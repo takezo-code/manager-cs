@@ -49,15 +49,18 @@ describe('Fechamento do mês', () => {
   });
 });
 
+const MAJOR = { format: 'major32' as const, prizePool: 1_250_000 };
+const IEM = { format: 'groups16' as const, prizePool: 1_250_000 };
+
 describe('Premiação real', () => {
   it('Major e IEM pagam por colocação', () => {
-    expect(prizeFor('major', 'Campeão')).toBe(500_000);
-    expect(prizeFor('major', '5º–8º')).toBe(45_000);
-    expect(prizeFor('major', '12º–14º')).toBe(20_000);
-    expect(prizeFor('major', '17º–19º')).toBe(10_000);
-    expect(prizeFor('major', '25º–27º')).toBe(0);
-    expect(prizeFor('iem', 'Vice')).toBe(210_000);
-    expect(prizeFor('iem', '13º–16º')).toBe(4_000);
+    expect(prizeFor(MAJOR, 'Campeão')).toBe(500_000);
+    expect(prizeFor(MAJOR, '5º–8º')).toBe(45_000);
+    expect(prizeFor(MAJOR, '12º–14º')).toBe(20_000);
+    expect(prizeFor(MAJOR, '17º–19º')).toBe(10_000);
+    expect(prizeFor(MAJOR, '25º–27º')).toBe(0);
+    expect(prizeFor(IEM, 'Vice')).toBe(210_000);
+    expect(prizeFor(IEM, '13º–16º')).toBe(4_000);
     expect(placeNumber('3º–4º')).toBe(3);
   });
 });

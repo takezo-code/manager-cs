@@ -39,7 +39,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "spinx",
@@ -81,7 +83,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "xertion",
@@ -123,7 +127,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "pr",
@@ -165,7 +171,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "xelex",
@@ -207,7 +215,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fallen",
@@ -249,7 +259,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "yuurih",
@@ -291,7 +303,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "yekindar",
@@ -333,7 +347,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "kscerato",
@@ -375,7 +391,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "molodoy",
@@ -417,7 +435,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "apex",
@@ -459,7 +479,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "ropz",
@@ -501,7 +523,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "zywoo",
@@ -543,7 +567,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "flamez",
@@ -585,7 +611,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "mezii",
@@ -627,7 +655,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "sh1ro",
@@ -669,7 +699,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "magixx",
@@ -711,7 +743,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "tn1r",
@@ -753,7 +787,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "zont1x",
@@ -795,7 +831,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "donk",
@@ -837,7 +875,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "xantares",
@@ -879,7 +919,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "woxic",
@@ -921,7 +963,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "jimpphat",
@@ -963,7 +1007,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "kyxsan",
@@ -1005,7 +1051,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "wicadia",
@@ -1047,7 +1095,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "karrigan",
@@ -1089,7 +1139,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "niko",
@@ -1131,7 +1183,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "teses",
@@ -1173,7 +1227,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "m0nesy",
@@ -1215,7 +1271,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "kyousuke",
@@ -1257,7 +1315,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "boombl4",
@@ -1299,7 +1359,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "zorte",
@@ -1341,7 +1403,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "s1ren",
@@ -1383,7 +1447,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "d1ledez",
@@ -1425,7 +1491,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "magnojez",
@@ -1467,7 +1535,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "aleksib",
@@ -1509,7 +1579,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "im",
@@ -1551,7 +1623,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "b1t",
@@ -1593,7 +1667,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "w0nderful",
@@ -1635,7 +1711,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "makazze",
@@ -1677,7 +1755,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "sunpayus",
@@ -1719,7 +1799,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "xfl0ud",
@@ -1761,7 +1843,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "dem0n",
@@ -1803,7 +1887,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "krabeni",
@@ -1845,7 +1931,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "dziugss",
@@ -1887,7 +1975,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "nin9",
@@ -1929,7 +2019,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "blitz",
@@ -1971,7 +2063,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "techno",
@@ -2013,7 +2107,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "910",
@@ -2055,7 +2151,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "cobrazera",
@@ -2097,7 +2195,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "kair0n",
@@ -2139,7 +2239,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "xant3r",
@@ -2181,7 +2283,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "robo",
@@ -2223,7 +2327,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "khan",
@@ -2265,7 +2371,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "syph0",
@@ -2307,7 +2415,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "hunter",
@@ -2349,7 +2459,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "nertz",
@@ -2391,7 +2503,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "r1nkle",
@@ -2433,7 +2547,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "heavygod",
@@ -2475,7 +2591,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "matys",
@@ -2517,7 +2635,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "hobbit",
@@ -2559,7 +2679,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fl1t",
@@ -2601,7 +2723,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "jame",
@@ -2643,7 +2767,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "xielo",
@@ -2685,7 +2811,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "zweih",
@@ -2727,7 +2855,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "art",
@@ -2769,7 +2899,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "dumau",
@@ -2811,7 +2943,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "latto",
@@ -2853,7 +2987,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "try",
@@ -2895,7 +3031,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "legacy-standin",
@@ -2937,7 +3075,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "ax1le",
@@ -2979,7 +3119,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "nafany",
@@ -3021,7 +3163,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "belchonokk",
@@ -3063,7 +3207,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fame",
@@ -3105,7 +3251,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "artfr0st",
@@ -3147,7 +3295,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "lnz",
@@ -3189,7 +3339,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "nqz",
@@ -3231,7 +3383,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "insani",
@@ -3273,7 +3427,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "venomzera",
@@ -3315,7 +3471,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "tomaszin",
@@ -3357,7 +3515,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "naf",
@@ -3399,7 +3559,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "elige",
@@ -3441,7 +3603,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "malbsmd",
@@ -3483,7 +3647,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "jt",
@@ -3525,7 +3691,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "jorko",
@@ -3567,7 +3735,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "frozen",
@@ -3609,7 +3779,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "twistzz",
@@ -3651,7 +3823,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "neityu",
@@ -3693,7 +3867,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "jcobbb",
@@ -3735,7 +3911,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "jboen",
@@ -3777,7 +3955,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "max",
@@ -3819,7 +3999,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "dgt",
@@ -3861,7 +4043,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "luchov",
@@ -3903,7 +4087,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "huasopeek",
@@ -3945,7 +4131,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "9z-standin",
@@ -3987,7 +4175,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "phzy",
@@ -4029,7 +4219,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "siuhy",
@@ -4071,7 +4263,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "staehr",
@@ -4113,7 +4307,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "ryu",
@@ -4155,7 +4351,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "cmtry",
@@ -4197,7 +4395,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "alex666",
@@ -4239,7 +4439,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "npl",
@@ -4281,7 +4483,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "kensizor",
@@ -4323,7 +4527,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "esenthial",
@@ -4365,7 +4571,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "s1zzi",
@@ -4407,7 +4615,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "stavn",
@@ -4449,7 +4659,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "sjuush",
@@ -4491,7 +4703,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "krimbo",
@@ -4533,7 +4747,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "adamb",
@@ -4575,7 +4791,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "xkacpersky",
@@ -4617,7 +4835,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "mistem",
@@ -4659,7 +4879,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "regali",
@@ -4701,7 +4923,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "soulfly",
@@ -4743,7 +4967,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "kvem",
@@ -4785,7 +5011,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "jottaaa",
@@ -4827,7 +5055,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "slaxz",
@@ -4869,7 +5099,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "swisher",
@@ -4911,7 +5143,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "s1n",
@@ -4953,7 +5187,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "jba",
@@ -4995,7 +5231,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "lake",
@@ -5037,7 +5275,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "brollan",
@@ -5079,7 +5319,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "nilo",
@@ -5121,7 +5363,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "susp",
@@ -5163,7 +5407,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "martinezsa",
@@ -5205,7 +5451,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "chr1zn",
@@ -5247,7 +5495,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "rez",
@@ -5289,7 +5539,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "shalfey",
@@ -5331,7 +5583,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "tauson",
@@ -5373,7 +5627,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fl4mus",
@@ -5415,7 +5671,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "hypex",
@@ -5457,7 +5715,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fear",
@@ -5499,7 +5759,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "jambo",
@@ -5541,7 +5803,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "jackasmo",
@@ -5583,7 +5847,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "cairne",
@@ -5625,7 +5891,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "mazay",
@@ -5667,7 +5935,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "maka",
@@ -5709,7 +5979,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "lucky",
@@ -5751,7 +6023,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "misutaaa",
@@ -5793,7 +6067,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "kursy",
@@ -5835,7 +6111,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "graviti",
@@ -5877,7 +6155,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "masval",
@@ -5919,7 +6199,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "lattykk",
@@ -5961,7 +6243,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "sfade8",
@@ -6003,7 +6287,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "aw",
@@ -6045,7 +6331,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "tenzy",
@@ -6087,7 +6375,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "jamyoung",
@@ -6129,7 +6419,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "jee",
@@ -6171,7 +6463,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "mercury",
@@ -6213,7 +6507,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "moseyuh",
@@ -6255,7 +6551,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "zero",
@@ -6297,7 +6595,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "n0rb3r7",
@@ -6339,7 +6639,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "kade0",
@@ -6381,7 +6683,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "mizu",
@@ -6423,7 +6727,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "dwushka",
@@ -6465,7 +6771,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "frontales",
@@ -6507,7 +6815,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "tabsen",
@@ -6549,7 +6859,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "jdc",
@@ -6591,7 +6903,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "faven",
@@ -6633,7 +6947,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "blamef",
@@ -6675,7 +6991,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "gr1ks",
@@ -6717,7 +7035,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-kraeven",
@@ -6754,7 +7074,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-dovi",
@@ -6791,7 +7113,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-mirok",
@@ -6828,7 +7152,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-tavinho",
@@ -6865,7 +7191,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-ozzyx",
@@ -6902,7 +7230,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-lumen",
@@ -6939,7 +7269,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-brakk",
@@ -6976,7 +7308,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-sanchoz",
@@ -7013,7 +7347,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-nyxen",
@@ -7050,7 +7386,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-zelko",
@@ -7087,7 +7425,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-caffe",
@@ -7124,7 +7464,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-vyrus",
@@ -7161,7 +7503,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-pakito",
@@ -7198,7 +7542,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-jinsu",
@@ -7235,7 +7581,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-hollow",
@@ -7272,7 +7620,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-tenk",
@@ -7309,7 +7659,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-marzo",
@@ -7346,7 +7698,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-qwerin",
@@ -7383,7 +7737,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-bolt",
@@ -7420,7 +7776,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-drezz",
@@ -7457,7 +7815,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-ferro",
@@ -7494,7 +7854,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-kalm",
@@ -7531,7 +7893,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-zuhl",
@@ -7568,7 +7932,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-rastko",
@@ -7605,7 +7971,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-wenhao",
@@ -7642,7 +8010,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-tiqo",
@@ -7679,7 +8049,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-hevo",
@@ -7716,7 +8088,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-grimm",
@@ -7753,7 +8127,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-soren",
@@ -7790,7 +8166,9 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   },
   {
     "id": "fa-yapix",
@@ -7827,6 +8205,8 @@
       "cutRefusals": 0,
       "salaryBeforeCut": null,
       "lastRequest": null
-    }
+    },
+    "awards": [],
+    "mvpUntil": null
   }
 ]

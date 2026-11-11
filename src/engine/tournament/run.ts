@@ -68,6 +68,7 @@ export function createTournament(info: EventInfo, participants: string[], seed: 
     stageIdx: 0,
     championId: null,
     placements: {},
+    playerStats: {},
   };
 }
 
@@ -177,6 +178,8 @@ export function playDay(tournament: Tournament, teams: Record<string, Team>, pla
     if (stage.kind === 'swiss') applySwissResult(stage, m);
     for (const pid of [...startersA, ...startersB]) {
       const mapRatings = r.maps.map((x) => calcRating(x.stats[pid]));
+      const st = t.playerStats[pid] ?? { maps: 0, ratingSum: 0, teamId: startersA.includes(pid) ? ta.id : tb.id };
+      t.playerStats[pid] = { ...st, maps: st.maps + mapRatings.length, ratingSum: st.ratingSum + mapRatings.reduce((a, b) => a + b, 0) };
       ps = { ...ps, [pid]: afterSeries(ps[pid], mapRatings) };
     }
   }

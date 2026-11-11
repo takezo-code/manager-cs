@@ -72,6 +72,12 @@ export interface PlayerMood {
   lastRequest: string | null;
 }
 
+export interface PlayerAward {
+  kind: 'MVP' | 'EVP';
+  event: string;
+  date: string;
+}
+
 export interface Player {
   id: string;
   nick: string;
@@ -101,6 +107,10 @@ export interface Player {
   /** null = agente livre. */
   contract: Contract | null;
   mood: PlayerMood;
+  /** MVPs e EVPs conquistados (o MVP vira carta especial). */
+  awards: PlayerAward[];
+  /** Bônus de MVP (+2 em todos os atributos) válido até esta data. */
+  mvpUntil: string | null;
 }
 
 export const MAP_IDS = ['ancient', 'anubis', 'cache', 'dust2', 'inferno', 'mirage', 'nuke'] as const;

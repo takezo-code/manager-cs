@@ -135,6 +135,8 @@ export interface Tournament {
   stages: Stage[];
   stageIdx: number;
   championId: string | null;
+  /** Mapas e soma de ratings de cada jogador no evento (para MVP e EVPs). */
+  playerStats: Record<string, { maps: number; ratingSum: number; teamId: string }>;
   /** Colocação final de quem já saiu (ex.: "9º–11º", "Vice"). */
   placements: Record<string, string>;
 }

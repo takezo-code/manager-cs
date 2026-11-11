@@ -398,30 +398,48 @@ export const FINANCE = {
 };
 
 /**
- * Premiação real (US$ 1,25 mi em cada evento), por faixa de colocação (a partir de qual posição).
- * Faixas compartilhadas sem disputa (ex.: 3º–4º) recebem a média das duas posições.
+ * Fração do prêmio total paga a cada posição (por time), a partir de qual posição. Faixas compartilhadas
+ * (ex.: 3º–4º sem disputa de 3º) recebem a média das posições. Major e groups16 usam as proporções reais
+ * (PGL Major Singapura e IEM Beijing 2026); os demais são estimativas no mesmo padrão, somando 100%.
  */
-export const PRIZES: Record<'major' | 'iem', Array<{ from: number; amount: number }>> = {
-  // PGL Major Singapura 2026 (Liquipedia): 3º 100k e 4º 60k → 80k cada.
-  major: [
-    { from: 1, amount: 500_000 },
-    { from: 2, amount: 170_000 },
-    { from: 3, amount: 80_000 },
-    { from: 5, amount: 45_000 },
-    { from: 9, amount: 20_000 },
-    { from: 17, amount: 10_000 },
-    { from: 25, amount: 0 },
+export const PRIZE_SHARES: Record<import('./tournament/types').FormatId, Array<{ from: number; share: number }>> = {
+  major32: [
+    { from: 1, share: 0.4 }, { from: 2, share: 0.136 }, { from: 3, share: 0.08 }, { from: 4, share: 0.048 },
+    { from: 5, share: 0.036 }, { from: 9, share: 0.016 }, { from: 17, share: 0.008 }, { from: 25, share: 0 },
   ],
-  // IEM Beijing 2026: 3º 160k e 4º 120k → 140k cada.
-  iem: [
-    { from: 1, amount: 360_000 },
-    { from: 2, amount: 210_000 },
-    { from: 3, amount: 140_000 },
-    { from: 5, amount: 87_500 },
-    { from: 7, amount: 54_500 },
-    { from: 9, amount: 25_000 },
-    { from: 13, amount: 4_000 },
+  groups16: [
+    { from: 1, share: 0.288 }, { from: 2, share: 0.168 }, { from: 3, share: 0.128 }, { from: 4, share: 0.096 },
+    { from: 5, share: 0.07 }, { from: 7, share: 0.0436 }, { from: 9, share: 0.02 }, { from: 13, share: 0.0032 },
   ],
+  swiss16: [
+    { from: 1, share: 0.4 }, { from: 2, share: 0.15 }, { from: 3, share: 0.09 }, { from: 4, share: 0.07 },
+    { from: 5, share: 0.045 }, { from: 9, share: 0.01375 },
+  ],
+  epl24: [
+    { from: 1, share: 0.4 }, { from: 2, share: 0.15 }, { from: 3, share: 0.09 }, { from: 4, share: 0.07 },
+    { from: 5, share: 0.04 }, { from: 9, share: 0.015 }, { from: 17, share: 0.00125 },
+  ],
+  ewc32: [
+    { from: 1, share: 0.35 }, { from: 2, share: 0.15 }, { from: 3, share: 0.08 }, { from: 4, share: 0.07 },
+    { from: 5, share: 0.04 }, { from: 9, share: 0.015 }, { from: 17, share: 0.006 }, { from: 25, share: 0.00275 },
+  ],
+  rivals8: [
+    { from: 1, share: 0.4 }, { from: 2, share: 0.2 }, { from: 3, share: 0.12 }, { from: 4, share: 0.08 },
+    { from: 5, share: 0.06 }, { from: 7, share: 0.04 },
+  ],
+  bracket8: [
+    { from: 1, share: 0.45 }, { from: 2, share: 0.2 }, { from: 3, share: 0.1 }, { from: 5, share: 0.0375 },
+  ],
+};
+
+/** MVP e EVPs de cada evento. */
+export const AWARDS = {
+  /** Mínimo de mapas no evento para concorrer. */
+  minMaps: 6,
+  evps: 4,
+  /** MVP: +2 em todos os atributos por uma temporada. */
+  mvpBonus: 2,
+  mvpDays: 365,
 };
 
 // ---------- Satisfação ----------
