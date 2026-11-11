@@ -3,9 +3,7 @@ import { useMemo } from 'react';
 import { create } from 'zustand';
 import type { SavedState, Slot } from '../db/saveFormat';
 import { START_DATE } from '../engine/date';
-import { awardTournament } from '../engine/finance/prizes';
 import { acceptSponsor } from '../engine/finance/sponsors';
-import { recoverBetweenEvents } from '../engine/form';
 import { respondToOffer } from '../engine/market/ai';
 import { failedNegotiationEffects, finalizeNegotiation, type Negotiation } from '../engine/market/negotiation';
 import type { Relations } from '../engine/market/relations';
@@ -17,11 +15,11 @@ import { buySkill, upgradeCard } from '../engine/player';
 import { createRng, hashString } from '../engine/rng';
 import { createWorld, dailyTick } from '../engine/season';
 import { validStarters } from '../engine/squad';
-import { createLegacyTournament, playDay, type TournamentTemplate } from '../engine/tournament/run';
-import type { Tournament } from '../engine/tournament/types';
+import { windowOpen } from '../engine/calendar';
+import { acceptInvite, declineInvite } from '../engine/schedule';
 import type { CalendarEvent } from '../engine/calendar';
 import type { EventResult, SeriesLogEntry } from '../engine/ranking';
-import type { MatchFormat, MatchResult, MatchStage, Player, SkillId, Team } from '../engine/types';
+import type { MatchFormat, MatchResult, MatchStage, Player, SkillId, Team, TrainingPlan } from '../engine/types';
 import {
   addMoney,
   type IncomingOffer,
@@ -63,7 +61,6 @@ export interface GameState {
   myTeamId: string | null;
   lastMatch: MatchResult | null;
   message: { kind: 'ok' | 'erro'; text: string } | null;
-  tournament: Tournament | null;
   /** Resultados completos guardados: os do último dia e todos os do meu time. */
   seriesResults: Record<string, MatchResult>;
   /** Séries jogadas no último dia. */
@@ -77,12 +74,13 @@ export interface GameState {
   buySkill(playerId: string, skillId: SkillId): void;
   playMatch(opponentId: string, format: MatchFormat, stage: MatchStage, seed: number): void;
   clearMessage(): void;
-  startTournament(template: TournamentTemplate): void;
-  playNextDay(): void;
-  playToEnd(): void;
-  closeTournament(): void;
+
   // Mercado
-  advanceDays(days: number): void;
+  /** Avança N dias, ou até o próximo jogo do seu time ('jogo'; no máximo 60 dias). */
+  advance(target: number | 'jogo'): void;
+  acceptInvite(eventId: string): void;
+  declineInvite(eventId: string): void;
+  setTraining(plan: TrainingPlan): void;
   setStarter(benchId: string, starterId: string): void;
   toggleListed(playerId: string): void;
   commitNegotiation(neg: Negotiation): void;
@@ -152,7 +150,6 @@ export function savedPart(s: GameState): SavedState | null {
     ...worldOf(s),
     events: s.events,
     myTeamId: s.myTeamId,
-    tournament: s.tournament,
     seriesResults: s.seriesResults,
     lastDayIds: s.lastDayIds,
   };
@@ -161,14 +158,14 @@ export function savedPart(s: GameState): SavedState | null {
 /** Campos do estado que vão para o save. */
 const SAVED_KEYS = [
   'date', 'teams', 'players', 'relations', 'offers', 'transferLog', 'ledger', 'sponsorOffers', 'inbox', 'results', 'seriesLog', 'calendar', 'events',
-  'myTeamId', 'tournament', 'seriesResults', 'lastDayIds', 'activeSlot',
+  'myTeamId', 'seriesResults', 'lastDayIds', 'activeSlot',
 ] as const satisfies ReadonlyArray<keyof GameState>;
 
 /** Algum campo salvo mudou? (o autosave grava só quando sim). */
 export const savedStateChanged = (s: GameState, prev: GameState) => SAVED_KEYS.some((k) => s[k] !== prev[k]);
 
-/** Mercado fechado enquanto há campeonato em andamento (elencos travados durante o evento). */
-export const marketOpen = (s: Pick<GameState, 'tournament'>) => !s.tournament || !!s.tournament.championId;
+/** Janela de transferências aberta na data atual. */
+export const marketOpen = (s: Pick<GameState, 'date'>) => windowOpen(s.date);
 
 const MAX_EVENTS = 80;
 const stamp = (date: string, events: WorldEvent[]): GameEvent[] => events.map((e) => ({ ...e, date })).reverse();
@@ -189,7 +186,6 @@ export const useGame = create<GameState>((set, get) => {
     myTeamId: null,
     lastMatch: null,
     message: null,
-    tournament: null,
     seriesResults: {},
     lastDayIds: [],
 
@@ -207,8 +203,7 @@ export const useGame = create<GameState>((set, get) => {
         screen: 'game',
         lastMatch: null,
         message: null,
-        tournament: null,
-        seriesResults: {},
+            seriesResults: {},
         lastDayIds: [],
         saveStatus: { kind: 'idle' },
       });
@@ -256,57 +251,46 @@ export const useGame = create<GameState>((set, get) => {
 
     clearMessage: () => set({ message: null }),
 
-    startTournament: (template) => {
-      const { teams, players, myTeamId } = get();
-      if (myTeamId && teams[myTeamId].playerIds.length < 5)
-        return set({ message: { kind: 'erro', text: 'Seu elenco precisa de 5 jogadores para entrar num campeonato.' } });
-      const t = createLegacyTournament(template, Object.values(teams), Math.floor(Math.random() * 1e9));
-      // Descanso antes do evento.
-      const ps = { ...players };
-      for (const teamId of t.participants) for (const pid of teams[teamId].playerIds) ps[pid] = recoverBetweenEvents(ps[pid]);
-      set({ tournament: t, players: ps, seriesResults: {}, lastDayIds: [] });
-    },
-
-    playNextDay: () => {
-      const s = get();
-      if (!s.tournament || s.tournament.championId || !s.myTeamId) return;
-      const out = playDay(s.tournament, s.teams, s.players);
-      const ids = Object.keys(out.results);
-      // Guarda os jogos do meu time para sempre; os outros só até o próximo dia.
-      const kept: Record<string, MatchResult> = {};
-      for (const [id, r] of Object.entries(s.seriesResults)) if (r.teamAId === s.myTeamId || r.teamBId === s.myTeamId) kept[id] = r;
-      // O dia passa (fechamento do mês incluso), com o mercado fechado.
-      let w: World = { ...worldOf(s), players: out.players };
-      const tick = dailyTick(w);
-      w = tick.world;
-      const events = [...tick.events];
-      // Fim do campeonato: premiação, bônus de título e satisfação.
-      if (out.tournament.championId) {
-        w = awardTournament(w, out.tournament);
-        const place = out.tournament.placements[s.myTeamId];
-        if (place) events.push({ kind: 'ok', text: `${out.tournament.name} encerrado. ${s.teams[s.myTeamId].shortName}: ${place}.` });
-      }
-      commitWorld(w, events, { tournament: out.tournament, seriesResults: { ...kept, ...out.results }, lastDayIds: ids });
-    },
-
-    playToEnd: () => {
-      for (let i = 0; i < 60 && get().tournament && !get().tournament!.championId; i++) get().playNextDay();
-    },
-
-    closeTournament: () => set({ tournament: null, seriesResults: {}, lastDayIds: [] }),
-
-    advanceDays: (days) => {
+    advance: (target) => {
       const s = get();
       if (!s.myTeamId) return;
-      if (!marketOpen(s)) return set({ message: { kind: 'erro', text: 'Há um campeonato em andamento: avance pelos dias do campeonato.' } });
+      const me = s.myTeamId;
+      const maxDays = target === 'jogo' ? 60 : target;
       let w = worldOf(s);
       let events: GameEvent[] = [];
-      for (let i = 0; i < days; i++) {
-        const out = dailyTick(w, { rng: createRng(hashString(`${w.date}:${s.activeSlot}:${s.myTeamId}`)) });
+      // Guarda os jogos do seu time; dos outros, só os do último dia.
+      const kept: Record<string, MatchResult> = {};
+      for (const [id, r] of Object.entries(s.seriesResults)) if (r.teamAId === me || r.teamBId === me) kept[id] = r;
+      let lastDay: Record<string, MatchResult> = {};
+      for (let i = 0; i < maxDays; i++) {
+        const out = dailyTick(w, { rng: createRng(hashString(`${w.date}:${s.activeSlot}:${me}`)) });
         w = out.world;
         events = [...stamp(w.date, out.events), ...events];
+        if (Object.keys(out.results).length) lastDay = out.results;
+        for (const [id, r] of Object.entries(out.results)) if (r.teamAId === me || r.teamBId === me) kept[id] = r;
+        const myGame = Object.values(out.results).some((r) => r.teamAId === me || r.teamBId === me);
+        if (target === 'jogo' && (myGame || w.inbox.length > s.inbox.length)) break;
       }
-      set({ ...fromWorld(w), events: [...events, ...s.events].slice(0, MAX_EVENTS) });
+      set({
+        ...fromWorld(w),
+        events: [...events, ...s.events].slice(0, MAX_EVENTS),
+        seriesResults: { ...kept, ...lastDay },
+        lastDayIds: Object.keys(lastDay),
+      });
+    },
+
+    acceptInvite: (eventId) => {
+      const r = acceptInvite(worldOf(get()), eventId);
+      if (!r.ok) return set({ message: { kind: 'erro', text: r.error } });
+      commitWorld(r.world, [], { message: { kind: 'ok', text: 'Convite aceito.' } });
+    },
+
+    declineInvite: (eventId) => commitWorld(declineInvite(worldOf(get()), eventId), [], { message: { kind: 'ok', text: 'Convite recusado.' } }),
+
+    setTraining: (plan) => {
+      const { teams, myTeamId } = get();
+      if (!myTeamId) return;
+      set({ teams: { ...teams, [myTeamId]: { ...teams[myTeamId], training: plan } } });
     },
 
     setStarter: (benchId, starterId) => {

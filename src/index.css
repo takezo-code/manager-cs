@@ -45,3 +45,15 @@ body {
   font-family: var(--font-display);
   letter-spacing: 0.02em;
 }
+
+/* Carta especial de MVP: moldura dourada metálica (o único elemento chamativo do jogo). */
+.mvp-card {
+  box-shadow:
+    0 0 0 2px #f2c14e,
+    0 0 0 3px #7a5a12,
+    0 8px 24px -8px rgba(242, 193, 78, 0.45);
+}
+.mvp-ribbon {
+  background: linear-gradient(100deg, #b8862b 0%, #f7d77a 35%, #fff1c2 50%, #f7d77a 65%, #b8862b 100%);
+  letter-spacing: 0.02em;
+}

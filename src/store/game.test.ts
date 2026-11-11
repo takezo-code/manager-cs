@@ -12,3 +12,15 @@ describe('Autosave', () => {
     expect(savedStateChanged({ ...s, message: { kind: 'ok', text: 'x' } }, s)).toBe(false);
   });
 });
+
+describe('Autosave (passo 9)', () => {
+  it('detecta mudanças no calendário e nos resultados', () => {
+    const s = useGame.getState();
+    expect(savedStateChanged({ ...s, calendar: [] }, s)).toBe(true);
+    expect(savedStateChanged({ ...s, results: [] }, s)).toBe(true);
+  });
+
+  it('não existe mais o campeonato único do seletor antigo', () => {
+    expect('tournament' in useGame.getState()).toBe(false);
+  });
+});

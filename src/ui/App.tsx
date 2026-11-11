@@ -12,16 +12,20 @@ import { PlayerCard } from './PlayerCard';
 import { PlayerPanel } from './PlayerPanel';
 import { TeamBadge } from './TeamBadge';
 import { TeamSelect } from './TeamSelect';
-import { TournamentPanel } from './TournamentView';
+import { CalendarPanel } from './CalendarPanel';
+import { RankingPanel } from './RankingPanel';
+import { TimeBar } from './TimeBar';
+import { TrainingSection } from './TrainingSection';
 
-type Tab = 'elenco' | 'mercado' | 'financas' | 'mensagens' | 'campeonato' | 'amistoso';
+type Tab = 'elenco' | 'calendario' | 'ranking' | 'mercado' | 'financas' | 'mensagens' | 'amistoso';
 
 const TAB_LABEL: Record<Tab, string> = {
   elenco: 'Elenco',
+  calendario: 'Calendário',
+  ranking: 'Ranking',
   mercado: 'Mercado',
   financas: 'Finanças',
   mensagens: 'Mensagens',
-  campeonato: 'Campeonato',
   amistoso: 'Amistoso',
 };
 
@@ -101,6 +105,10 @@ function Dashboard() {
         </div>
       </header>
 
+      <div className="mt-4">
+        <TimeBar />
+      </div>
+
       <nav className="mt-4 flex flex-wrap gap-1" role="tablist">
         {(Object.keys(TAB_LABEL) as Tab[]).map((t) => (
           <button
@@ -138,7 +146,8 @@ function Dashboard() {
                 Seu elenco tem só {team.playerIds.length} jogadores. Contrate no Mercado para chegar a 5 e poder jogar.
               </p>
             )}
-            <h2 className="text-xs font-semibold tracking-wider text-muted uppercase">Titulares</h2>
+            <TrainingSection />
+            <h2 className="text-sm font-semibold text-muted">Titulares</h2>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               {team.starters.map((id) => (
                 <PlayerCard key={id} player={players[id]} selected={id === current} onClick={() => setSelected(id)} />
@@ -146,7 +155,7 @@ function Dashboard() {
             </div>
             {bench.length > 0 && (
               <>
-                <h2 className="text-xs font-semibold tracking-wider text-muted uppercase">Reservas</h2>
+                <h2 className="text-sm font-semibold text-muted">Reservas</h2>
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                   {bench.map((id) => (
                     <PlayerCard key={id} player={players[id]} selected={id === current} onClick={() => setSelected(id)} />
@@ -169,9 +178,13 @@ function Dashboard() {
         <div className="mt-4">
           <InboxPanel />
         </div>
-      ) : tab === 'campeonato' ? (
+      ) : tab === 'calendario' ? (
         <div className="mt-4">
-          <TournamentPanel />
+          <CalendarPanel />
+        </div>
+      ) : tab === 'ranking' ? (
+        <div className="mt-4">
+          <RankingPanel />
         </div>
       ) : (
         <div className="mt-4 space-y-4">

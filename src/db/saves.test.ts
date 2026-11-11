@@ -1,6 +1,7 @@
 import 'fake-indexeddb/auto';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { INITIAL_PLAYERS, INITIAL_TEAMS } from '../data';
+import { buildYear } from '../engine/calendar';
 import { createLegacyTournament as createTournament, playDay } from '../engine/tournament/run';
 import { exportFileName, exportJson, makeRecord, parseImport, type SavedState } from './saveFormat';
 import { db, deleteSave, getSave, lastSave, listSaves, putSave } from './saves';
@@ -20,7 +21,7 @@ function sampleState(): SavedState {
     inbox: [],
     results: [],
     seriesLog: [],
-    calendar: [],
+    calendar: [{ ...buildYear(2026).find((e) => e.templateId === 'iem-china')!, status: 'em_andamento', tournament: out.tournament }],
     teams,
     players: out.players,
     relations: {},
@@ -28,7 +29,6 @@ function sampleState(): SavedState {
     transferLog: [],
     events: [],
     myTeamId: 'furia',
-    tournament: out.tournament,
     seriesResults: out.results,
     lastDayIds: Object.keys(out.results),
   };
@@ -45,7 +45,7 @@ describe('Saves no IndexedDB', () => {
     const r = await getSave(2);
     expect(r?.state).toEqual(state);
     expect(r?.meta.teamName).toBe('FURIA');
-    expect(r?.meta.status).toBe('IEM Beijing 2026 · Dia 1');
+    expect(r?.meta.status).toBe('Jogando IEM Beijing 2026 · Dia 1');
   });
 
   it('lista os slots em ordem e acha o mais recente', async () => {
@@ -88,5 +88,32 @@ describe('Exportar e importar JSON', () => {
   it('nome do arquivo tem slot, time e data', () => {
     const name = exportFileName(makeRecord(3, sampleState(), Date.UTC(2026, 10, 11)));
     expect(name).toBe('manager-cs-slot3-furia-2026-11-11.json');
+  });
+});
+
+describe('Migração v3 → v4', () => {
+  it('um save v3 com campeonato em andamento vira um evento em andamento no calendário', async () => {
+    const { migrateState } = await import('./saveFormat');
+    const { createLegacyTournament, playDay } = await import('../engine/tournament/run');
+    const teams = byId(INITIAL_TEAMS);
+    const players = byId(INITIAL_PLAYERS);
+    // Campeonato no formato antigo (v3): sem format/options/prizePool/playerStats, com template.
+    let t = createLegacyTournament('major', INITIAL_TEAMS, 3);
+    t = playDay(t, teams, players).tournament;
+    const { format: _f, options: _o, prizePool: _p, playerStats: _s, ...rest } = t;
+    const old = { ...rest, template: 'major' };
+    const v3 = {
+      date: '2026-11-20', managerTeamId: 'furia', teams, players, relations: {}, offers: [], transferLog: [], ledger: [], sponsorOffers: [],
+      inbox: [], events: [], myTeamId: 'furia', tournament: old, seriesResults: {}, lastDayIds: [],
+    };
+    const s = migrateState(v3 as unknown as Record<string, unknown>, 3);
+    const ev = s.calendar.find((e) => e.status === 'em_andamento')!;
+    expect(ev.tournament!.id).toBe(t.id);
+    expect(ev.tournament!.format).toBe('major32');
+    expect(ev.tournament!.stages).toHaveLength(1);
+    expect(s.calendar.some((e) => e.status === 'futuro')).toBe(true);
+    expect(s.players.fallen.awards).toEqual([]);
+    expect(s.teams.furia.training).toEqual({ mode: 'dividido', focus: 'mira' });
+    expect(s.teams.furia.legacyPoints).toBe(teams.furia.hltvPoints);
   });
 });

@@ -1,6 +1,8 @@
 // Formato do save: o que vai para o IndexedDB e para o arquivo JSON de backup.
 import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_TEAMS } from '../data';
-import { START_DATE } from '../engine/date';
+import { buildYear, type CalendarEvent } from '../engine/calendar';
+import { START_DATE, addDays } from '../engine/date';
+import { createGroup } from '../engine/tournament/doubleElim';
 import { initialSponsors } from '../engine/finance/sponsors';
 import { relationsFromList } from '../engine/market/relations';
 import { DEFAULT_MOOD } from '../engine/morale/satisfaction';
@@ -9,8 +11,8 @@ import type { Tournament } from '../engine/tournament/types';
 import type { MatchResult, Player, Team } from '../engine/types';
 import type { World, WorldEvent } from '../engine/world';
 
-/** v1: passo 6. v2: mercado (data, contratos, relações, propostas). v3: finanças e satisfação. */
-export const SAVE_VERSION = 3;
+/** v1: passo 6. v2: mercado. v3: finanças e satisfação. v4: calendário, ranking, prêmios e treino. */
+export const SAVE_VERSION = 4;
 export const SLOTS = [1, 2, 3] as const;
 export type Slot = (typeof SLOTS)[number];
 
@@ -18,7 +20,6 @@ export type Slot = (typeof SLOTS)[number];
 export interface SavedState extends World {
   events: Array<WorldEvent & { date: string }>;
   myTeamId: string;
-  tournament: Tournament | null;
   seriesResults: Record<string, MatchResult>;
   lastDayIds: string[];
 }
@@ -42,9 +43,14 @@ export interface SaveRecord {
 
 export function buildMeta(state: SavedState): SaveMeta {
   const team = state.teams[state.myTeamId];
-  const t = state.tournament;
-  let status = 'Sem campeonato em andamento';
-  if (t) status = t.championId ? `${t.name} · encerrado` : `${t.name} · Dia ${t.day}`;
+  const me = state.myTeamId;
+  const playing = state.calendar.find((e) => e.status === 'em_andamento' && e.tournament?.participants.includes(me) && !e.tournament.placements[me]);
+  const next = state.calendar.find((e) => e.status !== 'encerrado' && e.startDate > state.date && (e.accepted.includes(me) || e.qualified.includes(me)));
+  const status = playing
+    ? `Jogando ${playing.name} · Dia ${playing.tournament!.day}`
+    : next
+      ? `Próximo: ${next.name}`
+      : `#${team.hltvRank} no ranking HLTV`;
   return { teamId: team.id, teamName: team.name, money: team.money, date: state.date, status };
 }
 
@@ -62,7 +68,49 @@ export function migrateState(raw: Record<string, unknown>, version: number): Sav
   let s = raw as unknown as SavedState;
   if (version < 2) s = migrateV1(s);
   if (version < 3) s = migrateV2(s);
+  if (version < 4) s = migrateV3(s as SavedState & { tournament?: unknown });
   return s;
+}
+
+/** Campeonato no formato antigo (v3): tinha `template` em vez de `format`. */
+type LegacyTournament = Omit<Tournament, 'format' | 'options' | 'prizePool' | 'playerStats'> & { template?: 'major' | 'iem' };
+
+/**
+ * v3 → v4: calendário, ranking dinâmico, prêmios e treino. Um campeonato antigo em andamento vira
+ * um evento em andamento no calendário (grupos antigos ganham os campos novos).
+ */
+function migrateV3(s: SavedState & { tournament?: unknown }): SavedState {
+  const players: Record<string, Player> = {};
+  for (const [id, p] of Object.entries(s.players))
+    players[id] = { ...p, awards: p.awards ?? [], mvpUntil: p.mvpUntil ?? null, trainingGains: p.trainingGains ?? {} };
+  const teams: Record<string, Team> = {};
+  for (const [id, t] of Object.entries(s.teams))
+    teams[id] = {
+      ...t,
+      legacyPoints: t.legacyPoints ?? t.hltvPoints,
+      legacyRoster: t.legacyRoster ?? [...t.starters],
+      rankHistory: t.rankHistory ?? [],
+      training: t.training ?? { mode: 'dividido', focus: 'mira' },
+    };
+  const year = Number(s.date.slice(0, 4));
+  const calendar: CalendarEvent[] = [...buildYear(year).filter((e) => e.startDate > s.date), ...buildYear(year + 1)];
+  const old = s.tournament as LegacyTournament | null | undefined;
+  if (old && !old.championId) {
+    const format = old.template === 'iem' ? 'groups16' : 'major32';
+    const stages = old.stages.map((st) =>
+      st.kind === 'groups'
+        ? { ...st, groups: st.groups.map((g) => ({ ...createGroup(g.name, g.seeds), ...g, kind: 'de8' as const })) }
+        : st,
+    );
+    const tournament: Tournament = { ...old, format, options: {}, prizePool: 1_250_000, playerStats: {}, stages: stages as Tournament['stages'] };
+    calendar.unshift({
+      id: old.id, templateId: 'legado', name: old.name, city: '', startDate: s.date, endDate: addDays(s.date, 20), format, teams: old.participants.length,
+      prizePool: 1_250_000, status: 'em_andamento', invited: [...old.participants], accepted: [...old.participants], declined: [], qualifierSlots: 0,
+      qualified: [], tournament,
+    });
+  }
+  const { tournament: _drop, ...rest } = s;
+  return { ...rest, players, teams, calendar, results: s.results ?? [], seriesLog: s.seriesLog ?? [] };
 }
 
 /** v2 → v3: finanças e satisfação (patrocínios iniciais, humor dos jogadores, extrato e caixa de entrada vazios). */
@@ -133,7 +181,6 @@ export function parseImport(text: string): { ok: true; state: SavedState } | { o
     return { ok: false, error: 'O save está incompleto ou corrompido.' };
   const base = {
     ...s,
-    tournament: s.tournament ?? null,
     seriesResults: isObj(s.seriesResults) ? s.seriesResults : {},
     lastDayIds: Array.isArray(s.lastDayIds) ? s.lastDayIds : [],
   };
