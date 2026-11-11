@@ -1,0 +1,1186 @@
+[
+  {
+    "id": "mouz",
+    "name": "MOUZ",
+    "shortName": "MOUZ",
+    "country": "DE",
+    "region": "EU",
+    "hltvRank": 1,
+    "hltvPoints": 912,
+    "color": "#e3001b",
+    "playerIds": [
+      "torzsi",
+      "spinx",
+      "xertion",
+      "pr",
+      "xelex"
+    ],
+    "starters": [
+      "torzsi",
+      "spinx",
+      "xertion",
+      "pr",
+      "xelex"
+    ],
+    "mapStrength": {
+      "ancient": 77,
+      "anubis": 65,
+      "cache": 86,
+      "dust2": 65,
+      "inferno": 68,
+      "mirage": 84,
+      "nuke": 72
+    },
+    "money": 3500000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "furia",
+    "name": "FURIA",
+    "shortName": "FURIA",
+    "country": "BR",
+    "region": "SA",
+    "hltvRank": 2,
+    "hltvPoints": 910,
+    "color": "#9a9a9a",
+    "playerIds": [
+      "fallen",
+      "yuurih",
+      "yekindar",
+      "kscerato",
+      "molodoy"
+    ],
+    "starters": [
+      "fallen",
+      "yuurih",
+      "yekindar",
+      "kscerato",
+      "molodoy"
+    ],
+    "mapStrength": {
+      "ancient": 86,
+      "anubis": 75,
+      "cache": 81,
+      "dust2": 82,
+      "inferno": 80,
+      "mirage": 71,
+      "nuke": 71
+    },
+    "money": 3250000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "vitality",
+    "name": "Team Vitality",
+    "shortName": "Vitality",
+    "country": "FR",
+    "region": "EU",
+    "hltvRank": 3,
+    "hltvPoints": 836,
+    "color": "#f5e000",
+    "playerIds": [
+      "apex",
+      "ropz",
+      "zywoo",
+      "flamez",
+      "mezii"
+    ],
+    "starters": [
+      "apex",
+      "ropz",
+      "zywoo",
+      "flamez",
+      "mezii"
+    ],
+    "mapStrength": {
+      "ancient": 83,
+      "anubis": 84,
+      "cache": 63,
+      "dust2": 78,
+      "inferno": 80,
+      "mirage": 65,
+      "nuke": 76
+    },
+    "money": 3050000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "spirit",
+    "name": "Team Spirit",
+    "shortName": "Spirit",
+    "country": "RU",
+    "region": "CIS",
+    "hltvRank": 4,
+    "hltvPoints": 777,
+    "color": "#c8c8c8",
+    "playerIds": [
+      "sh1ro",
+      "magixx",
+      "tn1r",
+      "zont1x",
+      "donk"
+    ],
+    "starters": [
+      "sh1ro",
+      "magixx",
+      "tn1r",
+      "zont1x",
+      "donk"
+    ],
+    "mapStrength": {
+      "ancient": 86,
+      "anubis": 82,
+      "cache": 70,
+      "dust2": 70,
+      "inferno": 73,
+      "mirage": 64,
+      "nuke": 85
+    },
+    "money": 2800000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "aurora",
+    "name": "Aurora",
+    "shortName": "Aurora",
+    "country": "TR",
+    "region": "EU",
+    "hltvRank": 5,
+    "hltvPoints": 552,
+    "color": "#7b5cff",
+    "playerIds": [
+      "xantares",
+      "woxic",
+      "jimpphat",
+      "kyxsan",
+      "wicadia"
+    ],
+    "starters": [
+      "xantares",
+      "woxic",
+      "jimpphat",
+      "kyxsan",
+      "wicadia"
+    ],
+    "mapStrength": {
+      "ancient": 74,
+      "anubis": 85,
+      "cache": 64,
+      "dust2": 86,
+      "inferno": 85,
+      "mirage": 78,
+      "nuke": 75
+    },
+    "money": 2600000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "falcons",
+    "name": "Team Falcons",
+    "shortName": "Falcons",
+    "country": "SA",
+    "region": "EU",
+    "hltvRank": 6,
+    "hltvPoints": 477,
+    "color": "#00a651",
+    "playerIds": [
+      "karrigan",
+      "niko",
+      "teses",
+      "m0nesy",
+      "kyousuke"
+    ],
+    "starters": [
+      "karrigan",
+      "niko",
+      "teses",
+      "m0nesy",
+      "kyousuke"
+    ],
+    "mapStrength": {
+      "ancient": 65,
+      "anubis": 75,
+      "cache": 87,
+      "dust2": 78,
+      "inferno": 68,
+      "mirage": 80,
+      "nuke": 79
+    },
+    "money": 2350000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "betboom",
+    "name": "BetBoom Team",
+    "shortName": "BETBOOM",
+    "country": "RU",
+    "region": "CIS",
+    "hltvRank": 7,
+    "hltvPoints": 439,
+    "color": "#ff2d55",
+    "playerIds": [
+      "boombl4",
+      "zorte",
+      "s1ren",
+      "d1ledez",
+      "magnojez"
+    ],
+    "starters": [
+      "boombl4",
+      "zorte",
+      "s1ren",
+      "d1ledez",
+      "magnojez"
+    ],
+    "mapStrength": {
+      "ancient": 62,
+      "anubis": 83,
+      "cache": 70,
+      "dust2": 85,
+      "inferno": 85,
+      "mirage": 64,
+      "nuke": 67
+    },
+    "money": 2100000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "navi",
+    "name": "Natus Vincere",
+    "shortName": "NAVI",
+    "country": "UA",
+    "region": "CIS",
+    "hltvRank": 8,
+    "hltvPoints": 412,
+    "color": "#ffe000",
+    "playerIds": [
+      "aleksib",
+      "im",
+      "b1t",
+      "w0nderful",
+      "makazze"
+    ],
+    "starters": [
+      "aleksib",
+      "im",
+      "b1t",
+      "w0nderful",
+      "makazze"
+    ],
+    "mapStrength": {
+      "ancient": 72,
+      "anubis": 82,
+      "cache": 84,
+      "dust2": 79,
+      "inferno": 84,
+      "mirage": 74,
+      "nuke": 88
+    },
+    "money": 1900000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "fut",
+    "name": "FUT Esports",
+    "shortName": "FUT",
+    "country": "TR",
+    "region": "EU",
+    "hltvRank": 9,
+    "hltvPoints": 361,
+    "color": "#ff6a00",
+    "playerIds": [
+      "sunpayus",
+      "xfl0ud",
+      "dem0n",
+      "krabeni",
+      "dziugss"
+    ],
+    "starters": [
+      "sunpayus",
+      "xfl0ud",
+      "dem0n",
+      "krabeni",
+      "dziugss"
+    ],
+    "mapStrength": {
+      "ancient": 68,
+      "anubis": 68,
+      "cache": 73,
+      "dust2": 70,
+      "inferno": 70,
+      "mirage": 86,
+      "nuke": 84
+    },
+    "money": 1650000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "mongolz",
+    "name": "The MongolZ",
+    "shortName": "MongolZ",
+    "country": "MN",
+    "region": "ASIA",
+    "hltvRank": 10,
+    "hltvPoints": 324,
+    "color": "#d4a017",
+    "playerIds": [
+      "nin9",
+      "blitz",
+      "techno",
+      "910",
+      "cobrazera"
+    ],
+    "starters": [
+      "nin9",
+      "blitz",
+      "techno",
+      "910",
+      "cobrazera"
+    ],
+    "mapStrength": {
+      "ancient": 63,
+      "anubis": 64,
+      "cache": 73,
+      "dust2": 86,
+      "inferno": 74,
+      "mirage": 88,
+      "nuke": 87
+    },
+    "money": 1450000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "nemiga",
+    "name": "Nemiga",
+    "shortName": "Nemiga",
+    "country": "BY",
+    "region": "CIS",
+    "hltvRank": 11,
+    "hltvPoints": 316,
+    "color": "#3fa9f5",
+    "playerIds": [
+      "kair0n",
+      "xant3r",
+      "robo",
+      "khan",
+      "syph0"
+    ],
+    "starters": [
+      "kair0n",
+      "xant3r",
+      "robo",
+      "khan",
+      "syph0"
+    ],
+    "mapStrength": {
+      "ancient": 85,
+      "anubis": 81,
+      "cache": 63,
+      "dust2": 67,
+      "inferno": 67,
+      "mirage": 72,
+      "nuke": 77
+    },
+    "money": 1200000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "g2",
+    "name": "G2 Esports",
+    "shortName": "G2",
+    "country": "DE",
+    "region": "EU",
+    "hltvRank": 12,
+    "hltvPoints": 247,
+    "color": "#f5f5f5",
+    "playerIds": [
+      "hunter",
+      "nertz",
+      "r1nkle",
+      "heavygod",
+      "matys"
+    ],
+    "starters": [
+      "hunter",
+      "nertz",
+      "r1nkle",
+      "heavygod",
+      "matys"
+    ],
+    "mapStrength": {
+      "ancient": 69,
+      "anubis": 75,
+      "cache": 75,
+      "dust2": 83,
+      "inferno": 65,
+      "mirage": 69,
+      "nuke": 69
+    },
+    "money": 950000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "parivision",
+    "name": "PARIVISION",
+    "shortName": "PARI",
+    "country": "RU",
+    "region": "CIS",
+    "hltvRank": 13,
+    "hltvPoints": 234,
+    "color": "#b14cff",
+    "playerIds": [
+      "hobbit",
+      "fl1t",
+      "jame",
+      "xielo",
+      "zweih"
+    ],
+    "starters": [
+      "hobbit",
+      "fl1t",
+      "jame",
+      "xielo",
+      "zweih"
+    ],
+    "mapStrength": {
+      "ancient": 82,
+      "anubis": 66,
+      "cache": 64,
+      "dust2": 85,
+      "inferno": 67,
+      "mirage": 79,
+      "nuke": 83
+    },
+    "money": 750000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "legacy",
+    "name": "Legacy",
+    "shortName": "Legacy",
+    "country": "BR",
+    "region": "SA",
+    "hltvRank": 14,
+    "hltvPoints": 221,
+    "color": "#00c2a8",
+    "playerIds": [
+      "art",
+      "dumau",
+      "latto",
+      "try",
+      "legacy-standin"
+    ],
+    "starters": [
+      "art",
+      "dumau",
+      "latto",
+      "try",
+      "legacy-standin"
+    ],
+    "mapStrength": {
+      "ancient": 76,
+      "anubis": 68,
+      "cache": 87,
+      "dust2": 65,
+      "inferno": 84,
+      "mirage": 86,
+      "nuke": 80
+    },
+    "money": 500000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "1win",
+    "name": "1win",
+    "shortName": "1win",
+    "country": "RU",
+    "region": "CIS",
+    "hltvRank": 15,
+    "hltvPoints": 161,
+    "color": "#2e6bff",
+    "playerIds": [
+      "ax1le",
+      "nafany",
+      "belchonokk",
+      "fame",
+      "artfr0st"
+    ],
+    "starters": [
+      "ax1le",
+      "nafany",
+      "belchonokk",
+      "fame",
+      "artfr0st"
+    ],
+    "mapStrength": {
+      "ancient": 65,
+      "anubis": 77,
+      "cache": 77,
+      "dust2": 68,
+      "inferno": 77,
+      "mirage": 73,
+      "nuke": 69
+    },
+    "money": 400000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "mibr",
+    "name": "MIBR",
+    "shortName": "MIBR",
+    "country": "BR",
+    "region": "SA",
+    "hltvRank": 16,
+    "hltvPoints": 153,
+    "color": "#3b6ff5",
+    "playerIds": [
+      "lnz",
+      "nqz",
+      "insani",
+      "venomzera",
+      "tomaszin"
+    ],
+    "starters": [
+      "lnz",
+      "nqz",
+      "insani",
+      "venomzera",
+      "tomaszin"
+    ],
+    "mapStrength": {
+      "ancient": 74,
+      "anubis": 67,
+      "cache": 70,
+      "dust2": 68,
+      "inferno": 64,
+      "mirage": 87,
+      "nuke": 88
+    },
+    "money": 400000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "liquid",
+    "name": "Team Liquid",
+    "shortName": "Liquid",
+    "country": "US",
+    "region": "NA",
+    "hltvRank": 17,
+    "hltvPoints": 150,
+    "color": "#0b2f6b",
+    "playerIds": [
+      "naf",
+      "elige",
+      "malbsmd",
+      "jt",
+      "jorko"
+    ],
+    "starters": [
+      "naf",
+      "elige",
+      "malbsmd",
+      "jt",
+      "jorko"
+    ],
+    "mapStrength": {
+      "ancient": 77,
+      "anubis": 87,
+      "cache": 74,
+      "dust2": 62,
+      "inferno": 73,
+      "mirage": 71,
+      "nuke": 77
+    },
+    "money": 400000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "faze",
+    "name": "FaZe Clan",
+    "shortName": "FaZe",
+    "country": "US",
+    "region": "EU",
+    "hltvRank": 18,
+    "hltvPoints": 118,
+    "color": "#e4002b",
+    "playerIds": [
+      "frozen",
+      "twistzz",
+      "neityu",
+      "jcobbb",
+      "jboen"
+    ],
+    "starters": [
+      "frozen",
+      "twistzz",
+      "neityu",
+      "jcobbb",
+      "jboen"
+    ],
+    "mapStrength": {
+      "ancient": 86,
+      "anubis": 74,
+      "cache": 84,
+      "dust2": 67,
+      "inferno": 86,
+      "mirage": 75,
+      "nuke": 70
+    },
+    "money": 400000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "9z",
+    "name": "9z Team",
+    "shortName": "9z",
+    "country": "AR",
+    "region": "SA",
+    "hltvRank": 19,
+    "hltvPoints": 113,
+    "color": "#ffffff",
+    "playerIds": [
+      "max",
+      "dgt",
+      "luchov",
+      "huasopeek",
+      "9z-standin"
+    ],
+    "starters": [
+      "max",
+      "dgt",
+      "luchov",
+      "huasopeek",
+      "9z-standin"
+    ],
+    "mapStrength": {
+      "ancient": 82,
+      "anubis": 79,
+      "cache": 88,
+      "dust2": 79,
+      "inferno": 74,
+      "mirage": 65,
+      "nuke": 75
+    },
+    "money": 400000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "astralis",
+    "name": "Astralis",
+    "shortName": "Astralis",
+    "country": "DK",
+    "region": "EU",
+    "hltvRank": 20,
+    "hltvPoints": 112,
+    "color": "#e3000b",
+    "playerIds": [
+      "phzy",
+      "siuhy",
+      "staehr",
+      "ryu",
+      "cmtry"
+    ],
+    "starters": [
+      "phzy",
+      "siuhy",
+      "staehr",
+      "ryu",
+      "cmtry"
+    ],
+    "mapStrength": {
+      "ancient": 65,
+      "anubis": 73,
+      "cache": 69,
+      "dust2": 87,
+      "inferno": 68,
+      "mirage": 63,
+      "nuke": 74
+    },
+    "money": 400000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "b8",
+    "name": "B8",
+    "shortName": "B8",
+    "country": "UA",
+    "region": "CIS",
+    "hltvRank": 21,
+    "hltvPoints": 101,
+    "color": "#f2c94c",
+    "playerIds": [
+      "alex666",
+      "npl",
+      "kensizor",
+      "esenthial",
+      "s1zzi"
+    ],
+    "starters": [
+      "alex666",
+      "npl",
+      "kensizor",
+      "esenthial",
+      "s1zzi"
+    ],
+    "mapStrength": {
+      "ancient": 86,
+      "anubis": 73,
+      "cache": 73,
+      "dust2": 62,
+      "inferno": 79,
+      "mirage": 70,
+      "nuke": 67
+    },
+    "money": 400000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "nip",
+    "name": "Ninjas in Pyjamas",
+    "shortName": "NIP",
+    "country": "SE",
+    "region": "EU",
+    "hltvRank": 22,
+    "hltvPoints": 100,
+    "color": "#d8d8d8",
+    "playerIds": [
+      "stavn",
+      "sjuush",
+      "krimbo",
+      "adamb",
+      "xkacpersky"
+    ],
+    "starters": [
+      "stavn",
+      "sjuush",
+      "krimbo",
+      "adamb",
+      "xkacpersky"
+    ],
+    "mapStrength": {
+      "ancient": 82,
+      "anubis": 66,
+      "cache": 64,
+      "dust2": 64,
+      "inferno": 86,
+      "mirage": 82,
+      "nuke": 78
+    },
+    "money": 400000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "eternalfire",
+    "name": "Eternal Fire",
+    "shortName": "EF",
+    "country": "TR",
+    "region": "EU",
+    "hltvRank": 23,
+    "hltvPoints": 94,
+    "color": "#ff7a1a",
+    "playerIds": [
+      "mistem",
+      "regali",
+      "soulfly",
+      "kvem",
+      "jottaaa"
+    ],
+    "starters": [
+      "mistem",
+      "regali",
+      "soulfly",
+      "kvem",
+      "jottaaa"
+    ],
+    "mapStrength": {
+      "ancient": 85,
+      "anubis": 75,
+      "cache": 75,
+      "dust2": 65,
+      "inferno": 84,
+      "mirage": 70,
+      "nuke": 82
+    },
+    "money": 400000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "m80",
+    "name": "M80",
+    "shortName": "M80",
+    "country": "US",
+    "region": "NA",
+    "hltvRank": 24,
+    "hltvPoints": 89,
+    "color": "#00e0a0",
+    "playerIds": [
+      "slaxz",
+      "swisher",
+      "s1n",
+      "jba",
+      "lake"
+    ],
+    "starters": [
+      "slaxz",
+      "swisher",
+      "s1n",
+      "jba",
+      "lake"
+    ],
+    "mapStrength": {
+      "ancient": 68,
+      "anubis": 69,
+      "cache": 79,
+      "dust2": 84,
+      "inferno": 70,
+      "mirage": 87,
+      "nuke": 66
+    },
+    "money": 400000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "heroic",
+    "name": "HEROIC",
+    "shortName": "HEROIC",
+    "country": "DK",
+    "region": "EU",
+    "hltvRank": 25,
+    "hltvPoints": 88,
+    "color": "#ff9933",
+    "playerIds": [
+      "brollan",
+      "nilo",
+      "susp",
+      "martinezsa",
+      "chr1zn"
+    ],
+    "starters": [
+      "brollan",
+      "nilo",
+      "susp",
+      "martinezsa",
+      "chr1zn"
+    ],
+    "mapStrength": {
+      "ancient": 69,
+      "anubis": 66,
+      "cache": 81,
+      "dust2": 86,
+      "inferno": 82,
+      "mirage": 82,
+      "nuke": 68
+    },
+    "money": 400000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "gamerlegion",
+    "name": "GamerLegion",
+    "shortName": "GL",
+    "country": "DE",
+    "region": "EU",
+    "hltvRank": 26,
+    "hltvPoints": 86,
+    "color": "#ff3d6e",
+    "playerIds": [
+      "rez",
+      "shalfey",
+      "tauson",
+      "fl4mus",
+      "hypex"
+    ],
+    "starters": [
+      "rez",
+      "shalfey",
+      "tauson",
+      "fl4mus",
+      "hypex"
+    ],
+    "mapStrength": {
+      "ancient": 87,
+      "anubis": 70,
+      "cache": 73,
+      "dust2": 74,
+      "inferno": 68,
+      "mirage": 79,
+      "nuke": 86
+    },
+    "money": 400000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "fnatic",
+    "name": "Fnatic",
+    "shortName": "fnatic",
+    "country": "GB",
+    "region": "EU",
+    "hltvRank": 27,
+    "hltvPoints": 76,
+    "color": "#ff5900",
+    "playerIds": [
+      "fear",
+      "jambo",
+      "jackasmo",
+      "cairne",
+      "mazay"
+    ],
+    "starters": [
+      "fear",
+      "jambo",
+      "jackasmo",
+      "cairne",
+      "mazay"
+    ],
+    "mapStrength": {
+      "ancient": 82,
+      "anubis": 65,
+      "cache": 83,
+      "dust2": 85,
+      "inferno": 84,
+      "mirage": 63,
+      "nuke": 71
+    },
+    "money": 400000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "envy",
+    "name": "Team Envy",
+    "shortName": "Envy",
+    "country": "US",
+    "region": "EU",
+    "hltvRank": 28,
+    "hltvPoints": 72,
+    "color": "#6a3df5",
+    "playerIds": [
+      "maka",
+      "lucky",
+      "misutaaa",
+      "kursy",
+      "graviti"
+    ],
+    "starters": [
+      "maka",
+      "lucky",
+      "misutaaa",
+      "kursy",
+      "graviti"
+    ],
+    "mapStrength": {
+      "ancient": 77,
+      "anubis": 64,
+      "cache": 79,
+      "dust2": 74,
+      "inferno": 63,
+      "mirage": 77,
+      "nuke": 83
+    },
+    "money": 400000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "magic",
+    "name": "magic",
+    "shortName": "magic",
+    "country": "RU",
+    "region": "CIS",
+    "hltvRank": 29,
+    "hltvPoints": 65,
+    "color": "#9b5de5",
+    "playerIds": [
+      "masval",
+      "lattykk",
+      "sfade8",
+      "aw",
+      "tenzy"
+    ],
+    "starters": [
+      "masval",
+      "lattykk",
+      "sfade8",
+      "aw",
+      "tenzy"
+    ],
+    "mapStrength": {
+      "ancient": 85,
+      "anubis": 67,
+      "cache": 69,
+      "dust2": 64,
+      "inferno": 67,
+      "mirage": 63,
+      "nuke": 82
+    },
+    "money": 400000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "tyloo",
+    "name": "TYLOO",
+    "shortName": "TYLOO",
+    "country": "CN",
+    "region": "ASIA",
+    "hltvRank": 30,
+    "hltvPoints": 63,
+    "color": "#d62828",
+    "playerIds": [
+      "jamyoung",
+      "jee",
+      "mercury",
+      "moseyuh",
+      "zero"
+    ],
+    "starters": [
+      "jamyoung",
+      "jee",
+      "mercury",
+      "moseyuh",
+      "zero"
+    ],
+    "mapStrength": {
+      "ancient": 77,
+      "anubis": 84,
+      "cache": 83,
+      "dust2": 78,
+      "inferno": 85,
+      "mirage": 87,
+      "nuke": 82
+    },
+    "money": 400000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "hotu",
+    "name": "HOTU",
+    "shortName": "HOTU",
+    "country": "RU",
+    "region": "CIS",
+    "hltvRank": 31,
+    "hltvPoints": 61,
+    "color": "#ffb703",
+    "playerIds": [
+      "n0rb3r7",
+      "kade0",
+      "mizu",
+      "dwushka",
+      "frontales"
+    ],
+    "starters": [
+      "n0rb3r7",
+      "kade0",
+      "mizu",
+      "dwushka",
+      "frontales"
+    ],
+    "mapStrength": {
+      "ancient": 88,
+      "anubis": 62,
+      "cache": 71,
+      "dust2": 70,
+      "inferno": 86,
+      "mirage": 77,
+      "nuke": 86
+    },
+    "money": 400000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  },
+  {
+    "id": "big",
+    "name": "BIG",
+    "shortName": "BIG",
+    "country": "DE",
+    "region": "EU",
+    "hltvRank": 32,
+    "hltvPoints": 57,
+    "color": "#1d3557",
+    "playerIds": [
+      "tabsen",
+      "jdc",
+      "faven",
+      "blamef",
+      "gr1ks"
+    ],
+    "starters": [
+      "tabsen",
+      "jdc",
+      "faven",
+      "blamef",
+      "gr1ks"
+    ],
+    "mapStrength": {
+      "ancient": 76,
+      "anubis": 80,
+      "cache": 77,
+      "dust2": 67,
+      "inferno": 85,
+      "mirage": 69,
+      "nuke": 64
+    },
+    "money": 400000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0
+  }
+]

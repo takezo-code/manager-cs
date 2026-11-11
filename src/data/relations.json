@@ -1,0 +1,140 @@
+[
+  {
+    "a": "furia",
+    "b": "vitality",
+    "value": 40,
+    "note": "exemplo do documento"
+  },
+  {
+    "a": "furia",
+    "b": "falcons",
+    "value": -40,
+    "note": "exemplo do documento"
+  },
+  {
+    "a": "furia",
+    "b": "mibr",
+    "value": -50,
+    "note": "rivalidade brasileira"
+  },
+  {
+    "a": "mibr",
+    "b": "legacy",
+    "value": -15,
+    "note": "rivalidade brasileira"
+  },
+  {
+    "a": "furia",
+    "b": "legacy",
+    "value": 10,
+    "note": "mesmo país"
+  },
+  {
+    "a": "9z",
+    "b": "legacy",
+    "value": 10,
+    "note": "América do Sul"
+  },
+  {
+    "a": "navi",
+    "b": "b8",
+    "value": 25,
+    "note": "cena ucraniana"
+  },
+  {
+    "a": "navi",
+    "b": "spirit",
+    "value": -25,
+    "note": "rivalidade CIS"
+  },
+  {
+    "a": "spirit",
+    "b": "betboom",
+    "value": -10,
+    "note": "rivalidade russa"
+  },
+  {
+    "a": "parivision",
+    "b": "betboom",
+    "value": -10,
+    "note": "rivalidade russa"
+  },
+  {
+    "a": "faze",
+    "b": "liquid",
+    "value": -30,
+    "note": "rivalidade histórica"
+  },
+  {
+    "a": "liquid",
+    "b": "m80",
+    "value": 10,
+    "note": "América do Norte"
+  },
+  {
+    "a": "astralis",
+    "b": "heroic",
+    "value": -30,
+    "note": "rivalidade dinamarquesa"
+  },
+  {
+    "a": "astralis",
+    "b": "nip",
+    "value": -10,
+    "note": "rivalidade escandinava"
+  },
+  {
+    "a": "aurora",
+    "b": "eternalfire",
+    "value": -40,
+    "note": "rivalidade turca"
+  },
+  {
+    "a": "fut",
+    "b": "eternalfire",
+    "value": -20,
+    "note": "rivalidade turca"
+  },
+  {
+    "a": "aurora",
+    "b": "fut",
+    "value": -10,
+    "note": "rivalidade turca"
+  },
+  {
+    "a": "mongolz",
+    "b": "tyloo",
+    "value": -10,
+    "note": "rivalidade asiática"
+  },
+  {
+    "a": "mouz",
+    "b": "big",
+    "value": -20,
+    "note": "rivalidade alemã"
+  },
+  {
+    "a": "g2",
+    "b": "falcons",
+    "value": -20,
+    "note": "saída do NiKo"
+  },
+  {
+    "a": "vitality",
+    "b": "mouz",
+    "value": 10,
+    "note": "boa relação de negócios"
+  },
+  {
+    "a": "vitality",
+    "b": "envy",
+    "value": 15,
+    "note": "cena francesa"
+  },
+  {
+    "a": "g2",
+    "b": "mouz",
+    "value": -10,
+    "note": "disputa por jogadores"
+  }
+]

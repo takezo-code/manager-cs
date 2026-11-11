@@ -1,0 +1,152 @@
+// Formato do save: o que vai para o IndexedDB e para o arquivo JSON de backup.
+import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_TEAMS } from '../data';
+import { START_DATE } from '../engine/date';
+import { initialSponsors } from '../engine/finance/sponsors';
+import { relationsFromList } from '../engine/market/relations';
+import { DEFAULT_MOOD } from '../engine/morale/satisfaction';
+import { createRng, hashString } from '../engine/rng';
+import type { Tournament } from '../engine/tournament/types';
+import type { MatchResult, Player, Team } from '../engine/types';
+import type { World, WorldEvent } from '../engine/world';
+
+/** v1: passo 6. v2: mercado (data, contratos, relações, propostas). v3: finanças e satisfação. */
+export const SAVE_VERSION = 3;
+export const SLOTS = [1, 2, 3] as const;
+export type Slot = (typeof SLOTS)[number];
+
+/** Parte do estado do jogo que é salva. */
+export interface SavedState extends World {
+  events: Array<WorldEvent & { date: string }>;
+  myTeamId: string;
+  tournament: Tournament | null;
+  seriesResults: Record<string, MatchResult>;
+  lastDayIds: string[];
+}
+
+export interface SaveMeta {
+  teamId: string;
+  teamName: string;
+  money: number;
+  date: string;
+  /** Ex.: "PGL Major Singapura 2026 · Dia 5". */
+  status: string;
+}
+
+export interface SaveRecord {
+  slot: Slot;
+  version: number;
+  updatedAt: number;
+  meta: SaveMeta;
+  state: SavedState;
+}
+
+export function buildMeta(state: SavedState): SaveMeta {
+  const team = state.teams[state.myTeamId];
+  const t = state.tournament;
+  let status = 'Sem campeonato em andamento';
+  if (t) status = t.championId ? `${t.name} · encerrado` : `${t.name} · Dia ${t.day}`;
+  return { teamId: team.id, teamName: team.name, money: team.money, date: state.date, status };
+}
+
+export function makeRecord(slot: Slot, state: SavedState, now = Date.now()): SaveRecord {
+  return { slot, version: SAVE_VERSION, updatedAt: now, meta: buildMeta(state), state };
+}
+
+const isObj = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
+
+/**
+ * Atualiza um save antigo para o formato atual.
+ * v1 → v2: completa contratos, potencial, região e titulares com os dados iniciais; data, relações e propostas começam do zero.
+ */
+export function migrateState(raw: Record<string, unknown>, version: number): SavedState {
+  let s = raw as unknown as SavedState;
+  if (version < 2) s = migrateV1(s);
+  if (version < 3) s = migrateV2(s);
+  return s;
+}
+
+/** v2 → v3: finanças e satisfação (patrocínios iniciais, humor dos jogadores, extrato e caixa de entrada vazios). */
+function migrateV2(s: SavedState): SavedState {
+  const rng = createRng(hashString(`migracao:${s.myTeamId}`));
+  const players: Record<string, Player> = {};
+  for (const [id, p] of Object.entries(s.players)) players[id] = { ...p, mood: p.mood ?? { ...DEFAULT_MOOD } };
+  const teams: Record<string, Team> = {};
+  for (const [id, t] of Object.entries(s.teams))
+    teams[id] = { ...t, sponsors: t.sponsors ?? initialSponsors(t, s.date, rng), lateMonths: t.lateMonths ?? 0, arrears: t.arrears ?? 0 };
+  return {
+    ...s,
+    players,
+    teams,
+    managerTeamId: s.myTeamId,
+    ledger: s.ledger ?? [],
+    sponsorOffers: s.sponsorOffers ?? [],
+    inbox: s.inbox ?? [],
+  };
+}
+
+function migrateV1(s: SavedState): SavedState {
+  const initPlayers = Object.fromEntries(INITIAL_PLAYERS.map((p) => [p.id, p]));
+  const initTeams = Object.fromEntries(INITIAL_TEAMS.map((t) => [t.id, t]));
+  const players: Record<string, Player> = {};
+  for (const [id, p] of Object.entries(s.players)) {
+    const init = initPlayers[id];
+    players[id] = {
+      ...p,
+      potential: p.potential ?? init?.potential ?? 70,
+      regionFlex: p.regionFlex ?? init?.regionFlex ?? 0.5,
+      transferListed: p.transferListed ?? false,
+      contract: p.contract !== undefined ? p.contract : (init?.contract ?? null),
+    };
+  }
+  // Agentes livres que não existiam na v1.
+  for (const p of INITIAL_PLAYERS) if (!players[p.id]) players[p.id] = structuredClone(p);
+  const teams: Record<string, Team> = {};
+  for (const [id, t] of Object.entries(s.teams)) {
+    const init = initTeams[id];
+    teams[id] = { ...t, region: t.region ?? init?.region ?? 'EU', starters: t.starters ?? [...t.playerIds] };
+  }
+  return {
+    ...s,
+    teams,
+    players,
+    date: s.date ?? START_DATE,
+    relations: s.relations ?? relationsFromList(INITIAL_RELATIONS),
+    offers: s.offers ?? [],
+    transferLog: s.transferLog ?? [],
+    events: s.events ?? [],
+  };
+}
+
+/** Valida um JSON importado. Devolve o estado ou uma mensagem de erro em português. */
+export function parseImport(text: string): { ok: true; state: SavedState } | { ok: false; error: string } {
+  let data: unknown;
+  try {
+    data = JSON.parse(text);
+  } catch {
+    return { ok: false, error: 'O arquivo não é um JSON válido.' };
+  }
+  if (!isObj(data) || data.app !== 'manager-cs') return { ok: false, error: 'Esse arquivo não é um save do Manager de CS.' };
+  if (typeof data.version !== 'number' || data.version > SAVE_VERSION)
+    return { ok: false, error: 'Esse save é de uma versão mais nova do jogo.' };
+  const s = data.state;
+  if (!isObj(s) || !isObj(s.teams) || !isObj(s.players) || typeof s.myTeamId !== 'string' || !isObj(s.teams[s.myTeamId]))
+    return { ok: false, error: 'O save está incompleto ou corrompido.' };
+  const base = {
+    ...s,
+    tournament: s.tournament ?? null,
+    seriesResults: isObj(s.seriesResults) ? s.seriesResults : {},
+    lastDayIds: Array.isArray(s.lastDayIds) ? s.lastDayIds : [],
+  };
+  return { ok: true, state: migrateState(base, data.version) };
+}
+
+/** Conteúdo do arquivo de backup. */
+export function exportJson(record: SaveRecord): string {
+  return JSON.stringify({ app: 'manager-cs', version: record.version, exportedAt: new Date().toISOString(), meta: record.meta, state: record.state });
+}
+
+export function exportFileName(record: SaveRecord): string {
+  const date = new Date(record.updatedAt).toISOString().slice(0, 10);
+  const team = record.meta.teamName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  return `manager-cs-slot${record.slot}-${team}-${date}.json`;
+}
