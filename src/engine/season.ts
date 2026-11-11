@@ -2,8 +2,10 @@
 import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_TEAMS } from '../data';
 import { addToAcademy, generateYouth } from './academy';
 import { buildYear, teamBusy } from './calendar';
-import { generateAmateurs } from './amateurs';
-import { newBaseSeason } from './baseLeague';
+import { generateAmateurs, refreshAmateurs } from './amateurs';
+import { academyAgingWarning, academyYearEnd } from './academy';
+import { ageUp, monthlyDevelopment } from './development';
+import { newBaseSeason, playBaseRound } from './baseLeague';
 import { ACADEMY, AMATEURS } from './config';
 import { START_DATE, addDays, daysBetween } from './date';
 import { monthlyFinance } from './finance/monthly';
@@ -83,12 +85,24 @@ export function dailyTick(world: World, opts: { rng?: Rng } = {}): { world: Worl
   for (const t of Object.values(w.teams)) if (!teamBusy(w.calendar, t.id)) w = trainDay(w, t.id);
   w = { ...w, players: Object.fromEntries(Object.entries(w.players).map(([id, p]) => [id, p.teamId ? p : recoverRest(p)])) };
 
+  // Virada do ano: aniversários, saída dos jovens de 20 anos e nova temporada da liga de base.
+  if (w.date.endsWith('-01-01')) {
+    w = ageUp(w);
+    add(academyYearEnd(w));
+    w = { ...w, baseLeague: newBaseSeason(year) };
+  }
   if (isFirstOfMonth(w.date)) {
+    w = monthlyDevelopment(w);
+    w = refreshAmateurs(w, rng);
+    if (w.date.slice(5, 7) === '12') events.push(...academyAgingWarning(w));
     add(monthlyFinance(w, rng));
     w = monthlySatisfaction(w);
     add(monthlyRequests(w));
   }
-  if (isMonday(w.date)) w = applyRanking(w);
+  if (isMonday(w.date)) {
+    w = applyRanking(w);
+    w = playBaseRound(w, rng);
+  }
   w = { ...w, sponsorOffers: w.sponsorOffers.filter((o) => o.expires >= w.date) };
   add(aiMarketDay(w, w.managerTeamId, rng));
 

@@ -119,3 +119,24 @@ describe('Migração v3 → v4', () => {
     expect(s.teams.furia.legacyPoints).toBe(teams.furia.hltvPoints);
   });
 });
+
+describe('Migração v4 → v5', () => {
+  it('cria academies, olheiro, amadores e liga de base', async () => {
+    const { migrateState } = await import('./saveFormat');
+    const s0 = sampleState();
+    const strip = <T extends object>(o: T, keys: string[]) => Object.fromEntries(Object.entries(o).filter(([k]) => !keys.includes(k)));
+    const v4 = {
+      ...strip(s0, ['amateurs', 'baseLeague']),
+      teams: Object.fromEntries(Object.entries(s0.teams).map(([id, t]) => [id, strip(t, ['academyIds', 'scoutLevel'])])),
+      players: Object.fromEntries(Object.entries(s0.players).map(([id, p]) => [id, strip(p, ['squad', 'growth'])])),
+    };
+    const s = migrateState(v4 as unknown as Record<string, unknown>, 4);
+    expect(s.teams.furia.academyIds).toHaveLength(5);
+    expect(s.teams.furia.scoutLevel).toBe(1);
+    expect(s.players.fallen.squad).toBe('principal');
+    expect(s.players.fallen.growth).toEqual({});
+    expect(s.players[s.teams.furia.academyIds[0]].squad).toBe('academy');
+    expect(s.amateurs).toHaveLength(40);
+    expect(s.baseLeague).toEqual({ season: 2026, table: {}, lastRound: [] });
+  });
+});

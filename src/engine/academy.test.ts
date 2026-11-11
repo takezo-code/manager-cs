@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { academyYearEnd, promote } from './academy';
 import { payroll } from './finance/monthly';
 import { startNegotiation } from './market/negotiation';
-import { createWorld } from './season';
+import { createWorld, dailyTick } from './season';
 
 describe('Academy', () => {
   it('todo time começa com 5 jovens na academy, fora do elenco principal', () => {
@@ -62,5 +62,38 @@ describe('Academy', () => {
     expect(out.events.some((e) => e.text.includes(w.players[mine].nick))).toBe(true);
     expect(out.world.teams.big.academyIds).not.toContain(theirs);
     expect(out.world.teams.big.academyIds).toHaveLength(5);
+  });
+});
+
+describe('Academy na temporada (dailyTick)', () => {
+  const at = (date: string) => ({ ...createWorld('furia'), date, calendar: [] });
+
+  it('no dia 1º: crescimento mensal dos jovens e troca de parte da GC/FACEIT', () => {
+    const before = at('2027-02-28');
+    const id = before.teams.furia.academyIds[0];
+    const out = dailyTick(before).world;
+    expect(out.players[id].growth).not.toEqual(before.players[id].growth);
+    expect(out.amateurs.map((a) => a.player.id)).not.toEqual(before.amateurs.map((a) => a.player.id));
+  });
+
+  it('segunda-feira de março: rodada da liga de base', () => {
+    const out = dailyTick(at('2027-03-07')).world;
+    expect(out.baseLeague.lastRound).toHaveLength(16);
+  });
+
+  it('1º de janeiro: todos fazem aniversário e a liga de base recomeça', () => {
+    const before = at('2027-12-31');
+    const vet = Object.values(before.players).find((p) => p.squad === 'principal' && p.teamId)!;
+    const out = dailyTick({ ...before, baseLeague: { season: 2027, table: { furia: { w: 3, l: 1 } }, lastRound: [] } }).world;
+    expect(out.players[vet.id].age).toBe(vet.age + 1);
+    expect(out.baseLeague.season).toBe(2028);
+    expect(out.baseLeague.table).toEqual({});
+  });
+
+  it('1º de dezembro: aviso de quem vai fazer 20 anos', () => {
+    let w = at('2027-11-30');
+    const id = w.teams.furia.academyIds[0];
+    w = { ...w, players: { ...w.players, [id]: { ...w.players[id], age: 19 } } };
+    expect(dailyTick(w).events.some((e) => e.text.includes('faz 20 anos'))).toBe(true);
   });
 });

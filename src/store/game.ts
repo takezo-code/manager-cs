@@ -17,7 +17,9 @@ import { createWorld, dailyTick } from '../engine/season';
 import { validStarters } from '../engine/squad';
 import { windowOpen } from '../engine/calendar';
 import { acceptInvite, declineInvite } from '../engine/schedule';
-import type { Amateur } from '../engine/amateurs';
+import { signAmateur, type Amateur } from '../engine/amateurs';
+import { promote } from '../engine/academy';
+import { upgradeScout } from '../engine/scout';
 import type { BaseLeague } from '../engine/baseLeague';
 import type { CalendarEvent } from '../engine/calendar';
 import type { EventResult, SeriesLogEntry } from '../engine/ranking';
@@ -96,6 +98,9 @@ export interface GameState {
   raiseSalary(playerId: string, pct: number): void;
   proposeSalaryCut(playerIds: string[], pct: number): void;
   denyPlayerExit(playerId: string): void;
+  promoteYouth(playerId: string): void;
+  signAmateur(playerId: string): void;
+  upgradeScout(): void;
 }
 
 type WorldFields =
@@ -386,6 +391,25 @@ export const useGame = create<GameState>((set, get) => {
     denyPlayerExit: (playerId) => {
       const out = denyExit(worldOf(get()), playerId);
       commitWorld(out.world, [out.event], { message: { kind: 'erro', text: out.event.text } });
+    },
+
+    promoteYouth: (playerId) => {
+      const r = promote(worldOf(get()), playerId);
+      if (!r.ok) return set({ message: { kind: 'erro', text: r.error } });
+      commitWorld(r.world, [], { message: { kind: 'ok', text: `${r.world.players[playerId].nick} subiu para o elenco principal.` } });
+    },
+
+    signAmateur: (playerId) => {
+      const r = signAmateur(worldOf(get()), playerId);
+      if (!r.ok) return set({ message: { kind: 'erro', text: r.error } });
+      commitWorld(r.world, [], { message: { kind: 'ok', text: `${r.world.players[playerId].nick} entrou na academy.` } });
+    },
+
+    upgradeScout: () => {
+      const r = upgradeScout(worldOf(get()));
+      if (!r.ok) return set({ message: { kind: 'erro', text: r.error } });
+      const me = get().myTeamId!;
+      commitWorld(r.world, [], { message: { kind: 'ok', text: `Olheiro agora é nível ${r.world.teams[me].scoutLevel}.` } });
     },
   };
 });

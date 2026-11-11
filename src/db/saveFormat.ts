@@ -1,6 +1,10 @@
 // Formato do save: o que vai para o IndexedDB e para o arquivo JSON de backup.
 import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_TEAMS } from '../data';
+import { addToAcademy, generateYouth } from '../engine/academy';
+import { generateAmateurs } from '../engine/amateurs';
+import { newBaseSeason } from '../engine/baseLeague';
 import { buildYear, type CalendarEvent } from '../engine/calendar';
+import { ACADEMY, AMATEURS } from '../engine/config';
 import { START_DATE, addDays } from '../engine/date';
 import { createGroup } from '../engine/tournament/doubleElim';
 import { initialSponsors } from '../engine/finance/sponsors';
@@ -11,8 +15,8 @@ import type { Tournament } from '../engine/tournament/types';
 import type { MatchResult, Player, Team } from '../engine/types';
 import type { World, WorldEvent } from '../engine/world';
 
-/** v1: passo 6. v2: mercado. v3: finanças e satisfação. v4: calendário, ranking, prêmios e treino. */
-export const SAVE_VERSION = 4;
+/** v1: passo 6. v2: mercado. v3: finanças e satisfação. v4: calendário, ranking, prêmios e treino. v5: academy, olheiro, GC/FACEIT e idade. */
+export const SAVE_VERSION = 5;
 export const SLOTS = [1, 2, 3] as const;
 export type Slot = (typeof SLOTS)[number];
 
@@ -69,7 +73,27 @@ export function migrateState(raw: Record<string, unknown>, version: number): Sav
   if (version < 2) s = migrateV1(s);
   if (version < 3) s = migrateV2(s);
   if (version < 4) s = migrateV3(s as SavedState & { tournament?: unknown });
+  if (version < 5) s = migrateV4(s);
   return s;
+}
+
+/** v4 → v5: elenco principal/academy, crescimento por idade, olheiro nível 1, academies e amadores gerados. */
+function migrateV4(s: SavedState): SavedState {
+  const rng = createRng(hashString(`migracao-v5:${s.myTeamId}:${s.date}`));
+  const players: Record<string, Player> = {};
+  for (const [id, p] of Object.entries(s.players)) players[id] = { ...p, squad: p.squad ?? 'principal', growth: p.growth ?? {} };
+  const teams: Record<string, Team> = {};
+  for (const [id, t] of Object.entries(s.teams)) teams[id] = { ...t, academyIds: t.academyIds ?? [], scoutLevel: t.scoutLevel ?? 1 };
+  let out: SavedState = {
+    ...s,
+    players,
+    teams,
+    amateurs: s.amateurs ?? generateAmateurs(rng, AMATEURS.poolSize, s.date),
+    baseLeague: s.baseLeague ?? newBaseSeason(Number(s.date.slice(0, 4))),
+  };
+  for (const id of Object.keys(out.teams))
+    if (!out.teams[id].academyIds.length) out = { ...out, ...addToAcademy(out, id, generateYouth(out, rng, id, ACADEMY.aiSize)) };
+  return out;
 }
 
 /** Campeonato no formato antigo (v3): tinha `template` em vez de `format`. */
