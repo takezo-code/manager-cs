@@ -43,6 +43,15 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 - **Conversas** (pedido de aumento, insatisfeito, pedido de saída): caixa de entrada com prazo de 7 dias; sem resposta conta como recusar/ignorar (saída: negar).
 - **Negar saída** (seção Mercado do documento) entrou aqui, junto com a satisfação.
 
+### Passo 9 (11/11/2026)
+
+- **Só tier 1** por enquanto; quem não é convidado joga a qualificatória entre os 32.
+- **Formato real de cada evento**; IEM Kraków e BLAST Bounty aproximados (formato não confirmado).
+- **Qualificatória:** mata-mata MD3, 3 dias antes do evento.
+- **Treino e descanso** nos dias livres.
+- **Sobreposição:** você escolhe o convite; a IA fica com o de maior premiação.
+- Detalhes do calendário, ranking, MVP e treino: .
+
 ## Criado por mim (revisar se quiser)
 
 | Item | Valor |
@@ -89,6 +98,11 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 | Autosave | Grava o slot ativo 0,4 s depois de qualquer mudança no estado salvo (elenco, caixa, campeonato) e ao fechar a aba. Amistosos não são salvos. |
 | Menu de saves | Cada slot tem Carregar, Nova carreira, Exportar, Importar e Apagar. Sobrescrever ou apagar pede confirmação; slot vazio, não. |
 | Backup JSON | Arquivo `manager-cs-slotN-time-data.json`, com versão do formato (1) e validação na importação |
+| Eventos de 32 times | Majors e EWC são obrigatórios para os 32 times (só existem 32 no jogo; uma recusa quebrava o formato) |
+| Stand-ins | Time com menos de 5 jogadores joga o evento com os melhores agentes livres, sem contrato |
+| Convite sem resposta | Até o dia da qualificatória: aceite automático se não houver conflito de datas; depois disso, o convite fecha |
+| Energia nos eventos | Quem entra num evento ganha +30 de energia; nos dias livres, treino gasta 2, descanso recupera 2, dividido fica igual |
+| Resultados guardados | Os últimos 40 jogos completos do seu time (os outros só até o dia seguinte) |
 | Cor da carta evoluída | A cor da evolução (azul, vermelha ou rosa) substitui a cor da faixa; a faixa continua num selo |
 
 ## Dados
