@@ -80,7 +80,9 @@ export function CalendarPanel() {
       <ol className="relative space-y-3 border-l border-line pl-5">
         {months.map(({ name, i, list }) => {
           const notes = monthNotes(i);
-          if (!list.length && !notes.length) return null;
+          // Meses já passados sem eventos não aparecem (só teriam a faixa da janela).
+          const past = date.startsWith(String(year)) ? i < thisMonth : Number(date.slice(0, 4)) > year;
+          if (!list.length && (!notes.length || past)) return null;
           return (
             <li key={name} className="relative">
               <span
