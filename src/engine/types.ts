@@ -161,6 +161,8 @@ export interface Team {
   training: TrainingPlan;
   /** Jovens da academy (fora do elenco principal). */
   academyIds: string[];
+  /** Nível do olheiro (1 a 5). */
+  scoutLevel: number;
 }
 
 export type MatchFormat = 'MD1' | 'MD3' | 'MD5';

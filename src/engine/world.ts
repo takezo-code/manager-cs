@@ -36,7 +36,8 @@ export type LedgerCategory =
   | 'salarios'
   | 'contratacao'
   | 'upgrade'
-  | 'habilidade';
+  | 'habilidade'
+  | 'olheiro';
 
 export const LEDGER_LABEL: Record<LedgerCategory, string> = {
   patrocinio: 'Patrocínios',
@@ -47,6 +48,7 @@ export const LEDGER_LABEL: Record<LedgerCategory, string> = {
   contratacao: 'Contratações e multas',
   upgrade: 'Upgrades de carta',
   habilidade: 'Habilidades',
+  olheiro: 'Olheiro',
 };
 
 /** Movimento de caixa do seu time (positivo entra, negativo sai). */

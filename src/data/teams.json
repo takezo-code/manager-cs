@@ -48,7 +48,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "furia",
@@ -99,7 +100,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "vitality",
@@ -150,7 +152,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "spirit",
@@ -201,7 +204,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "aurora",
@@ -252,7 +256,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "falcons",
@@ -303,7 +308,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "betboom",
@@ -354,7 +360,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "navi",
@@ -405,7 +412,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "fut",
@@ -456,7 +464,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "mongolz",
@@ -507,7 +516,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "nemiga",
@@ -558,7 +568,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "g2",
@@ -609,7 +620,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "parivision",
@@ -660,7 +672,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "legacy",
@@ -711,7 +724,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "1win",
@@ -762,7 +776,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "mibr",
@@ -813,7 +828,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "liquid",
@@ -864,7 +880,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "faze",
@@ -915,7 +932,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "9z",
@@ -966,7 +984,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "astralis",
@@ -1017,7 +1036,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "b8",
@@ -1068,7 +1088,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "nip",
@@ -1119,7 +1140,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "eternalfire",
@@ -1170,7 +1192,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "m80",
@@ -1221,7 +1244,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "heroic",
@@ -1272,7 +1296,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "gamerlegion",
@@ -1323,7 +1348,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "fnatic",
@@ -1374,7 +1400,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "envy",
@@ -1425,7 +1452,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "magic",
@@ -1476,7 +1504,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "tyloo",
@@ -1527,7 +1556,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "hotu",
@@ -1578,7 +1608,8 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   },
   {
     "id": "big",
@@ -1629,6 +1660,7 @@
       "mode": "dividido",
       "focus": "mira"
     },
-    "academyIds": []
+    "academyIds": [],
+    "scoutLevel": 1
   }
 ]

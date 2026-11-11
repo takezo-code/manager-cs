@@ -598,3 +598,22 @@ export const ACADEMY = {
   salaryMax: 30,
   contractMonths: 24,
 };
+
+// ---------- Olheiro ----------
+
+export const SCOUT = {
+  /** Por nível (1 a 5): meia-largura da faixa de POT, chance de errar o centro e amadores visíveis. */
+  levels: [
+    { range: 12, wrongChance: 0.25, visible: 8 },
+    { range: 9, wrongChance: 0.15, visible: 11 },
+    { range: 6, wrongChance: 0.1, visible: 14 },
+    { range: 4, wrongChance: 0.05, visible: 17 },
+    { range: 2, wrongChance: 0, visible: 20 },
+  ],
+  /** Preço para subir do nível N para N+1 (N = 1..4). */
+  upgradePrices: [100_000, 200_000, 400_000, 800_000],
+  /** Alertas a partir deste nível. */
+  alertsFrom: 4,
+  starPotential: 85,
+  bigGap: 15,
+};

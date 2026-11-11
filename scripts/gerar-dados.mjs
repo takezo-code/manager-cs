@@ -193,7 +193,7 @@ TEAMS.forEach(([id, name, shortName, country, color, roster], i) => {
   teams.push({
     id, name, shortName, country, region: TEAM_REGION[id] ?? 'EU', hltvRank: rank, hltvPoints: POINTS[i], color,
     playerIds: ids, starters: [...ids], mapStrength, money, sponsors: [], lateMonths: 0, arrears: 0,
-    legacyPoints: POINTS[i], legacyRoster: [...ids], rankHistory: [], training: { mode: 'dividido', focus: 'mira' }, academyIds: [],
+    legacyPoints: POINTS[i], legacyRoster: [...ids], rankHistory: [], training: { mode: 'dividido', focus: 'mira' }, academyIds: [], scoutLevel: 1,
   });
 });
 
