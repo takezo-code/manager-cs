@@ -97,3 +97,40 @@ describe('Academy na temporada (dailyTick)', () => {
     expect(dailyTick(w).events.some((e) => e.text.includes('faz 20 anos'))).toBe(true);
   });
 });
+
+describe('Correções da revisão', () => {
+  it('jovem que sai do time (fim de contrato) deixa a academy de verdade', async () => {
+    const { releasePlayer } = await import('./market/transfer');
+    const w = createWorld('furia');
+    const id = w.teams.furia.academyIds[0];
+    const out = releasePlayer(w, id, 'fim_contrato');
+    expect(out.teams.furia.academyIds).not.toContain(id);
+    expect(out.players[id].squad).toBe('principal');
+    expect(out.players[id].teamId).toBeNull();
+  });
+
+  it('IA com elenco incompleto promove o jovem de 20 anos em vez de dispensar', () => {
+    let w = createWorld('furia');
+    const ai = Object.keys(w.teams).find((id) => id !== 'furia')!;
+    const t = w.teams[ai];
+    const id = t.academyIds[0];
+    w = {
+      ...w,
+      date: '2028-01-01',
+      teams: { ...w.teams, [ai]: { ...t, playerIds: t.playerIds.slice(0, 4), starters: t.starters.filter((x) => t.playerIds.slice(0, 4).includes(x)) } },
+      players: { ...w.players, [id]: { ...w.players[id], age: 20 } },
+    };
+    const out = academyYearEnd(w).world;
+    expect(out.teams[ai].playerIds).toContain(id);
+  });
+
+  it('na virada do ano os amadores também envelhecem e quem passou de 19 sai do banco', async () => {
+    const { ageUp } = await import('./development');
+    const w = createWorld('furia');
+    const out = ageUp(w);
+    for (const a of out.amateurs) expect(a.player.age).toBeLessThanOrEqual(19);
+    const kept = w.amateurs.filter((a) => a.player.age < 19);
+    expect(out.amateurs).toHaveLength(kept.length);
+    expect(out.amateurs[0].player.age).toBe(kept[0].player.age + 1);
+  });
+});

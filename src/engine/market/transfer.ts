@@ -6,7 +6,12 @@ import { addMoney, type TransferEntry, type TransferKind, type World } from '../
 import { changeRelation } from './relations';
 
 function withoutPlayer(team: Team, playerId: string): Team {
-  return { ...team, playerIds: team.playerIds.filter((id) => id !== playerId), starters: team.starters.filter((id) => id !== playerId) };
+  return {
+    ...team,
+    playerIds: team.playerIds.filter((id) => id !== playerId),
+    starters: team.starters.filter((id) => id !== playerId),
+    academyIds: (team.academyIds ?? []).filter((id) => id !== playerId),
+  };
 }
 
 /** Recalcula titulares quando ficaram incompletos (alguém saiu). */
@@ -27,7 +32,8 @@ export function movePlayer(w: World, playerId: string, toTeamId: string | null, 
   const p = w.players[playerId];
   const teams = { ...w.teams };
   if (p.teamId) teams[p.teamId] = withoutPlayer(teams[p.teamId], playerId);
-  const moved: Player = { ...p, teamId: toTeamId, contract, transferListed: false };
+  // Quem sai do time deixa também a academy.
+  const moved: Player = { ...p, teamId: toTeamId, contract, transferListed: false, squad: 'principal' };
   const players = { ...w.players, [playerId]: moved };
   if (toTeamId) {
     const t = teams[toTeamId];

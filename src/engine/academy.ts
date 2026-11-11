@@ -126,7 +126,8 @@ export function academyYearEnd(world: World, rngIn?: Rng): { world: World; event
         continue;
       }
       const team = w.teams[t.id];
-      const good = team.playerIds.length >= 5 && baseOvr(p) >= weakestRole(team, w.players).ovr - 2;
+      // Elenco incompleto: promove; completo, só se ele for quase tão bom quanto o pior titular.
+      const good = team.playerIds.length < 5 || baseOvr(p) >= weakestRole(team, w.players).ovr - 2;
       const r = good ? promote(w, id) : null;
       w = r?.ok ? r.world : releaseYouth(w, id);
     }

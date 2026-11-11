@@ -1,5 +1,5 @@
 // Desenvolvimento por idade: jovens crescem rumo ao POT, auge de 22 a 26, queda gradual depois.
-import { ATTR_MAX, DEVELOPMENT, ROLE_WEIGHTS } from './config';
+import { ACADEMY, ATTR_MAX, DEVELOPMENT, ROLE_WEIGHTS } from './config';
 import { baseOvr } from './form';
 import { ATTR_KEYS, type Player } from './types';
 import type { World } from './world';
@@ -36,7 +36,13 @@ export function monthlyDevelopment(w: World): World {
   return { ...w, players };
 }
 
-/** 1º de janeiro: todos fazem aniversário. */
+/** 1º de janeiro: todos fazem aniversário; amadores que passam de 19 anos saem do banco da GC/FACEIT. */
 export function ageUp(w: World): World {
-  return { ...w, players: Object.fromEntries(Object.entries(w.players).map(([id, p]) => [id, { ...p, age: p.age + 1 }])) };
+  return {
+    ...w,
+    players: Object.fromEntries(Object.entries(w.players).map(([id, p]) => [id, { ...p, age: p.age + 1 }])),
+    amateurs: (w.amateurs ?? [])
+      .map((a) => ({ ...a, player: { ...a.player, age: a.player.age + 1 } }))
+      .filter((a) => a.player.age <= ACADEMY.maxAge),
+  };
 }
