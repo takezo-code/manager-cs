@@ -18,6 +18,8 @@ function sampleState(): SavedState {
     ledger: [],
     sponsorOffers: [],
     inbox: [],
+    results: [],
+    seriesLog: [],
     teams,
     players: out.players,
     relations: {},

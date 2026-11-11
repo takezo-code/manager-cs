@@ -19,6 +19,7 @@ import { createWorld, dailyTick } from '../engine/season';
 import { validStarters } from '../engine/squad';
 import { createLegacyTournament, playDay, type TournamentTemplate } from '../engine/tournament/run';
 import type { Tournament } from '../engine/tournament/types';
+import type { EventResult, SeriesLogEntry } from '../engine/ranking';
 import type { MatchFormat, MatchResult, MatchStage, Player, SkillId, Team } from '../engine/types';
 import {
   addMoney,
@@ -52,6 +53,8 @@ export interface GameState {
   ledger: LedgerEntry[];
   sponsorOffers: SponsorOffer[];
   inbox: InboxItem[];
+  results: EventResult[];
+  seriesLog: SeriesLogEntry[];
   /** Avisos (os mais novos primeiro). */
   events: GameEvent[];
 
@@ -91,7 +94,19 @@ export interface GameState {
   denyPlayerExit(playerId: string): void;
 }
 
-type WorldFields = 'date' | 'teams' | 'players' | 'relations' | 'offers' | 'transferLog' | 'ledger' | 'sponsorOffers' | 'inbox' | 'myTeamId';
+type WorldFields =
+  | 'date'
+  | 'teams'
+  | 'players'
+  | 'relations'
+  | 'offers'
+  | 'transferLog'
+  | 'ledger'
+  | 'sponsorOffers'
+  | 'inbox'
+  | 'results'
+  | 'seriesLog'
+  | 'myTeamId';
 
 export const worldOf = (s: Pick<GameState, WorldFields>): World => ({
   date: s.date,
@@ -104,6 +119,8 @@ export const worldOf = (s: Pick<GameState, WorldFields>): World => ({
   ledger: s.ledger,
   sponsorOffers: s.sponsorOffers,
   inbox: s.inbox,
+  results: s.results,
+  seriesLog: s.seriesLog,
 });
 
 /** Campos do mundo para gravar de volta no estado. */
@@ -118,6 +135,8 @@ function fromWorld(w: World) {
     ledger: w.ledger,
     sponsorOffers: w.sponsorOffers,
     inbox: w.inbox,
+    results: w.results,
+    seriesLog: w.seriesLog,
   };
 }
 
@@ -136,7 +155,7 @@ export function savedPart(s: GameState): SavedState | null {
 
 /** Campos do estado que vão para o save. */
 const SAVED_KEYS = [
-  'date', 'teams', 'players', 'relations', 'offers', 'transferLog', 'ledger', 'sponsorOffers', 'inbox', 'events',
+  'date', 'teams', 'players', 'relations', 'offers', 'transferLog', 'ledger', 'sponsorOffers', 'inbox', 'results', 'seriesLog', 'events',
   'myTeamId', 'tournament', 'seriesResults', 'lastDayIds', 'activeSlot',
 ] as const satisfies ReadonlyArray<keyof GameState>;
 
@@ -378,8 +397,10 @@ export function useWorld(): World {
   const ledger = useGame((s) => s.ledger);
   const sponsorOffers = useGame((s) => s.sponsorOffers);
   const inbox = useGame((s) => s.inbox);
+  const results = useGame((s) => s.results);
+  const seriesLog = useGame((s) => s.seriesLog);
   return useMemo(
-    () => worldOf({ date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox }),
-    [date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox],
+    () => worldOf({ date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog }),
+    [date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog],
   );
 }

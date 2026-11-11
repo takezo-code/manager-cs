@@ -27,6 +27,8 @@ export function createWorld(managerTeamId: string, seed = 1): World {
     ledger: [],
     sponsorOffers: [],
     inbox: [],
+    results: [],
+    seriesLog: [],
   };
 }
 

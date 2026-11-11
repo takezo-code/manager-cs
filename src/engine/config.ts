@@ -512,3 +512,27 @@ export const CALENDAR = {
   /** Férias de fim de ano. */
   vacation: ['12-14', '12-31'] as const,
 };
+
+// ---------- Ranking HLTV ----------
+
+export const RANKING = {
+  wAchievement: 0.6,
+  wForm: 0.2,
+  wLan: 0.2,
+  formDays: 60,
+  lanCount: 10,
+  decayDays: 365,
+  /** Regra do núcleo: titulares em comum para manter os pontos. */
+  coreSize: 3,
+  /** Semanas guardadas no histórico de cada time. */
+  historySize: 26,
+  placeFactors: [
+    { upTo: 1, factor: 1 },
+    { upTo: 2, factor: 0.7 },
+    { upTo: 4, factor: 0.5 },
+    { upTo: 8, factor: 0.3 },
+    { upTo: 16, factor: 0.15 },
+    { upTo: 99, factor: 0.05 },
+  ],
+  eventWeights: { major: 1, big: 0.8, mid: 0.6, small: 0.4 },
+};

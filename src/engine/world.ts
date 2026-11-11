@@ -1,5 +1,6 @@
 // "Mundo" do jogo: tudo que muda com o tempo, com o mercado e com as finanças.
 import type { Relations } from './market/relations';
+import type { EventResult, SeriesLogEntry } from './ranking';
 import type { Player, Team } from './types';
 
 export interface IncomingOffer {
@@ -101,6 +102,10 @@ export interface World {
   ledger: LedgerEntry[];
   sponsorOffers: SponsorOffer[];
   inbox: InboxItem[];
+  /** Colocações em eventos (ranking). */
+  results: EventResult[];
+  /** Séries jogadas (forma no ranking). */
+  seriesLog: SeriesLogEntry[];
 }
 
 /** Mensagem curta para o manager (vira notícia de verdade no passo 13). */

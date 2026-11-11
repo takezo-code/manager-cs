@@ -139,6 +139,11 @@ export interface Team {
   lateMonths: number;
   /** Salários devidos (atrasados). */
   arrears: number;
+  /** Pontos reais do ranking no início (decaem em 12 meses) e o elenco que os conquistou. */
+  legacyPoints: number;
+  legacyRoster: string[];
+  /** Histórico semanal do ranking. */
+  rankHistory: Array<{ date: string; rank: number; points: number }>;
 }
 
 export type MatchFormat = 'MD1' | 'MD3' | 'MD5';

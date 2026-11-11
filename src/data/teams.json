@@ -34,7 +34,16 @@
     "money": 3500000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 912,
+    "legacyRoster": [
+      "torzsi",
+      "spinx",
+      "xertion",
+      "pr",
+      "xelex"
+    ],
+    "rankHistory": []
   },
   {
     "id": "furia",
@@ -71,7 +80,16 @@
     "money": 3250000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 910,
+    "legacyRoster": [
+      "fallen",
+      "yuurih",
+      "yekindar",
+      "kscerato",
+      "molodoy"
+    ],
+    "rankHistory": []
   },
   {
     "id": "vitality",
@@ -108,7 +126,16 @@
     "money": 3050000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 836,
+    "legacyRoster": [
+      "apex",
+      "ropz",
+      "zywoo",
+      "flamez",
+      "mezii"
+    ],
+    "rankHistory": []
   },
   {
     "id": "spirit",
@@ -145,7 +172,16 @@
     "money": 2800000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 777,
+    "legacyRoster": [
+      "sh1ro",
+      "magixx",
+      "tn1r",
+      "zont1x",
+      "donk"
+    ],
+    "rankHistory": []
   },
   {
     "id": "aurora",
@@ -182,7 +218,16 @@
     "money": 2600000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 552,
+    "legacyRoster": [
+      "xantares",
+      "woxic",
+      "jimpphat",
+      "kyxsan",
+      "wicadia"
+    ],
+    "rankHistory": []
   },
   {
     "id": "falcons",
@@ -219,7 +264,16 @@
     "money": 2350000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 477,
+    "legacyRoster": [
+      "karrigan",
+      "niko",
+      "teses",
+      "m0nesy",
+      "kyousuke"
+    ],
+    "rankHistory": []
   },
   {
     "id": "betboom",
@@ -256,7 +310,16 @@
     "money": 2100000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 439,
+    "legacyRoster": [
+      "boombl4",
+      "zorte",
+      "s1ren",
+      "d1ledez",
+      "magnojez"
+    ],
+    "rankHistory": []
   },
   {
     "id": "navi",
@@ -293,7 +356,16 @@
     "money": 1900000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 412,
+    "legacyRoster": [
+      "aleksib",
+      "im",
+      "b1t",
+      "w0nderful",
+      "makazze"
+    ],
+    "rankHistory": []
   },
   {
     "id": "fut",
@@ -330,7 +402,16 @@
     "money": 1650000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 361,
+    "legacyRoster": [
+      "sunpayus",
+      "xfl0ud",
+      "dem0n",
+      "krabeni",
+      "dziugss"
+    ],
+    "rankHistory": []
   },
   {
     "id": "mongolz",
@@ -367,7 +448,16 @@
     "money": 1450000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 324,
+    "legacyRoster": [
+      "nin9",
+      "blitz",
+      "techno",
+      "910",
+      "cobrazera"
+    ],
+    "rankHistory": []
   },
   {
     "id": "nemiga",
@@ -404,7 +494,16 @@
     "money": 1200000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 316,
+    "legacyRoster": [
+      "kair0n",
+      "xant3r",
+      "robo",
+      "khan",
+      "syph0"
+    ],
+    "rankHistory": []
   },
   {
     "id": "g2",
@@ -441,7 +540,16 @@
     "money": 950000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 247,
+    "legacyRoster": [
+      "hunter",
+      "nertz",
+      "r1nkle",
+      "heavygod",
+      "matys"
+    ],
+    "rankHistory": []
   },
   {
     "id": "parivision",
@@ -478,7 +586,16 @@
     "money": 750000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 234,
+    "legacyRoster": [
+      "hobbit",
+      "fl1t",
+      "jame",
+      "xielo",
+      "zweih"
+    ],
+    "rankHistory": []
   },
   {
     "id": "legacy",
@@ -515,7 +632,16 @@
     "money": 500000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 221,
+    "legacyRoster": [
+      "art",
+      "dumau",
+      "latto",
+      "try",
+      "legacy-standin"
+    ],
+    "rankHistory": []
   },
   {
     "id": "1win",
@@ -552,7 +678,16 @@
     "money": 400000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 161,
+    "legacyRoster": [
+      "ax1le",
+      "nafany",
+      "belchonokk",
+      "fame",
+      "artfr0st"
+    ],
+    "rankHistory": []
   },
   {
     "id": "mibr",
@@ -589,7 +724,16 @@
     "money": 400000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 153,
+    "legacyRoster": [
+      "lnz",
+      "nqz",
+      "insani",
+      "venomzera",
+      "tomaszin"
+    ],
+    "rankHistory": []
   },
   {
     "id": "liquid",
@@ -626,7 +770,16 @@
     "money": 400000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 150,
+    "legacyRoster": [
+      "naf",
+      "elige",
+      "malbsmd",
+      "jt",
+      "jorko"
+    ],
+    "rankHistory": []
   },
   {
     "id": "faze",
@@ -663,7 +816,16 @@
     "money": 400000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 118,
+    "legacyRoster": [
+      "frozen",
+      "twistzz",
+      "neityu",
+      "jcobbb",
+      "jboen"
+    ],
+    "rankHistory": []
   },
   {
     "id": "9z",
@@ -700,7 +862,16 @@
     "money": 400000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 113,
+    "legacyRoster": [
+      "max",
+      "dgt",
+      "luchov",
+      "huasopeek",
+      "9z-standin"
+    ],
+    "rankHistory": []
   },
   {
     "id": "astralis",
@@ -737,7 +908,16 @@
     "money": 400000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 112,
+    "legacyRoster": [
+      "phzy",
+      "siuhy",
+      "staehr",
+      "ryu",
+      "cmtry"
+    ],
+    "rankHistory": []
   },
   {
     "id": "b8",
@@ -774,7 +954,16 @@
     "money": 400000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 101,
+    "legacyRoster": [
+      "alex666",
+      "npl",
+      "kensizor",
+      "esenthial",
+      "s1zzi"
+    ],
+    "rankHistory": []
   },
   {
     "id": "nip",
@@ -811,7 +1000,16 @@
     "money": 400000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 100,
+    "legacyRoster": [
+      "stavn",
+      "sjuush",
+      "krimbo",
+      "adamb",
+      "xkacpersky"
+    ],
+    "rankHistory": []
   },
   {
     "id": "eternalfire",
@@ -848,7 +1046,16 @@
     "money": 400000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 94,
+    "legacyRoster": [
+      "mistem",
+      "regali",
+      "soulfly",
+      "kvem",
+      "jottaaa"
+    ],
+    "rankHistory": []
   },
   {
     "id": "m80",
@@ -885,7 +1092,16 @@
     "money": 400000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 89,
+    "legacyRoster": [
+      "slaxz",
+      "swisher",
+      "s1n",
+      "jba",
+      "lake"
+    ],
+    "rankHistory": []
   },
   {
     "id": "heroic",
@@ -922,7 +1138,16 @@
     "money": 400000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 88,
+    "legacyRoster": [
+      "brollan",
+      "nilo",
+      "susp",
+      "martinezsa",
+      "chr1zn"
+    ],
+    "rankHistory": []
   },
   {
     "id": "gamerlegion",
@@ -959,7 +1184,16 @@
     "money": 400000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 86,
+    "legacyRoster": [
+      "rez",
+      "shalfey",
+      "tauson",
+      "fl4mus",
+      "hypex"
+    ],
+    "rankHistory": []
   },
   {
     "id": "fnatic",
@@ -996,7 +1230,16 @@
     "money": 400000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 76,
+    "legacyRoster": [
+      "fear",
+      "jambo",
+      "jackasmo",
+      "cairne",
+      "mazay"
+    ],
+    "rankHistory": []
   },
   {
     "id": "envy",
@@ -1033,7 +1276,16 @@
     "money": 400000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 72,
+    "legacyRoster": [
+      "maka",
+      "lucky",
+      "misutaaa",
+      "kursy",
+      "graviti"
+    ],
+    "rankHistory": []
   },
   {
     "id": "magic",
@@ -1070,7 +1322,16 @@
     "money": 400000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 65,
+    "legacyRoster": [
+      "masval",
+      "lattykk",
+      "sfade8",
+      "aw",
+      "tenzy"
+    ],
+    "rankHistory": []
   },
   {
     "id": "tyloo",
@@ -1107,7 +1368,16 @@
     "money": 400000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 63,
+    "legacyRoster": [
+      "jamyoung",
+      "jee",
+      "mercury",
+      "moseyuh",
+      "zero"
+    ],
+    "rankHistory": []
   },
   {
     "id": "hotu",
@@ -1144,7 +1414,16 @@
     "money": 400000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 61,
+    "legacyRoster": [
+      "n0rb3r7",
+      "kade0",
+      "mizu",
+      "dwushka",
+      "frontales"
+    ],
+    "rankHistory": []
   },
   {
     "id": "big",
@@ -1181,6 +1460,15 @@
     "money": 400000,
     "sponsors": [],
     "lateMonths": 0,
-    "arrears": 0
+    "arrears": 0,
+    "legacyPoints": 57,
+    "legacyRoster": [
+      "tabsen",
+      "jdc",
+      "faven",
+      "blamef",
+      "gr1ks"
+    ],
+    "rankHistory": []
   }
 ]
