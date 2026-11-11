@@ -638,3 +638,11 @@ export const AMATEURS = {
   gemPotential: 85,
   countries: ['BR', 'AR', 'US', 'RU', 'UA', 'KZ', 'PL', 'DK', 'SE', 'FR', 'DE', 'TR', 'MN', 'CN', 'FI', 'ES', 'PT', 'CZ'],
 };
+
+/** Liga de base das academies (MD1 simulada toda segunda). */
+export const BASE_LEAGUE = {
+  firstMonth: 2,
+  lastMonth: 11,
+  /** Diferença de OVR médio que dá ~73% de chance ao mais forte. */
+  ratingScale: 5,
+};

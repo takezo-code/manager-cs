@@ -22,6 +22,7 @@ function sampleState(): SavedState {
     results: [],
     seriesLog: [],
     amateurs: [],
+    baseLeague: { season: 2026, table: {}, lastRound: [] },
     calendar: [{ ...buildYear(2026).find((e) => e.templateId === 'iem-china')!, status: 'em_andamento', tournament: out.tournament }],
     teams,
     players: out.players,
