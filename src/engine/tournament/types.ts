@@ -51,20 +51,44 @@ export type DESlot =
   | 'LR2B'
   | 'DEC';
 
-/** Grupo de 8 em dupla eliminação (IEM): 1º, 2º e 3º se classificam. */
+/**
+ * Grupo de 8 em dupla eliminação. Com 3 classificados (IEM, BLAST): vencedor da final do upper,
+ * perdedor da final do upper e vencedor da final do lower. Com 4 (EWC): vencedores das semis do upper
+ * e vencedores da 2ª rodada do lower.
+ */
 export interface DoubleElimGroup {
+  kind: 'de8';
   name: string;
   seeds: string[];
+  advance: 3 | 4;
+  /** Abertura (quartas do upper) em MD1. */
+  openingBo1: boolean;
+  /** Colocação de quem cai em cada partida eliminatória. */
+  placeLabels: Partial<Record<DESlot, string>>;
   matches: Partial<Record<DESlot, Series>>;
 }
+
+export type Gsl4Slot = 'O1' | 'O2' | 'W' | 'L' | 'D';
+
+/** Grupo GSL de 4 (BLAST Rivals): abertura 1×4 e 2×3, vencedores, perdedores e decisão; 3 classificados. */
+export interface Gsl4Group {
+  kind: 'gsl4';
+  name: string;
+  seeds: string[];
+  /** Colocação de quem cai (o perdedor da partida dos perdedores). */
+  eliminatedPlace: string;
+  matches: Partial<Record<Gsl4Slot, Series>>;
+}
+
+export type Group = DoubleElimGroup | Gsl4Group;
 
 export interface GroupsStage {
   kind: 'groups';
   name: string;
-  groups: DoubleElimGroup[];
+  groups: Group[];
 }
 
-export type SlotSource = { team: string } | { winnerOf: string };
+export type SlotSource = { team: string } | { winnerOf: string } | { loserOf: string };
 
 export interface BracketSlot {
   id: string;
@@ -75,6 +99,8 @@ export interface BracketSlot {
   b: SlotSource;
   /** Colocação de quem perde aqui (ex.: "5º–8º", "Vice"). */
   loserPlace: string;
+  /** Colocação de quem vence aqui (só na disputa de 3º: "3º"). */
+  winnerPlace?: string;
   series?: Series;
 }
 
@@ -88,12 +114,21 @@ export interface BracketStage {
 
 export type Stage = SwissStage | GroupsStage | BracketStage;
 
-export type TournamentTemplate = 'major' | 'iem';
+export type FormatId = 'major32' | 'groups16' | 'swiss16' | 'epl24' | 'ewc32' | 'rivals8' | 'bracket8';
+
+export interface FormatOptions {
+  /** Disputa de 3º lugar (MD3) entre os perdedores das semis. */
+  thirdPlace?: boolean;
+  /** Abertura dos grupos em MD1. */
+  openingBo1?: boolean;
+}
 
 export interface Tournament {
   id: string;
   name: string;
-  template: TournamentTemplate;
+  format: FormatId;
+  options: FormatOptions;
+  prizePool: number;
   seed: number;
   day: number;
   participants: string[];

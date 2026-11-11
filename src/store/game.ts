@@ -17,8 +17,8 @@ import { buySkill, upgradeCard } from '../engine/player';
 import { createRng, hashString } from '../engine/rng';
 import { createWorld, dailyTick } from '../engine/season';
 import { validStarters } from '../engine/squad';
-import { createTournament, playDay } from '../engine/tournament/run';
-import type { Tournament, TournamentTemplate } from '../engine/tournament/types';
+import { createLegacyTournament, playDay, type TournamentTemplate } from '../engine/tournament/run';
+import type { Tournament } from '../engine/tournament/types';
 import type { MatchFormat, MatchResult, MatchStage, Player, SkillId, Team } from '../engine/types';
 import {
   addMoney,
@@ -236,7 +236,7 @@ export const useGame = create<GameState>((set, get) => {
       const { teams, players, myTeamId } = get();
       if (myTeamId && teams[myTeamId].playerIds.length < 5)
         return set({ message: { kind: 'erro', text: 'Seu elenco precisa de 5 jogadores para entrar num campeonato.' } });
-      const t = createTournament(template, Object.values(teams), Math.floor(Math.random() * 1e9));
+      const t = createLegacyTournament(template, Object.values(teams), Math.floor(Math.random() * 1e9));
       // Descanso antes do evento.
       const ps = { ...players };
       for (const teamId of t.participants) for (const pid of teams[teamId].playerIds) ps[pid] = recoverBetweenEvents(ps[pid]);

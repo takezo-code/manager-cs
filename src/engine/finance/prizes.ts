@@ -13,7 +13,10 @@ export function placeNumber(label: string): number {
   return parseInt(label, 10) || 99;
 }
 
-export function prizeFor(template: Tournament['template'], label: string): number {
+/** Provisório até a Tarefa 2: Major usa a tabela do Major; o resto, a do IEM. */
+const tableOf = (t: Pick<Tournament, 'format'>) => (t.format === 'major32' ? 'major' : 'iem');
+
+export function prizeFor(template: 'major' | 'iem', label: string): number {
   const place = placeNumber(label);
   const table = PRIZES[template];
   let amount = 0;
@@ -25,7 +28,7 @@ export function awardTournament(world: World, t: Tournament): World {
   let w = world;
   const half = t.participants.length / 2;
   for (const [teamId, label] of Object.entries(t.placements)) {
-    w = addMoney(w, teamId, prizeFor(t.template, label), 'premiacao', `${t.name} (${label})`);
+    w = addMoney(w, teamId, prizeFor(tableOf(t), label), 'premiacao', `${t.name} (${label})`);
     const place = placeNumber(label);
     const delta =
       place === 1 ? MORALE.events.title : place === 2 ? MORALE.events.vice : place <= 4 ? MORALE.events.top4 : place > half ? MORALE.events.earlyExit : 0;

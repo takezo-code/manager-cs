@@ -155,7 +155,7 @@ describe('Um ano de jogo', () => {
 
 describe('Fim de campeonato', () => {
   it('paga premiação real, bônus de título e mexe na satisfação', async () => {
-    const { createTournament, playDay } = await import('../tournament/run');
+    const { createLegacyTournament: createTournament, playDay } = await import('../tournament/run');
     const { awardTournament } = await import('./prizes');
     let w = createWorld('furia');
     let t = createTournament('iem', Object.values(w.teams), 11);

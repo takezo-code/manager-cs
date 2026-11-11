@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { DE_SLOTS } from '../engine/tournament/doubleElim';
-import { TEMPLATES, allSeries } from '../engine/tournament/run';
 import { buchholz, isActive, swissStandings } from '../engine/tournament/swiss';
-import type { BracketStage, DoubleElimGroup, Series, Stage, SwissStage, Tournament, TournamentTemplate } from '../engine/tournament/types';
+import { TEMPLATES, allSeries, type TournamentTemplate } from '../engine/tournament/run';
+import type { BracketStage, Group, Series, Stage, SwissStage, Tournament } from '../engine/tournament/types';
 import type { Team } from '../engine/types';
 import { useGame } from '../store/game';
 import { MatchView } from './MatchView';
@@ -156,9 +156,9 @@ function SwissView({ s, teams, myTeamId, open, can }: { s: SwissStage; teams: Re
   );
 }
 
-function GroupView({ g, teams, myTeamId, open, can }: { g: DoubleElimGroup; teams: Record<string, Team>; myTeamId: string; open: (id: string) => void; can: (id: string) => boolean }) {
-  const upper = DE_SLOTS.filter((k) => k.startsWith('U')).map((k) => g.matches[k]);
-  const lower = DE_SLOTS.filter((k) => !k.startsWith('U')).map((k) => g.matches[k]);
+function GroupView({ g, teams, myTeamId, open, can }: { g: Group; teams: Record<string, Team>; myTeamId: string; open: (id: string) => void; can: (id: string) => boolean }) {
+  const upper = g.kind === 'de8' ? DE_SLOTS.filter((k) => k.startsWith('U')).map((k) => g.matches[k]) : (['O1', 'O2', 'W'] as const).map((k) => g.matches[k]);
+  const lower = g.kind === 'de8' ? DE_SLOTS.filter((k) => !k.startsWith('U')).map((k) => g.matches[k]) : (['L', 'D'] as const).map((k) => g.matches[k]);
   const col = (title: string, ms: (Series | undefined)[]) => (
     <div className="space-y-1.5">
       <h4 className="text-xs font-semibold tracking-wider text-muted uppercase">{title}</h4>

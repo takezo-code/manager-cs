@@ -1,7 +1,8 @@
-// Grupo de 8 em dupla eliminação (formato dos grupos do IEM), tudo em MD3.
-// Upper: quartas (1×8, 4×5, 2×7, 3×6), semis e final. Vencedor da final = 1º; perdedor = 2º.
-// Lower: perdedores das quartas se enfrentam; os vencedores pegam os perdedores das semis (cruzado);
-// os dois que sobram jogam o desempate de 3º lugar.
+// Grupo de 8 em dupla eliminação, tudo em MD3 (a abertura pode ser MD1).
+// Upper: quartas (1×8, 4×5, 2×7, 3×6), semis e final. Lower: perdedores das quartas se enfrentam; os
+// vencedores pegam os perdedores das semis (cruzado); os dois que sobram fazem a final do lower.
+// Com 3 classificados: vencedor e perdedor da final do upper + vencedor da final do lower.
+// Com 4 (EWC): vencedores das semis do upper + vencedores da 2ª rodada do lower.
 import type { DESlot, DoubleElimGroup, Series } from './types';
 
 type Src = { slot: DESlot; take: 'winner' | 'loser' } | { seed: number };
@@ -18,13 +19,24 @@ const PLAN: Record<DESlot, { label: string; a: Src; b: Src }> = {
   LR1B: { label: 'Lower · Rodada 1', a: { slot: 'UQF3', take: 'loser' }, b: { slot: 'UQF4', take: 'loser' } },
   LR2A: { label: 'Lower · Rodada 2', a: { slot: 'USF2', take: 'loser' }, b: { slot: 'LR1A', take: 'winner' } },
   LR2B: { label: 'Lower · Rodada 2', a: { slot: 'USF1', take: 'loser' }, b: { slot: 'LR1B', take: 'winner' } },
-  DEC: { label: 'Decisão do 3º lugar', a: { slot: 'LR2A', take: 'winner' }, b: { slot: 'LR2B', take: 'winner' } },
+  DEC: { label: 'Lower · Final', a: { slot: 'LR2A', take: 'winner' }, b: { slot: 'LR2B', take: 'winner' } },
 };
 
 export const DE_SLOTS = Object.keys(PLAN) as DESlot[];
 
-export function createGroup(name: string, seeds: string[]): DoubleElimGroup {
-  return { name, seeds, matches: {} };
+/** Partidas que existem no grupo (com 4 classificados não há final do upper nem do lower). */
+const slotsFor = (g: DoubleElimGroup) => (g.advance === 4 ? DE_SLOTS.filter((s) => s !== 'UF' && s !== 'DEC') : DE_SLOTS);
+
+export function createGroup(
+  name: string,
+  seeds: string[],
+  opts: { advance?: 3 | 4; openingBo1?: boolean; placeLabels?: Partial<Record<DESlot, string>> } = {},
+): DoubleElimGroup {
+  const advance = opts.advance ?? 3;
+  const placeLabels =
+    opts.placeLabels ??
+    (advance === 3 ? { LR1A: '13º–16º', LR1B: '13º–16º', LR2A: '9º–12º', LR2B: '9º–12º', DEC: '7º–8º' } : {});
+  return { kind: 'de8', name, seeds, advance, openingBo1: !!opts.openingBo1, placeLabels, matches: {} };
 }
 
 function resolve(g: DoubleElimGroup, src: Src): string | null {
@@ -37,7 +49,7 @@ function resolve(g: DoubleElimGroup, src: Src): string | null {
 /** Cria as séries cujos dois lados já estão definidos. */
 export function nextGroupMatches(g: DoubleElimGroup, makeId: (slot: DESlot) => string): Series[] {
   const created: Series[] = [];
-  for (const slot of DE_SLOTS) {
+  for (const slot of slotsFor(g)) {
     if (g.matches[slot]) continue;
     const plan = PLAN[slot];
     const x = resolve(g, plan.a);
@@ -45,25 +57,23 @@ export function nextGroupMatches(g: DoubleElimGroup, makeId: (slot: DESlot) => s
     if (!x || !y) continue;
     const seedIdx = (id: string) => g.seeds.indexOf(id);
     const [a, b] = seedIdx(x) <= seedIdx(y) ? [x, y] : [y, x];
-    const s: Series = { id: makeId(slot), teamAId: a, teamBId: b, format: 'MD3', stage: 'grupos', label: `${g.name} · ${plan.label}` };
+    const format = g.openingBo1 && slot.startsWith('UQF') ? 'MD1' : 'MD3';
+    const s: Series = { id: makeId(slot), teamAId: a, teamBId: b, format, stage: 'grupos', label: `${g.name} · ${plan.label}` };
     g.matches[slot] = s;
     created.push(s);
   }
   return created;
 }
 
-export const groupDone = (g: DoubleElimGroup) => !!g.matches.UF?.winnerId && !!g.matches.DEC?.winnerId;
+export const groupDone = (g: DoubleElimGroup) => slotsFor(g).every((s) => !!g.matches[s]?.winnerId);
 
-/** 1º, 2º e 3º colocados (classificados). */
-export function groupQualified(g: DoubleElimGroup): [string, string, string] | null {
+/** Classificados em ordem de seed para os playoffs (null enquanto o grupo não acabou). */
+export function groupQualified(g: DoubleElimGroup): string[] | null {
   if (!groupDone(g)) return null;
-  return [g.matches.UF!.winnerId!, g.matches.UF!.loserId!, g.matches.DEC!.winnerId!];
+  const w = (s: DESlot) => g.matches[s]!.winnerId!;
+  if (g.advance === 4) return [w('USF1'), w('USF2'), w('LR2A'), w('LR2B')];
+  return [w('UF'), g.matches.UF!.loserId!, w('DEC')];
 }
 
-/** Colocação de quem caiu no grupo, pela partida em que perdeu. */
-export function groupEliminationPlace(slot: DESlot): string | null {
-  if (slot === 'DEC') return '7º–8º';
-  if (slot === 'LR2A' || slot === 'LR2B') return '9º–12º';
-  if (slot === 'LR1A' || slot === 'LR1B') return '13º–16º';
-  return null;
-}
+/** Séries do grupo na ordem do plano. */
+export const groupSeries = (g: DoubleElimGroup): Series[] => DE_SLOTS.map((k) => g.matches[k]).filter((m): m is Series => !!m);

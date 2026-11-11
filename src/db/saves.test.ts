@@ -1,7 +1,7 @@
 import 'fake-indexeddb/auto';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { INITIAL_PLAYERS, INITIAL_TEAMS } from '../data';
-import { createTournament, playDay } from '../engine/tournament/run';
+import { createLegacyTournament as createTournament, playDay } from '../engine/tournament/run';
 import { exportFileName, exportJson, makeRecord, parseImport, type SavedState } from './saveFormat';
 import { db, deleteSave, getSave, lastSave, listSaves, putSave } from './saves';
 
