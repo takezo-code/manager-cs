@@ -13,9 +13,8 @@ import type { IncomingOffer, World, WorldEvent } from '../world';
 import { askingPrice, playerStance } from './negotiation';
 import { executeRenewal, executeTransfer, releasePlayer } from './transfer';
 import { contractMonthsLeft, marketValue } from './value';
+import { fmtMoney, roundTo } from '../format';
 
-const fmt = (v: number) => (v >= 1_000_000 ? `US$ ${(v / 1_000_000).toFixed(2).replace('.', ',')} mi` : `US$ ${Math.round(v / 1000)} mil`);
-const round = (v: number, step: number) => Math.round(v / step) * step;
 
 function aiContract(w: World, p: Player, teamId: string, rng: Rng): Contract {
   const st = playerStance(w, p.id, teamId, p.teamId === teamId ? 'renewal' : 'transfer');
@@ -121,7 +120,7 @@ export function aiMarketDay(world: World, myTeamId: string, rng: Rng): { world: 
     );
     if (buyers.length) {
       const buyer = rng.pick(buyers);
-      const fee = round(value * (target.transferListed ? 0.85 + rng.next() * 0.2 : 0.95 + rng.next() * 0.25), 10_000);
+      const fee = roundTo(value * (target.transferListed ? 0.85 + rng.next() * 0.2 : 0.95 + rng.next() * 0.25), 10_000);
       const offer: IncomingOffer = {
         id: `${w.date}-${buyer.id}-${target.id}`,
         fromTeamId: buyer.id,
@@ -131,7 +130,7 @@ export function aiMarketDay(world: World, myTeamId: string, rng: Rng): { world: 
         expires: addDays(w.date, AI_MARKET.offerDays),
       };
       w = { ...w, offers: [...w.offers, offer] };
-      events.push({ kind: 'info', text: `${buyer.shortName} fez uma proposta de ${fmt(fee)} por ${target.nick}.` });
+      events.push({ kind: 'info', text: `${buyer.shortName} fez uma proposta de ${fmtMoney(fee)} por ${target.nick}.` });
     }
   }
 
@@ -146,7 +145,7 @@ export function aiMarketDay(world: World, myTeamId: string, rng: Rng): { world: 
       if (leaves) {
         w = makeRoom(w, buyer.id);
         w = executeTransfer(w, target.id, buyer.id, clause, aiContract(w, target, buyer.id, rng), 'multa');
-        events.push({ kind: 'alerta', text: `${buyer.shortName} pagou a multa de ${fmt(clause)} e levou ${target.nick}.` });
+        events.push({ kind: 'alerta', text: `${buyer.shortName} pagou a multa de ${fmtMoney(clause)} e levou ${target.nick}.` });
       } else {
         events.push({ kind: 'info', text: `${buyer.shortName} pagou a multa de ${target.nick}, mas ele recusou a saída.` });
       }
@@ -172,14 +171,16 @@ export function respondToOffer(
 
   let fee = offer.fee;
   if (response.kind === 'counter') {
-    const max = round(marketValue(p, w.date) * 1.3, 10_000);
+    const max = roundTo(marketValue(p, w.date) * 1.3, 10_000);
     if (response.fee > max || response.fee > buyer.money)
-      return { world: rest, event: { kind: 'info', text: `${buyer.shortName} não aceitou pagar ${fmt(response.fee)} e desistiu de ${p.nick}.` } };
+      return { world: rest, event: { kind: 'info', text: `${buyer.shortName} não aceitou pagar ${fmtMoney(response.fee)} e desistiu de ${p.nick}.` } };
     fee = response.fee;
   }
+  // A proposta pode ter dias: o comprador precisa ainda ter o dinheiro.
+  if (buyer.money < fee) return { world: rest, event: { kind: 'info', text: `${buyer.shortName} ficou sem caixa e desistiu de ${p.nick}.` } };
   const st = playerStance(w, p.id, buyer.id, 'transfer');
   if (st.refuses) return { world: rest, event: { kind: 'info', text: `${buyer.shortName} aceitou, mas ${st.refuses}` } };
   let next = makeRoom(rest, buyer.id);
   next = executeTransfer(next, p.id, buyer.id, fee, aiContract(next, p, buyer.id, rng), 'transferencia');
-  return { world: next, event: { kind: 'ok', text: `${p.nick} vendido para ${buyer.shortName} por ${fmt(fee)}.` } };
+  return { world: next, event: { kind: 'ok', text: `${p.nick} vendido para ${buyer.shortName} por ${fmtMoney(fee)}.` } };
 }

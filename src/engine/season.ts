@@ -2,6 +2,7 @@
 import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_TEAMS } from '../data';
 import { START_DATE, addDays } from './date';
 import { monthlyFinance } from './finance/monthly';
+import { recoverRest } from './form';
 import { initialSponsors } from './finance/sponsors';
 import { aiMarketDay } from './market/ai';
 import { relationsFromList } from './market/relations';
@@ -31,7 +32,10 @@ export function createWorld(managerTeamId: string, seed = 1): World {
 
 export const isFirstOfMonth = (date: string) => date.endsWith('-01');
 
-/** Avança um dia. Mercado da IA só roda com o mercado aberto (fora de campeonato). */
+/**
+ * Avança um dia. `marketOpen` = sem campeonato em andamento: a IA do mercado roda, os jogadores
+ * descansam e rescisões por atraso podem acontecer.
+ */
 export function dailyTick(world: World, opts: { marketOpen: boolean; rng?: Rng }): { world: World; events: WorldEvent[] } {
   let w: World = { ...world, date: addDays(world.date, 1) };
   const rng = opts.rng ?? createRng(hashString(`${w.date}:${w.managerTeamId}`));
@@ -42,12 +46,16 @@ export function dailyTick(world: World, opts: { marketOpen: boolean; rng?: Rng }
   };
 
   if (isFirstOfMonth(w.date)) {
-    add(monthlyFinance(w, rng));
+    add(monthlyFinance(w, rng, { allowDepartures: opts.marketOpen }));
     w = monthlySatisfaction(w);
     add(monthlyRequests(w));
   }
   add(expireInbox(w));
   w = { ...w, sponsorOffers: w.sponsorOffers.filter((o) => o.expires >= w.date) };
-  if (opts.marketOpen) add(aiMarketDay(w, w.managerTeamId, rng));
+  if (opts.marketOpen) {
+    // Sem campeonato, o dia é de descanso: todo mundo recupera energia.
+    w = { ...w, players: Object.fromEntries(Object.entries(w.players).map(([id, p]) => [id, recoverRest(p)])) };
+    add(aiMarketDay(w, w.managerTeamId, rng));
+  }
   return { world: w, events };
 }

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { formatMonth } from '../engine/date';
-import { offerClub, offerPlayer, suggestedTerms, tradeValueFor, type Negotiation, type Terms } from '../engine/market/negotiation';
+import { abandonNegotiation, offerClub, offerPlayer, suggestedTerms, tradeValueFor, type Negotiation, type Terms } from '../engine/market/negotiation';
 import { marketValue } from '../engine/market/value';
 import { MARKET } from '../engine/config';
 import { playerOvr } from '../engine/player';
@@ -142,7 +142,16 @@ export function NegotiationDialog({ initial, onClose }: { initial: Negotiation; 
           )}
           <div className="flex flex-wrap justify-end gap-2">
             {!finished && (
-              <button type="button" onClick={onClose} className={`${btn} border border-line text-muted hover:text-ink`}>
+              <button
+                type="button"
+                onClick={() => {
+                  const abandoned = abandonNegotiation(neg);
+                  if (abandoned) commit(abandoned);
+                  onClose();
+                }}
+                className={`${btn} border border-line text-muted hover:text-ink`}
+                title="Depois de fazer uma proposta, desistir piora a relação com o time."
+              >
                 Desistir
               </button>
             )}

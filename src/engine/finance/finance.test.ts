@@ -175,3 +175,25 @@ describe('Fim de campeonato', () => {
     expect(w.players[w.teams[champ].playerIds[0]].satisfaction).toBeGreaterThan(sat);
   });
 });
+
+describe('Correções do code review', () => {
+  it('durante campeonato, o atraso de salário não tira jogadores do elenco', async () => {
+    const { dailyTick } = await import('../season');
+    let w = at(createWorld('furia'), '2026-11-30');
+    const big = w.teams.big;
+    w = { ...w, teams: { ...w.teams, big: { ...big, money: -5_000_000, sponsors: [], lateMonths: 2 } } };
+    for (const id of big.playerIds) w = { ...w, players: { ...w.players, [id]: { ...w.players[id], satisfaction: 10 } } };
+    const out = dailyTick(w, { marketOpen: false }).world;
+    expect(out.date).toBe('2026-12-01');
+    expect(out.teams.big.lateMonths).toBe(3);
+    expect(out.teams.big.playerIds).toHaveLength(big.playerIds.length);
+  });
+
+  it('fora de campeonato, os dias de descanso recuperam energia', async () => {
+    const { dailyTick } = await import('../season');
+    let w = createWorld('furia');
+    w = { ...w, players: { ...w.players, fallen: { ...w.players.fallen, energy: 50 } } };
+    const out = dailyTick(w, { marketOpen: true }).world;
+    expect(out.players.fallen.energy).toBeGreaterThan(50);
+  });
+});

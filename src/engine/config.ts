@@ -296,6 +296,8 @@ export const ENERGY = {
   perMap: 3,
   /** Recuperação por dia de campeonato. */
   perDay: 3,
+  /** Recuperação por dia sem campeonato (descanso). */
+  restPerDay: 2,
   /** Recuperação ao começar um campeonato novo (descanso entre eventos). */
   betweenEvents: 30,
 };

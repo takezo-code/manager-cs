@@ -1,7 +1,6 @@
 import type { CardTier, Evolution, Role } from '../engine/types';
 
-export const money = (v: number) =>
-  v >= 1_000_000 ? `US$ ${(v / 1_000_000).toFixed(2).replace('.', ',')} mi` : `US$ ${Math.round(v / 1000)} mil`;
+export { fmtMoney as money } from '../engine/format';
 
 export const ROLE_LABEL: Record<Role, string> = {
   IGL: 'IGL',

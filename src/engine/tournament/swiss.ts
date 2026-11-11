@@ -112,17 +112,30 @@ export function applySwissResult(s: SwissStage, m: Series) {
   }
 }
 
-/** Colocações dos eliminados: quem caiu com mais vitórias fica à frente; empatados dividem a faixa. */
+/** Combinação C(n, k). */
+const choose = (n: number, k: number) => {
+  let r = 1;
+  for (let i = 1; i <= k; i++) r = (r * (n - k + i)) / i;
+  return r;
+};
+
+/**
+ * Quantos times terminam eliminados com `wins` vitórias. No suíço com 3 derrotas, isso é fixo
+ * (16 times: 2 caem por 0-3, 3 por 1-3 e 3 por 2-3), então a colocação sai no dia em que o time cai.
+ */
+export const eliminatedWith = (teams: number, wins: number) => (teams * choose(SWISS_LOSSES - 1 + wins, wins)) / Math.pow(2, SWISS_LOSSES + wins);
+
+/** Faixa de colocação de quem cai com `wins` vitórias (quem cai com mais vitórias fica à frente). */
+export function swissPlaceLabel(s: SwissStage, wins: number): string {
+  let place = s.eliminatedBasePlace;
+  for (let w = SWISS_WINS - 1; w > wins; w--) place += eliminatedWith(s.seeds.length, w);
+  const n = eliminatedWith(s.seeds.length, wins);
+  return n === 1 ? `${place}º` : `${place}º–${place + n - 1}º`;
+}
+
+/** Colocações de todos os eliminados até agora. */
 export function swissEliminationPlaces(s: SwissStage): Record<string, string> {
   const out: Record<string, string> = {};
-  const elim = swissEliminated(s);
-  let place = s.eliminatedBasePlace;
-  for (let w = SWISS_WINS - 1; w >= 0; w--) {
-    const group = elim.filter((id) => s.records[id].w === w);
-    if (!group.length) continue;
-    const label = group.length === 1 ? `${place}º` : `${place}º–${place + group.length - 1}º`;
-    for (const id of group) out[id] = label;
-    place += group.length;
-  }
+  for (const id of swissEliminated(s)) out[id] = swissPlaceLabel(s, s.records[id].w);
   return out;
 }

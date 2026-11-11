@@ -134,6 +134,15 @@ export function savedPart(s: GameState): SavedState | null {
   };
 }
 
+/** Campos do estado que vão para o save. */
+const SAVED_KEYS = [
+  'date', 'teams', 'players', 'relations', 'offers', 'transferLog', 'ledger', 'sponsorOffers', 'inbox', 'events',
+  'myTeamId', 'tournament', 'seriesResults', 'lastDayIds', 'activeSlot',
+] as const satisfies ReadonlyArray<keyof GameState>;
+
+/** Algum campo salvo mudou? (o autosave grava só quando sim). */
+export const savedStateChanged = (s: GameState, prev: GameState) => SAVED_KEYS.some((k) => s[k] !== prev[k]);
+
 /** Mercado fechado enquanto há campeonato em andamento (elencos travados durante o evento). */
 export const marketOpen = (s: Pick<GameState, 'tournament'>) => !s.tournament || !!s.tournament.championId;
 

@@ -79,3 +79,18 @@ describe('Simulação de partida', () => {
     expect(mean).toBeLessThan(1.15);
   });
 });
+
+describe('Correções do code review (prorrogação)', () => {
+  it('cada prorrogação começa com os times no lado em que terminaram', () => {
+    let checked = 0;
+    for (let seed = 1; seed <= 400 && checked < 3; seed++) {
+      const m = simulateMatch(input('mouz', 'furia', seed)).maps[0];
+      if (m.overtimes < 1) continue;
+      checked++;
+      // Round 25 (1º da OT1) com o mesmo CT do round 24; idem para o início de cada OT seguinte.
+      for (let start = 25; start <= m.rounds.length; start += 6)
+        expect(m.rounds[start - 1].ctTeamId, `seed ${seed}, round ${start}`).toBe(m.rounds[start - 2].ctTeamId);
+    }
+    expect(checked).toBeGreaterThan(0);
+  });
+});

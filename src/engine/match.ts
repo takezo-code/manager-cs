@@ -1,5 +1,5 @@
 // Simulação de partida round a round: economia, duelos, trades, bomba, clutches e narração.
-import { ECONOMY, MAP_NAMES, PASSIVE_BONUS, SIM } from './config';
+import { ECONOMY, PASSIVE_BONUS, SIM } from './config';
 import { effectiveAttributes } from './player';
 import { createRng, type Rng } from './rng';
 import { calcRating } from './rating';
@@ -112,7 +112,7 @@ function lossBonus(lossCount: number) {
   return ECONOMY.lossBonus[Math.min(lossCount, ECONOMY.lossBonus.length - 1)];
 }
 
-function decideBuy(t: SimTeam, side: Side, roundInHalf: number, isPistol: boolean, isLastOfHalf: boolean, rng: Rng): BuyType {
+function decideBuy(t: SimTeam, side: Side, isPistol: boolean, isLastOfHalf: boolean, rng: Rng): BuyType {
   if (isPistol) return 'pistol';
   const avg = t.players.reduce((s, p) => s + p.money, 0) / t.players.length;
   const kept = t.players.filter((p) => p.keptWeapon).length;
@@ -124,7 +124,6 @@ function decideBuy(t: SimTeam, side: Side, roundInHalf: number, isPistol: boolea
   // Só economiza quem perdeu o round anterior; quem ganhou mantém a pressão.
   if (!t.wonLast && avg + lossBonus(t.lossCount) >= full) return rng.chance(0.2) && avg >= 2000 ? 'force' : 'eco';
   if (avg >= 2000) return 'force';
-  void roundInHalf;
   return 'eco';
 }
 
@@ -424,12 +423,12 @@ export function simulateMap(
   const ids = [teams[0].team.id, teams[1].team.id];
   let overtimes = 0;
 
-  const playRound = (n: number, ctTeam: 0 | 1, isPistol: boolean, isLastOfHalf: boolean, roundInHalf: number) => {
+  const playRound = (n: number, ctTeam: 0 | 1, isPistol: boolean, isLastOfHalf: boolean) => {
     const tIdx = (1 - ctTeam) as 0 | 1;
     const side: Record<number, Side> = { [ctTeam]: 'CT', [tIdx]: 'T' };
     const buys: [BuyType, BuyType] = [
-      decideBuy(teams[0], side[0], roundInHalf, isPistol, isLastOfHalf, rng),
-      decideBuy(teams[1], side[1], roundInHalf, isPistol, isLastOfHalf, rng),
+      decideBuy(teams[0], side[0], isPistol, isLastOfHalf, rng),
+      decideBuy(teams[1], side[1], isPistol, isLastOfHalf, rng),
     ];
     applyBuy(teams[0], buys[0], side[0]);
     applyBuy(teams[1], buys[1], side[1]);
@@ -470,21 +469,23 @@ export function simulateMap(
     const inSecondHalf = n >= half;
     const ct = (inSecondHalf ? 1 - firstCT : firstCT) as 0 | 1;
     const roundInHalf = inSecondHalf ? n - half : n;
-    playRound(n + 1, ct, roundInHalf === 0, roundInHalf === half - 1, roundInHalf);
+    playRound(n + 1, ct, roundInHalf === 0, roundInHalf === half - 1);
     n++;
   }
 
   // Prorrogação: MR3 (6 rounds, vence quem fizer 4), repetindo enquanto empatar.
-  let ctOt = (1 - firstCT) as 0 | 1; // terminou o regulamentar no lado oposto ao inicial
+  // Cada prorrogação começa com os times no lado em que terminaram e troca na metade.
+  let lastCt = (1 - firstCT) as 0 | 1; // CT do 2º tempo do regulamentar
   while (score[0] === score[1]) {
     overtimes++;
     const base: [number, number] = [score[0], score[1]];
     const otHalf = SIM.overtimeHalf;
-    ctOt = (1 - ctOt) as 0 | 1;
+    const ctOt = lastCt;
     for (let k = 0; k < otHalf * 2; k++) {
       if (k === 0 || k === otHalf) resetHalf(teams, ECONOMY.overtimeStartMoney);
       const ct = (k < otHalf ? ctOt : 1 - ctOt) as 0 | 1;
-      playRound(++n, ct, false, k === otHalf - 1 || k === otHalf * 2 - 1, k % otHalf);
+      lastCt = ct;
+      playRound(++n, ct, false, k === otHalf - 1 || k === otHalf * 2 - 1);
       if (score[0] - base[0] > otHalf || score[1] - base[1] > otHalf) break;
     }
   }
@@ -558,4 +559,3 @@ export function simulateMatch(input: MatchInput): MatchResult {
   };
 }
 
-export { MAP_NAMES };

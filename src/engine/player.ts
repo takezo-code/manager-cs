@@ -58,7 +58,8 @@ export function ovrFor(attrs: Attributes, role: Role): number {
   const w = ROLE_WEIGHTS[role];
   let sum = 0;
   for (const key of ATTR_KEYS) sum += attrs[key] * w[key];
-  return Math.round(sum);
+  // Folga para erro de ponto flutuante: 75,5 vira 75,4999… dependendo da ordem da soma.
+  return Math.round(sum + 1e-9);
 }
 
 export function playerOvr(player: Player): number {

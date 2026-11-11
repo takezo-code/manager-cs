@@ -148,7 +148,6 @@ function recordPlacements(t: Tournament, s: Stage, played: Series[]) {
     for (const slot of (s as BracketStage).slots)
       if (slot.series?.loserId && played.includes(slot.series)) t.placements[slot.series.loserId] = slot.loserPlace;
   }
-  // Suíço: colocações saem no fim da fase, quando dá para comparar quem caiu.
 }
 
 export interface DayOutcome {
@@ -203,9 +202,10 @@ export function playDay(tournament: Tournament, teams: Record<string, Team>, pla
     }
   }
   recordPlacements(t, stage, todays);
+  // Suíço: quem chegou a 3 derrotas já tem a colocação definida.
+  if (stage.kind === 'swiss') Object.assign(t.placements, swissEliminationPlaces(stage));
 
   if (stageDone(stage)) {
-    if (stage.kind === 'swiss') Object.assign(t.placements, swissEliminationPlaces(stage));
     const next = buildNextStage(t);
     if (next) {
       t.stages.push(next);

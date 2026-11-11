@@ -6,8 +6,7 @@ import type { Rng } from '../rng';
 import type { Team } from '../types';
 import type { SponsorContract, SponsorOffer, SponsorSlot, World } from '../world';
 import { addMoney } from '../world';
-
-const round = (v: number, step: number) => Math.round(v / step) * step;
+import { roundTo } from '../format';
 
 /** Valor mensal de referência para o slot, pela posição no ranking. */
 export function sponsorBase(team: Team, slot: SponsorSlot): number {
@@ -26,7 +25,7 @@ export function freeSlots(team: Team, date: string): { master: boolean; regular:
 export function makeOffer(team: Team, slot: SponsorSlot, date: string, rng: Rng, used: string[] = []): SponsorOffer {
   const brands = BRANDS.filter((b) => !used.includes(b));
   const brand = rng.pick(brands.length ? brands : BRANDS);
-  const monthly = round(sponsorBase(team, slot) * (1 - FINANCE.offerSpread + rng.next() * 2 * FINANCE.offerSpread), 1000);
+  const monthly = roundTo(sponsorBase(team, slot) * (1 - FINANCE.offerSpread + rng.next() * 2 * FINANCE.offerSpread), 1000);
   const months = rng.int(FINANCE.offerMonthsMin, FINANCE.offerMonthsMax);
   const bonusShare = FINANCE.titleBonusMin + rng.next() * (FINANCE.titleBonusMax - FINANCE.titleBonusMin);
   return {
@@ -36,7 +35,7 @@ export function makeOffer(team: Team, slot: SponsorSlot, date: string, rng: Rng,
     monthly,
     months,
     endDate: endOfMonthAfter(date, months),
-    titleBonus: round(monthly * 12 * bonusShare, 1000),
+    titleBonus: roundTo(monthly * 12 * bonusShare, 1000),
     expires: addDays(date, FINANCE.offerDays),
   };
 }

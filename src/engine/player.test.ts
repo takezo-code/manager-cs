@@ -129,3 +129,11 @@ describe('Habilidades', () => {
     expect(r.ok && r.cost).toBe(450_000);
   });
 });
+
+describe('Arredondamento do OVR', () => {
+  it('OVR exatamente em ,5 arredonda para cima, sem depender da ordem da soma', () => {
+    // Lurker: 0,30×78 + 0,25×77 + 0,20×74 + 0,15×73 + 0,05×71 + 0,05×71 = 75,5
+    const p = make({ role: 'LURKER', baseAttributes: { MIR: 74, REF: 73, NOC: 78, UTL: 71, MEN: 77, EQP: 71 } });
+    expect(playerOvr(p)).toBe(76);
+  });
+});

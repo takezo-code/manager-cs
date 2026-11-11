@@ -6,8 +6,8 @@ import type { Team } from '../types';
 import type { World, WorldEvent } from '../world';
 import { addMoney } from '../world';
 import { freeSlots, makeOffer, toContract } from './sponsors';
+import { fmtMoney } from '../format';
 
-const fmt = (v: number) => (v >= 1_000_000 ? `US$ ${(v / 1_000_000).toFixed(2).replace('.', ',')} mi` : `US$ ${Math.round(v / 1000)} mil`);
 
 export const payroll = (w: World, team: Team) => team.playerIds.reduce((s, id) => s + (w.players[id].contract?.salary ?? 0), 0);
 
@@ -40,7 +40,12 @@ function changeSatisfaction(w: World, teamId: string, delta: number): World {
   return { ...w, players };
 }
 
-export function monthlyFinance(world: World, rng: Rng): { world: World; events: WorldEvent[] } {
+/**
+ * Fecha o mês. Com `allowDepartures` falso (campeonato em andamento), ninguém rescinde: os elencos
+ * ficam travados até o fim do evento, e a rescisão acontece no primeiro fechamento depois dele.
+ */
+export function monthlyFinance(world: World, rng: Rng, opts: { allowDepartures?: boolean } = {}): { world: World; events: WorldEvent[] } {
+  const allowDepartures = opts.allowDepartures ?? true;
   let w = world;
   const events: WorldEvent[] = [];
   const mine = w.managerTeamId;
@@ -58,14 +63,14 @@ export function monthlyFinance(world: World, rng: Rng): { world: World; events: 
     // 2) Salários: paga o atrasado e o mês; se não der, atrasa tudo.
     const due = payroll(w, team) + team.arrears;
     if (team.money >= due) {
-      if (team.arrears && id === mine) events.push({ kind: 'ok', text: `Salários atrasados quitados (${fmt(team.arrears)}).` });
+      if (team.arrears && id === mine) events.push({ kind: 'ok', text: `Salários atrasados quitados (${fmtMoney(team.arrears)}).` });
       w = addMoney(w, id, -due, 'salarios', team.arrears ? 'Folha do mês + atrasados' : 'Folha do mês');
       w = setTeam(w, { ...w.teams[id], arrears: 0, lateMonths: 0 });
     } else {
       w = setTeam(w, { ...team, arrears: due, lateMonths: team.lateMonths + 1 });
       w = changeSatisfaction(w, id, MORALE.monthly.lateSalary);
       if (id === mine)
-        events.push({ kind: 'alerta', text: `Salários atrasados! Faltou dinheiro para a folha (${fmt(due)} devidos). O elenco ficou insatisfeito e patrocinadores estão de olho.` });
+        events.push({ kind: 'alerta', text: `Salários atrasados! Faltou dinheiro para a folha (${fmtMoney(due)} devidos). O elenco ficou insatisfeito e patrocinadores estão de olho.` });
       // Patrocinador rompe depois de alguns meses de atraso.
       const late = w.teams[id];
       if (late.lateMonths >= FINANCE.sponsorLeavesAfterLate && late.sponsors.length) {
@@ -74,7 +79,7 @@ export function monthlyFinance(world: World, rng: Rng): { world: World; events: 
         if (id === mine) events.push({ kind: 'alerta', text: `${gone.brand} rompeu o patrocínio por causa dos salários atrasados.` });
       }
       // Jogadores insatisfeitos rescindem e saem de graça.
-      if (w.teams[id].lateMonths >= FINANCE.playersLeaveAfterLate) {
+      if (allowDepartures && w.teams[id].lateMonths >= FINANCE.playersLeaveAfterLate) {
         for (const pid of w.teams[id].playerIds) {
           const p = w.players[pid];
           if (p.satisfaction < FINANCE.rescindBelowSatisfaction && w.teams[id].playerIds.length > 1) {

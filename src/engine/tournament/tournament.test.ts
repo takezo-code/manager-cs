@@ -99,3 +99,18 @@ describe('IEM (grupos dupla eliminação + playoffs)', () => {
     expect(po.slots.find((s) => s.id === 'SF1')!.a).toEqual({ team: a1 });
   });
 });
+
+describe('Correções do code review (suíço)', () => {
+  it('time eliminado no suíço já tem colocação no dia em que cai', () => {
+    let t: Tournament = createTournament('major', INITIAL_TEAMS, 2);
+    let players = basePlayers;
+    for (let d = 0; d < 5; d++) {
+      const out = playDay(t, teams, players);
+      t = out.tournament;
+      players = out.players;
+      const s1 = t.stages[0];
+      if (s1.kind !== 'swiss') throw new Error();
+      for (const [id, r] of Object.entries(s1.records)) if (r.l === 3) expect(t.placements[id], `dia ${d + 1}: ${id}`).toBeTruthy();
+    }
+  });
+});

@@ -1,7 +1,7 @@
 // Autosave: grava a carreira aberta no slot ativo sempre que o estado salvo muda.
 import { makeRecord } from '../db/saveFormat';
 import { putSave } from '../db/saves';
-import { savedPart, useGame } from './game';
+import { savedPart, savedStateChanged, useGame } from './game';
 
 const DELAY_MS = 400;
 let timer: ReturnType<typeof setTimeout> | null = null;
@@ -37,19 +37,7 @@ export function startAutosave() {
   started = true;
   useGame.subscribe((s, prev) => {
     if (!s.activeSlot || s.screen !== 'game') return;
-    const changed =
-      s.activeSlot !== prev.activeSlot ||
-      s.teams !== prev.teams ||
-      s.players !== prev.players ||
-      s.myTeamId !== prev.myTeamId ||
-      s.tournament !== prev.tournament ||
-      s.seriesResults !== prev.seriesResults ||
-      s.date !== prev.date ||
-      s.relations !== prev.relations ||
-      s.offers !== prev.offers ||
-      s.transferLog !== prev.transferLog ||
-      s.events !== prev.events;
-    if (!changed) return;
+    if (!savedStateChanged(s, prev)) return;
     if (timer) clearTimeout(timer);
     timer = setTimeout(() => {
       pending = writeNow();

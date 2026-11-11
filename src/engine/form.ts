@@ -40,4 +40,7 @@ export function afterSeries(p: Player, mapRatings: number[]): Player {
 
 export const recoverDay = (p: Player): Player => ({ ...p, energy: Math.min(100, p.energy + ENERGY.perDay) });
 
+/** Dia de descanso, fora de campeonato. */
+export const recoverRest = (p: Player): Player => (p.energy >= 100 ? p : { ...p, energy: Math.min(100, p.energy + ENERGY.restPerDay) });
+
 export const recoverBetweenEvents = (p: Player): Player => ({ ...p, energy: Math.min(100, p.energy + ENERGY.betweenEvents) });

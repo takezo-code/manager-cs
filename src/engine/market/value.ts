@@ -3,10 +3,10 @@ import { MARKET } from '../config';
 import { monthsUntil } from '../date';
 import { baseOvr } from '../form';
 import type { Player, Region } from '../types';
+import { roundTo } from '../format';
 
-const round = (v: number, step: number) => Math.round(v / step) * step;
 
-export const salaryForOvr = (ovr: number) => round(MARKET.salaryBase * Math.pow(MARKET.salaryGrowth, ovr - 60), 500);
+export const salaryForOvr = (ovr: number) => roundTo(MARKET.salaryBase * Math.pow(MARKET.salaryGrowth, ovr - 60), 500);
 
 export function contractMonthsLeft(p: Player, date: string): number {
   return p.contract ? Math.max(0, monthsUntil(date, p.contract.endDate)) : 0;
@@ -30,7 +30,7 @@ export function marketValue(p: Player, date: string): number {
     const t = Math.sqrt(Math.min(1, months / MARKET.contractFullMonths));
     v *= MARKET.contractFactorMin + (1 - MARKET.contractFactorMin) * t;
   }
-  return Math.max(10_000, round(v, 10_000));
+  return Math.max(10_000, roundTo(v, 10_000));
 }
 
 const REGION_BY_COUNTRY: Record<string, Region> = {

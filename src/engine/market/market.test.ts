@@ -4,7 +4,16 @@ import { addDays } from '../date';
 import { createRng } from '../rng';
 import type { World } from '../world';
 import { aiMarketDay, respondToOffer } from './ai';
-import { askingPrice, finalizeNegotiation, offerClub, offerPlayer, playerStance, startNegotiation } from './negotiation';
+import {
+  abandonNegotiation,
+  askingPrice,
+  failedNegotiationEffects,
+  finalizeNegotiation,
+  offerClub,
+  offerPlayer,
+  playerStance,
+  startNegotiation,
+} from './negotiation';
 import { getRelation } from './relations';
 import { createWorld } from '../season';
 import { marketValue } from './value';
@@ -143,5 +152,29 @@ describe('IA do mercado (6 meses)', () => {
     expect(offers).toBeGreaterThan(0);
     // Ninguém fica com caixa muito negativo por causa do mercado.
     expect(Math.min(...Object.values(w.teams).map((t) => t.money))).toBeGreaterThan(0);
+  });
+});
+
+describe('Correções do code review (mercado)', () => {
+  it('aceitar proposta de time que ficou sem dinheiro não fecha a venda', () => {
+    let w = fresh();
+    const offer = { id: 'o1', fromTeamId: 'aurora', playerId: 'yuurih', fee: 900_000, date: w.date, expires: addDays(w.date, 7) };
+    w = { ...w, offers: [offer], teams: { ...w.teams, aurora: { ...w.teams.aurora, money: 100_000 } } };
+    const out = respondToOffer(w, 'o1', { kind: 'accept' }, createRng(1)).world;
+    expect(out.players.yuurih.teamId).toBe('furia');
+    expect(out.teams.aurora.money).toBe(100_000);
+  });
+
+  it('desistir depois de fazer propostas conta como negociação frustrada', () => {
+    const w = fresh();
+    const start = startNegotiation(w, 'transfer', 'jimpphat', 'furia');
+    if (!start.ok) throw new Error(start.error);
+    const n = offerClub(w, start.neg, 100_000);
+    const abandoned = abandonNegotiation(n);
+    expect(abandoned?.phase).toBe('failed');
+    const after = failedNegotiationEffects(w, abandoned!);
+    expect(getRelation(after.relations, 'furia', 'aurora')).toBeLessThan(getRelation(w.relations, 'furia', 'aurora'));
+    // Sem nenhuma proposta feita, desistir não custa nada.
+    expect(abandonNegotiation(start.neg)).toBeNull();
   });
 });

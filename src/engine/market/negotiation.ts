@@ -11,6 +11,7 @@ import { changeRelation, getRelation } from './relations';
 import { executeRenewal, executeTrade, executeTransfer } from './transfer';
 import { bandOf } from '../morale/satisfaction';
 import { marketValue, regionOf, salaryForOvr } from './value';
+import { fmtMoney, roundTo } from '../format';
 
 export type DealKind = 'transfer' | 'clause' | 'free' | 'renewal' | 'trade';
 
@@ -43,8 +44,6 @@ export interface Negotiation {
   messages: NegMessage[];
 }
 
-const round = (v: number, step: number) => Math.round(v / step) * step;
-const fmt = (v: number) => (v >= 1_000_000 ? `US$ ${(v / 1_000_000).toFixed(2).replace('.', ',')} mi` : `US$ ${Math.round(v / 1000)} mil`);
 
 // ---------- Lado do time vendedor ----------
 
@@ -61,7 +60,7 @@ export function askingPrice(w: World, playerId: string, buyerId: string): number
   if (p.transferListed) price *= 1 - MARKET.listedDiscount;
   // Relação boa barateia; ruim encarece (±25%).
   price *= 1 - rel / 400;
-  return round(price, 10_000);
+  return roundTo(price, 10_000);
 }
 
 /** Quanto o time vendedor considera que vale o jogador oferecido numa troca. */
@@ -73,7 +72,7 @@ export function tradeValueFor(w: World, sellerId: string, offeredId: string): nu
   const has = roleCount(seller, w.players, offered.role);
   if (has === 0) v *= 1.3;
   else if (playerOvr(offered) > starterOvrAt(seller, w.players, offered.role)) v *= 1.1;
-  return round(v, 10_000);
+  return roundTo(v, 10_000);
 }
 
 // ---------- Lado do jogador ----------
@@ -113,8 +112,8 @@ export function playerStance(w: World, playerId: string, buyerId: string, kind: 
   }
 
   const minMonths = p.age >= 30 ? 24 : 6;
-  const releaseClause = round(value * 2, 50_000);
-  return { refuses, desired: { salary: round(salary, 500), months: Math.max(minMonths, 24), releaseClause }, minMonths };
+  const releaseClause = roundTo(value * 2, 50_000);
+  return { refuses, desired: { salary: roundTo(salary, 500), months: Math.max(minMonths, 24), releaseClause }, minMonths };
 }
 
 /** Salário exigido para uma multa: multa alta = salário maior; multa baixa = um pouco menor. */
@@ -172,7 +171,7 @@ export function startNegotiation(
   if (neg.phase === 'player') {
     const st = playerStance(w, playerId, buyerId, kind);
     if (st.refuses) return { ok: true, neg: { ...neg, phase: 'failed', messages: [{ from: 'jogador', text: st.refuses }] } };
-    if (kind === 'clause') neg.messages.push({ from: 'time', text: `Multa de ${fmt(neg.fee)} paga. ${w.teams[p.teamId!].shortName} não pode impedir a saída; agora falta o jogador aceitar.` });
+    if (kind === 'clause') neg.messages.push({ from: 'time', text: `Multa de ${fmtMoney(neg.fee)} paga. ${w.teams[p.teamId!].shortName} não pode impedir a saída; agora falta o jogador aceitar.` });
   }
   return { ok: true, neg };
 }
@@ -190,11 +189,11 @@ export function offerClub(w: World, neg: Negotiation, amount: number): Negotiati
     const tv = tradeValueFor(w, seller.id, neg.tradePlayerId!);
     offered = tv + amount;
     target = asking ?? Infinity;
-    msgs.push({ from: 'voce', text: `${w.players[neg.tradePlayerId!].nick} + ${fmt(Math.max(0, amount))} por ${w.players[neg.playerId].nick}.` });
+    msgs.push({ from: 'voce', text: `${w.players[neg.tradePlayerId!].nick} + ${fmtMoney(Math.max(0, amount))} por ${w.players[neg.playerId].nick}.` });
   } else {
     offered = amount;
     target = asking ?? Infinity;
-    msgs.push({ from: 'voce', text: `Proposta de ${fmt(amount)}.` });
+    msgs.push({ from: 'voce', text: `Proposta de ${fmtMoney(amount)}.` });
   }
   if (w.teams[neg.buyerId].money < Math.max(0, amount)) {
     msgs.push({ from: 'time', text: 'Vocês nem têm esse dinheiro em caixa.' });
@@ -222,13 +221,13 @@ export function offerClub(w: World, neg: Negotiation, amount: number): Negotiati
     return { ...neg, clubRound: round_, phase: 'failed', messages: msgs };
   }
   // Contraproposta: cede um pouco a cada rodada.
-  const counter = round(Math.max(offered, target * (1 - 0.04 * neg.clubRound)), 10_000);
+  const counter = roundTo(Math.max(offered, target * (1 - 0.04 * neg.clubRound)), 10_000);
   const counterAmount = neg.kind === 'trade' ? counter - tradeValueFor(w, seller.id, neg.tradePlayerId!) : counter;
   msgs.push({
     from: 'time',
-    text: neg.kind === 'trade' ? `Aceitamos a troca se vocês colocarem mais ${fmt(Math.max(0, counterAmount))}.` : `Fechamos por ${fmt(counterAmount)}.`,
+    text: neg.kind === 'trade' ? `Aceitamos a troca se vocês colocarem mais ${fmtMoney(Math.max(0, counterAmount))}.` : `Fechamos por ${fmtMoney(counterAmount)}.`,
   });
-  return { ...neg, clubRound: round_, counterFee: round(Math.max(0, counterAmount), 10_000), messages: msgs };
+  return { ...neg, clubRound: round_, counterFee: roundTo(Math.max(0, counterAmount), 10_000), messages: msgs };
 }
 
 /** Proposta de contrato ao jogador. */
@@ -238,30 +237,30 @@ export function offerPlayer(w: World, neg: Negotiation, terms: Terms): Negotiati
   const st = playerStance(w, neg.playerId, neg.buyerId, neg.kind);
   const value = marketValue(p, w.date);
   const round_ = neg.playerRound + 1;
-  const msgs: NegMessage[] = [...neg.messages, { from: 'voce', text: `${fmt(terms.salary)}/mês, ${terms.months} meses, multa de ${fmt(terms.releaseClause)}.` }];
+  const msgs: NegMessage[] = [...neg.messages, { from: 'voce', text: `${fmtMoney(terms.salary)}/mês, ${terms.months} meses, multa de ${fmtMoney(terms.releaseClause)}.` }];
 
   const months = Math.max(MARKET.contractMonthsMin, Math.min(MARKET.contractMonthsMax, terms.months));
   const clause = Math.max(value * MARKET.clauseMultMin, Math.min(value * MARKET.clauseMultMax, terms.releaseClause));
-  const wanted = round(salaryForClause(st.desired.salary, clause, value), 500);
+  const wanted = roundTo(salaryForClause(st.desired.salary, clause, value), 500);
   const ratio = terms.salary / wanted;
   const okMonths = months >= st.minMonths;
 
   if (ratio >= 1 && okMonths) {
     msgs.push({ from: 'jogador', text: neg.kind === 'renewal' ? 'Fechado, renovo.' : 'Fechado! Pode anunciar.' });
-    return { ...neg, playerRound: round_, phase: 'done', counterTerms: { salary: terms.salary, months, releaseClause: round(clause, 50_000) }, messages: msgs };
+    return { ...neg, playerRound: round_, phase: 'done', counterTerms: { salary: terms.salary, months, releaseClause: roundTo(clause, 50_000) }, messages: msgs };
   }
   const lastRound = round_ >= MARKET.maxRounds;
   if (lastRound) {
     msgs.push({ from: 'jogador', text: `${p.nick} não aceitou e encerrou a conversa.` });
     return { ...neg, playerRound: round_, phase: 'failed', messages: msgs };
   }
-  const counter: Terms = { salary: wanted, months: Math.max(months, st.minMonths), releaseClause: round(clause, 50_000) };
+  const counter: Terms = { salary: wanted, months: Math.max(months, st.minMonths), releaseClause: roundTo(clause, 50_000) };
   msgs.push({
     from: 'jogador',
     text:
       (ratio < 0.85 ? 'Isso está longe do que eu espero. ' : '') +
       (okMonths ? '' : `Quero pelo menos ${st.minMonths} meses de contrato. `) +
-      `Assino por ${fmt(wanted)}/mês com essa multa.`,
+      `Assino por ${fmtMoney(wanted)}/mês com essa multa.`,
   });
   return { ...neg, playerRound: round_, counterTerms: counter, messages: msgs };
 }
@@ -276,6 +275,16 @@ export function finalizeNegotiation(w: World, neg: Negotiation): World {
   return executeTransfer(w, neg.playerId, neg.buyerId, neg.fee, contract, neg.kind === 'clause' ? 'multa' : 'transferencia');
 }
 
+/**
+ * Desistir no meio da conversa. Depois de qualquer proposta feita, conta como negociação frustrada
+ * (piora a relação, como tentativas repetidas de tirar jogadores). Sem proposta feita, não custa nada (null).
+ */
+export function abandonNegotiation(neg: Negotiation): Negotiation | null {
+  if (neg.phase === 'done' || neg.phase === 'failed') return null;
+  if (neg.clubRound === 0 && neg.playerRound === 0) return null;
+  return { ...neg, phase: 'failed', messages: [...neg.messages, { from: 'voce', text: 'Você desistiu da negociação.' }] };
+}
+
 /** Efeitos de uma negociação que fracassou (relação com o time). */
 export function failedNegotiationEffects(w: World, neg: Negotiation): World {
   if (neg.phase !== 'failed' || !neg.sellerId) return w;
@@ -288,8 +297,8 @@ export function suggestedTerms(w: World, playerId: string): Terms {
   const p: Player = w.players[playerId];
   const value = marketValue(p, w.date);
   return {
-    salary: round(p.contract?.salary ?? salaryForOvr(baseOvr(p)), 500),
+    salary: roundTo(p.contract?.salary ?? salaryForOvr(baseOvr(p)), 500),
     months: 24,
-    releaseClause: round(value * 2, 50_000),
+    releaseClause: roundTo(value * 2, 50_000),
   };
 }

@@ -7,9 +7,8 @@ import type { Rng } from '../rng';
 import type { Player } from '../types';
 import type { InboxItem, World, WorldEvent } from '../world';
 import { applyJealousy, applySatisfaction, bandOf, fairSalary, recentRaise } from './satisfaction';
+import { fmtMoney, roundTo } from '../format';
 
-const round = (v: number, step: number) => Math.round(v / step) * step;
-const fmt = (v: number) => (v >= 1_000_000 ? `US$ ${(v / 1_000_000).toFixed(2).replace('.', ',')} mi` : `US$ ${Math.round(v / 1000)} mil`);
 
 function setMood(w: World, id: string, mood: Partial<Player['mood']>): World {
   const p = w.players[id];
@@ -42,9 +41,9 @@ export function monthlyRequests(world: World): { world: World; events: WorldEven
       item = { ...base, kind: 'conversa' };
       events.push({ kind: 'alerta', text: `${p.nick} está insatisfeito e pediu uma conversa.` });
     } else if (p.contract.salary < fairSalary(p) * MORALE.raiseRequestBelow || p.mood.salaryBeforeCut) {
-      const asked = p.mood.salaryBeforeCut ?? round(fairSalary(p), 500);
+      const asked = p.mood.salaryBeforeCut ?? roundTo(fairSalary(p), 500);
       item = { ...base, kind: 'aumento', askedSalary: Math.max(asked, p.contract.salary + 500) };
-      events.push({ kind: 'info', text: `${p.nick} pediu aumento para ${fmt(item.askedSalary!)}/mês.` });
+      events.push({ kind: 'info', text: `${p.nick} pediu aumento para ${fmtMoney(item.askedSalary!)}/mês.` });
     } else if (band === 'incomodado' && p.satisfaction < MORALE.bands.satisfeito - 5) {
       events.push({ kind: 'info', text: `Rumor: ${p.nick} anda incomodado no time.` });
       w = setMood(w, id, { lastRequest: w.date });
@@ -95,7 +94,7 @@ export function respondInbox(world: World, itemId: string, r: InboxResponse): { 
       w = setMood(w, p.id, { lastRaise: w.date, raiseRefusals: 0, salaryBeforeCut: null });
       w = applySatisfaction(w, p.id, E.raiseRequested);
       w = applyJealousy(w, w.managerTeamId, p.id).world;
-      return { world: w, event: { kind: 'ok', text: `${p.nick} recebeu o aumento para ${fmt(asked)}/mês.` } };
+      return { world: w, event: { kind: 'ok', text: `${p.nick} recebeu o aumento para ${fmtMoney(asked)}/mês.` } };
     }
     if (r.kind === 'contrapropor') {
       const mid = p.contract.salary + (asked - p.contract.salary) * 0.6;
@@ -104,7 +103,7 @@ export function respondInbox(world: World, itemId: string, r: InboxResponse): { 
         w = setMood(w, p.id, { lastRaise: w.date, raiseRefusals: 0, salaryBeforeCut: r.salary >= (p.mood.salaryBeforeCut ?? 0) ? null : p.mood.salaryBeforeCut });
         w = applySatisfaction(w, p.id, E.raiseRequested / 2);
         w = applyJealousy(w, w.managerTeamId, p.id).world;
-        return { world: w, event: { kind: 'ok', text: `${p.nick} aceitou ${fmt(r.salary)}/mês.` } };
+        return { world: w, event: { kind: 'ok', text: `${p.nick} aceitou ${fmtMoney(r.salary)}/mês.` } };
       }
       // Contraproposta baixa conta como recusa.
     }
@@ -164,7 +163,7 @@ export function denyExit(world: World, playerId: string): { world: World; event:
 export function giveRaise(world: World, playerId: string, pct: number): { world: World; event: WorldEvent } {
   const p = world.players[playerId];
   if (!p.contract) return { world, event: { kind: 'alerta', text: 'Jogador sem contrato.' } };
-  const salary = round(p.contract.salary * (1 + pct / 100), 500);
+  const salary = roundTo(p.contract.salary * (1 + pct / 100), 500);
   let bonus = MORALE.events.raiseInitiativePer10 * (pct / 10);
   if (recentRaise(p, world.date)) bonus /= 2;
   let w = setSalary(world, playerId, salary);
@@ -173,7 +172,7 @@ export function giveRaise(world: World, playerId: string, pct: number): { world:
   const j = applyJealousy(w, p.teamId!, playerId);
   w = j.world;
   const extra = j.jealous.length ? ` Ciúme no elenco: ${j.jealous.map((id) => w.players[id].nick).join(', ')}.` : '';
-  return { world: w, event: { kind: 'ok', text: `${p.nick} ganhou ${pct}% de aumento (${fmt(salary)}/mês).${extra}` } };
+  return { world: w, event: { kind: 'ok', text: `${p.nick} ganhou ${pct}% de aumento (${fmtMoney(salary)}/mês).${extra}` } };
 }
 
 /**
@@ -209,7 +208,7 @@ export function proposeCut(world: World, playerIds: string[], pct: number, rng: 
     // IGL com Liderança (Equipe) alta ajuda a convencer o elenco.
     if (collective && igl) chance += (effectiveAttributes(igl).EQP - 70) * 0.01;
     if (rng.chance(Math.max(0.02, Math.min(0.95, chance)))) {
-      const salary = round(p.contract.salary * (1 - pct / 100), 500);
+      const salary = roundTo(p.contract.salary * (1 - pct / 100), 500);
       w = setMood(w, id, { lastCut: w.date, salaryBeforeCut: p.mood.salaryBeforeCut ?? p.contract.salary, cutRefusals: 0 });
       w = setSalary(w, id, salary);
       w = applySatisfaction(w, id, MORALE.events.cutAccepted);
