@@ -31,6 +31,9 @@ const make = (over: Partial<Player> = {}): Player => ({
   transferListed: false,
   contract: null,
   mood: { ...DEFAULT_MOOD },
+  awards: [],
+  mvpUntil: null,
+  trainingGains: {},
   ...over,
 });
 

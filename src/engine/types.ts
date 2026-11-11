@@ -72,6 +72,12 @@ export interface PlayerMood {
   lastRequest: string | null;
 }
 
+export interface PlayerAward {
+  kind: 'MVP' | 'EVP';
+  event: string;
+  date: string;
+}
+
 export interface Player {
   id: string;
   nick: string;
@@ -101,6 +107,19 @@ export interface Player {
   /** null = agente livre. */
   contract: Contract | null;
   mood: PlayerMood;
+  /** MVPs e EVPs conquistados (o MVP vira carta especial). */
+  awards: PlayerAward[];
+  /** Bônus de MVP (+2 em todos os atributos) válido até esta data. */
+  mvpUntil: string | null;
+  /** Ganho acumulado de treino por atributo (fracionado; teto em TRAINING.maxGain). */
+  trainingGains: Partial<Attributes>;
+}
+
+export type TrainingFocus = 'mira' | 'utilidade' | 'taticas' | MapId;
+
+export interface TrainingPlan {
+  mode: 'treino' | 'descanso' | 'dividido';
+  focus: TrainingFocus;
 }
 
 export const MAP_IDS = ['ancient', 'anubis', 'cache', 'dust2', 'inferno', 'mirage', 'nuke'] as const;
@@ -129,6 +148,13 @@ export interface Team {
   lateMonths: number;
   /** Salários devidos (atrasados). */
   arrears: number;
+  /** Pontos reais do ranking no início (decaem em 12 meses) e o elenco que os conquistou. */
+  legacyPoints: number;
+  legacyRoster: string[];
+  /** Histórico semanal do ranking. */
+  rankHistory: Array<{ date: string; rank: number; points: number }>;
+  /** O que o time faz nos dias sem evento. */
+  training: TrainingPlan;
 }
 
 export type MatchFormat = 'MD1' | 'MD3' | 'MD5';

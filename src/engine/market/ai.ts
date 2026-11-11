@@ -1,5 +1,6 @@
 // IA do mercado: um passo por dia. Renova e encerra contratos, completa elencos, busca reforços,
 // faz propostas pelos jogadores do seu time e às vezes paga multas.
+import { teamBusy, windowOpen } from '../calendar';
 import { AI_MARKET, FINANCE, MARKET } from '../config';
 import { payroll } from '../finance/monthly';
 import { bandOf } from '../morale/satisfaction';
@@ -80,9 +81,13 @@ export function aiMarketDay(world: World, myTeamId: string, rng: Rng): { world: 
     }
   }
 
-  // 3) Reforços entre times da IA (só com folga no caixa e sem salário atrasado).
-  for (const t of aiTeams()) {
-    if (!rng.chance(AI_MARKET.upgradeChance) || t.lateMonths > 0) continue;
+  // Fora da janela de transferências, só agentes livres (passo 2) e contratos (passo 1).
+  const open = windowOpen(w.date);
+  const busy = (teamId: string | null) => !!teamId && teamBusy(w.calendar ?? [], teamId);
+
+  // 3) Reforços entre times da IA (só com folga no caixa, sem salário atrasado e sem evento em andamento).
+  for (const t of open ? aiTeams() : []) {
+    if (!rng.chance(AI_MARKET.upgradeChance) || t.lateMonths > 0 || busy(t.id)) continue;
     const team = w.teams[t.id];
     const weak = weakestRole(team, w.players);
     const candidates = Object.values(w.players)
@@ -92,7 +97,8 @@ export function aiMarketDay(world: World, myTeamId: string, rng: Rng): { world: 
           p.teamId !== t.id &&
           p.teamId !== myTeamId &&
           playerOvr(p) >= weak.ovr + AI_MARKET.minUpgrade &&
-          !recentlyMoved(w, p.id),
+          !recentlyMoved(w, p.id) &&
+          !busy(p.teamId),
       )
       .map((p) => ({ p, price: p.teamId ? askingPrice(w, p.id, t.id) : 0 }))
       .filter((c): c is { p: Player; price: number } => c.price !== null && team.money - c.price >= reserve(team))
@@ -108,7 +114,7 @@ export function aiMarketDay(world: World, myTeamId: string, rng: Rng): { world: 
   w = { ...w, offers: w.offers.filter((o) => o.expires >= w.date && w.players[o.playerId].teamId === myTeamId) };
   const mine = myTeam().playerIds.map((id) => w.players[id]);
   const anyListed = mine.some((p) => p.transferListed);
-  if (w.offers.length < 3 && mine.length && rng.chance(AI_MARKET.offerChance * (anyListed ? 4 : 1))) {
+  if (open && w.offers.length < 3 && mine.length && rng.chance(AI_MARKET.offerChance * (anyListed ? 4 : 1))) {
     const target = rng.weighted(mine, (p) => (recentlyMoved(w, p.id) ? 0 : 1) * (p.transferListed ? 6 : 1) * (wantsOut(p) ? 3 : 1) * (1 + Math.max(0, baseOvr(p) - 75) / 5));
     const value = marketValue(target, w.date);
     const buyers = aiTeams().filter(
@@ -135,7 +141,7 @@ export function aiMarketDay(world: World, myTeamId: string, rng: Rng): { world: 
   }
 
   // 5) Multa paga por um jogador seu (raro): o time não pode impedir; o jogador decide.
-  if (rng.chance(AI_MARKET.clauseChance) && mine.length > MARKET.squadMin - 1) {
+  if (open && rng.chance(AI_MARKET.clauseChance) && mine.length > MARKET.squadMin - 1) {
     const target = rng.pick(mine);
     const clause = target.contract?.releaseClause ?? Infinity;
     const buyer = aiTeams().find((t) => t.money >= clause * 1.3 && playerOvr(target) >= starterOvrAt(t, w.players, target.role) + 5);
@@ -168,6 +174,7 @@ export function respondToOffer(
   const p = w.players[offer.playerId];
   const buyer: Team = w.teams[offer.fromTeamId];
   if (response.kind === 'refuse') return { world: rest, event: { kind: 'info', text: `Proposta de ${buyer.shortName} por ${p.nick} recusada.` } };
+  if (!windowOpen(w.date)) return { world: w, event: { kind: 'alerta', text: 'Mercado fechado: a venda só pode ser fechada na janela de transferências.' } };
 
   let fee = offer.fee;
   if (response.kind === 'counter') {

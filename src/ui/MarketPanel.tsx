@@ -14,25 +14,6 @@ import { TeamBadge } from './TeamBadge';
 
 type SubTab = 'jogadores' | 'propostas' | 'movimentacoes' | 'relacoes';
 
-export function TimeControls() {
-  const date = useGame((s) => s.date);
-  const advance = useGame((s) => s.advanceDays);
-  const open = useGame((s) => marketOpen(s));
-  const btn = 'rounded-lg border border-line px-3 py-1.5 text-sm text-muted transition hover:text-ink disabled:opacity-40';
-  return (
-    <div className="flex flex-wrap items-center gap-2">
-      <span className="font-display text-lg font-bold">{formatDate(date)}</span>
-      <button type="button" className={btn} disabled={!open} onClick={() => advance(1)}>
-        +1 dia
-      </button>
-      <button type="button" className={btn} disabled={!open} onClick={() => advance(7)}>
-        +1 semana
-      </button>
-      {!open && <span className="text-xs text-muted">Mercado fechado durante o campeonato.</span>}
-    </div>
-  );
-}
-
 function PlayerDetail({ p, onDeal }: { p: Player; onDeal: (kind: DealKind, tradePlayerId?: string) => void }) {
   const w = useWorld();
   const myTeamId = useGame((s) => s.myTeamId)!;
@@ -96,7 +77,7 @@ function PlayerDetail({ p, onDeal }: { p: Player; onDeal: (kind: DealKind, trade
 
       {!mine && (
         <div className="mt-4 space-y-2 border-t border-line pt-4">
-          {!open && <p className="text-sm text-muted">Mercado fechado durante o campeonato.</p>}
+          {!open && <p className="text-sm text-muted">Fora da janela de transferências: só agentes livres.</p>}
           {team ? (
             <>
               <div className="flex flex-wrap gap-2">
@@ -132,7 +113,7 @@ function PlayerDetail({ p, onDeal }: { p: Player; onDeal: (kind: DealKind, trade
               </div>
             </>
           ) : (
-            <button type="button" disabled={!open} onClick={() => onDeal('free')} className={`${btn} bg-accent text-black hover:brightness-110`}>
+            <button type="button" onClick={() => onDeal('free')} className={`${btn} bg-accent text-black hover:brightness-110`}>
               Contratar
             </button>
           )}
@@ -390,7 +371,7 @@ export function MarketPanel() {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-line bg-panel p-4">
-        <TimeControls />
+        <span className="text-sm text-muted">{marketOpen({ date: w.date }) ? 'Janela de transferências aberta.' : 'Fora da janela: só agentes livres e renovações.'}</span>
         <span className="text-sm text-muted">
           Elenco: {w.teams[myTeamId].playerIds.length}/7 · Caixa {money(w.teams[myTeamId].money)}
         </span>

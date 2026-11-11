@@ -1,44 +1,27 @@
 import { useEffect, useRef, useState } from 'react';
 import { DE_SLOTS } from '../engine/tournament/doubleElim';
-import { TEMPLATES, allSeries } from '../engine/tournament/run';
 import { buchholz, isActive, swissStandings } from '../engine/tournament/swiss';
-import type { BracketStage, DoubleElimGroup, Series, Stage, SwissStage, Tournament, TournamentTemplate } from '../engine/tournament/types';
+import type { CalendarEvent } from '../engine/calendar';
+import { formatDate } from '../engine/date';
+import { prizeFor } from '../engine/finance/prizes';
+import { pickAwards } from '../engine/tournament/awards';
+import { allSeries } from '../engine/tournament/run';
+import type { BracketStage, FormatId, Group, Series, Stage, SwissStage } from '../engine/tournament/types';
+import { money } from './format';
+
+export const FORMAT_LABEL: Record<FormatId, string> = {
+  major32: '32 times, 3 fases suíças e playoffs com 8',
+  groups16: '16 times, 2 grupos de dupla eliminação e playoffs com 6',
+  swiss16: '16 times, fase suíça e playoffs com 8',
+  epl24: '24 times, 2 fases suíças e playoffs com 8',
+  ewc32: '32 times, 4 grupos de dupla eliminação e playoffs com 16',
+  rivals8: '8 times, 2 grupos GSL e playoffs com 6',
+  bracket8: '8 times em mata-mata',
+};
 import type { Team } from '../engine/types';
 import { useGame } from '../store/game';
 import { MatchView } from './MatchView';
 import { TeamBadge } from './TeamBadge';
-
-function TournamentStart() {
-  const start = useGame((s) => s.startTournament);
-  const myTeam = useGame((s) => s.teams[s.myTeamId!]);
-  return (
-    <div className="grid gap-4 md:grid-cols-2">
-      {(Object.keys(TEMPLATES) as TournamentTemplate[]).map((k) => {
-        const info = TEMPLATES[k];
-        const invited = myTeam.hltvRank <= info.teams;
-        return (
-          <div key={k} className="flex flex-col rounded-2xl border border-line bg-panel p-5">
-            <p className="text-xs font-semibold tracking-wider text-accent uppercase">{k === 'major' ? 'Major' : 'Intel Extreme Masters'}</p>
-            <h2 className="font-display mt-1 text-2xl font-bold">{info.name}</h2>
-            <p className="mt-2 flex-1 text-sm text-muted">{info.description}</p>
-            <p className={`mt-3 text-sm ${invited ? 'text-win' : 'text-loss'}`}>
-              {invited
-                ? `${myTeam.shortName} está convidado (top ${info.teams} do ranking).`
-                : `${myTeam.shortName} não foi convidado (só o top ${info.teams}). Você acompanha de fora.`}
-            </p>
-            <button
-              type="button"
-              onClick={() => start(k)}
-              className="mt-4 self-start rounded-lg bg-accent px-5 py-2 font-semibold text-black transition hover:brightness-110"
-            >
-              Começar campeonato
-            </button>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
 
 function SeriesRow({
   m,
@@ -156,9 +139,9 @@ function SwissView({ s, teams, myTeamId, open, can }: { s: SwissStage; teams: Re
   );
 }
 
-function GroupView({ g, teams, myTeamId, open, can }: { g: DoubleElimGroup; teams: Record<string, Team>; myTeamId: string; open: (id: string) => void; can: (id: string) => boolean }) {
-  const upper = DE_SLOTS.filter((k) => k.startsWith('U')).map((k) => g.matches[k]);
-  const lower = DE_SLOTS.filter((k) => !k.startsWith('U')).map((k) => g.matches[k]);
+function GroupView({ g, teams, myTeamId, open, can }: { g: Group; teams: Record<string, Team>; myTeamId: string; open: (id: string) => void; can: (id: string) => boolean }) {
+  const upper = g.kind === 'de8' ? DE_SLOTS.filter((k) => k.startsWith('U')).map((k) => g.matches[k]) : (['O1', 'O2', 'W'] as const).map((k) => g.matches[k]);
+  const lower = g.kind === 'de8' ? DE_SLOTS.filter((k) => !k.startsWith('U')).map((k) => g.matches[k]) : (['L', 'D'] as const).map((k) => g.matches[k]);
   const col = (title: string, ms: (Series | undefined)[]) => (
     <div className="space-y-1.5">
       <h4 className="text-xs font-semibold tracking-wider text-muted uppercase">{title}</h4>
@@ -181,14 +164,15 @@ function GroupView({ g, teams, myTeamId, open, can }: { g: DoubleElimGroup; team
 }
 
 function BracketView({ b, teams, myTeamId, open, can }: { b: BracketStage; teams: Record<string, Team>; myTeamId: string; open: (id: string) => void; can: (id: string) => boolean }) {
-  const columns = ['Quartas de final', 'Semifinal', 'Grande final'];
+  const col = (label: string) => (label === 'Disputa de 3º lugar' ? 'Grande final' : label);
+  const columns = [...new Set(b.slots.map((x) => col(x.label)))];
   return (
-    <div className="grid gap-4 md:grid-cols-3">
+    <div className="grid gap-4 md:auto-cols-fr md:grid-flow-col">
       {columns.map((c) => (
         <div key={c} className="flex flex-col justify-around gap-2">
           <h4 className="text-xs font-semibold tracking-wider text-muted uppercase">{c}</h4>
           {b.slots
-            .filter((s) => s.label === c)
+            .filter((s) => col(s.label) === c)
             .map((slot) =>
               slot.series ? (
                 <SeriesRow key={slot.id} m={slot.series} teams={teams} myTeamId={myTeamId} onOpen={open} canOpen={can(slot.series.id)} />
@@ -218,23 +202,28 @@ function StageView(props: { stage: Stage; teams: Record<string, Team>; myTeamId:
   return <BracketView b={stage} {...props} />;
 }
 
-function myStatus(t: Tournament, myTeamId: string, teams: Record<string, Team>): string {
-  if (!t.participants.includes(myTeamId)) return `${teams[myTeamId].shortName} não foi convidado. Você está acompanhando de fora.`;
+function myStatus(ev: CalendarEvent, myTeamId: string): string {
+  const t = ev.tournament;
+  if (!t) {
+    if (ev.accepted.includes(myTeamId) || ev.qualified.includes(myTeamId)) return 'Seu time está confirmado.';
+    if (ev.invited.includes(myTeamId) && !ev.declined.includes(myTeamId)) return 'Seu time foi convidado: responda na aba Mensagens.';
+    return ev.status === 'futuro' ? 'Os convites saem 21 dias antes do evento.' : 'Seu time não está neste evento.';
+  }
+  if (!t.participants.includes(myTeamId)) return 'Seu time não está neste evento.';
   const place = t.placements[myTeamId];
-  if (place === 'Campeão') return `${teams[myTeamId].shortName} é CAMPEÃO!`;
-  if (place) return `${teams[myTeamId].shortName} terminou em ${place}.`;
-  return `${teams[myTeamId].shortName} segue na disputa.`;
+  if (place === 'Campeão') return 'Seu time é campeão!';
+  if (place) return `Seu time terminou em ${place}.`;
+  return 'Seu time segue na disputa.';
 }
 
-export function TournamentPanel() {
-  const t = useGame((s) => s.tournament);
+/** Detalhe de um evento do calendário: chaves, jogos do último dia, colocações e prêmios. */
+export function EventPanel({ ev, onBack }: { ev: CalendarEvent; onBack: () => void }) {
   const teams = useGame((s) => s.teams);
+  const players = useGame((s) => s.players);
   const myTeamId = useGame((s) => s.myTeamId)!;
   const results = useGame((s) => s.seriesResults);
   const lastDayIds = useGame((s) => s.lastDayIds);
-  const playNextDay = useGame((s) => s.playNextDay);
-  const playToEnd = useGame((s) => s.playToEnd);
-  const close = useGame((s) => s.closeTournament);
+  const t = ev.tournament;
   const [stageView, setStageView] = useState<number | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
   const detailRef = useRef<HTMLDivElement>(null);
@@ -244,63 +233,67 @@ export function TournamentPanel() {
     if (openId) detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, [openId]);
 
-  if (!t) return <TournamentStart />;
-
-  const shownIdx = stageView ?? t.stageIdx;
-  const series = allSeries(t);
+  const series = t ? allSeries(t) : [];
   const lastDay = series.filter((m) => lastDayIds.includes(m.id));
   const can = (id: string) => !!results[id];
   const open = (id: string) => setOpenId((cur) => (cur === id ? null : id));
-  const champion = t.championId ? teams[t.championId] : null;
-  const placementList = Object.entries(t.placements).sort(([, a], [, b]) => placeOrder(a) - placeOrder(b));
+  const champion = t?.championId ? teams[t.championId] : null;
+  const placementList = t ? Object.entries(t.placements).sort(([, a], [, b]) => placeOrder(a) - placeOrder(b)) : [];
+  const awards = t?.championId ? pickAwards(t) : null;
+  const shownIdx = stageView ?? t?.stageIdx ?? 0;
 
   return (
     <div className="space-y-4">
+      <button type="button" onClick={onBack} className="text-sm text-muted hover:text-ink">
+        ‹ Voltar ao calendário
+      </button>
       <div className="rounded-2xl border border-line bg-panel p-5">
-        <div className="flex flex-wrap items-start gap-4">
-          <div className="min-w-0 flex-1">
-            <h2 className="font-display text-3xl font-bold">{t.name}</h2>
-            <p className="text-sm text-muted">
-              Dia {t.day} · {t.stages[t.stageIdx].name} · {t.participants.length} times
-            </p>
-            <p className="mt-1 text-sm font-semibold">{myStatus(t, myTeamId, teams)}</p>
-          </div>
-          {!champion ? (
-            <div className="flex flex-wrap gap-2">
-              <button type="button" onClick={playToEnd} className="rounded-lg border border-line px-4 py-2 text-sm text-muted hover:text-ink">
-                Simular até o fim
-              </button>
-              <button type="button" onClick={playNextDay} className="rounded-lg bg-accent px-5 py-2 font-semibold text-black transition hover:brightness-110">
-                Jogar próximo dia
-              </button>
-            </div>
-          ) : (
-            <button type="button" onClick={close} className="rounded-lg border border-line px-4 py-2 text-sm text-muted hover:text-ink">
-              Encerrar campeonato
-            </button>
-          )}
-        </div>
-
+        <h2 className="font-display text-3xl font-bold">{ev.name}</h2>
+        <p className="text-sm text-muted">
+          {ev.city && `${ev.city}, `}
+          {formatDate(ev.startDate)} a {formatDate(ev.endDate)}. {FORMAT_LABEL[ev.format]}. Prêmio total {money(ev.prizePool)}
+          {ev.approximated && ' (formato aproximado)'}.
+        </p>
+        <p className="mt-1 text-sm font-semibold">{myStatus(ev, myTeamId)}</p>
         {champion && (
-          <div className="mt-4 flex items-center gap-4 rounded-xl border border-accent/40 bg-accent/10 p-4">
+          <div className="mt-4 flex flex-wrap items-center gap-4 rounded-xl border border-accent/40 bg-accent/10 p-4">
             <TeamBadge team={champion} size={56} />
-            <div>
-              <p className="text-xs font-semibold tracking-wider text-accent uppercase">Campeão</p>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm text-accent">Campeão</p>
               <p className="font-display text-3xl font-bold">{champion.name}</p>
             </div>
+            {awards?.mvp && (
+              <div className="text-right">
+                <p className="text-sm text-accent">MVP</p>
+                <p className="font-display text-2xl font-bold">{players[awards.mvp].nick}</p>
+                {awards.evps.length > 0 && <p className="text-xs text-muted">EVPs: {awards.evps.map((id) => players[id].nick).join(', ')}</p>}
+              </div>
+            )}
           </div>
         )}
       </div>
 
+      {!t && (
+        <section className="rounded-2xl border border-line bg-panel p-5 text-sm">
+          <h3 className="font-display mb-2 text-xl font-bold">Participantes</h3>
+          {ev.accepted.length + ev.qualified.length === 0 ? (
+            <p className="text-muted">Ainda sem confirmados.</p>
+          ) : (
+            <p>{[...ev.accepted, ...ev.qualified].map((id) => teams[id].shortName).join(', ')}</p>
+          )}
+          {ev.qualifierSlots > 0 && <p className="mt-2 text-muted">{ev.qualifierSlots} vagas saem da qualificatória, 3 dias antes do evento.</p>}
+        </section>
+      )}
+
       {lastDay.length > 0 && (
         <section className="rounded-2xl border border-line bg-panel p-5">
-          <h3 className="font-display mb-3 text-xl font-bold">Jogos do dia {t.day}</h3>
+          <h3 className="font-display mb-3 text-xl font-bold">Jogos do último dia</h3>
           <div className="grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
             {lastDay.map((m) => (
               <SeriesRow key={m.id} m={m} teams={teams} myTeamId={myTeamId} onOpen={open} canOpen={can(m.id)} />
             ))}
           </div>
-          <p className="mt-2 text-xs text-muted">Clique num jogo para ver o placar completo. Os jogos do seu time ficam guardados; os outros, só até o dia seguinte.</p>
+          <p className="mt-2 text-xs text-muted">Clique num jogo para ver o placar completo. Os jogos do seu time ficam guardados; os outros, só até o próximo dia.</p>
         </section>
       )}
 
@@ -310,31 +303,34 @@ export function TournamentPanel() {
         </div>
       )}
 
-      <section className="rounded-2xl border border-line bg-panel p-5">
-        <div className="mb-4 flex flex-wrap gap-1">
-          {t.stages.map((s, i) => (
-            <button
-              key={s.name}
-              type="button"
-              onClick={() => setStageView(i)}
-              className={`font-display rounded-lg px-3 py-1.5 font-bold transition ${i === shownIdx ? 'bg-panel-2 text-ink' : 'text-muted hover:text-ink'}`}
-            >
-              {s.name}
-            </button>
-          ))}
-        </div>
-        <StageView stage={t.stages[shownIdx]} teams={teams} myTeamId={myTeamId} open={open} can={can} />
-      </section>
-
-      {placementList.length > 0 && (
+      {t && (
         <section className="rounded-2xl border border-line bg-panel p-5">
-          <h3 className="font-display mb-3 text-xl font-bold">Colocações</h3>
+          <div className="mb-4 flex flex-wrap gap-1">
+            {t.stages.map((st, i) => (
+              <button
+                key={st.name}
+                type="button"
+                onClick={() => setStageView(i)}
+                className={`font-display rounded-lg px-3 py-1.5 font-bold transition ${i === shownIdx ? 'bg-panel-2 text-ink' : 'text-muted hover:text-ink'}`}
+              >
+                {st.name}
+              </button>
+            ))}
+          </div>
+          <StageView stage={t.stages[shownIdx]} teams={teams} myTeamId={myTeamId} open={open} can={can} />
+        </section>
+      )}
+
+      {t && placementList.length > 0 && (
+        <section className="rounded-2xl border border-line bg-panel p-5">
+          <h3 className="font-display mb-3 text-xl font-bold">Colocações e prêmios</h3>
           <ol className="grid gap-x-6 gap-y-1 text-sm sm:grid-cols-2 lg:grid-cols-3">
             {placementList.map(([id, place]) => (
               <li key={id} className={`flex items-center gap-2 ${id === myTeamId ? 'text-accent' : ''}`}>
-                <span className="w-20 shrink-0 text-muted tabular-nums">{place}</span>
+                <span className="w-16 shrink-0 text-muted tabular-nums">{place}</span>
                 <TeamBadge team={teams[id]} size={18} />
-                <span className="truncate font-semibold">{teams[id].name}</span>
+                <span className="min-w-0 flex-1 truncate font-semibold">{teams[id].name}</span>
+                <span className="text-muted tabular-nums">{money(prizeFor(t, place))}</span>
               </li>
             ))}
           </ol>

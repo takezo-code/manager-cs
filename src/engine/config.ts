@@ -398,30 +398,48 @@ export const FINANCE = {
 };
 
 /**
- * Premiação real (US$ 1,25 mi em cada evento), por faixa de colocação (a partir de qual posição).
- * Faixas compartilhadas sem disputa (ex.: 3º–4º) recebem a média das duas posições.
+ * Fração do prêmio total paga a cada posição (por time), a partir de qual posição. Faixas compartilhadas
+ * (ex.: 3º–4º sem disputa de 3º) recebem a média das posições. Major e groups16 usam as proporções reais
+ * (PGL Major Singapura e IEM Beijing 2026); os demais são estimativas no mesmo padrão, somando 100%.
  */
-export const PRIZES: Record<'major' | 'iem', Array<{ from: number; amount: number }>> = {
-  // PGL Major Singapura 2026 (Liquipedia): 3º 100k e 4º 60k → 80k cada.
-  major: [
-    { from: 1, amount: 500_000 },
-    { from: 2, amount: 170_000 },
-    { from: 3, amount: 80_000 },
-    { from: 5, amount: 45_000 },
-    { from: 9, amount: 20_000 },
-    { from: 17, amount: 10_000 },
-    { from: 25, amount: 0 },
+export const PRIZE_SHARES: Record<import('./tournament/types').FormatId, Array<{ from: number; share: number }>> = {
+  major32: [
+    { from: 1, share: 0.4 }, { from: 2, share: 0.136 }, { from: 3, share: 0.08 }, { from: 4, share: 0.048 },
+    { from: 5, share: 0.036 }, { from: 9, share: 0.016 }, { from: 17, share: 0.008 }, { from: 25, share: 0 },
   ],
-  // IEM Beijing 2026: 3º 160k e 4º 120k → 140k cada.
-  iem: [
-    { from: 1, amount: 360_000 },
-    { from: 2, amount: 210_000 },
-    { from: 3, amount: 140_000 },
-    { from: 5, amount: 87_500 },
-    { from: 7, amount: 54_500 },
-    { from: 9, amount: 25_000 },
-    { from: 13, amount: 4_000 },
+  groups16: [
+    { from: 1, share: 0.288 }, { from: 2, share: 0.168 }, { from: 3, share: 0.128 }, { from: 4, share: 0.096 },
+    { from: 5, share: 0.07 }, { from: 7, share: 0.0436 }, { from: 9, share: 0.02 }, { from: 13, share: 0.0032 },
   ],
+  swiss16: [
+    { from: 1, share: 0.4 }, { from: 2, share: 0.15 }, { from: 3, share: 0.09 }, { from: 4, share: 0.07 },
+    { from: 5, share: 0.045 }, { from: 9, share: 0.01375 },
+  ],
+  epl24: [
+    { from: 1, share: 0.4 }, { from: 2, share: 0.15 }, { from: 3, share: 0.09 }, { from: 4, share: 0.07 },
+    { from: 5, share: 0.04 }, { from: 9, share: 0.015 }, { from: 17, share: 0.00125 },
+  ],
+  ewc32: [
+    { from: 1, share: 0.35 }, { from: 2, share: 0.15 }, { from: 3, share: 0.08 }, { from: 4, share: 0.07 },
+    { from: 5, share: 0.04 }, { from: 9, share: 0.015 }, { from: 17, share: 0.006 }, { from: 25, share: 0.00275 },
+  ],
+  rivals8: [
+    { from: 1, share: 0.4 }, { from: 2, share: 0.2 }, { from: 3, share: 0.12 }, { from: 4, share: 0.08 },
+    { from: 5, share: 0.06 }, { from: 7, share: 0.04 },
+  ],
+  bracket8: [
+    { from: 1, share: 0.45 }, { from: 2, share: 0.2 }, { from: 3, share: 0.1 }, { from: 5, share: 0.0375 },
+  ],
+};
+
+/** MVP e EVPs de cada evento. */
+export const AWARDS = {
+  /** Mínimo de mapas no evento para concorrer. */
+  minMaps: 6,
+  evps: 4,
+  /** MVP: +2 em todos os atributos por uma temporada. */
+  mvpBonus: 2,
+  mvpDays: 365,
 };
 
 // ---------- Satisfação ----------
@@ -475,4 +493,68 @@ export const MORALE = {
   deniedCap: 45,
   deniedEventFactor: 0.5,
   deniedFormPenalty: 0.05,
+};
+
+// ---------- Calendário ----------
+
+export const CALENDAR = {
+  /** Convites saem N dias antes do evento. */
+  inviteDaysBefore: 21,
+  /** Qualificatória (mata-mata MD3) N dias antes do evento. */
+  qualifierDaysBefore: 3,
+  /** Vagas de qualificatória nos eventos com menos de 32 times. */
+  qualifierSlots: 2,
+  /** Times que disputam a qualificatória (os seguintes no ranking, livres na data). */
+  qualifierTeams: 8,
+  /** Janela principal (após as férias) e menor (após o Major do meio do ano), MM-DD. */
+  mainWindow: ['01-01', '01-20'] as const,
+  midWindow: ['06-22', '08-10'] as const,
+  /** Férias de fim de ano. */
+  vacation: ['12-14', '12-31'] as const,
+};
+
+// ---------- Ranking HLTV ----------
+
+export const RANKING = {
+  wAchievement: 0.6,
+  wForm: 0.2,
+  wLan: 0.2,
+  formDays: 60,
+  lanCount: 10,
+  decayDays: 365,
+  /** Regra do núcleo: titulares em comum para manter os pontos. */
+  coreSize: 3,
+  /** Semanas guardadas no histórico de cada time. */
+  historySize: 26,
+  placeFactors: [
+    { upTo: 1, factor: 1 },
+    { upTo: 2, factor: 0.7 },
+    { upTo: 4, factor: 0.5 },
+    { upTo: 8, factor: 0.3 },
+    { upTo: 16, factor: 0.15 },
+    { upTo: 99, factor: 0.05 },
+  ],
+  eventWeights: { major: 1, big: 0.8, mid: 0.6, small: 0.4 },
+};
+
+// ---------- Treino e descanso ----------
+
+export const TRAINING = {
+  /** Ganho por dia de treino no atributo do foco (táticas divide entre NOC e EQP). */
+  gainPerDay: 0.08,
+  /** Multiplicador por idade: jovem aprende mais rápido, veterano mais devagar. */
+  youngAge: 21,
+  youngMult: 1.5,
+  oldAge: 29,
+  oldMult: 0.5,
+  /** Teto de ganho vindo de treino, por atributo. */
+  maxGain: 6,
+  /** Foco em mapa: força do mapa por dia e teto. */
+  mapGainPerDay: 0.3,
+  mapMax: 95,
+  /** Energia por dia: treino gasta, descanso recupera. */
+  trainEnergy: -2,
+  restEnergy: 2,
+  /** Satisfação por dia de descanso. */
+  restSatisfaction: 0.2,
 };

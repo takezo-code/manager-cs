@@ -7,6 +7,34 @@ import { money } from './format';
 
 const btn = 'rounded-lg px-3 py-1.5 text-sm font-semibold transition';
 
+function InviteItem({ item }: { item: InboxItem }) {
+  const ev = useGame((s) => s.calendar.find((e) => e.id === item.eventId));
+  const accept = useGame((s) => s.acceptInvite);
+  const decline = useGame((s) => s.declineInvite);
+  if (!ev) return null;
+  return (
+    <li className="rounded-xl border border-accent/40 bg-panel p-4">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <p className="font-semibold">Convite: {ev.name}</p>
+        <span className="text-xs text-muted">Responder até {formatDate(item.expires)}</span>
+      </div>
+      <p className="mt-1 text-sm text-muted">
+        {formatDate(ev.startDate)} a {formatDate(ev.endDate)}
+        {ev.city && ` em ${ev.city}`}. {ev.teams} times, prêmio de {money(ev.prizePool)}. Sem resposta, seu time é confirmado se não tiver outro
+        evento nas mesmas datas.
+      </p>
+      <div className="mt-3 flex gap-2">
+        <button type="button" onClick={() => accept(ev.id)} className={`${btn} bg-accent text-black`}>
+          Aceitar
+        </button>
+        <button type="button" onClick={() => decline(ev.id)} className={`${btn} border border-line text-muted hover:text-ink`}>
+          Recusar
+        </button>
+      </div>
+    </li>
+  );
+}
+
 function Item({ item }: { item: InboxItem }) {
   const w = useWorld();
   const respond = useGame((s) => s.respondInboxItem);
@@ -22,7 +50,7 @@ function Item({ item }: { item: InboxItem }) {
         <span className="text-xs text-muted">Responder até {formatDate(item.expires)}</span>
       </div>
       <p className="mt-1 text-sm text-muted">
-        Satisfação {p.satisfaction} ({BAND_LABEL[bandOf(p.satisfaction)]}) · salário {money(p.contract?.salary ?? 0)}/mês · referência {money(fairSalary(p))}
+        Satisfação {Math.round(p.satisfaction)} ({BAND_LABEL[bandOf(p.satisfaction)]}) · salário {money(p.contract?.salary ?? 0)}/mês · referência {money(fairSalary(p))}
       </p>
 
       {item.kind === 'aumento' && (
@@ -111,9 +139,7 @@ export function InboxPanel() {
           <p className="text-sm text-muted">Nenhum jogador pediu conversa. Pedidos aparecem no começo de cada mês.</p>
         ) : (
           <ul className="space-y-2">
-            {w.inbox.map((i) => (
-              <Item key={i.id} item={i} />
-            ))}
+            {w.inbox.map((i) => (i.kind === 'convite' ? <InviteItem key={i.id} item={i} /> : <Item key={i.id} item={i} />))}
           </ul>
         )}
       </section>

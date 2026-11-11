@@ -70,7 +70,7 @@ export function PlayerPanel({ player }: { player: Player }) {
       </table>
 
       <p className="mt-2 text-xs text-muted">
-        Fase: {PHASE_LABELS[player.phase]} · Energia {player.energy} · Satisfação {player.satisfaction}
+        Fase: {PHASE_LABELS[player.phase]} · Energia {player.energy} · Satisfação {Math.round(player.satisfaction)}
       </p>
 
       <MoodSection player={player} />

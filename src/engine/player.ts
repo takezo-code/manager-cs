@@ -2,6 +2,7 @@
 import {
   ATTR_MAX,
   ATTR_MIN,
+  AWARDS,
   EVOLUTION_BONUS_PER_LEVEL,
   MA_FASE_MAX_EXTRA,
   MA_FASE_WORSEN_EVERY,
@@ -41,7 +42,7 @@ export function phaseModifiers(player: Pick<Player, 'role' | 'phase' | 'phaseStr
  * É o que a simulação usa e o que define o OVR.
  */
 export function effectiveAttributes(player: Player): Attributes {
-  const evo = player.evolution * EVOLUTION_BONUS_PER_LEVEL;
+  const evo = player.evolution * EVOLUTION_BONUS_PER_LEVEL + (player.mvpUntil ? AWARDS.mvpBonus : 0);
   const skill = player.skillId ? SKILLS[player.skillId] : null;
   const phase = phaseModifiers(player);
   const out = {} as Attributes;

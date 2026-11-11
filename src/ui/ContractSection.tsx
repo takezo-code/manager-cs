@@ -3,7 +3,7 @@ import { formatMonth } from '../engine/date';
 import { startNegotiation, type Negotiation } from '../engine/market/negotiation';
 import { contractMonthsLeft, marketValue } from '../engine/market/value';
 import type { Player } from '../engine/types';
-import { marketOpen, useGame, useWorld } from '../store/game';
+import { useGame, useWorld } from '../store/game';
 import { money } from './format';
 import { NegotiationDialog } from './NegotiationDialog';
 
@@ -11,7 +11,6 @@ import { NegotiationDialog } from './NegotiationDialog';
 export function ContractSection({ player }: { player: Player }) {
   const w = useWorld();
   const myTeamId = useGame((s) => s.myTeamId)!;
-  const open = useGame((s) => marketOpen(s));
   const toggleListed = useGame((s) => s.toggleListed);
   const setStarter = useGame((s) => s.setStarter);
   const [neg, setNeg] = useState<Negotiation | null>(null);
@@ -47,7 +46,7 @@ export function ContractSection({ player }: { player: Player }) {
       )}
       {error && <p className="mt-2 text-sm text-loss">{error}</p>}
       <div className="mt-3 flex flex-wrap gap-2">
-        <button type="button" disabled={!open} onClick={renew} className="rounded-lg border border-line px-3 py-1.5 text-sm hover:border-white/40 disabled:opacity-40">
+        <button type="button" onClick={renew} className="rounded-lg border border-line px-3 py-1.5 text-sm hover:border-white/40 disabled:opacity-40">
           Renovar contrato
         </button>
         <button

@@ -10,18 +10,27 @@ export function PlayerCard({ player, selected, onClick }: { player: Player; sele
   const attrs = effectiveAttributes(player);
   const phaseGood = ['destaque', 'em_alta', 'boa_fase'].includes(player.phase);
   const phaseBad = ['abaixo', 'ma_fase'].includes(player.phase);
+  // Carta especial de evento: o MVP ganha moldura dourada e a faixa do evento enquanto vale o bônus.
+  const mvp = player.mvpUntil ? [...(player.awards ?? [])].reverse().find((a) => a.kind === 'MVP') : null;
 
   return (
     <button
       type="button"
       onClick={onClick}
       className={`group relative w-full overflow-hidden rounded-2xl border text-left transition ${
-        selected ? 'border-white/70 ring-2 ring-white/40' : 'border-white/10 hover:border-white/40'
+        selected ? 'border-white/70 ring-2 ring-white/40' : mvp ? 'mvp-card border-transparent' : 'border-white/10 hover:border-white/40'
       }`}
       style={{
-        background: `linear-gradient(160deg, color-mix(in srgb, ${color} 55%, #0b0e13) 0%, color-mix(in srgb, ${color} 18%, #0b0e13) 55%, #0b0e13 100%)`,
+        background: mvp
+          ? 'linear-gradient(160deg, #3a2a05 0%, #15110a 45%, #0b0e13 100%)'
+          : `linear-gradient(160deg, color-mix(in srgb, ${color} 55%, #0b0e13) 0%, color-mix(in srgb, ${color} 18%, #0b0e13) 55%, #0b0e13 100%)`,
       }}
     >
+      {mvp && (
+        <div className="mvp-ribbon truncate px-3 py-1 text-[11px] font-bold text-black" title={`MVP de ${mvp.event}`}>
+          MVP · {mvp.event}
+        </div>
+      )}
       <div className="flex items-start justify-between p-3 pb-0">
         <div>
           <div className="font-display text-4xl leading-none font-bold">{ovr}</div>

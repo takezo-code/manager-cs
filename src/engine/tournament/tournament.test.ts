@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { INITIAL_PLAYERS, INITIAL_TEAMS } from '../../data';
 import type { Player, Team } from '../types';
-import { allSeries, createTournament, playDay } from './run';
-import type { Tournament, TournamentTemplate } from './types';
+import { allSeries, createLegacyTournament as createTournament, playDay, type TournamentTemplate } from './run';
+import type { Tournament } from './types';
 
 const teams: Record<string, Team> = Object.fromEntries(INITIAL_TEAMS.map((t) => [t.id, t]));
 const basePlayers: Record<string, Player> = Object.fromEntries(INITIAL_PLAYERS.map((p) => [p.id, p]));
@@ -95,7 +95,9 @@ describe('IEM (grupos dupla eliminação + playoffs)', () => {
     const g = t.stages[0];
     const po = t.stages[1];
     if (g.kind !== 'groups' || po.kind !== 'bracket') throw new Error();
-    const a1 = g.groups[0].matches.UF!.winnerId;
+    const g0 = g.groups[0];
+    if (g0.kind !== 'de8') throw new Error();
+    const a1 = g0.matches.UF!.winnerId;
     expect(po.slots.find((s) => s.id === 'SF1')!.a).toEqual({ team: a1 });
   });
 });
