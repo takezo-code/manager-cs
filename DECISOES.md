@@ -50,7 +50,7 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 - **Qualificatória:** mata-mata MD3, 3 dias antes do evento.
 - **Treino e descanso** nos dias livres.
 - **Sobreposição:** você escolhe o convite; a IA fica com o de maior premiação.
-- Detalhes do calendário, ranking, MVP e treino: .
+- Detalhes do calendário, ranking, MVP e treino: `docs/superpowers/specs/2026-11-11-passo-9-calendario-design.md`.
 
 ## Criado por mim (revisar se quiser)
 
