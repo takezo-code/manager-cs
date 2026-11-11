@@ -143,7 +143,7 @@ function RoundStrip({ map, teamA, teamB }: { map: MapResult; teamA: Team; teamB:
                 <span
                   key={r.number}
                   title={`Round ${r.number}: ${r.narration}`}
-                  className={`h-4 w-3 rounded-sm ${won ? (ct ? 'bg-ct' : 'bg-t') : 'bg-white/5'} ${
+                  className={`h-4 w-3 rounded-sm ${won ? (ct ? 'bg-ct' : 'bg-tr') : 'bg-white/5'} ${
                     r.number === 13 || (r.number > 24 && (r.number - 25) % 3 === 0) ? 'ml-1.5' : ''
                   }`}
                 />
@@ -230,7 +230,7 @@ export function MatchView({ result }: { result: MatchResult }) {
       <RoundStrip map={map} teamA={teamA} teamB={teamB} />
       <p className="text-xs text-muted">
         <span className="mr-1 inline-block h-2.5 w-2.5 rounded-sm bg-ct align-middle" /> vitória como CT
-        <span className="mr-1 ml-3 inline-block h-2.5 w-2.5 rounded-sm bg-t align-middle" /> vitória como TR
+        <span className="mr-1 ml-3 inline-block h-2.5 w-2.5 rounded-sm bg-tr align-middle" /> vitória como TR
       </p>
 
       <Scoreboard map={map} teams={[teamA, teamB]} players={players} />
