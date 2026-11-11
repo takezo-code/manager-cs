@@ -18,7 +18,8 @@ import { getRelation } from './relations';
 import { createWorld } from '../season';
 import { marketValue } from './value';
 
-const fresh = (): World => createWorld('furia');
+// Dentro da janela de transferências (1–20 jan).
+const fresh = (): World => ({ ...createWorld('furia'), date: '2027-01-05' });
 
 describe('Valor de mercado', () => {
   it('estrelas valem milhões; jovem vale mais que veterano de OVR parecido', () => {

@@ -536,3 +536,25 @@ export const RANKING = {
   ],
   eventWeights: { major: 1, big: 0.8, mid: 0.6, small: 0.4 },
 };
+
+// ---------- Treino e descanso ----------
+
+export const TRAINING = {
+  /** Ganho por dia de treino no atributo do foco (táticas divide entre NOC e EQP). */
+  gainPerDay: 0.08,
+  /** Multiplicador por idade: jovem aprende mais rápido, veterano mais devagar. */
+  youngAge: 21,
+  youngMult: 1.5,
+  oldAge: 29,
+  oldMult: 0.5,
+  /** Teto de ganho vindo de treino, por atributo. */
+  maxGain: 6,
+  /** Foco em mapa: força do mapa por dia e teto. */
+  mapGainPerDay: 0.3,
+  mapMax: 95,
+  /** Energia por dia: treino gasta, descanso recupera. */
+  trainEnergy: -2,
+  restEnergy: 2,
+  /** Satisfação por dia de descanso. */
+  restSatisfaction: 0.2,
+};

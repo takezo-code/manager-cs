@@ -19,6 +19,7 @@ import { createWorld, dailyTick } from '../engine/season';
 import { validStarters } from '../engine/squad';
 import { createLegacyTournament, playDay, type TournamentTemplate } from '../engine/tournament/run';
 import type { Tournament } from '../engine/tournament/types';
+import type { CalendarEvent } from '../engine/calendar';
 import type { EventResult, SeriesLogEntry } from '../engine/ranking';
 import type { MatchFormat, MatchResult, MatchStage, Player, SkillId, Team } from '../engine/types';
 import {
@@ -55,6 +56,7 @@ export interface GameState {
   inbox: InboxItem[];
   results: EventResult[];
   seriesLog: SeriesLogEntry[];
+  calendar: CalendarEvent[];
   /** Avisos (os mais novos primeiro). */
   events: GameEvent[];
 
@@ -106,6 +108,7 @@ type WorldFields =
   | 'inbox'
   | 'results'
   | 'seriesLog'
+  | 'calendar'
   | 'myTeamId';
 
 export const worldOf = (s: Pick<GameState, WorldFields>): World => ({
@@ -121,6 +124,7 @@ export const worldOf = (s: Pick<GameState, WorldFields>): World => ({
   inbox: s.inbox,
   results: s.results,
   seriesLog: s.seriesLog,
+  calendar: s.calendar,
 });
 
 /** Campos do mundo para gravar de volta no estado. */
@@ -137,6 +141,7 @@ function fromWorld(w: World) {
     inbox: w.inbox,
     results: w.results,
     seriesLog: w.seriesLog,
+    calendar: w.calendar,
   };
 }
 
@@ -155,7 +160,7 @@ export function savedPart(s: GameState): SavedState | null {
 
 /** Campos do estado que vão para o save. */
 const SAVED_KEYS = [
-  'date', 'teams', 'players', 'relations', 'offers', 'transferLog', 'ledger', 'sponsorOffers', 'inbox', 'results', 'seriesLog', 'events',
+  'date', 'teams', 'players', 'relations', 'offers', 'transferLog', 'ledger', 'sponsorOffers', 'inbox', 'results', 'seriesLog', 'calendar', 'events',
   'myTeamId', 'tournament', 'seriesResults', 'lastDayIds', 'activeSlot',
 ] as const satisfies ReadonlyArray<keyof GameState>;
 
@@ -272,7 +277,7 @@ export const useGame = create<GameState>((set, get) => {
       for (const [id, r] of Object.entries(s.seriesResults)) if (r.teamAId === s.myTeamId || r.teamBId === s.myTeamId) kept[id] = r;
       // O dia passa (fechamento do mês incluso), com o mercado fechado.
       let w: World = { ...worldOf(s), players: out.players };
-      const tick = dailyTick(w, { marketOpen: false });
+      const tick = dailyTick(w);
       w = tick.world;
       const events = [...tick.events];
       // Fim do campeonato: premiação, bônus de título e satisfação.
@@ -297,7 +302,7 @@ export const useGame = create<GameState>((set, get) => {
       let w = worldOf(s);
       let events: GameEvent[] = [];
       for (let i = 0; i < days; i++) {
-        const out = dailyTick(w, { marketOpen: true, rng: createRng(hashString(`${w.date}:${s.activeSlot}:${s.myTeamId}`)) });
+        const out = dailyTick(w, { rng: createRng(hashString(`${w.date}:${s.activeSlot}:${s.myTeamId}`)) });
         w = out.world;
         events = [...stamp(w.date, out.events), ...events];
       }
@@ -399,8 +404,9 @@ export function useWorld(): World {
   const inbox = useGame((s) => s.inbox);
   const results = useGame((s) => s.results);
   const seriesLog = useGame((s) => s.seriesLog);
+  const calendar = useGame((s) => s.calendar);
   return useMemo(
-    () => worldOf({ date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog }),
-    [date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog],
+    () => worldOf({ date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar }),
+    [date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar],
   );
 }

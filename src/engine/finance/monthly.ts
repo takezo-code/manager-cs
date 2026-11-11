@@ -1,5 +1,6 @@
 // Fechamento do mês (dia 1º): patrocínios entram, salários saem, atrasos e ofertas de patrocínio.
 import { FINANCE, MORALE } from '../config';
+import { teamBusy } from '../calendar';
 import { releasePlayer } from '../market/transfer';
 import type { Rng } from '../rng';
 import type { Team } from '../types';
@@ -44,8 +45,7 @@ function changeSatisfaction(w: World, teamId: string, delta: number): World {
  * Fecha o mês. Com `allowDepartures` falso (campeonato em andamento), ninguém rescinde: os elencos
  * ficam travados até o fim do evento, e a rescisão acontece no primeiro fechamento depois dele.
  */
-export function monthlyFinance(world: World, rng: Rng, opts: { allowDepartures?: boolean } = {}): { world: World; events: WorldEvent[] } {
-  const allowDepartures = opts.allowDepartures ?? true;
+export function monthlyFinance(world: World, rng: Rng): { world: World; events: WorldEvent[] } {
   let w = world;
   const events: WorldEvent[] = [];
   const mine = w.managerTeamId;
@@ -79,7 +79,7 @@ export function monthlyFinance(world: World, rng: Rng, opts: { allowDepartures?:
         if (id === mine) events.push({ kind: 'alerta', text: `${gone.brand} rompeu o patrocínio por causa dos salários atrasados.` });
       }
       // Jogadores insatisfeitos rescindem e saem de graça.
-      if (allowDepartures && w.teams[id].lateMonths >= FINANCE.playersLeaveAfterLate) {
+      if (!teamBusy(w.calendar, id) && w.teams[id].lateMonths >= FINANCE.playersLeaveAfterLate) {
         for (const pid of w.teams[id].playerIds) {
           const p = w.players[pid];
           if (p.satisfaction < FINANCE.rescindBelowSatisfaction && w.teams[id].playerIds.length > 1) {

@@ -148,7 +148,7 @@ describe('Satisfação', () => {
 describe('Um ano de jogo', () => {
   it('a economia não quebra todo mundo nem infla sem limite', () => {
     let w = createWorld('furia', 3);
-    for (let d = 0; d < 365; d++) w = dailyTick(w, { marketOpen: true }).world;
+    for (let d = 0; d < 365; d++) w = dailyTick(w).world;
     expect(w.date).toBe(addDays('2026-11-11', 365));
     const teams = Object.values(w.teams);
     expect(teams.filter((t) => t.lateMonths > 0).length).toBeLessThan(8);
@@ -182,11 +182,16 @@ describe('Fim de campeonato', () => {
 describe('Correções do code review', () => {
   it('durante campeonato, o atraso de salário não tira jogadores do elenco', async () => {
     const { dailyTick } = await import('../season');
+    const { createLegacyTournament } = await import('../tournament/run');
     let w = at(createWorld('furia'), '2026-11-30');
+    // O Major está em andamento com a BIG participando.
+    const major = w.calendar.find((e) => e.templateId === 'major-2')!;
+    const tournament = createLegacyTournament('major', Object.values(w.teams), 1);
+    w = { ...w, calendar: w.calendar.map((e) => (e.id === major.id ? { ...e, status: 'em_andamento' as const, tournament } : e)) };
     const big = w.teams.big;
     w = { ...w, teams: { ...w.teams, big: { ...big, money: -5_000_000, sponsors: [], lateMonths: 2 } } };
     for (const id of big.playerIds) w = { ...w, players: { ...w.players, [id]: { ...w.players[id], satisfaction: 10 } } };
-    const out = dailyTick(w, { marketOpen: false }).world;
+    const out = dailyTick(w).world;
     expect(out.date).toBe('2026-12-01');
     expect(out.teams.big.lateMonths).toBe(3);
     expect(out.teams.big.playerIds).toHaveLength(big.playerIds.length);
@@ -195,8 +200,9 @@ describe('Correções do code review', () => {
   it('fora de campeonato, os dias de descanso recuperam energia', async () => {
     const { dailyTick } = await import('../season');
     let w = createWorld('furia');
+    w = { ...w, teams: { ...w.teams, furia: { ...w.teams.furia, training: { mode: 'descanso', focus: 'mira' } } } };
     w = { ...w, players: { ...w.players, fallen: { ...w.players.fallen, energy: 50 } } };
-    const out = dailyTick(w, { marketOpen: true }).world;
+    const out = dailyTick(w).world;
     expect(out.players.fallen.energy).toBeGreaterThan(50);
   });
 });

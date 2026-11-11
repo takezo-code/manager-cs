@@ -1,5 +1,6 @@
 // "Mundo" do jogo: tudo que muda com o tempo, com o mercado e com as finanças.
 import type { Relations } from './market/relations';
+import type { CalendarEvent } from './calendar';
 import type { EventResult, SeriesLogEntry } from './ranking';
 import type { Player, Team } from './types';
 
@@ -76,7 +77,7 @@ export interface SponsorOffer extends SponsorContract {
 
 // ---------- Caixa de entrada ----------
 
-export type InboxKind = 'aumento' | 'conversa' | 'saida';
+export type InboxKind = 'aumento' | 'conversa' | 'saida' | 'convite';
 
 export interface InboxItem {
   id: string;
@@ -87,6 +88,8 @@ export interface InboxItem {
   expires: string;
   /** Pedido de aumento: salário pedido. */
   askedSalary?: number;
+  /** Convite: evento do calendário. */
+  eventId?: string;
 }
 
 export interface World {
@@ -106,6 +109,8 @@ export interface World {
   results: EventResult[];
   /** Séries jogadas (forma no ranking). */
   seriesLog: SeriesLogEntry[];
+  /** Eventos do ano atual e do próximo. */
+  calendar: CalendarEvent[];
 }
 
 /** Mensagem curta para o manager (vira notícia de verdade no passo 13). */

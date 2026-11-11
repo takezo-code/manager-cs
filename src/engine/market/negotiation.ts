@@ -1,5 +1,6 @@
 // Negociação em duas etapas (dupla aprovação): primeiro o time aceita a proposta, depois o jogador aceita ir.
 // Cada etapa tem até 3 rodadas com contraproposta. As decisões são determinísticas (sem sorte).
+import { windowOpen } from '../calendar';
 import { MARKET } from '../config';
 import { endOfMonthAfter } from '../date';
 import { baseOvr } from '../form';
@@ -140,6 +141,8 @@ export function startNegotiation(
     if (kind !== 'trade' && buyer.playerIds.length >= MARKET.squadMax) return { ok: false, error: `Seu elenco já tem ${MARKET.squadMax} jogadores.` };
   }
   if (kind === 'free' && p.teamId) return { ok: false, error: 'O jogador tem contrato com outro time.' };
+  if ((kind === 'transfer' || kind === 'clause' || kind === 'trade') && !windowOpen(w.date))
+    return { ok: false, error: 'Mercado fechado: fora da janela de transferências (1–20 jan e 22 jun–10 ago). Só agentes livres e renovações.' };
   if (kind === 'trade') {
     if (!p.teamId) return { ok: false, error: 'Agente livre não entra em troca.' };
     if (!tradePlayerId || w.players[tradePlayerId].teamId !== buyerId) return { ok: false, error: 'Escolha um jogador seu para a troca.' };

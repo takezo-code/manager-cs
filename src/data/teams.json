@@ -43,7 +43,11 @@
       "pr",
       "xelex"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "furia",
@@ -89,7 +93,11 @@
       "kscerato",
       "molodoy"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "vitality",
@@ -135,7 +143,11 @@
       "flamez",
       "mezii"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "spirit",
@@ -181,7 +193,11 @@
       "zont1x",
       "donk"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "aurora",
@@ -227,7 +243,11 @@
       "kyxsan",
       "wicadia"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "falcons",
@@ -273,7 +293,11 @@
       "m0nesy",
       "kyousuke"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "betboom",
@@ -319,7 +343,11 @@
       "d1ledez",
       "magnojez"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "navi",
@@ -365,7 +393,11 @@
       "w0nderful",
       "makazze"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "fut",
@@ -411,7 +443,11 @@
       "krabeni",
       "dziugss"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "mongolz",
@@ -457,7 +493,11 @@
       "910",
       "cobrazera"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "nemiga",
@@ -503,7 +543,11 @@
       "khan",
       "syph0"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "g2",
@@ -549,7 +593,11 @@
       "heavygod",
       "matys"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "parivision",
@@ -595,7 +643,11 @@
       "xielo",
       "zweih"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "legacy",
@@ -641,7 +693,11 @@
       "try",
       "legacy-standin"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "1win",
@@ -687,7 +743,11 @@
       "fame",
       "artfr0st"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "mibr",
@@ -733,7 +793,11 @@
       "venomzera",
       "tomaszin"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "liquid",
@@ -779,7 +843,11 @@
       "jt",
       "jorko"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "faze",
@@ -825,7 +893,11 @@
       "jcobbb",
       "jboen"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "9z",
@@ -871,7 +943,11 @@
       "huasopeek",
       "9z-standin"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "astralis",
@@ -917,7 +993,11 @@
       "ryu",
       "cmtry"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "b8",
@@ -963,7 +1043,11 @@
       "esenthial",
       "s1zzi"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "nip",
@@ -1009,7 +1093,11 @@
       "adamb",
       "xkacpersky"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "eternalfire",
@@ -1055,7 +1143,11 @@
       "kvem",
       "jottaaa"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "m80",
@@ -1101,7 +1193,11 @@
       "jba",
       "lake"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "heroic",
@@ -1147,7 +1243,11 @@
       "martinezsa",
       "chr1zn"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "gamerlegion",
@@ -1193,7 +1293,11 @@
       "fl4mus",
       "hypex"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "fnatic",
@@ -1239,7 +1343,11 @@
       "cairne",
       "mazay"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "envy",
@@ -1285,7 +1393,11 @@
       "kursy",
       "graviti"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "magic",
@@ -1331,7 +1443,11 @@
       "aw",
       "tenzy"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "tyloo",
@@ -1377,7 +1493,11 @@
       "moseyuh",
       "zero"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "hotu",
@@ -1423,7 +1543,11 @@
       "dwushka",
       "frontales"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   },
   {
     "id": "big",
@@ -1469,6 +1593,10 @@
       "blamef",
       "gr1ks"
     ],
-    "rankHistory": []
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    }
   }
 ]

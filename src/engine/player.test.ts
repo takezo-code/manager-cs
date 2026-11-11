@@ -33,6 +33,7 @@ const make = (over: Partial<Player> = {}): Player => ({
   mood: { ...DEFAULT_MOOD },
   awards: [],
   mvpUntil: null,
+  trainingGains: {},
   ...over,
 });
 

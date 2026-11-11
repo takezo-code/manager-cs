@@ -63,3 +63,12 @@ export const windowOpen = (date: string) => inRange(date, CALENDAR.mainWindow) |
 
 /** Férias de fim de ano: sem campeonatos. */
 export const onVacation = (date: string) => inRange(date, CALENDAR.vacation);
+
+/** Dois eventos com datas que se cruzam. */
+export const overlaps = (a: Pick<CalendarEvent, 'startDate' | 'endDate'>, b: Pick<CalendarEvent, 'startDate' | 'endDate'>) =>
+  a.startDate <= b.endDate && b.startDate <= a.endDate;
+
+/** Time jogando um evento agora (ainda não eliminado). */
+export function teamBusy(calendar: CalendarEvent[], teamId: string): boolean {
+  return calendar.some((e) => e.status === 'em_andamento' && !!e.tournament?.participants.includes(teamId) && !e.tournament.placements[teamId]);
+}

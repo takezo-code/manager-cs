@@ -20,6 +20,7 @@ function sampleState(): SavedState {
     inbox: [],
     results: [],
     seriesLog: [],
+    calendar: [],
     teams,
     players: out.players,
     relations: {},

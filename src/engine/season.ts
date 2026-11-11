@@ -1,6 +1,7 @@
-// Passagem do tempo: um dia de cada vez. No dia 1º fecha o mês (finanças, satisfação, pedidos).
+// Passagem do tempo: um dia de cada vez (calendário, treino, fechamento do mês, ranking e mercado).
 import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_TEAMS } from '../data';
-import { START_DATE, addDays } from './date';
+import { buildYear, teamBusy } from './calendar';
+import { START_DATE, addDays, daysBetween } from './date';
 import { monthlyFinance } from './finance/monthly';
 import { recoverRest } from './form';
 import { initialSponsors } from './finance/sponsors';
@@ -8,7 +9,12 @@ import { aiMarketDay } from './market/ai';
 import { relationsFromList } from './market/relations';
 import { expireInbox, monthlyRequests } from './morale/conversations';
 import { monthlySatisfaction } from './morale/satisfaction';
+import { applyRanking } from './ranking';
 import { createRng, hashString, type Rng } from './rng';
+import { issueInvites, playEvents, runQualifiers, startEvents } from './schedule';
+import { expireMvp } from './tournament/awards';
+import { trainDay } from './training';
+import type { MatchResult } from './types';
 import type { World, WorldEvent } from './world';
 
 /** Mundo de um jogo novo: dados dos JSONs + patrocínios iniciais. */
@@ -29,16 +35,19 @@ export function createWorld(managerTeamId: string, seed = 1): World {
     inbox: [],
     results: [],
     seriesLog: [],
+    // Eventos de 2026 que ainda não começaram + o ano seguinte.
+    calendar: [...buildYear(2026).filter((e) => e.startDate > START_DATE), ...buildYear(2027)],
   };
 }
 
 export const isFirstOfMonth = (date: string) => date.endsWith('-01');
+const isMonday = (date: string) => new Date(`${date}T00:00:00Z`).getUTCDay() === 1;
 
 /**
- * Avança um dia. `marketOpen` = sem campeonato em andamento: a IA do mercado roda, os jogadores
- * descansam e rescisões por atraso podem acontecer.
+ * Avança um dia: calendário (convites, qualificatórias, eventos), treino/descanso de quem está livre,
+ * fechamento do mês, ranking às segundas e mercado da IA (que respeita as janelas).
  */
-export function dailyTick(world: World, opts: { marketOpen: boolean; rng?: Rng }): { world: World; events: WorldEvent[] } {
+export function dailyTick(world: World, opts: { rng?: Rng } = {}): { world: World; events: WorldEvent[]; results: Record<string, MatchResult> } {
   let w: World = { ...world, date: addDays(world.date, 1) };
   const rng = opts.rng ?? createRng(hashString(`${w.date}:${w.managerTeamId}`));
   const events: WorldEvent[] = [];
@@ -47,17 +56,38 @@ export function dailyTick(world: World, opts: { marketOpen: boolean; rng?: Rng }
     events.push(...out.events);
   };
 
+  // Calendário do ano seguinte a partir de novembro (os convites de janeiro saem em dezembro).
+  const year = Number(w.date.slice(0, 4));
+  if (w.date.slice(5, 7) >= '11' && !w.calendar.some((e) => e.startDate.startsWith(String(year + 1))))
+    w = { ...w, calendar: [...w.calendar, ...buildYear(year + 1)] };
+  w = { ...w, players: Object.fromEntries(Object.entries(w.players).map(([id, p]) => [id, expireMvp(p, w.date)])) };
+
+  add(issueInvites(w));
+  add(expireInbox(w));
+  add(runQualifiers(w));
+  add(startEvents(w));
+  const played = playEvents(w);
+  add(played);
+
+  // Dias livres: treino/descanso para quem não está em evento; agentes livres descansam.
+  for (const t of Object.values(w.teams)) if (!teamBusy(w.calendar, t.id)) w = trainDay(w, t.id);
+  w = { ...w, players: Object.fromEntries(Object.entries(w.players).map(([id, p]) => [id, p.teamId ? p : recoverRest(p)])) };
+
   if (isFirstOfMonth(w.date)) {
-    add(monthlyFinance(w, rng, { allowDepartures: opts.marketOpen }));
+    add(monthlyFinance(w, rng));
     w = monthlySatisfaction(w);
     add(monthlyRequests(w));
   }
-  add(expireInbox(w));
+  if (isMonday(w.date)) w = applyRanking(w);
   w = { ...w, sponsorOffers: w.sponsorOffers.filter((o) => o.expires >= w.date) };
-  if (opts.marketOpen) {
-    // Sem campeonato, o dia é de descanso: todo mundo recupera energia.
-    w = { ...w, players: Object.fromEntries(Object.entries(w.players).map(([id, p]) => [id, recoverRest(p)])) };
-    add(aiMarketDay(w, w.managerTeamId, rng));
-  }
-  return { world: w, events };
+  add(aiMarketDay(w, w.managerTeamId, rng));
+
+  // Limpeza do histórico.
+  w = {
+    ...w,
+    seriesLog: w.seriesLog.filter((x) => daysBetween(x.date, w.date) <= 70),
+    results: w.results.filter((x) => daysBetween(x.date, w.date) <= 400),
+    calendar: w.calendar.filter((e) => daysBetween(e.endDate, w.date) <= 400),
+  };
+  return { world: w, events, results: played.results };
 }
