@@ -34,6 +34,7 @@ const make = (over: Partial<Player> = {}): Player => ({
   awards: [],
   mvpUntil: null,
   trainingGains: {},
+  growth: {},
   ...over,
 });
 

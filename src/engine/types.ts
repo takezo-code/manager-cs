@@ -113,6 +113,8 @@ export interface Player {
   mvpUntil: string | null;
   /** Ganho acumulado de treino por atributo (fracionado; teto em TRAINING.maxGain). */
   trainingGains: Partial<Attributes>;
+  /** Crescimento/queda por idade acumulado (fracionado). */
+  growth: Partial<Attributes>;
 }
 
 export type TrainingFocus = 'mira' | 'utilidade' | 'taticas' | MapId;

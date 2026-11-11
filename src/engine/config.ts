@@ -558,3 +558,22 @@ export const TRAINING = {
   /** Satisfação por dia de descanso. */
   restSatisfaction: 0.2,
 };
+
+// ---------- Desenvolvimento por idade ----------
+
+export const DEVELOPMENT = {
+  /** Variação mensal de OVR por idade (até `maxAge`). */
+  curve: [
+    { maxAge: 18, perMonth: 0.6 },
+    { maxAge: 21, perMonth: 0.4 },
+    { maxAge: 26, perMonth: 0 },
+    { maxAge: 29, perMonth: -0.1 },
+    { maxAge: 32, perMonth: -0.25 },
+    { maxAge: 99, perMonth: -0.4 },
+  ],
+  /** Piso de cada atributo na queda por idade. */
+  minAttr: 40,
+  /** Crescimento extra por mapa jogado (até 21 anos), na liga de base. */
+  perMapYoung: 0.15,
+  youngAge: 21,
+};
