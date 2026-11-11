@@ -52,6 +52,14 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 - **Sobreposição:** você escolhe o convite; a IA fica com o de maior premiação.
 - Detalhes do calendário, ranking, MVP e treino: `docs/superpowers/specs/2026-11-11-passo-9-calendario-design.md`.
 
+### Passo 10 (11/11/2026)
+
+- **Liga de base simulada** para as academies (MD1 toda segunda, fevereiro a novembro).
+- **Idade vale para todos:** jovens crescem rumo ao POT, auge de 22 a 26, queda depois.
+- **IA com academy simples:** 5 jovens por time, promove os bons aos 20 e repõe.
+- **Empréstimo** fica para depois, junto com o tier 2.
+- Detalhes: `docs/superpowers/specs/2026-11-11-passo-10-academy-design.md`.
+
 ## Criado por mim (revisar se quiser)
 
 | Item | Valor |
@@ -103,6 +111,12 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 | Convite sem resposta | Até o dia da qualificatória: aceite automático se não houver conflito de datas; depois disso, o convite fecha |
 | Energia nos eventos | Quem entra num evento ganha +30 de energia; nos dias livres, treino gasta 2, descanso recupera 2, dividido fica igual |
 | Resultados guardados | Os últimos 40 jogos completos do seu time (os outros só até o dia seguinte) |
+| Academy | 16 a 19 anos, até 6 jovens; aos 20 sai como agente livre (aviso em dezembro). Contrato de 24 meses, US$ 1–3 mil |
+| Crescimento por idade | OVR por mês: até 18 +0,6; até 21 +0,4; até 26 0; até 29 −0,1; até 32 −0,25; depois −0,4. Para no POT; piso de 40 por atributo |
+| Olheiro | Faixa do POT ±12/9/6/4/2 por nível, erro 25/15/10/5/0%; 8 a 20 amadores à vista; alertas a partir do nível 4. Preços: US$ 100, 200, 400 e 800 mil |
+| GC/FACEIT | Banco de 40 amadores, 25% trocados por mês; luvas de US$ 5 a 20 mil. Joias escondidas (POT 85+, nível baixo) só com olheiro 4+ |
+| Liga de base | Vitória pela força média dos 5 melhores (curva logística, escala 5). Menos de 5 jovens = W.O.; cada mapa dá +0,15 de crescimento até 21 anos |
+| Cor do lado TR | Token renomeado de `t` para `tr`: `border-t` herdava a cor dourada em todas as tabelas |
 | Cor da carta evoluída | A cor da evolução (azul, vermelha ou rosa) substitui a cor da faixa; a faixa continua num selo |
 
 ## Dados
