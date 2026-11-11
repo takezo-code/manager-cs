@@ -4,6 +4,7 @@ import { type CalendarEvent, overlaps } from './calendar';
 import { CALENDAR } from './config';
 import { addDays, daysBetween } from './date';
 import { awardTournament, placeNumber } from './finance/prizes';
+import { recoverBetweenEvents } from './form';
 import { simulateMatch } from './match';
 import { eventWeightOf, placeFactorOf } from './ranking';
 import { hashString, type Rng } from './rng';
@@ -81,18 +82,26 @@ export function issueInvites(world: World): Out {
         events.push({ kind: 'info', text: `Convite para ${ev.name} (${ev.city}), de ${ev.startDate.slice(8)}/${ev.startDate.slice(5, 7)}.` });
         continue;
       }
-      // IA: aceita se não tiver outro evento no mesmo período.
-      ev = conflictFor(setEvent(w, ev), teamId, ev) ? { ...ev, declined: [...ev.declined, teamId] } : { ...ev, accepted: [...ev.accepted, teamId] };
+      // IA: aceita se estiver livre; se já tiver outro evento nas mesmas datas, fica com o de maior premiação
+      // (desde que o outro ainda não tenha começado).
+      const clash = conflictFor(setEvent(w, ev), teamId, ev);
+      if (!clash) ev = { ...ev, accepted: [...ev.accepted, teamId] };
+      else if (clash.status === 'convites' && clash.accepted.includes(teamId) && ev.prizePool > clash.prizePool) {
+        w = setEvent(w, { ...clash, accepted: clash.accepted.filter((id) => id !== teamId), declined: [...clash.declined, teamId] });
+        ev = { ...ev, accepted: [...ev.accepted, teamId] };
+      } else ev = { ...ev, declined: [...ev.declined, teamId] };
     }
     w = setEvent(w, ev);
   }
   return { world: w, events };
 }
 
-export function acceptInvite(w: World, eventId: string): { ok: true; world: World } | { ok: false; error: string } {
+export function acceptInvite(w: World, eventId: string, opts: { auto?: boolean } = {}): { ok: true; world: World } | { ok: false; error: string } {
   const ev = w.calendar.find((e) => e.id === eventId);
   const me = w.managerTeamId;
   if (!ev || ev.status !== 'convites' || !ev.invited.includes(me)) return { ok: false, error: 'Esse convite não está mais disponível.' };
+  if (!opts.auto && w.date >= addDays(ev.startDate, -CALENDAR.qualifierDaysBefore))
+    return { ok: false, error: 'O prazo para responder acabou: as vagas restantes já foram para a qualificatória.' };
   if (w.teams[me].playerIds.length < 5) return { ok: false, error: 'Seu elenco precisa de 5 jogadores para aceitar.' };
   const clash = conflictFor(w, me, ev);
   if (clash) return { ok: false, error: `Seu time já vai jogar ${clash.name} nessas datas.` };
@@ -137,7 +146,7 @@ export function runQualifiers(world: World): Out {
     let ev = ev0;
     // Convite seu sem resposta: aceita se não houver conflito.
     if (ev.invited.includes(me) && !ev.accepted.includes(me) && !ev.declined.includes(me)) {
-      const r = acceptInvite(w, ev.id);
+      const r = acceptInvite(w, ev.id, { auto: true });
       if (r.ok) {
         w = r.world;
         events.push({ kind: 'info', text: `Sem resposta: seu time foi confirmado em ${ev.name}.` });
@@ -193,7 +202,10 @@ export function startEvents(world: World): Out {
       }
     const participants = ranked(w).map((t) => t.id).filter((id) => ids.has(id)).slice(0, ev.teams);
     const tournament = createTournament({ id: ev.id, name: ev.name, format: ev.format, options: ev.options, prizePool: ev.prizePool }, participants, hashString(ev.id));
-    w = setEvent(w, { ...ev, status: 'em_andamento', tournament });
+    // Quem entra chega descansado (+30 de energia), e o convite sai da caixa de entrada.
+    const players = { ...w.players };
+    for (const id of participants) for (const pid of w.teams[id].playerIds) players[pid] = recoverBetweenEvents(players[pid]);
+    w = { ...setEvent(w, { ...ev, status: 'em_andamento', tournament }), players, inbox: w.inbox.filter((i) => i.eventId !== ev.id) };
     if (participants.includes(w.managerTeamId)) events.push({ kind: 'info', text: `Começou ${ev.name}, em ${ev.city}.` });
   }
   return { world: w, events };

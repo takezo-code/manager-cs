@@ -33,3 +33,6 @@ export const tierColor = (tier: CardTier) => `var(--color-${tier})`;
 
 export const ratingColor = (r: number) =>
   r >= 1.15 ? 'text-win' : r >= 1.0 ? 'text-ink' : r >= 0.9 ? 'text-muted' : 'text-loss';
+
+/** Satisfação guarda frações (descanso diário); na tela, inteiro. */
+export const fmtSatisfaction = (v: number) => String(Math.round(v));

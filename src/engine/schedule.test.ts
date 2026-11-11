@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { buildYear } from './calendar';
 import { addDays } from './date';
-import { startNegotiation } from './market/negotiation';
+import { dealAllowed, startNegotiation } from './market/negotiation';
 import { aiMarketDay } from './market/ai';
 import { createRng } from './rng';
-import { acceptInvite, issueInvites } from './schedule';
+import { acceptInvite, declineInvite, issueInvites, startEvents } from './schedule';
 import { createWorld, dailyTick } from './season';
 import type { World } from './world';
 
@@ -96,5 +96,53 @@ describe('Janelas de transferência', () => {
       w = aiMarketDay(w, 'furia', createRng(d)).world;
     }
     expect(w.transferLog.filter((e) => e.kind === 'transferencia' || e.kind === 'multa')).toHaveLength(0);
+  });
+});
+
+describe('Correções do review do passo 9', () => {
+  it('quem entra num evento chega descansado (+30 de energia)', () => {
+    let w = withCalendar(createWorld('furia'), '2027-04-15', ['iem-maio']);
+    w = { ...w, players: { ...w.players, fallen: { ...w.players.fallen, energy: 40 } } };
+    for (let i = 0; i < 30 && w.calendar[0].status !== 'em_andamento'; i++) w = dailyTick(w).world;
+    expect(w.calendar[0].tournament!.participants).toContain('furia');
+    // 40 + 30 ao entrar; no mesmo dia já joga (−3 por mapa, +3 de recuperação). Sem o +30, ficaria em ~34.
+    expect(w.players.fallen.energy).toBeGreaterThanOrEqual(60);
+  });
+
+  it('depois do dia da qualificatória não dá mais para aceitar o convite', () => {
+    let w = withCalendar(createWorld('furia'), '2027-04-20', ['iem-maio']);
+    w = issueInvites(w).world;
+    w = declineInvite(w, w.calendar[0].id);
+    w = { ...w, date: '2027-05-08' };
+    const r = acceptInvite(w, w.calendar[0].id);
+    expect(r.ok).toBe(false);
+  });
+
+  it('quando o evento começa, o convite some da caixa de entrada', () => {
+    let w = withCalendar(createWorld('furia'), '2027-04-20', ['iem-maio']);
+    w = issueInvites(w).world;
+    w = { ...w, date: '2027-05-11' };
+    w = startEvents(w).world;
+    expect(w.inbox.some((i) => i.kind === 'convite')).toBe(false);
+  });
+
+  it('em sobreposição, a IA troca para o evento de maior premiação', () => {
+    let w = withCalendar(createWorld('furia'), '2027-04-18', ['pgl-maio', 'iem-maio']);
+    // Atlanta (US$ 1 mi) convida primeiro; Astana (US$ 1,6 mi) depois.
+    w = { ...w, calendar: w.calendar.map((e) => (e.templateId === 'pgl-maio' ? { ...e, startDate: '2027-05-12' } : { ...e, startDate: '2027-05-08' })) };
+    w = issueInvites(w).world;
+    const atlanta = w.calendar.find((e) => e.templateId === 'iem-maio')!;
+    expect(atlanta.accepted).toContain('vitality');
+    w = issueInvites({ ...w, date: '2027-04-21' }).world;
+    const astana = w.calendar.find((e) => e.templateId === 'pgl-maio')!;
+    expect(astana.accepted).toContain('vitality');
+    expect(w.calendar.find((e) => e.templateId === 'iem-maio')!.accepted).not.toContain('vitality');
+  });
+
+  it('agente livre e renovação valem fora da janela; transferência não', () => {
+    expect(dealAllowed('free', '2027-03-01')).toBe(true);
+    expect(dealAllowed('renewal', '2027-03-01')).toBe(true);
+    expect(dealAllowed('transfer', '2027-03-01')).toBe(false);
+    expect(dealAllowed('transfer', '2027-01-05')).toBe(true);
   });
 });

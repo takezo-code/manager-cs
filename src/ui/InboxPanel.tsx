@@ -50,7 +50,7 @@ function Item({ item }: { item: InboxItem }) {
         <span className="text-xs text-muted">Responder até {formatDate(item.expires)}</span>
       </div>
       <p className="mt-1 text-sm text-muted">
-        Satisfação {p.satisfaction} ({BAND_LABEL[bandOf(p.satisfaction)]}) · salário {money(p.contract?.salary ?? 0)}/mês · referência {money(fairSalary(p))}
+        Satisfação {Math.round(p.satisfaction)} ({BAND_LABEL[bandOf(p.satisfaction)]}) · salário {money(p.contract?.salary ?? 0)}/mês · referência {money(fairSalary(p))}
       </p>
 
       {item.kind === 'aumento' && (

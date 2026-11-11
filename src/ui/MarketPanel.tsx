@@ -113,7 +113,7 @@ function PlayerDetail({ p, onDeal }: { p: Player; onDeal: (kind: DealKind, trade
               </div>
             </>
           ) : (
-            <button type="button" disabled={!open} onClick={() => onDeal('free')} className={`${btn} bg-accent text-black hover:brightness-110`}>
+            <button type="button" onClick={() => onDeal('free')} className={`${btn} bg-accent text-black hover:brightness-110`}>
               Contratar
             </button>
           )}

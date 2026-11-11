@@ -125,6 +125,9 @@ function salaryForClause(base: number, clause: number, value: number): number {
 
 // ---------- Fluxo ----------
 
+/** Fora da janela de transferências só valem agentes livres e renovações. */
+export const dealAllowed = (kind: DealKind, date: string) => kind === 'free' || kind === 'renewal' || windowOpen(date);
+
 export function startNegotiation(
   w: World,
   kind: DealKind,
@@ -141,7 +144,7 @@ export function startNegotiation(
     if (kind !== 'trade' && buyer.playerIds.length >= MARKET.squadMax) return { ok: false, error: `Seu elenco já tem ${MARKET.squadMax} jogadores.` };
   }
   if (kind === 'free' && p.teamId) return { ok: false, error: 'O jogador tem contrato com outro time.' };
-  if ((kind === 'transfer' || kind === 'clause' || kind === 'trade') && !windowOpen(w.date))
+  if (!dealAllowed(kind, w.date))
     return { ok: false, error: 'Mercado fechado: fora da janela de transferências (1–20 jan e 22 jun–10 ago). Só agentes livres e renovações.' };
   if (kind === 'trade') {
     if (!p.teamId) return { ok: false, error: 'Agente livre não entra em troca.' };

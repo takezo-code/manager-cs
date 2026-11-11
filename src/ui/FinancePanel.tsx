@@ -5,7 +5,7 @@ import { freeSlots } from '../engine/finance/sponsors';
 import { BAND_LABEL, bandOf, fairSalary } from '../engine/morale/satisfaction';
 import { LEDGER_LABEL, type LedgerCategory } from '../engine/world';
 import { useGame, useWorld } from '../store/game';
-import { ROLE_LABEL, money } from './format';
+import { ROLE_LABEL, fmtSatisfaction, money } from './format';
 
 const signed = (v: number) => `${v >= 0 ? '+' : '−'} ${money(Math.abs(v))}`;
 
@@ -225,7 +225,7 @@ export function MoodTag({ band, value }: { band: ReturnType<typeof bandOf>; valu
   const color = band === 'satisfeito' ? 'text-win' : band === 'incomodado' ? 'text-accent' : 'text-loss';
   return (
     <span className={`text-sm font-semibold ${color}`}>
-      {BAND_LABEL[band]} <span className="font-normal text-muted tabular-nums">({value})</span>
+      {BAND_LABEL[band]} <span className="font-normal text-muted tabular-nums">({fmtSatisfaction(value)})</span>
     </span>
   );
 }

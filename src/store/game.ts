@@ -155,6 +155,12 @@ export function savedPart(s: GameState): SavedState | null {
   };
 }
 
+/** Guarda só os últimos jogos do seu time (os MatchResult completos pesam no save). */
+export function trimMyResults(results: Record<string, MatchResult>, me: string, keep = 40): Record<string, MatchResult> {
+  const mine = Object.entries(results).filter(([, r]) => r.teamAId === me || r.teamBId === me);
+  return Object.fromEntries(mine.slice(-keep));
+}
+
 /** Campos do estado que vão para o save. */
 const SAVED_KEYS = [
   'date', 'teams', 'players', 'relations', 'offers', 'transferLog', 'ledger', 'sponsorOffers', 'inbox', 'results', 'seriesLog', 'calendar', 'events',
@@ -274,7 +280,7 @@ export const useGame = create<GameState>((set, get) => {
       set({
         ...fromWorld(w),
         events: [...events, ...s.events].slice(0, MAX_EVENTS),
-        seriesResults: { ...kept, ...lastDay },
+        seriesResults: { ...trimMyResults(kept, me), ...lastDay },
         lastDayIds: Object.keys(lastDay),
       });
     },

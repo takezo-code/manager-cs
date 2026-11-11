@@ -24,3 +24,15 @@ describe('Autosave (passo 9)', () => {
     expect('tournament' in useGame.getState()).toBe(false);
   });
 });
+
+describe('Resultados guardados', () => {
+  it('guarda só os últimos jogos do seu time', async () => {
+    const { trimMyResults } = await import('./game');
+    const fake = (i: number) => [`s${i}`, { teamAId: 'furia', teamBId: 'x', seed: i }] as const;
+    const many = Object.fromEntries(Array.from({ length: 100 }, (_, i) => fake(i)));
+    const kept = trimMyResults(many as never, 'furia', 40);
+    expect(Object.keys(kept)).toHaveLength(40);
+    expect(kept.s99).toBeTruthy();
+    expect(kept.s0).toBeUndefined();
+  });
+});
