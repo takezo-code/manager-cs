@@ -617,3 +617,24 @@ export const SCOUT = {
   starPotential: 85,
   bigGap: 15,
 };
+
+// ---------- Amadores (GC/FACEIT) ----------
+
+export const AMATEURS = {
+  poolSize: 40,
+  /** Fração do banco trocada todo mês. */
+  monthlyTurnover: 0.25,
+  levelMin: 45,
+  levelMax: 68,
+  /** POT = OVR + entre 5 e 30, até 95. */
+  potentialGapMin: 5,
+  potentialGapMax: 30,
+  /** Luvas em US$ (5 a 20 mil) e salário mensal (1 a 3 mil). */
+  feeMin: 5_000,
+  feeMax: 20_000,
+  /** Joia escondida: nível FACEIT até 4 (GC até 8) com POT 85+. */
+  gemMaxFaceit: 4,
+  gemMaxGc: 8,
+  gemPotential: 85,
+  countries: ['BR', 'AR', 'US', 'RU', 'UA', 'KZ', 'PL', 'DK', 'SE', 'FR', 'DE', 'TR', 'MN', 'CN', 'FI', 'ES', 'PT', 'CZ'],
+};

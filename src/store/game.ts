@@ -17,6 +17,7 @@ import { createWorld, dailyTick } from '../engine/season';
 import { validStarters } from '../engine/squad';
 import { windowOpen } from '../engine/calendar';
 import { acceptInvite, declineInvite } from '../engine/schedule';
+import type { Amateur } from '../engine/amateurs';
 import type { CalendarEvent } from '../engine/calendar';
 import type { EventResult, SeriesLogEntry } from '../engine/ranking';
 import type { MatchFormat, MatchResult, MatchStage, Player, SkillId, Team, TrainingPlan } from '../engine/types';
@@ -55,6 +56,7 @@ export interface GameState {
   results: EventResult[];
   seriesLog: SeriesLogEntry[];
   calendar: CalendarEvent[];
+  amateurs: Amateur[];
   /** Avisos (os mais novos primeiro). */
   events: GameEvent[];
 
@@ -107,6 +109,7 @@ type WorldFields =
   | 'results'
   | 'seriesLog'
   | 'calendar'
+  | 'amateurs'
   | 'myTeamId';
 
 export const worldOf = (s: Pick<GameState, WorldFields>): World => ({
@@ -123,6 +126,7 @@ export const worldOf = (s: Pick<GameState, WorldFields>): World => ({
   results: s.results,
   seriesLog: s.seriesLog,
   calendar: s.calendar,
+  amateurs: s.amateurs,
 });
 
 /** Campos do mundo para gravar de volta no estado. */
@@ -140,6 +144,7 @@ function fromWorld(w: World) {
     results: w.results,
     seriesLog: w.seriesLog,
     calendar: w.calendar,
+    amateurs: w.amateurs,
   };
 }
 
@@ -163,7 +168,7 @@ export function trimMyResults(results: Record<string, MatchResult>, me: string, 
 
 /** Campos do estado que vão para o save. */
 const SAVED_KEYS = [
-  'date', 'teams', 'players', 'relations', 'offers', 'transferLog', 'ledger', 'sponsorOffers', 'inbox', 'results', 'seriesLog', 'calendar', 'events',
+  'date', 'teams', 'players', 'relations', 'offers', 'transferLog', 'ledger', 'sponsorOffers', 'inbox', 'results', 'seriesLog', 'calendar', 'amateurs', 'events',
   'myTeamId', 'seriesResults', 'lastDayIds', 'activeSlot',
 ] as const satisfies ReadonlyArray<keyof GameState>;
 
@@ -395,8 +400,9 @@ export function useWorld(): World {
   const results = useGame((s) => s.results);
   const seriesLog = useGame((s) => s.seriesLog);
   const calendar = useGame((s) => s.calendar);
+  const amateurs = useGame((s) => s.amateurs);
   return useMemo(
-    () => worldOf({ date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar }),
-    [date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar],
+    () => worldOf({ date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar, amateurs }),
+    [date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar, amateurs],
   );
 }

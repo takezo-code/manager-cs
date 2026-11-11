@@ -1,5 +1,6 @@
 // "Mundo" do jogo: tudo que muda com o tempo, com o mercado e com as finanças.
 import type { Relations } from './market/relations';
+import type { Amateur } from './amateurs';
 import type { CalendarEvent } from './calendar';
 import type { EventResult, SeriesLogEntry } from './ranking';
 import type { Player, Team } from './types';
@@ -113,6 +114,8 @@ export interface World {
   seriesLog: SeriesLogEntry[];
   /** Eventos do ano atual e do próximo. */
   calendar: CalendarEvent[];
+  /** Banco de amadores da GC/FACEIT. */
+  amateurs: Amateur[];
 }
 
 /** Mensagem curta para o manager (vira notícia de verdade no passo 13). */

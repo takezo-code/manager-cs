@@ -2,7 +2,8 @@
 import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_TEAMS } from '../data';
 import { addToAcademy, generateYouth } from './academy';
 import { buildYear, teamBusy } from './calendar';
-import { ACADEMY } from './config';
+import { generateAmateurs } from './amateurs';
+import { ACADEMY, AMATEURS } from './config';
 import { START_DATE, addDays, daysBetween } from './date';
 import { monthlyFinance } from './finance/monthly';
 import { recoverRest } from './form';
@@ -39,7 +40,9 @@ export function createWorld(managerTeamId: string, seed = 1): World {
     seriesLog: [],
     // Eventos de 2026 que ainda não começaram + o ano seguinte.
     calendar: [...buildYear(2026).filter((e) => e.startDate > START_DATE), ...buildYear(2027)],
+    amateurs: [],
   };
+  w = { ...w, amateurs: generateAmateurs(rng, AMATEURS.poolSize, START_DATE) };
   // Academy inicial de cada time.
   for (const id of Object.keys(w.teams)) w = addToAcademy(w, id, generateYouth(w, rng, id, ACADEMY.aiSize));
   return w;
