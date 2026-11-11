@@ -1,6 +1,8 @@
 // Passagem do tempo: um dia de cada vez (calendário, treino, fechamento do mês, ranking e mercado).
 import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_TEAMS } from '../data';
+import { addToAcademy, generateYouth } from './academy';
 import { buildYear, teamBusy } from './calendar';
+import { ACADEMY } from './config';
 import { START_DATE, addDays, daysBetween } from './date';
 import { monthlyFinance } from './finance/monthly';
 import { recoverRest } from './form';
@@ -22,7 +24,7 @@ export function createWorld(managerTeamId: string, seed = 1): World {
   const rng = createRng(hashString(`mundo:${seed}`));
   const teams = Object.fromEntries(INITIAL_TEAMS.map((t) => [t.id, structuredClone(t)]));
   for (const t of Object.values(teams)) t.sponsors = initialSponsors(t, START_DATE, rng);
-  return {
+  let w: World = {
     date: START_DATE,
     managerTeamId,
     teams,
@@ -38,6 +40,9 @@ export function createWorld(managerTeamId: string, seed = 1): World {
     // Eventos de 2026 que ainda não começaram + o ano seguinte.
     calendar: [...buildYear(2026).filter((e) => e.startDate > START_DATE), ...buildYear(2027)],
   };
+  // Academy inicial de cada time.
+  for (const id of Object.keys(w.teams)) w = addToAcademy(w, id, generateYouth(w, rng, id, ACADEMY.aiSize));
+  return w;
 }
 
 export const isFirstOfMonth = (date: string) => date.endsWith('-01');

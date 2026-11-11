@@ -10,7 +10,8 @@ import { freeSlots, makeOffer, toContract } from './sponsors';
 import { fmtMoney } from '../format';
 
 
-export const payroll = (w: World, team: Team) => team.playerIds.reduce((s, id) => s + (w.players[id].contract?.salary ?? 0), 0);
+export const payroll = (w: World, team: Team) =>
+  [...team.playerIds, ...(team.academyIds ?? [])].reduce((s, id) => s + (w.players[id]?.contract?.salary ?? 0), 0);
 
 export const sponsorIncome = (team: Team, date: string) =>
   team.sponsors.filter((s) => s.endDate >= date).reduce((s, x) => s + x.monthly, 0);

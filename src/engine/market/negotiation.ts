@@ -144,6 +144,7 @@ export function startNegotiation(
     if (kind !== 'trade' && buyer.playerIds.length >= MARKET.squadMax) return { ok: false, error: `Seu elenco já tem ${MARKET.squadMax} jogadores.` };
   }
   if (kind === 'free' && p.teamId) return { ok: false, error: 'O jogador tem contrato com outro time.' };
+  if (p.squad === 'academy' && p.teamId !== buyerId) return { ok: false, error: 'Jogador da academy não está à venda.' };
   if (!dealAllowed(kind, w.date))
     return { ok: false, error: 'Mercado fechado: fora da janela de transferências (1–20 jan e 22 jun–10 ago). Só agentes livres e renovações.' };
   if (kind === 'trade') {

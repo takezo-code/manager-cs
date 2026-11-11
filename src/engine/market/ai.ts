@@ -1,6 +1,7 @@
 // IA do mercado: um passo por dia. Renova e encerra contratos, completa elencos, busca reforços,
 // faz propostas pelos jogadores do seu time e às vezes paga multas.
 import { teamBusy, windowOpen } from '../calendar';
+import { promote } from '../academy';
 import { AI_MARKET, FINANCE, MARKET } from '../config';
 import { payroll } from '../finance/monthly';
 import { bandOf } from '../morale/satisfaction';
@@ -69,8 +70,14 @@ export function aiMarketDay(world: World, myTeamId: string, rng: Rng): { world: 
     }
   }
 
-  // 2) Elencos da IA com menos de 5: contratam o melhor agente livre da função que falta.
+  // 2) Elencos da IA com menos de 5: promovem da academy ou contratam o melhor agente livre da função que falta.
   for (const t of aiTeams()) {
+    while (w.teams[t.id].playerIds.length < MARKET.squadMin && (w.teams[t.id].academyIds ?? []).length) {
+      const best = [...w.teams[t.id].academyIds].sort((a, b) => playerOvr(w.players[b]) - playerOvr(w.players[a]))[0];
+      const r = promote(w, best);
+      if (!r.ok) break;
+      w = r.world;
+    }
     while (w.teams[t.id].playerIds.length < MARKET.squadMin) {
       const team = w.teams[t.id];
       const roles = new Set(team.playerIds.map((id) => w.players[id].role));
@@ -96,6 +103,7 @@ export function aiMarketDay(world: World, myTeamId: string, rng: Rng): { world: 
           p.role === weak.role &&
           p.teamId !== t.id &&
           p.teamId !== myTeamId &&
+          p.squad !== 'academy' &&
           playerOvr(p) >= weak.ovr + AI_MARKET.minUpgrade &&
           !recentlyMoved(w, p.id) &&
           !busy(p.teamId),

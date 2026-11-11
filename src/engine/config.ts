@@ -577,3 +577,24 @@ export const DEVELOPMENT = {
   perMapYoung: 0.15,
   youngAge: 21,
 };
+
+// ---------- Academy ----------
+
+export const ACADEMY = {
+  maxSize: 6,
+  /** Tamanho da academy dos times da IA. */
+  aiSize: 5,
+  minAge: 16,
+  maxAge: 19,
+  /** Nível de OVR dos jovens gerados para a academy. */
+  levelMin: 52,
+  levelMax: 66,
+  /** POT = OVR + entre 8 e 28, até 95. */
+  potentialGapMin: 8,
+  potentialGapMax: 28,
+  maxPotential: 95,
+  /** Salário mensal em centenas de US$ (1 a 3 mil). */
+  salaryMin: 10,
+  salaryMax: 30,
+  contractMonths: 24,
+};

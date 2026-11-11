@@ -134,7 +134,7 @@ function PlayersTab({ onDeal }: { onDeal: (kind: DealKind, playerId: string, tra
 
   const list = useMemo(() => {
     return Object.values(w.players)
-      .filter((p) => p.teamId !== myTeamId)
+      .filter((p) => p.teamId !== myTeamId && p.squad !== 'academy')
       .filter((p) => !q || p.nick.toLowerCase().includes(q.toLowerCase()))
       .filter((p) => !role || p.role === role)
       .filter((p) => (filter === 'livres' ? !p.teamId : filter === 'venda' ? p.transferListed : true))

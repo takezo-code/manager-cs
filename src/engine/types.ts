@@ -115,6 +115,8 @@ export interface Player {
   trainingGains: Partial<Attributes>;
   /** Crescimento/queda por idade acumulado (fracionado). */
   growth: Partial<Attributes>;
+  /** Elenco principal ou academy do time. */
+  squad: 'principal' | 'academy';
 }
 
 export type TrainingFocus = 'mira' | 'utilidade' | 'taticas' | MapId;
@@ -157,6 +159,8 @@ export interface Team {
   rankHistory: Array<{ date: string; rank: number; points: number }>;
   /** O que o time faz nos dias sem evento. */
   training: TrainingPlan;
+  /** Jovens da academy (fora do elenco principal). */
+  academyIds: string[];
 }
 
 export type MatchFormat = 'MD1' | 'MD3' | 'MD5';

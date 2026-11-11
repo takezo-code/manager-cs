@@ -47,7 +47,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "furia",
@@ -97,7 +98,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "vitality",
@@ -147,7 +149,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "spirit",
@@ -197,7 +200,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "aurora",
@@ -247,7 +251,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "falcons",
@@ -297,7 +302,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "betboom",
@@ -347,7 +353,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "navi",
@@ -397,7 +404,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "fut",
@@ -447,7 +455,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "mongolz",
@@ -497,7 +506,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "nemiga",
@@ -547,7 +557,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "g2",
@@ -597,7 +608,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "parivision",
@@ -647,7 +659,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "legacy",
@@ -697,7 +710,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "1win",
@@ -747,7 +761,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "mibr",
@@ -797,7 +812,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "liquid",
@@ -847,7 +863,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "faze",
@@ -897,7 +914,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "9z",
@@ -947,7 +965,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "astralis",
@@ -997,7 +1016,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "b8",
@@ -1047,7 +1067,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "nip",
@@ -1097,7 +1118,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "eternalfire",
@@ -1147,7 +1169,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "m80",
@@ -1197,7 +1220,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "heroic",
@@ -1247,7 +1271,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "gamerlegion",
@@ -1297,7 +1322,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "fnatic",
@@ -1347,7 +1373,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "envy",
@@ -1397,7 +1424,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "magic",
@@ -1447,7 +1475,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "tyloo",
@@ -1497,7 +1526,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "hotu",
@@ -1547,7 +1577,8 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   },
   {
     "id": "big",
@@ -1597,6 +1628,7 @@
     "training": {
       "mode": "dividido",
       "focus": "mira"
-    }
+    },
+    "academyIds": []
   }
 ]

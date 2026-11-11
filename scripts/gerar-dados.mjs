@@ -184,7 +184,7 @@ TEAMS.forEach(([id, name, shortName, country, color, roster], i) => {
       regionFlex: flexFor(nick + id),
       transferListed: false,
       contract: contractFor(nick + id, ovrOf(attrs, role), id),
-      mood: { promiseUntil: null, exitDenied: false, lastRaise: null, raiseRefusals: 0, lastCut: null, cutRefusals: 0, salaryBeforeCut: null, lastRequest: null }, awards: [], mvpUntil: null, trainingGains: {}, growth: {},
+      mood: { promiseUntil: null, exitDenied: false, lastRaise: null, raiseRefusals: 0, lastCut: null, cutRefusals: 0, salaryBeforeCut: null, lastRequest: null }, awards: [], mvpUntil: null, trainingGains: {}, growth: {}, squad: 'principal',
     });
   }
   const mapStrength = {};
@@ -193,7 +193,7 @@ TEAMS.forEach(([id, name, shortName, country, color, roster], i) => {
   teams.push({
     id, name, shortName, country, region: TEAM_REGION[id] ?? 'EU', hltvRank: rank, hltvPoints: POINTS[i], color,
     playerIds: ids, starters: [...ids], mapStrength, money, sponsors: [], lateMonths: 0, arrears: 0,
-    legacyPoints: POINTS[i], legacyRoster: [...ids], rankHistory: [], training: { mode: 'dividido', focus: 'mira' },
+    legacyPoints: POINTS[i], legacyRoster: [...ids], rankHistory: [], training: { mode: 'dividido', focus: 'mira' }, academyIds: [],
   });
 });
 
@@ -222,7 +222,7 @@ for (const [nick, pc, age, role, rating, leadership] of FREE) {
     id: 'fa-' + nick, nick, country: pc, age, role, teamId: null,
     baseAttributes: attrs, evolution: 0, skillId: null, phase: 'normal', phaseStreak: 0, energy: 100, satisfaction: 70,
     recentRatings: [], potential: potentialFor(nick, ovr, age), regionFlex: flexFor(nick), transferListed: false, contract: null,
-    mood: { promiseUntil: null, exitDenied: false, lastRaise: null, raiseRefusals: 0, lastCut: null, cutRefusals: 0, salaryBeforeCut: null, lastRequest: null }, awards: [], mvpUntil: null, trainingGains: {}, growth: {},
+    mood: { promiseUntil: null, exitDenied: false, lastRaise: null, raiseRefusals: 0, lastCut: null, cutRefusals: 0, salaryBeforeCut: null, lastRequest: null }, awards: [], mvpUntil: null, trainingGains: {}, growth: {}, squad: 'principal',
   });
 }
 
