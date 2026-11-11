@@ -494,3 +494,21 @@ export const MORALE = {
   deniedEventFactor: 0.5,
   deniedFormPenalty: 0.05,
 };
+
+// ---------- Calendário ----------
+
+export const CALENDAR = {
+  /** Convites saem N dias antes do evento. */
+  inviteDaysBefore: 21,
+  /** Qualificatória (mata-mata MD3) N dias antes do evento. */
+  qualifierDaysBefore: 3,
+  /** Vagas de qualificatória nos eventos com menos de 32 times. */
+  qualifierSlots: 2,
+  /** Times que disputam a qualificatória (os seguintes no ranking, livres na data). */
+  qualifierTeams: 8,
+  /** Janela principal (após as férias) e menor (após o Major do meio do ano), MM-DD. */
+  mainWindow: ['01-01', '01-20'] as const,
+  midWindow: ['06-22', '08-10'] as const,
+  /** Férias de fim de ano. */
+  vacation: ['12-14', '12-31'] as const,
+};
