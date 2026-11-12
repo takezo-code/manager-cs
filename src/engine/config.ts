@@ -646,3 +646,16 @@ export const BASE_LEAGUE = {
   /** Diferença de OVR médio que dá ~73% de chance ao mais forte. */
   ratingScale: 5,
 };
+
+/** Comissão técnica. */
+export const STAFF = {
+  /** Cargo vago conta como este atributo. */
+  vacantAttr: 50,
+  minAttr: 40,
+  maxAttr: 95,
+  /** Salário mensal: base + (OVR − 40)² × fator. */
+  salaryBase: 1000,
+  salaryFactor: 6,
+  /** Multa = salários × este número. */
+  clauseMonths: 12,
+};

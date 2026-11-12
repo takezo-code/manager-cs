@@ -2,6 +2,7 @@
 import type { Relations } from './market/relations';
 import type { Amateur } from './amateurs';
 import type { BaseLeague } from './baseLeague';
+import type { Staff } from './types';
 import type { CalendarEvent } from './calendar';
 import type { EventResult, SeriesLogEntry } from './ranking';
 import type { Player, Team } from './types';
@@ -119,6 +120,8 @@ export interface World {
   amateurs: Amateur[];
   /** Liga de base das academies (temporada atual). */
   baseLeague: BaseLeague;
+  /** Comissão técnica: todos os profissionais, empregados e livres. */
+  staff: Record<string, Staff>;
 }
 
 /** Mensagem curta para o manager (vira notícia de verdade no passo 13). */

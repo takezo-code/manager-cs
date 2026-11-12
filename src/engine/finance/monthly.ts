@@ -11,7 +11,8 @@ import { fmtMoney } from '../format';
 
 
 export const payroll = (w: World, team: Team) =>
-  [...team.playerIds, ...(team.academyIds ?? [])].reduce((s, id) => s + (w.players[id]?.contract?.salary ?? 0), 0);
+  [...team.playerIds, ...(team.academyIds ?? [])].reduce((s, id) => s + (w.players[id]?.contract?.salary ?? 0), 0) +
+  Object.values(team.staff ?? {}).reduce((s, id) => s + (id ? (w.staff?.[id]?.contract?.salary ?? 0) : 0), 0);
 
 export const sponsorIncome = (team: Team, date: string) =>
   team.sponsors.filter((s) => s.endDate >= date).reduce((s, x) => s + x.monthly, 0);

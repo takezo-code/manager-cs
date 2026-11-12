@@ -21,6 +21,7 @@ import { signAmateur, type Amateur } from '../engine/amateurs';
 import { promote } from '../engine/academy';
 import { upgradeScout } from '../engine/scout';
 import type { BaseLeague } from '../engine/baseLeague';
+import type { Staff } from '../engine/types';
 import type { CalendarEvent } from '../engine/calendar';
 import type { EventResult, SeriesLogEntry } from '../engine/ranking';
 import type { MatchFormat, MatchResult, MatchStage, Player, SkillId, Team, TrainingPlan } from '../engine/types';
@@ -61,6 +62,7 @@ export interface GameState {
   calendar: CalendarEvent[];
   amateurs: Amateur[];
   baseLeague: BaseLeague;
+  staff: Record<string, Staff>;
   /** Avisos (os mais novos primeiro). */
   events: GameEvent[];
 
@@ -118,6 +120,7 @@ type WorldFields =
   | 'calendar'
   | 'amateurs'
   | 'baseLeague'
+  | 'staff'
   | 'myTeamId';
 
 export const worldOf = (s: Pick<GameState, WorldFields>): World => ({
@@ -136,6 +139,7 @@ export const worldOf = (s: Pick<GameState, WorldFields>): World => ({
   calendar: s.calendar,
   amateurs: s.amateurs,
   baseLeague: s.baseLeague,
+  staff: s.staff,
 });
 
 /** Campos do mundo para gravar de volta no estado. */
@@ -155,6 +159,7 @@ function fromWorld(w: World) {
     calendar: w.calendar,
     amateurs: w.amateurs,
     baseLeague: w.baseLeague,
+    staff: w.staff,
   };
 }
 
@@ -178,7 +183,7 @@ export function trimMyResults(results: Record<string, MatchResult>, me: string, 
 
 /** Campos do estado que vão para o save. */
 const SAVED_KEYS = [
-  'date', 'teams', 'players', 'relations', 'offers', 'transferLog', 'ledger', 'sponsorOffers', 'inbox', 'results', 'seriesLog', 'calendar', 'amateurs', 'baseLeague', 'events',
+  'date', 'teams', 'players', 'relations', 'offers', 'transferLog', 'ledger', 'sponsorOffers', 'inbox', 'results', 'seriesLog', 'calendar', 'amateurs', 'baseLeague', 'staff', 'events',
   'myTeamId', 'seriesResults', 'lastDayIds', 'activeSlot',
 ] as const satisfies ReadonlyArray<keyof GameState>;
 
@@ -431,8 +436,9 @@ export function useWorld(): World {
   const calendar = useGame((s) => s.calendar);
   const amateurs = useGame((s) => s.amateurs);
   const baseLeague = useGame((s) => s.baseLeague);
+  const staff = useGame((s) => s.staff);
   return useMemo(
-    () => worldOf({ date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar, amateurs, baseLeague }),
-    [date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar, amateurs, baseLeague],
+    () => worldOf({ date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar, amateurs, baseLeague, staff }),
+    [date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar, amateurs, baseLeague, staff],
   );
 }

@@ -9,6 +9,28 @@ export const ROLES = ['IGL', 'AWPER', 'ENTRY', 'SUPPORT', 'LURKER'] as const;
 export type Role = (typeof ROLES)[number];
 
 /** Carta base, sempre derivada do OVR atual. */
+export type StaffRole = 'tecnico' | 'analista' | 'psicologo';
+/** Tática, Veto, Gestão (técnico); Leitura, Preparação (analista); Pressão, Motivação (psicólogo). */
+export type StaffAttr = 'TAT' | 'VET' | 'GES' | 'LEI' | 'PRE' | 'PRS' | 'MOT';
+
+/** Profissional da comissão técnica. */
+export interface Staff {
+  id: string;
+  nick: string;
+  country: string;
+  age: number;
+  role: StaffRole;
+  /** 40 a 95; só os atributos do cargo. */
+  attrs: Partial<Record<StaffAttr, number>>;
+  teamId: string | null;
+  contract: Contract | null;
+  /** Curso em andamento: o atributo sobe ao terminar. */
+  course: { attr: StaffAttr; until: string } | null;
+  titles: number;
+  /** Recusou-se a renovar (aumento negado). */
+  refusesRenewal: boolean;
+}
+
 export type CardTier = 'bronze' | 'prata' | 'ouro';
 
 /** 0 = base, 1 = azul, 2 = vermelha, 3 = Prime (rosa). */
@@ -163,6 +185,8 @@ export interface Team {
   academyIds: string[];
   /** Nível do olheiro (1 a 5). */
   scoutLevel: number;
+  /** Comissão técnica (id do profissional ou vago). */
+  staff: Record<StaffRole, string | null>;
 }
 
 export type MatchFormat = 'MD1' | 'MD3' | 'MD5';

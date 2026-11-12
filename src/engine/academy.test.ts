@@ -42,7 +42,8 @@ describe('Academy', () => {
     const main = w.teams.furia.playerIds.reduce((s, id) => s + w.players[id].contract!.salary, 0);
     const academy = w.teams.furia.academyIds.reduce((s, id) => s + w.players[id].contract!.salary, 0);
     expect(academy).toBeGreaterThan(0);
-    expect(payroll(w, w.teams.furia)).toBe(main + academy);
+    const staff = Object.values(w.teams.furia.staff).reduce((s, id) => s + (id ? w.staff[id].contract!.salary : 0), 0);
+    expect(payroll(w, w.teams.furia)).toBe(main + academy + staff);
   });
 
   it('jogador da academy não está à venda', () => {

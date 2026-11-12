@@ -49,7 +49,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-mouz-tecnico",
+      "analista": "st-mouz-analista",
+      "psicologo": "st-mouz-psicologo"
+    }
   },
   {
     "id": "furia",
@@ -101,7 +106,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-furia-tecnico",
+      "analista": "st-furia-analista",
+      "psicologo": "st-furia-psicologo"
+    }
   },
   {
     "id": "vitality",
@@ -153,7 +163,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-vitality-tecnico",
+      "analista": "st-vitality-analista",
+      "psicologo": "st-vitality-psicologo"
+    }
   },
   {
     "id": "spirit",
@@ -205,7 +220,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-spirit-tecnico",
+      "analista": "st-spirit-analista",
+      "psicologo": "st-spirit-psicologo"
+    }
   },
   {
     "id": "aurora",
@@ -257,7 +277,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-aurora-tecnico",
+      "analista": "st-aurora-analista",
+      "psicologo": "st-aurora-psicologo"
+    }
   },
   {
     "id": "falcons",
@@ -309,7 +334,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-falcons-tecnico",
+      "analista": "st-falcons-analista",
+      "psicologo": "st-falcons-psicologo"
+    }
   },
   {
     "id": "betboom",
@@ -361,7 +391,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-betboom-tecnico",
+      "analista": "st-betboom-analista",
+      "psicologo": "st-betboom-psicologo"
+    }
   },
   {
     "id": "navi",
@@ -413,7 +448,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-navi-tecnico",
+      "analista": "st-navi-analista",
+      "psicologo": "st-navi-psicologo"
+    }
   },
   {
     "id": "fut",
@@ -465,7 +505,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-fut-tecnico",
+      "analista": "st-fut-analista",
+      "psicologo": "st-fut-psicologo"
+    }
   },
   {
     "id": "mongolz",
@@ -517,7 +562,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-mongolz-tecnico",
+      "analista": "st-mongolz-analista",
+      "psicologo": "st-mongolz-psicologo"
+    }
   },
   {
     "id": "nemiga",
@@ -569,7 +619,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-nemiga-tecnico",
+      "analista": "st-nemiga-analista",
+      "psicologo": "st-nemiga-psicologo"
+    }
   },
   {
     "id": "g2",
@@ -621,7 +676,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-g2-tecnico",
+      "analista": "st-g2-analista",
+      "psicologo": "st-g2-psicologo"
+    }
   },
   {
     "id": "parivision",
@@ -673,7 +733,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-parivision-tecnico",
+      "analista": "st-parivision-analista",
+      "psicologo": "st-parivision-psicologo"
+    }
   },
   {
     "id": "legacy",
@@ -725,7 +790,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-legacy-tecnico",
+      "analista": "st-legacy-analista",
+      "psicologo": "st-legacy-psicologo"
+    }
   },
   {
     "id": "1win",
@@ -777,7 +847,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-1win-tecnico",
+      "analista": "st-1win-analista",
+      "psicologo": "st-1win-psicologo"
+    }
   },
   {
     "id": "mibr",
@@ -829,7 +904,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-mibr-tecnico",
+      "analista": "st-mibr-analista",
+      "psicologo": "st-mibr-psicologo"
+    }
   },
   {
     "id": "liquid",
@@ -881,7 +961,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-liquid-tecnico",
+      "analista": "st-liquid-analista",
+      "psicologo": "st-liquid-psicologo"
+    }
   },
   {
     "id": "faze",
@@ -933,7 +1018,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-faze-tecnico",
+      "analista": "st-faze-analista",
+      "psicologo": "st-faze-psicologo"
+    }
   },
   {
     "id": "9z",
@@ -985,7 +1075,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-9z-tecnico",
+      "analista": "st-9z-analista",
+      "psicologo": "st-9z-psicologo"
+    }
   },
   {
     "id": "astralis",
@@ -1037,7 +1132,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-astralis-tecnico",
+      "analista": "st-astralis-analista",
+      "psicologo": "st-astralis-psicologo"
+    }
   },
   {
     "id": "b8",
@@ -1089,7 +1189,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-b8-tecnico",
+      "analista": "st-b8-analista",
+      "psicologo": "st-b8-psicologo"
+    }
   },
   {
     "id": "nip",
@@ -1141,7 +1246,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-nip-tecnico",
+      "analista": "st-nip-analista",
+      "psicologo": "st-nip-psicologo"
+    }
   },
   {
     "id": "eternalfire",
@@ -1193,7 +1303,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-eternalfire-tecnico",
+      "analista": "st-eternalfire-analista",
+      "psicologo": "st-eternalfire-psicologo"
+    }
   },
   {
     "id": "m80",
@@ -1245,7 +1360,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-m80-tecnico",
+      "analista": "st-m80-analista",
+      "psicologo": "st-m80-psicologo"
+    }
   },
   {
     "id": "heroic",
@@ -1297,7 +1417,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-heroic-tecnico",
+      "analista": "st-heroic-analista",
+      "psicologo": "st-heroic-psicologo"
+    }
   },
   {
     "id": "gamerlegion",
@@ -1349,7 +1474,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-gamerlegion-tecnico",
+      "analista": "st-gamerlegion-analista",
+      "psicologo": "st-gamerlegion-psicologo"
+    }
   },
   {
     "id": "fnatic",
@@ -1401,7 +1531,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-fnatic-tecnico",
+      "analista": "st-fnatic-analista",
+      "psicologo": "st-fnatic-psicologo"
+    }
   },
   {
     "id": "envy",
@@ -1453,7 +1588,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-envy-tecnico",
+      "analista": "st-envy-analista",
+      "psicologo": "st-envy-psicologo"
+    }
   },
   {
     "id": "magic",
@@ -1505,7 +1645,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-magic-tecnico",
+      "analista": "st-magic-analista",
+      "psicologo": "st-magic-psicologo"
+    }
   },
   {
     "id": "tyloo",
@@ -1557,7 +1702,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-tyloo-tecnico",
+      "analista": "st-tyloo-analista",
+      "psicologo": "st-tyloo-psicologo"
+    }
   },
   {
     "id": "hotu",
@@ -1609,7 +1759,12 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-hotu-tecnico",
+      "analista": "st-hotu-analista",
+      "psicologo": "st-hotu-psicologo"
+    }
   },
   {
     "id": "big",
@@ -1661,6 +1816,11 @@
       "focus": "mira"
     },
     "academyIds": [],
-    "scoutLevel": 1
+    "scoutLevel": 1,
+    "staff": {
+      "tecnico": "st-big-tecnico",
+      "analista": "st-big-analista",
+      "psicologo": "st-big-psicologo"
+    }
   }
 ]

@@ -1,12 +1,15 @@
 // Dados iniciais (editáveis nos JSONs). Elencos e pontos: ranking HLTV de 09/11/2026.
 // Atributos, funções, idades e força por mapa são estimativas do jogo.
-import type { Player, Team } from '../engine/types';
+import type { Player, Staff, Team } from '../engine/types';
 import teamsJson from './teams.json';
 import playersJson from './players.json';
 import relationsJson from './relations.json';
+import staffJson from './staff.json';
 
 export const INITIAL_TEAMS = teamsJson as Team[];
 export const INITIAL_PLAYERS = playersJson as Player[];
+/** Comissão técnica: técnicos reais (quando confirmados) e profissionais fictícios. */
+export const INITIAL_STAFF = staffJson as Staff[];
 
 /** Relações iniciais entre times (proposta, para revisar). Pares fora da lista começam em 0. */
 export const INITIAL_RELATIONS = relationsJson as Array<{ a: string; b: string; value: number; note: string }>;

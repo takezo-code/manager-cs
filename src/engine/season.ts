@@ -1,5 +1,5 @@
 // Passagem do tempo: um dia de cada vez (calendário, treino, fechamento do mês, ranking e mercado).
-import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_TEAMS } from '../data';
+import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_STAFF, INITIAL_TEAMS } from '../data';
 import { addToAcademy, generateYouth } from './academy';
 import { buildYear, teamBusy } from './calendar';
 import { generateAmateurs, refreshAmateurs } from './amateurs';
@@ -45,6 +45,7 @@ export function createWorld(managerTeamId: string, seed = 1): World {
     calendar: [...buildYear(2026).filter((e) => e.startDate > START_DATE), ...buildYear(2027)],
     amateurs: [],
     baseLeague: newBaseSeason(Number(START_DATE.slice(0, 4))),
+    staff: Object.fromEntries(INITIAL_STAFF.map((s) => [s.id, structuredClone(s)])),
   };
   w = { ...w, amateurs: generateAmateurs(rng, AMATEURS.poolSize, START_DATE) };
   // Academy inicial de cada time.

@@ -1,4 +1,4 @@
-// Gera src/data/teams.json, players.json e relations.json: top 32 do ranking HLTV de 09/11/2026.
+// Gera src/data/teams.json, players.json, staff.json e relations.json: top 32 do ranking HLTV de 09/11/2026.
 // Elencos, países e pontos são reais; função, idade, rating, contratos e relações são estimativas.
 //
 // Uso: npm run gerar-dados
@@ -226,6 +226,56 @@ for (const [nick, pc, age, role, rating, leadership] of FREE) {
   });
 }
 
+// ---------- Comissão técnica ----------
+// Técnicos reais confirmados em nov/2026 (HLTV, Liquipedia, Wikipedia). Os times sem confirmação ganham um
+// técnico fictício. Atributos (40–95), idades e países são estimativas; analistas e psicólogos são fictícios.
+// Salário: mesma fórmula de src/engine/staff/model.ts (staffSalary).
+const REAL_COACHES = {
+  mouz: ['sycrone', 'DK', 33], furia: ['sidde', 'BR', 34], vitality: ['XTQZZZ', 'FR', 34], spirit: ['hally', 'RU', 35],
+  aurora: ['ash', 'GB', 32], falcons: ['zonic', 'DK', 43], betboom: ['Fierce', 'RU', 33], navi: ['B1ad3', 'UA', 38],
+  fut: ['coolio', 'HU', 30], mongolz: ['maaRaa', 'MN', 34], g2: ['sAw', 'FI', 31], parivision: ['dastan', 'KZ', 31],
+  legacy: ['adrrr', 'BR', 29], '1win': ['groove', 'RU', 33], mibr: ['LETN1', 'RS', 30], faze: ['enkay J', 'US', 36],
+  astralis: ['NEO', 'PL', 39], eternalfire: ['Fabre', 'TR', 33], heroic: ['Snappi', 'DK', 35], gamerlegion: ['imd', 'DK', 31],
+  big: ['xenn', 'DE', 30],
+};
+const STAFF_ATTRS = { tecnico: ['TAT', 'VET', 'GES'], analista: ['LEI', 'PRE'], psicologo: ['PRS', 'MOT'] };
+const SYL = ['ka', 'ro', 've', 'lin', 'dor', 'mak', 'sel', 'tu', 'van', 'bro', 'gus', 'fen', 'hal', 'jor', 'pet', 'rik'];
+const COUNTRIES = ['BR', 'DK', 'SE', 'FR', 'DE', 'PL', 'RU', 'UA', 'US', 'FI', 'TR', 'CZ', 'ES', 'PT', 'GB', 'KZ'];
+const staffNick = (key) => SYL[hash(key + 'a') % SYL.length] + SYL[hash(key + 'b') % SYL.length];
+const sClamp = (v) => Math.max(40, Math.min(95, Math.round(v)));
+const staffSalary = (ovr) => Math.round((1000 + (ovr - 40) ** 2 * 6) / 100) * 100;
+function makeStaff(id, role, nick, country, age, level, teamId) {
+  const attrs = {};
+  for (const k of STAFF_ATTRS[role]) attrs[k] = sClamp(level + noise(id + k, 5));
+  const vals = Object.values(attrs);
+  const ovr = Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
+  let contract = null;
+  if (teamId) {
+    const months = 12 + Math.floor(frac(id + 'c') * 25);
+    const end = new Date(Date.UTC(2026, 10 + months + 1, 0));
+    const salary = staffSalary(ovr);
+    contract = { teamId, salary, endDate: `${end.getUTCFullYear()}-${pad(end.getUTCMonth() + 1)}-${pad(end.getUTCDate())}`, releaseClause: salary * 12 };
+  }
+  return { id, nick, country, age, role, attrs, teamId, contract, course: null, titles: 0, refusesRenewal: false };
+}
+const staff = [];
+teams.forEach((t, i) => {
+  const top = 86 - i * 0.7;
+  const real = REAL_COACHES[t.id];
+  const tec = real
+    ? makeStaff(`st-${t.id}-tecnico`, 'tecnico', real[0], real[1], real[2], top, t.id)
+    : makeStaff(`st-${t.id}-tecnico`, 'tecnico', staffNick(t.id + 'tec'), t.country, 30 + (hash(t.id + 'ta') % 14), top, t.id);
+  const ana = makeStaff(`st-${t.id}-analista`, 'analista', staffNick(t.id + 'ana'), t.country, 26 + (hash(t.id + 'aa') % 15), top - 4, t.id);
+  const psi = makeStaff(`st-${t.id}-psicologo`, 'psicologo', staffNick(t.id + 'psi'), t.country, 30 + (hash(t.id + 'pa') % 20), top - 4, t.id);
+  staff.push(tec, ana, psi);
+  t.staff = { tecnico: tec.id, analista: ana.id, psicologo: psi.id };
+});
+for (const role of Object.keys(STAFF_ATTRS))
+  for (let n = 1; n <= 12; n++) {
+    const id = `st-livre-${role}-${pad(n)}`;
+    staff.push(makeStaff(id, role, staffNick(id), COUNTRIES[hash(id + 'p') % COUNTRIES.length], 28 + (hash(id + 'i') % 20), 50 + frac(id + 'l') * 25, null));
+  }
+
 // ---------- Relações (proposta, para revisar) ----------
 const RELATIONS = [
   ['furia', 'vitality', 40, 'exemplo do documento'], ['furia', 'falcons', -40, 'exemplo do documento'],
@@ -243,4 +293,5 @@ fs.mkdirSync(out, { recursive: true });
 fs.writeFileSync(path.join(out, 'relations.json'), JSON.stringify(relations, null, 2) + '\n');
 fs.writeFileSync(path.join(out, 'teams.json'), JSON.stringify(teams, null, 2) + '\n');
 fs.writeFileSync(path.join(out, 'players.json'), JSON.stringify(players, null, 2) + '\n');
-console.log(teams.length, 'times,', players.length, 'jogadores');
+fs.writeFileSync(path.join(out, 'staff.json'), JSON.stringify(staff, null, 2) + '\n');
+console.log(teams.length, 'times,', players.length, 'jogadores,', staff.length, 'profissionais');
