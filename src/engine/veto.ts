@@ -3,6 +3,7 @@
 // MD3: A ban, B ban, A pick, B pick, A ban, B ban, sobra o decider.
 // MD5: A ban, B ban, A pick, B pick, A pick, B pick, sobra o decider.
 import type { Rng } from './rng';
+import { readError, vetoNoise, type StaffAttrs } from './staff/effects';
 import { MAP_IDS, type MapId, type MatchFormat, type Team, type VetoStep } from './types';
 
 const SEQUENCE: Record<MatchFormat, Array<{ team: 0 | 1; action: 'ban' | 'pick' }>> = {
@@ -32,15 +33,23 @@ const SEQUENCE: Record<MatchFormat, Array<{ team: 0 | 1; action: 'ban' | 'pick' 
   ],
 };
 
-/** Time A (índice 0) é o de melhor seed e começa o veto. */
-export function runVeto(teams: [Team, Team], format: MatchFormat, rng: Rng): VetoStep[] {
+/**
+ * Time A (índice 0) é o de melhor seed e começa o veto. Com staff, o técnico (Veto) define o ruído e o
+ * analista (Leitura) a precisão com que cada lado lê a força do rival; sem staff, ruído de ±3.
+ */
+export function runVeto(teams: [Team, Team], format: MatchFormat, rng: Rng, staff?: [StaffAttrs, StaffAttrs]): VetoStep[] {
   const remaining: MapId[] = [...MAP_IDS];
+  // Erro de leitura de cada lado sobre cada mapa do rival.
+  const misread = staff
+    ? staff.map((s) => Object.fromEntries(MAP_IDS.map((m) => [m, (rng.next() - 0.5) * 2 * readError(s.LEI)])) as Record<MapId, number>)
+    : null;
   const steps: VetoStep[] = [];
   for (const { team, action } of SEQUENCE[format]) {
     const me = teams[team];
     const opp = teams[1 - team];
     // Vantagem no mapa do ponto de vista de quem escolhe, com um pouco de ruído.
-    const edge = (m: MapId) => me.mapStrength[m] - opp.mapStrength[m] + (rng.next() - 0.5) * 6;
+    const noise = staff ? vetoNoise(staff[team].VET) : 3;
+    const edge = (m: MapId) => me.mapStrength[m] - (opp.mapStrength[m] + (misread?.[team][m] ?? 0)) + (rng.next() - 0.5) * 2 * noise;
     const scored = remaining.map((m) => ({ m, e: edge(m) }));
     scored.sort((a, b) => (action === 'pick' ? b.e - a.e : a.e - b.e));
     const map = scored[0].m;

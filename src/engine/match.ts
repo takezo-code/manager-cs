@@ -1,8 +1,9 @@
 // Simulação de partida round a round: economia, duelos, trades, bomba, clutches e narração.
-import { ECONOMY, PASSIVE_BONUS, SIM } from './config';
+import { ECONOMY, PASSIVE_BONUS, SIM, STAFF } from './config';
 import { effectiveAttributes } from './player';
 import { createRng, type Rng } from './rng';
 import { calcRating } from './rating';
+import { pressureFactor, prepBonus, tacticBonus, type StaffAttrs } from './staff/effects';
 import { mapsToPlay, runVeto } from './veto';
 import type {
   Attributes,
@@ -30,6 +31,9 @@ export interface MatchInput {
   format: MatchFormat;
   stage: MatchStage;
   seed: number;
+  /** Comissão técnica de cada time (atributos efetivos). Sem ela, a partida é a de antes do passo 11. */
+  staffA?: StaffAttrs;
+  staffB?: StaffAttrs;
 }
 
 interface SimPlayer {
@@ -57,6 +61,8 @@ interface SimTeam {
   team: Team;
   players: SimPlayer[];
   callBonus: number;
+  /** Analista: bônus nos primeiros rounds de cada mapa. */
+  prepBonus: number;
   utility: number;
   tradeSkill: number;
   lossCount: number;
@@ -65,12 +71,12 @@ interface SimTeam {
 
 const has = (p: SimPlayer, s: SkillId) => p.skill === s;
 
-function buildSimTeam(team: Team, players: Player[], stage: MatchStage, rng: Rng): SimTeam {
+function buildSimTeam(team: Team, players: Player[], stage: MatchStage, rng: Rng, staff?: StaffAttrs): SimTeam {
   const sims: SimPlayer[] = players.map((pl) => {
     const attrs = effectiveAttributes(pl);
     const formFactor = 1 - (attrs.MEN - 50) / 100; // Mental alto = menos oscilação
     const form = rng.gaussian() * SIM.formSpread * Math.max(0.3, formFactor);
-    const pressure = pl.skillId === 'sangue_frio' ? 0 : SIM.pressure[stage] * Math.max(0, 85 - attrs.MEN);
+    const pressure = pl.skillId === 'sangue_frio' ? 0 : SIM.pressure[stage] * Math.max(0, 85 - attrs.MEN) * (staff ? pressureFactor(staff.PRS) : 1);
     const fatigue = Math.max(0, SIM.energyThreshold - pl.energy) * SIM.energyPenaltyPerPoint;
     return {
       id: pl.id,
@@ -92,12 +98,14 @@ function buildSimTeam(team: Team, players: Player[], stage: MatchStage, rng: Rng
   });
   const igl = sims.find((p) => p.role === 'IGL') ?? [...sims].sort((a, b) => b.attrs.EQP - a.attrs.EQP)[0];
   const call = igl.attrs.EQP * 0.6 + igl.attrs.NOC * 0.4;
-  const callBonus = (call - 70) * SIM.iglCallWeight + (has(igl, 'cerebro_tatico') ? PASSIVE_BONUS.cerebroTaticoTeam : 0);
+  const callBonus =
+    (call - 70) * SIM.iglCallWeight + (has(igl, 'cerebro_tatico') ? PASSIVE_BONUS.cerebroTaticoTeam : 0) + (staff ? tacticBonus(staff.TAT) : 0);
   const avg = (k: keyof Attributes) => sims.reduce((s, p) => s + p.attrs[k], 0) / sims.length;
   return {
     team,
     players: sims,
     callBonus,
+    prepBonus: staff ? prepBonus(staff.PRE) : 0,
     utility: (avg('UTL') - 70) * SIM.utilityWeight,
     tradeSkill: (avg('EQP') - 70) * 0.004,
     lossCount: 1,
@@ -184,6 +192,8 @@ interface RoundCtx {
   buys: [BuyType, BuyType];
   isPistol: boolean;
   map: MapId;
+  /** Número do round no mapa (1 = pistol). */
+  round: number;
 }
 
 function simulateRound(
@@ -207,6 +217,7 @@ function simulateRound(
     const mine = alive(i).length;
     const theirs = alive(1 - i).length;
     let v = duelBase(p) + p.matchMod + team.callBonus + roundNoise[i];
+    if (ctx.round <= STAFF.prepRounds) v += team.prepBonus;
     v += (team.team.mapStrength[ctx.map] - 75) * SIM.mapStrengthWeight;
     v += (mine - theirs) * SIM.numbersAdvantage;
     const isT = i === tIdx;
@@ -432,7 +443,7 @@ export function simulateMap(
     ];
     applyBuy(teams[0], buys[0], side[0]);
     applyBuy(teams[1], buys[1], side[1]);
-    const r = simulateRound(teams, { side, buys, isPistol, map }, stats, rng);
+    const r = simulateRound(teams, { side, buys, isPistol, map, round: n }, stats, rng);
     payRound(teams, r.winner, r.reason, r.planted, tIdx);
     // Sobreviventes guardam a arma (exceto pistol/eco, que só têm pistola).
     teams.forEach((t, i) =>
@@ -502,12 +513,16 @@ export function simulateMap(
   };
 }
 
+/** Cargo vago (quando só o outro time tem staff). */
+const NO_STAFF: StaffAttrs = { TAT: 50, VET: 50, GES: 50, LEI: 50, PRE: 50, PRS: 50, MOT: 50 };
+
 export const MAPS_TO_WIN: Record<MatchFormat, number> = { MD1: 1, MD3: 2, MD5: 3 };
 
 export function simulateMatch(input: MatchInput): MatchResult {
   const rng = createRng(input.seed);
   const { teamA, teamB } = input;
-  const veto = runVeto([teamA, teamB], input.format, rng);
+  const staff = input.staffA || input.staffB ? ([input.staffA ?? NO_STAFF, input.staffB ?? NO_STAFF] as [StaffAttrs, StaffAttrs]) : undefined;
+  const veto = runVeto([teamA, teamB], input.format, rng, staff);
   const toPlay = mapsToPlay(veto);
   const need = MAPS_TO_WIN[input.format];
   const mapScore = { [teamA.id]: 0, [teamB.id]: 0 };
@@ -517,8 +532,8 @@ export function simulateMatch(input: MatchInput): MatchResult {
     if (mapScore[teamA.id] === need || mapScore[teamB.id] === need) break;
     // Forma, pressão e cansaço são sorteados por mapa.
     const sims: [SimTeam, SimTeam] = [
-      buildSimTeam(teamA, input.playersA, input.stage, rng),
-      buildSimTeam(teamB, input.playersB, input.stage, rng),
+      buildSimTeam(teamA, input.playersA, input.stage, rng, staff?.[0]),
+      buildSimTeam(teamB, input.playersB, input.stage, rng, staff?.[1]),
     ];
     // Quem não escolheu o mapa escolhe o lado; no decider, faca (sorteio).
     const firstCT = rng.chance(0.5) ? 0 : 1;

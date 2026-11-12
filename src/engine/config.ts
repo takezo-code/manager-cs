@@ -658,4 +658,9 @@ export const STAFF = {
   salaryFactor: 6,
   /** Multa = salários × este número. */
   clauseMonths: 12,
+  /** Tática: pontos de duelo por ponto acima de 70. */
+  tacticWeight: 0.06,
+  /** Preparação: pontos de duelo por ponto acima de 70, nos primeiros rounds. */
+  prepWeight: 0.08,
+  prepRounds: 3,
 };

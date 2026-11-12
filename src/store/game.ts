@@ -8,6 +8,7 @@ import { respondToOffer } from '../engine/market/ai';
 import { failedNegotiationEffects, finalizeNegotiation, type Negotiation } from '../engine/market/negotiation';
 import type { Relations } from '../engine/market/relations';
 import { simulateMatch } from '../engine/match';
+import { staffAttrsOf } from '../engine/staff/effects';
 import { denyExit, giveRaise, proposeCut, respondInbox, type InboxResponse } from '../engine/morale/conversations';
 import { applyJealousy, applySatisfaction } from '../engine/morale/satisfaction';
 import { MORALE } from '../engine/config';
@@ -271,7 +272,7 @@ export const useGame = create<GameState>((set, get) => {
       // Melhor ranqueado é o time A (começa o veto).
       const [a, b] = mine.hltvRank <= opp.hltvRank ? [mine, opp] : [opp, mine];
       const roster = (t: Team) => validStarters(t, players).map((id) => players[id]);
-      const result = simulateMatch({ teamA: a, teamB: b, playersA: roster(a), playersB: roster(b), format, stage, seed });
+      const result = simulateMatch({ teamA: a, teamB: b, playersA: roster(a), playersB: roster(b), format, stage, seed, staffA: staffAttrsOf(worldOf(get()), a.id), staffB: staffAttrsOf(worldOf(get()), b.id) });
       set({ lastMatch: result, message: null });
     },
 

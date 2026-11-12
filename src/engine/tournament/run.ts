@@ -1,5 +1,6 @@
 // Monta os campeonatos (formatos em formats.ts) e avança um dia de cada vez.
 import { afterSeries, recoverDay } from '../form';
+import type { StaffAttrs } from '../staff/effects';
 import { simulateMatch } from '../match';
 import { calcRating } from '../rating';
 import { hashString } from '../rng';
@@ -138,7 +139,13 @@ export interface DayOutcome {
 }
 
 /** Joga um dia: cria os jogos que já podem acontecer, simula todos e atualiza fases, cansaço e chaves. */
-export function playDay(tournament: Tournament, teams: Record<string, Team>, players: Record<string, Player>): DayOutcome {
+export function playDay(
+  tournament: Tournament,
+  teams: Record<string, Team>,
+  players: Record<string, Player>,
+  /** Comissão técnica de cada time (sem ela, partidas sem efeito de staff). */
+  staffOf?: (teamId: string) => StaffAttrs,
+): DayOutcome {
   if (tournament.championId) return { tournament, players, results: {} };
   const t: Tournament = structuredClone(tournament);
   let ps: Record<string, Player> = { ...players };
@@ -168,6 +175,8 @@ export function playDay(tournament: Tournament, teams: Record<string, Team>, pla
       format: m.format,
       stage: m.stage,
       seed: hashString(`${t.seed}:${m.id}`),
+      staffA: staffOf?.(m.teamAId),
+      staffB: staffOf?.(m.teamBId),
     });
     results[m.id] = r;
     m.day = t.day;
