@@ -719,4 +719,16 @@ export const MANAGER = {
   happySquad: 65,
   dealGrowth: 0.5,
   promoteGrowth: 1,
+  /** Reputação. */
+  repMajor: 12,
+  repBig: 6,
+  repSmall: 3,
+  repHealthyMonth: 0.2,
+  repGoalMet: 3,
+  repGoalFailed: -2,
+  repFired: -10,
+  repResigned: -5,
+  /** Lenda: salário pedido até −10%; estrela aceita time até 12 + 8 posições abaixo. */
+  repSalaryMax: 0.1,
+  repRankSlack: 8,
 };

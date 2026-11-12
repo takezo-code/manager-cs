@@ -1,7 +1,7 @@
 // Efeitos e crescimento dos atributos do manager. Tudo é 0 com atributos iniciais (30) ou desempregado.
 import { MANAGER } from '../config';
 import type { World } from '../world';
-import { attrEffect, gainAttr, type Manager, type ManagerAttr } from './model';
+import { attrEffect, gainAttr, gainReputation, type Manager, type ManagerAttr } from './model';
 
 /** O manager, se estiver empregado. */
 const active = (w: World): Manager | null => (w.managerTeamId && w.manager ? w.manager : null);
@@ -31,7 +31,7 @@ export function monthlyManagerGrowth(w: World): World {
   if (!m) return w;
   const t = w.teams[w.managerTeamId];
   let next = m;
-  if (t.money > 0 && t.lateMonths === 0) next = gainAttr(next, 'FIN', MANAGER.monthlyGrowth);
+  if (t.money > 0 && t.lateMonths === 0) next = gainReputation(gainAttr(next, 'FIN', MANAGER.monthlyGrowth), MANAGER.repHealthyMonth);
   const sats = t.playerIds.map((id) => w.players[id]?.satisfaction ?? 0);
   if (sats.length && sats.reduce((a, b) => a + b, 0) / sats.length >= MANAGER.happySquad) next = gainAttr(next, 'VES', MANAGER.monthlyGrowth);
   return withManager(w, next);

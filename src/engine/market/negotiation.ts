@@ -2,7 +2,8 @@
 // Cada etapa tem até 3 rodadas com contraproposta. As decisões são determinísticas (sem sorte).
 import { windowOpen } from '../calendar';
 import { financeSalaryDiscount, negotiationDiscount } from '../manager/effects';
-import { MARKET } from '../config';
+import { reputationShare } from '../manager/reputation';
+import { MARKET, MANAGER } from '../config';
 import { endOfMonthAfter } from '../date';
 import { baseOvr } from '../form';
 import { playerOvr } from '../player';
@@ -104,7 +105,7 @@ export function playerStance(w: World, playerId: string, buyerId: string, kind: 
     if (!wouldStart(buyer, w.players, p)) salary *= 1.3;
     if (regionOf(p.country) !== buyer.region) salary *= 1 + (1 - p.regionFlex) * 0.4;
     if (current && p.contract) salary = Math.max(salary, p.contract.salary * 1.05); // não troca de time para ganhar menos
-    if (ovr >= 85 && diff > 12) refuses = `${p.nick} não tem interesse em jogar num time tão abaixo no ranking.`;
+    if (ovr >= 85 && diff > 12 + MANAGER.repRankSlack * reputationShare(w, buyerId)) refuses = `${p.nick} não tem interesse em jogar num time tão abaixo no ranking.`;
     if (kind === 'clause' && p.satisfaction >= 70 && diff > 0)
       refuses = `${p.nick} está feliz em ${current?.shortName} e não quer sair para um time mais fraco.`;
   } else {
@@ -116,6 +117,8 @@ export function playerStance(w: World, playerId: string, buyerId: string, kind: 
 
   // Finanças do manager: salários mais fáceis de acertar.
   if (buyerId === w.managerTeamId) salary *= 1 - financeSalaryDiscount(w);
+  // Reputação: vir trabalhar com um manager famoso vale um desconto.
+  if (kind !== 'renewal') salary *= 1 - MANAGER.repSalaryMax * reputationShare(w, buyerId);
   const minMonths = p.age >= 30 ? 24 : 6;
   const releaseClause = roundTo(value * 2, 50_000);
   return { refuses, desired: { salary: roundTo(salary, 500), months: Math.max(minMonths, 24), releaseClause }, minMonths };

@@ -3,6 +3,7 @@
 import { type CalendarEvent, overlaps } from './calendar';
 import { staffAttrsOf } from './staff/effects';
 import { staffTitle } from './staff/career';
+import { titleReputation } from './manager/reputation';
 import { CALENDAR } from './config';
 import { addDays, daysBetween } from './date';
 import { awardTournament, placeNumber } from './finance/prizes';
@@ -238,6 +239,7 @@ export function playEvents(world: World, _rng?: Rng): Out & { results: Record<st
     w = setEvent(w, { ...ev, tournament: t, status: 'encerrado' });
     w = awardTournament(w, t);
     w = staffTitle(w, t.championId, createRng(hashString(`staff-titulo:${ev.id}`)));
+    w = titleReputation(w, t.championId, t.format, t.participants.length, t.name);
     const weight = eventWeightOf(t.format, t.participants.length);
     const res = Object.entries(t.placements).map(([teamId, label]) => ({
       eventId: ev.id,
