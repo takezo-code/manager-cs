@@ -40,7 +40,8 @@ export type LedgerCategory =
   | 'contratacao'
   | 'upgrade'
   | 'habilidade'
-  | 'olheiro';
+  | 'olheiro'
+  | 'comissao';
 
 export const LEDGER_LABEL: Record<LedgerCategory, string> = {
   patrocinio: 'Patrocínios',
@@ -52,6 +53,7 @@ export const LEDGER_LABEL: Record<LedgerCategory, string> = {
   upgrade: 'Upgrades de carta',
   habilidade: 'Habilidades',
   olheiro: 'Olheiro',
+  comissao: 'Comissão técnica',
 };
 
 /** Movimento de caixa do seu time (positivo entra, negativo sai). */
@@ -82,7 +84,7 @@ export interface SponsorOffer extends SponsorContract {
 
 // ---------- Caixa de entrada ----------
 
-export type InboxKind = 'aumento' | 'conversa' | 'saida' | 'convite';
+export type InboxKind = 'aumento' | 'conversa' | 'saida' | 'convite' | 'staff_renovacao' | 'staff_aumento' | 'staff_proposta';
 
 export interface InboxItem {
   id: string;
@@ -95,6 +97,10 @@ export interface InboxItem {
   askedSalary?: number;
   /** Convite: evento do calendário. */
   eventId?: string;
+  /** Itens da comissão técnica (playerId fica vazio). */
+  staffId?: string;
+  /** Proposta pelo staff: time interessado. */
+  offerTeamId?: string;
 }
 
 export interface World {

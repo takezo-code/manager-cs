@@ -60,7 +60,7 @@ export function monthlyRequests(world: World): { world: World; events: WorldEven
 export function expireInbox(world: World): { world: World; events: WorldEvent[] } {
   let w = world;
   const events: WorldEvent[] = [];
-  for (const item of w.inbox.filter((i) => i.expires < w.date && i.kind !== 'convite')) {
+  for (const item of w.inbox.filter((i) => i.expires < w.date && i.kind !== 'convite' && !i.staffId)) {
     const r = respondInbox(w, item.id, item.kind === 'saida' ? { kind: 'negar' } : item.kind === 'aumento' ? { kind: 'recusar' } : { kind: 'ignorar' });
     w = r.world;
     events.push({ kind: 'info', text: `Sem resposta: ${r.event.text}` });

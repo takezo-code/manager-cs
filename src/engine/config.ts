@@ -668,4 +668,19 @@ export const STAFF = {
   managementCut: 0.005,
   /** Motivação: quanto as faixas de abaixo/má fase estreitam por ponto acima de 70. */
   motivationBand: 0.001,
+  /** Contrato novo/renovado, em meses. */
+  contractMonths: 24,
+  /** Empregado pede este aumento para trocar de time. */
+  poachRaise: 0.15,
+  /** Rescisão: parte do que falta do contrato. */
+  releaseShare: 0.5,
+  /** Aviso de renovação (dias antes do fim) e prazo para responder. */
+  renewNoticeDays: 60,
+  renewDays: 14,
+  /** Prazo padrão da caixa de entrada. */
+  inboxDays: 7,
+  /** IA renova quando faltam até estes dias. */
+  aiRenewDays: 30,
+  /** IA só contrata se o caixa cobre estes meses de salário. */
+  aiAffordMonths: 6,
 };
