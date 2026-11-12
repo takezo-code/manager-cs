@@ -3,7 +3,7 @@ import { windowOpen } from '../engine/calendar';
 import { STAFF } from '../engine/config';
 import { formatDate } from '../engine/date';
 import { courseCost } from '../engine/staff/career';
-import { releaseCost, ROLE_LABEL, staffAsk } from '../engine/staff/market';
+import { releaseCost, STAFF_ROLE_LABEL, staffAsk } from '../engine/staff/market';
 import { STAFF_ATTRS, STAFF_ROLES, staffOvr } from '../engine/staff/model';
 import type { Staff, StaffAttr, StaffRole } from '../engine/types';
 import { useGame, useWorld } from '../store/game';
@@ -156,7 +156,7 @@ function Market() {
         </div>
       </div>
       <p className="mb-2 text-xs text-muted">
-        {occupied ? `Para contratar outro ${ROLE_LABEL[role]}, dispense o atual. ` : ''}
+        {occupied ? `Para contratar outro ${STAFF_ROLE_LABEL[role]}, dispense o atual. ` : ''}
         Livres a qualquer momento; empregados só na janela, pagando a multa e 15% a mais de salário.
         {open ? ' A janela está aberta.' : ' A janela está fechada.'}
       </p>

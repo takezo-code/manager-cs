@@ -83,7 +83,6 @@ describe('Correções da revisão', () => {
 
   it('IA sem caixa ainda preenche a vaga com o profissional mais barato', async () => {
     const { staffMarketDay } = await import('./market');
-    const { createRng } = await import('../rng');
     let w = createWorld('furia');
     const old = w.teams.mouz.staff.tecnico!;
     w = {
@@ -91,6 +90,6 @@ describe('Correções da revisão', () => {
       teams: { ...w.teams, mouz: { ...w.teams.mouz, money: -50_000, staff: { ...w.teams.mouz.staff, tecnico: null } } },
       staff: { ...w.staff, [old]: { ...w.staff[old], teamId: null, contract: null } },
     };
-    expect(staffMarketDay(w, createRng(1)).world.teams.mouz.staff.tecnico).not.toBeNull();
+    expect(staffMarketDay(w).world.teams.mouz.staff.tecnico).not.toBeNull();
   });
 });

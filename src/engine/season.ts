@@ -130,7 +130,7 @@ export function dailyTick(world: World, opts: { rng?: Rng } = {}): { world: Worl
   w = managerDealsDay(w);
   w = expireManagerOffers(w);
   w = trackHistory(w);
-  add(staffMarketDay(w, rng));
+  add(staffMarketDay(w));
 
   // Limpeza do histórico.
   w = {

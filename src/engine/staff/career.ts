@@ -4,22 +4,11 @@ import { addDays } from '../date';
 import { fmtMoney } from '../format';
 import type { Rng } from '../rng';
 import type { StaffAttr } from '../types';
-import { addMoney, type InboxItem, type World, type WorldEvent } from '../world';
-import { ROLE_LABEL, type StaffResult } from './market';
+import { addMoney, type World, type WorldEvent } from '../world';
+import { inboxItem, round100, STAFF_ROLE_LABEL, type StaffResult } from './market';
 import { STAFF_ATTRS, STAFF_ROLES, staffOvr } from './model';
 
-const round100 = (v: number) => Math.round(v / 100) * 100;
 const cap = (v: number) => Math.min(STAFF.maxAttr, v);
-
-const item = (w: World, kind: InboxItem['kind'], staffId: string, extra: Partial<InboxItem>): InboxItem => ({
-  id: `${kind}:${staffId}:${w.date}`,
-  kind,
-  playerId: '',
-  staffId,
-  date: w.date,
-  expires: addDays(w.date, STAFF.inboxDays),
-  ...extra,
-});
 
 /** Título: +1 num atributo aleatório de cada profissional do campeão. O seu staff pede aumento. */
 export function staffTitle(world: World, teamId: string, rng: Rng): World {
@@ -36,7 +25,7 @@ export function staffTitle(world: World, teamId: string, rng: Rng): World {
     }
     w = { ...w, staff: { ...w.staff, [id]: { ...s, attrs, titles: s.titles + 1 } } };
     if (teamId === w.managerTeamId && s.contract)
-      w = { ...w, inbox: [item(w, 'staff_aumento', id, { askedSalary: round100(s.contract.salary * (1 + STAFF.raiseAfterTitle)) }), ...w.inbox] };
+      w = { ...w, inbox: [inboxItem(w, 'staff_aumento', id, { askedSalary: round100(s.contract.salary * (1 + STAFF.raiseAfterTitle)) }), ...w.inbox] };
   }
   return w;
 }
@@ -47,7 +36,7 @@ export function startCourse(w: World, staffId: string, attr: StaffAttr): StaffRe
   const s = w.staff[staffId];
   const me = w.managerTeamId;
   if (!s || s.teamId !== me) return { ok: false, error: 'Esse profissional não é do seu time.' };
-  if (!STAFF_ATTRS[s.role].includes(attr)) return { ok: false, error: `Esse curso não serve para um ${ROLE_LABEL[s.role]}.` };
+  if (!STAFF_ATTRS[s.role].includes(attr)) return { ok: false, error: `Esse curso não serve para um ${STAFF_ROLE_LABEL[s.role]}.` };
   if (s.course) return { ok: false, error: `${s.nick} já está fazendo um curso.` };
   const value = s.attrs[attr] ?? STAFF.vacantAttr;
   if (value >= STAFF.maxAttr) return { ok: false, error: 'Esse atributo já está no máximo (95).' };
@@ -86,8 +75,8 @@ export function monthlyStaffOffers(world: World, rng: Rng): { world: World; even
     });
     if (!buyers.length) continue;
     const buyer = rng.pick(buyers);
-    w = { ...w, inbox: [item(w, 'staff_proposta', id, { offerTeamId: buyer.id }), ...w.inbox] };
-    events.push({ kind: 'alerta', text: `${buyer.shortName} quer contratar ${s.nick} (${ROLE_LABEL[role]}) pagando a multa.` });
+    w = { ...w, inbox: [inboxItem(w, 'staff_proposta', id, { offerTeamId: buyer.id }), ...w.inbox] };
+    events.push({ kind: 'alerta', text: `${buyer.shortName} quer contratar ${s.nick} (${STAFF_ROLE_LABEL[role]}) pagando a multa.` });
   }
   return { world: w, events };
 }

@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import { addDays } from '../date';
-import { createRng } from '../rng';
 import { createWorld } from '../season';
 import type { World } from '../world';
 import { hireStaff, releaseStaff, respondStaffInbox, staffMarketDay } from './market';
@@ -71,7 +70,7 @@ describe('Mercado da comissão técnica', () => {
     const id = w.teams.furia.staff.tecnico!;
     const end = '2027-06-30';
     w = { ...w, staff: { ...w.staff, [id]: { ...w.staff[id], contract: { ...w.staff[id].contract!, endDate: end } } } };
-    w = staffMarketDay(at(w, addDays(end, -60)), createRng(1)).world;
+    w = staffMarketDay(at(w, addDays(end, -60))).world;
     const item = w.inbox.find((i) => i.kind === 'staff_renovacao' && i.staffId === id)!;
     expect(item).toBeTruthy();
     const yes = respondStaffInbox(w, item.id, true);
@@ -80,7 +79,7 @@ describe('Mercado da comissão técnica', () => {
     const no = respondStaffInbox(w, item.id, false);
     expect(no.ok).toBe(true);
     if (!no.ok) return;
-    const after = staffMarketDay(at(no.world, addDays(end, 1)), createRng(2)).world;
+    const after = staffMarketDay(at(no.world, addDays(end, 1))).world;
     expect(after.staff[id].teamId).toBeNull();
     expect(after.teams.furia.staff.tecnico).toBeNull();
   });
@@ -94,7 +93,7 @@ describe('Mercado da comissão técnica', () => {
       staff: { ...w.staff, [w.teams.mouz.staff.psicologo!]: { ...w.staff[w.teams.mouz.staff.psicologo!], teamId: null, contract: null }, [id]: { ...w.staff[id], contract: { ...w.staff[id].contract!, endDate: '2027-01-31' } } },
     };
     const best = free(w, 'psicologo');
-    const out = staffMarketDay(at(w, '2027-01-10'), createRng(3)).world;
+    const out = staffMarketDay(at(w, '2027-01-10')).world;
     expect(out.staff[id].contract!.endDate > '2027-01-31').toBe(true);
     expect(out.teams.mouz.staff.psicologo).toBe(best.id);
   });

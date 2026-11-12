@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { formatDate } from '../engine/date';
 import { BAND_LABEL, bandOf, fairSalary } from '../engine/morale/satisfaction';
 import type { InboxItem } from '../engine/world';
-import { ROLE_LABEL } from '../engine/staff/market';
+import { STAFF_ROLE_LABEL } from '../engine/staff/market';
 import { ManagerOfferItem } from './ManagerOffer';
 import { useGame, useWorld } from '../store/game';
 import { money } from './format';
@@ -42,7 +42,7 @@ function StaffItem({ item }: { item: InboxItem }) {
   const respond = useGame((s) => s.respondStaffItem);
   const s = w.staff[item.staffId!];
   if (!s) return null;
-  const role = ROLE_LABEL[s.role];
+  const role = STAFF_ROLE_LABEL[s.role];
   const salary = s.contract?.salary ?? 0;
   const content =
     item.kind === 'staff_renovacao'

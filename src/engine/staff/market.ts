@@ -4,16 +4,15 @@ import { STAFF } from '../config';
 import { addDays, daysBetween, endOfMonthAfter, monthsUntil } from '../date';
 import { hashString } from '../rng';
 import { fmtMoney } from '../format';
-import type { Rng } from '../rng';
 import type { Staff, StaffRole } from '../types';
 import { addMoney, type InboxItem, type World, type WorldEvent } from '../world';
 import { staffOvr, staffSalary } from './model';
 
 export type StaffResult = { ok: true; world: World } | { ok: false; error: string };
 
-export const ROLE_LABEL: Record<StaffRole, string> = { tecnico: 'técnico', analista: 'analista', psicologo: 'psicólogo' };
+export const STAFF_ROLE_LABEL: Record<StaffRole, string> = { tecnico: 'técnico', analista: 'analista', psicologo: 'psicólogo' };
 
-const round100 = (v: number) => Math.round(v / 100) * 100;
+export const round100 = (v: number) => Math.round(v / 100) * 100;
 
 /** Salário que o profissional pede para vir (empregado pede +15%). */
 export const staffAsk = (s: Staff) => round100(staffSalary(staffOvr(s)) * (s.teamId ? 1 + STAFF.poachRaise : 1));
@@ -55,7 +54,7 @@ export function hireStaff(w: World, staffId: string): StaffResult {
   const t = w.teams[me];
   if (!s) return { ok: false, error: 'Esse profissional não existe.' };
   if (s.teamId === me) return { ok: false, error: `${s.nick} já trabalha no seu time.` };
-  if (t.staff[s.role]) return { ok: false, error: `Você já tem um ${ROLE_LABEL[s.role]}. Dispense o atual antes de contratar outro.` };
+  if (t.staff[s.role]) return { ok: false, error: `Você já tem um ${STAFF_ROLE_LABEL[s.role]}. Dispense o atual antes de contratar outro.` };
   const salary = staffAsk(s);
   if (!s.teamId) return { ok: true, world: sign(w, staffId, me, salary) };
   if (!windowOpen(w.date))
@@ -81,7 +80,8 @@ export function releaseStaff(w: World, staffId: string): StaffResult {
   return { ok: true, world: freeStaff(addMoney(w, me, -cost, 'comissao', `Rescisão de ${s.nick}`), staffId) };
 }
 
-function inboxItem(w: World, kind: InboxItem['kind'], staffId: string, extra: Partial<InboxItem> = {}): InboxItem {
+/** Item de staff para a caixa de entrada (prazo padrão de 7 dias). */
+export function inboxItem(w: World, kind: InboxItem['kind'], staffId: string, extra: Partial<InboxItem> = {}): InboxItem {
   return { id: `${kind}:${staffId}:${w.date}`, kind, playerId: '', staffId, date: w.date, expires: addDays(w.date, STAFF.inboxDays), ...extra };
 }
 
@@ -125,7 +125,7 @@ export function expireStaffInbox(w: World): World {
 }
 
 /** Um dia do mercado da comissão: avisos de renovação, fim de contrato, renovação e vagas da IA. */
-export function staffMarketDay(world: World, _rng: Rng): { world: World; events: WorldEvent[] } {
+export function staffMarketDay(world: World): { world: World; events: WorldEvent[] } {
   let w = expireStaffInbox(world);
   const events: WorldEvent[] = [];
   const me = w.managerTeamId;
@@ -134,7 +134,7 @@ export function staffMarketDay(world: World, _rng: Rng): { world: World; events:
     const left = daysBetween(w.date, s.contract.endDate);
     if (left < 0) {
       w = freeStaff(w, s.id);
-      if (s.teamId === me) events.push({ kind: 'alerta', text: `O contrato de ${s.nick} (${ROLE_LABEL[s.role]}) acabou e ele saiu.` });
+      if (s.teamId === me) events.push({ kind: 'alerta', text: `O contrato de ${s.nick} (${STAFF_ROLE_LABEL[s.role]}) acabou e ele saiu.` });
       continue;
     }
     if (s.teamId === me) {

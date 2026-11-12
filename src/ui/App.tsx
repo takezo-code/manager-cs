@@ -91,7 +91,7 @@ function Dashboard() {
     <div className="mx-auto max-w-6xl px-4 py-6">
       <header className="flex flex-wrap items-center gap-4 border-b border-line pb-4">
         <TeamBadge team={team} size={52} />
-        <div className="min-w-0 flex-1">
+        <div className="min-w-[11rem] flex-1">
           <h1 className="font-display truncate text-3xl font-bold">{team.name}</h1>
           <p className="text-sm text-muted">
             #{team.hltvRank} no ranking HLTV · {team.hltvPoints} pts · {formatDate(date)}

@@ -36,11 +36,12 @@ export function monthlyDevelopment(w: World): World {
   return { ...w, players };
 }
 
-/** 1º de janeiro: todos fazem aniversário; amadores que passam de 19 anos saem do banco da GC/FACEIT. */
+/** 1º de janeiro: jogadores e comissão fazem aniversário; amadores que passam de 19 anos saem do banco da GC/FACEIT. */
 export function ageUp(w: World): World {
   return {
     ...w,
     players: Object.fromEntries(Object.entries(w.players).map(([id, p]) => [id, { ...p, age: p.age + 1 }])),
+    staff: Object.fromEntries(Object.entries(w.staff ?? {}).map(([id, s]) => [id, { ...s, age: s.age + 1 }])),
     amateurs: (w.amateurs ?? [])
       .map((a) => ({ ...a, player: { ...a.player, age: a.player.age + 1 } }))
       .filter((a) => a.player.age <= ACADEMY.maxAge),
