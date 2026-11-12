@@ -166,15 +166,23 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 | Rumores | 15% ao dia (40% nas férias e janelas); 60% vêm de propostas reais quando existem |
 | Instagram | Recepção = momento (tabela do spec) + até +2 de Comunicação ± 1; mesmo tipo seguido vale metade; recepção ≥ 2 dá +0,5 de Comunicação |
 | Notícias das suas ações | Contratações, propostas aceitas e demissão viram notícia e tuíte na hora (não só no fim do dia) |
-| Tier 2 Cup | Uma por mês (dia 5, fev–nov), 16 times no suíço com playoffs; pontos 100/70/50/30/15/5; ranking zera em janeiro; sua academy entra sempre |
-| Empréstimo | Só para os 16 fictícios, 1 por time (6 + 1); o outro time paga 50% do salário; chamar de volta US$ 20 mil; emprestado não ocupa vaga na academy |
-| Manager da academy | Time principal com a IA; usa o caixa da org só na academy; metas: top 8 do tier 2, promover 1 jovem, um jovem +5 de OVR; as 3 batidas trazem a proposta do time principal |
-| Descanso no tier 2 | Fora das copas, jovens e jogadores do tier 2 recuperam energia todo dia |
+| Top 100 real | Times 1–100 do ranking HLTV de 09/11/2026 + Turma do Pagode e ODDIK (102); jogadores dos times 101–150 entram como agentes livres; time com menos de 5 completa com fictício na função que falta |
+| Nível do jogador | Curva pelo ranking do time (86 − 3,5·ln posição) + desvio do rating 3.0 (metade se acima da curva, um quarto se abaixo); sem estatística: só a curva, com o perfil da função |
+| Circuito tier 2/3 | 99 eventos por ano (datas aproximadas, online); convite pela faixa do ranking e região; rodízio (quem jogou menos no ano primeiro); faltando time: abaixo da faixa, academies da região (tier 3) e, por último, outras regiões |
+| Peso no ranking | Tier 2 vale 1/4 de um evento do mesmo tamanho; tier 3, 1/10; fator LAN só com tier 1; forma pesa (força do rival)² |
+| Prêmios tier 2/3 | US$ 10 mil (Challenger) a 250 mil (StarSeries); bônus de título de patrocinador só no tier 1; prêmio de academy vai para o time dono |
+| Academies no tier 3 | Entram com 5 jovens; a do manager da academy tem vaga garantida no tier 3 da região; jovens (até 21) crescem por mapa jogado no tier 2/3 |
+| Empréstimo | Para times reais fora do top 32 com menos de 7 (elenco + emprestados); o emprestado joga pelo time (5 melhores titulares) e o time paga 50% do salário; chamar de volta US$ 20 mil |
+| Manager da academy | Time principal com a IA; usa o caixa da org só na academy; metas: top 8 das academies no tier 3 (100/70/50/20 por colocação), promover 1 jovem, um jovem +5 de OVR |
+| Patrocínio | Master 200 mil × 0,96^(posição − 1) até o 32º; depois × 0,99 por posição (#100 ≈ 28 mil) |
+| Saves v9 → v10 | Saem a Tier 2 Cup e os fictícios; emprestados a eles voltam; entra o circuito tier 2/3 que ainda falta nos anos do save; o mundo continua com os 32 times |
 | Cor da carta evoluída | A cor da evolução (azul, vermelha ou rosa) substitui a cor da faixa; a faixa continua num selo |
 
 ## Dados
 
-- Elencos e pontos: [ranking HLTV de 09/11/2026](https://www.hltv.org/ranking/teams/2026/november/9).
+- Elencos e pontos: [ranking HLTV de 09/11/2026](https://www.hltv.org/ranking/teams/2026/november/9), 150 times em `src/data/hltv/ranking.json`.
+- Estatísticas (rating 3.0 e as 7 notas do perfil): 264 jogadores em `src/data/hltv/stats-1.json`; a coleta parou no bloqueio do Cloudflare. O resto tem nível estimado pelo ranking. Sem K/D (página bloqueada).
+- Técnicos reais onde a página do time abriu; nos outros, técnico fictício. ODDIK: elenco do bo3.gg (12/11/2026), 2 fictícios; Sharks e Case estavam sem elenco e a RED Canids fora do CS.
 - Map pool: Ancient, Anubis, Cache, Dust II, Inferno, Mirage e Nuke. A Cache substituiu a Overpass em julho de 2026.
 - Países dos jogadores: reais, tirados da página do ranking.
 - **São estimativas:** funções, idades, ratings, liderança dos IGLs e força por mapa. Tudo pode ser editado em `src/data/players.json` e `src/data/teams.json`.
@@ -182,3 +190,5 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 ## Calibragem da simulação
 
 Medida com 400 partidas MD1 por confronto: Vitality × MongolZ 72%, FURIA × MOUZ 66%, Vitality × BetBoom 79%, média de 21,7 rounds por mapa, ADR ~82 e KAST ~75%.
+
+Top 100 (12/11/2026, 300 partidas por confronto, MD1/MD3): Vitality × MongolZ 71%/84%, FURIA × MOUZ 47%/45%, MOUZ × BIG 80%/94%, BIG × Glitch 77%/85%. Com 102 times foram precisos SIM.duelScale 65 (era 45) e formSpread 8 (era 6) para ter zebras. Um ano: top 5 MOUZ, Vitality, Spirit, Falcons, FURIA; ~30 ms por dia de jogo.
