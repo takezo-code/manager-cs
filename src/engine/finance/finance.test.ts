@@ -155,12 +155,11 @@ describe('Satisfação', () => {
 describe('Um ano de jogo', () => {
   it('a economia não quebra todo mundo nem infla sem limite', () => {
     let w = createWorld('furia', 3);
-    // Provisório: só o top 32 inicial (os demais dependem da premiação do circuito tier 2/3, ainda por vir).
-    const top32 = new Set(Object.values(w.teams).filter((t) => t.hltvRank <= 32).map((t) => t.id));
     for (let d = 0; d < 365; d++) w = dailyTick(w).world;
     expect(w.date).toBe(addDays('2026-11-11', 365));
-    const teams = Object.values(w.teams).filter((t) => top32.has(t.id));
-    expect(teams.filter((t) => t.lateMonths > 0).length).toBeLessThan(8);
+    const teams = Object.values(w.teams);
+    // Até ~1 em cada 8 times com salário atrasado depois de um ano (102 times, com o circuito tier 2/3).
+    expect(teams.filter((t) => t.lateMonths > 0).length).toBeLessThan(teams.length / 8);
     expect(Math.max(...teams.map((t) => t.money))).toBeLessThan(20_000_000);
   }, 30_000);
 });

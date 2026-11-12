@@ -27,7 +27,8 @@ const FREE = ['kwezz', 'queenix', 'altekz'];
 describe('Valor de mercado', () => {
   it('estrelas valem milhões; jovem vale mais que veterano de OVR parecido', () => {
     const w = fresh();
-    expect(marketValue(w.players.zywoo, w.date)).toBeGreaterThan(5_000_000);
+    expect(marketValue(w.players.donk, w.date)).toBeGreaterThan(5_000_000);
+    expect(marketValue(w.players.zywoo, w.date)).toBeGreaterThan(3_000_000); // 30 anos: vale menos que o donk
     expect(marketValue(w.players.donk, w.date)).toBeGreaterThan(marketValue(w.players.karrigan, w.date));
   });
 

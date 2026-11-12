@@ -23,13 +23,13 @@
       "xelex"
     ],
     "mapStrength": {
-      "ancient": 79,
-      "anubis": 68,
-      "cache": 88,
-      "dust2": 68,
-      "inferno": 71,
-      "mirage": 86,
-      "nuke": 74
+      "ancient": 81,
+      "anubis": 71,
+      "cache": 90,
+      "dust2": 70,
+      "inferno": 73,
+      "mirage": 88,
+      "nuke": 77
     },
     "money": 3500000,
     "sponsors": [],
@@ -81,13 +81,13 @@
       "molodoy"
     ],
     "mapStrength": {
-      "ancient": 87,
-      "anubis": 77,
-      "cache": 83,
-      "dust2": 84,
-      "inferno": 82,
-      "mirage": 74,
-      "nuke": 74
+      "ancient": 89,
+      "anubis": 79,
+      "cache": 84,
+      "dust2": 86,
+      "inferno": 84,
+      "mirage": 76,
+      "nuke": 75
     },
     "money": 3250000,
     "sponsors": [],
@@ -140,12 +140,12 @@
     ],
     "mapStrength": {
       "ancient": 87,
-      "anubis": 87,
+      "anubis": 88,
       "cache": 68,
       "dust2": 82,
-      "inferno": 84,
+      "inferno": 85,
       "mirage": 70,
-      "nuke": 80
+      "nuke": 81
     },
     "money": 3050000,
     "sponsors": [],
@@ -197,13 +197,13 @@
       "donk"
     ],
     "mapStrength": {
-      "ancient": 87,
-      "anubis": 83,
-      "cache": 72,
-      "dust2": 72,
-      "inferno": 74,
-      "mirage": 67,
-      "nuke": 86
+      "ancient": 88,
+      "anubis": 84,
+      "cache": 73,
+      "dust2": 73,
+      "inferno": 76,
+      "mirage": 68,
+      "nuke": 87
     },
     "money": 2800000,
     "sponsors": [],
@@ -255,13 +255,13 @@
       "wicadia"
     ],
     "mapStrength": {
-      "ancient": 73,
-      "anubis": 84,
-      "cache": 65,
-      "dust2": 84,
-      "inferno": 84,
-      "mirage": 77,
-      "nuke": 75
+      "ancient": 75,
+      "anubis": 86,
+      "cache": 66,
+      "dust2": 86,
+      "inferno": 86,
+      "mirage": 79,
+      "nuke": 76
     },
     "money": 2600000,
     "sponsors": [],
@@ -315,11 +315,11 @@
     "mapStrength": {
       "ancient": 69,
       "anubis": 78,
-      "cache": 89,
+      "cache": 90,
       "dust2": 81,
       "inferno": 71,
       "mirage": 83,
-      "nuke": 81
+      "nuke": 82
     },
     "money": 2350000,
     "sponsors": [],
@@ -371,13 +371,13 @@
       "magnojez"
     ],
     "mapStrength": {
-      "ancient": 64,
-      "anubis": 82,
-      "cache": 71,
-      "dust2": 85,
-      "inferno": 85,
-      "mirage": 65,
-      "nuke": 68
+      "ancient": 65,
+      "anubis": 84,
+      "cache": 72,
+      "dust2": 86,
+      "inferno": 86,
+      "mirage": 66,
+      "nuke": 69
     },
     "money": 2100000,
     "sponsors": [],
@@ -434,7 +434,7 @@
       "cache": 85,
       "dust2": 81,
       "inferno": 85,
-      "mirage": 76,
+      "mirage": 77,
       "nuke": 89
     },
     "money": 1900000,
@@ -492,8 +492,8 @@
       "cache": 75,
       "dust2": 72,
       "inferno": 72,
-      "mirage": 87,
-      "nuke": 85
+      "mirage": 86,
+      "nuke": 84
     },
     "money": 1650000,
     "sponsors": [],
@@ -546,12 +546,12 @@
     ],
     "mapStrength": {
       "ancient": 64,
-      "anubis": 64,
+      "anubis": 65,
       "cache": 73,
       "dust2": 85,
-      "inferno": 74,
-      "mirage": 86,
-      "nuke": 86
+      "inferno": 75,
+      "mirage": 87,
+      "nuke": 87
     },
     "money": 1450000,
     "sponsors": [],
@@ -603,12 +603,12 @@
       "syph0"
     ],
     "mapStrength": {
-      "ancient": 86,
-      "anubis": 82,
-      "cache": 66,
-      "dust2": 69,
+      "ancient": 85,
+      "anubis": 81,
+      "cache": 65,
+      "dust2": 68,
       "inferno": 69,
-      "mirage": 74,
+      "mirage": 73,
       "nuke": 78
     },
     "money": 1200000,
@@ -661,13 +661,13 @@
       "matys"
     ],
     "mapStrength": {
-      "ancient": 67,
-      "anubis": 73,
-      "cache": 73,
-      "dust2": 81,
-      "inferno": 64,
-      "mirage": 68,
-      "nuke": 67
+      "ancient": 69,
+      "anubis": 75,
+      "cache": 75,
+      "dust2": 82,
+      "inferno": 66,
+      "mirage": 69,
+      "nuke": 69
     },
     "money": 950000,
     "sponsors": [],
@@ -719,13 +719,13 @@
       "zweih"
     ],
     "mapStrength": {
-      "ancient": 79,
-      "anubis": 65,
-      "cache": 62,
-      "dust2": 82,
-      "inferno": 66,
-      "mirage": 77,
-      "nuke": 80
+      "ancient": 81,
+      "anubis": 67,
+      "cache": 64,
+      "dust2": 84,
+      "inferno": 67,
+      "mirage": 79,
+      "nuke": 82
     },
     "money": 750000,
     "sponsors": [],
@@ -835,12 +835,12 @@
       "artfr0st"
     ],
     "mapStrength": {
-      "ancient": 67,
+      "ancient": 66,
       "anubis": 78,
-      "cache": 78,
-      "dust2": 70,
-      "inferno": 78,
-      "mirage": 75,
+      "cache": 77,
+      "dust2": 69,
+      "inferno": 77,
+      "mirage": 74,
       "nuke": 70
     },
     "money": 400000,
@@ -951,13 +951,13 @@
       "jorko"
     ],
     "mapStrength": {
-      "ancient": 79,
-      "anubis": 88,
+      "ancient": 78,
+      "anubis": 87,
       "cache": 75,
-      "dust2": 65,
-      "inferno": 75,
-      "mirage": 73,
-      "nuke": 78
+      "dust2": 64,
+      "inferno": 74,
+      "mirage": 72,
+      "nuke": 77
     },
     "money": 400000,
     "sponsors": [],
@@ -1009,9 +1009,9 @@
       "jboen"
     ],
     "mapStrength": {
-      "ancient": 86,
+      "ancient": 85,
       "anubis": 74,
-      "cache": 84,
+      "cache": 83,
       "dust2": 68,
       "inferno": 85,
       "mirage": 75,
@@ -1067,13 +1067,13 @@
       "kabro35"
     ],
     "mapStrength": {
-      "ancient": 78,
-      "anubis": 75,
-      "cache": 83,
-      "dust2": 75,
-      "inferno": 70,
-      "mirage": 62,
-      "nuke": 72
+      "ancient": 79,
+      "anubis": 77,
+      "cache": 85,
+      "dust2": 77,
+      "inferno": 72,
+      "mirage": 64,
+      "nuke": 73
     },
     "money": 400000,
     "sponsors": [],
@@ -1125,13 +1125,13 @@
       "cmtry"
     ],
     "mapStrength": {
-      "ancient": 68,
-      "anubis": 75,
+      "ancient": 67,
+      "anubis": 74,
       "cache": 71,
-      "dust2": 88,
-      "inferno": 71,
-      "mirage": 66,
-      "nuke": 76
+      "dust2": 87,
+      "inferno": 70,
+      "mirage": 65,
+      "nuke": 75
     },
     "money": 400000,
     "sponsors": [],
@@ -1186,7 +1186,7 @@
       "ancient": 85,
       "anubis": 73,
       "cache": 72,
-      "dust2": 63,
+      "dust2": 62,
       "inferno": 78,
       "mirage": 70,
       "nuke": 67
@@ -1241,13 +1241,13 @@
       "xkacpersky"
     ],
     "mapStrength": {
-      "ancient": 82,
-      "anubis": 67,
-      "cache": 66,
+      "ancient": 81,
+      "anubis": 66,
+      "cache": 65,
       "dust2": 65,
-      "inferno": 86,
-      "mirage": 82,
-      "nuke": 79
+      "inferno": 85,
+      "mirage": 81,
+      "nuke": 78
     },
     "money": 400000,
     "sponsors": [],
@@ -1299,13 +1299,13 @@
       "jottaaa"
     ],
     "mapStrength": {
-      "ancient": 86,
-      "anubis": 77,
-      "cache": 77,
-      "dust2": 67,
-      "inferno": 85,
-      "mirage": 72,
-      "nuke": 84
+      "ancient": 84,
+      "anubis": 75,
+      "cache": 75,
+      "dust2": 66,
+      "inferno": 83,
+      "mirage": 70,
+      "nuke": 82
     },
     "money": 400000,
     "sponsors": [],
@@ -1362,7 +1362,7 @@
       "cache": 78,
       "dust2": 82,
       "inferno": 69,
-      "mirage": 85,
+      "mirage": 84,
       "nuke": 66
     },
     "money": 400000,
@@ -1415,13 +1415,13 @@
       "chr1zn"
     ],
     "mapStrength": {
-      "ancient": 72,
-      "anubis": 70,
-      "cache": 83,
-      "dust2": 88,
-      "inferno": 85,
-      "mirage": 84,
-      "nuke": 72
+      "ancient": 70,
+      "anubis": 68,
+      "cache": 81,
+      "dust2": 86,
+      "inferno": 83,
+      "mirage": 82,
+      "nuke": 70
     },
     "money": 400000,
     "sponsors": [],
@@ -1473,13 +1473,13 @@
       "hypex"
     ],
     "mapStrength": {
-      "ancient": 87,
-      "anubis": 71,
-      "cache": 73,
-      "dust2": 74,
-      "inferno": 69,
-      "mirage": 79,
-      "nuke": 86
+      "ancient": 86,
+      "anubis": 70,
+      "cache": 72,
+      "dust2": 73,
+      "inferno": 68,
+      "mirage": 78,
+      "nuke": 85
     },
     "money": 400000,
     "sponsors": [],
@@ -1590,12 +1590,12 @@
     ],
     "mapStrength": {
       "ancient": 75,
-      "anubis": 62,
-      "cache": 76,
+      "anubis": 63,
+      "cache": 77,
       "dust2": 72,
       "inferno": 61,
-      "mirage": 74,
-      "nuke": 80
+      "mirage": 75,
+      "nuke": 81
     },
     "money": 400000,
     "sponsors": [],
@@ -1652,7 +1652,7 @@
       "cache": 68,
       "dust2": 63,
       "inferno": 65,
-      "mirage": 61,
+      "mirage": 62,
       "nuke": 79
     },
     "money": 400000,
@@ -1709,7 +1709,7 @@
       "anubis": 81,
       "cache": 80,
       "dust2": 75,
-      "inferno": 81,
+      "inferno": 82,
       "mirage": 84,
       "nuke": 79
     },
@@ -1768,8 +1768,8 @@
       "cache": 69,
       "dust2": 68,
       "inferno": 83,
-      "mirage": 74,
-      "nuke": 82
+      "mirage": 75,
+      "nuke": 83
     },
     "money": 400000,
     "sponsors": [],
@@ -1825,7 +1825,7 @@
       "anubis": 79,
       "cache": 76,
       "dust2": 66,
-      "inferno": 84,
+      "inferno": 83,
       "mirage": 69,
       "nuke": 64
     },
@@ -1880,12 +1880,12 @@
     ],
     "mapStrength": {
       "ancient": 79,
-      "anubis": 68,
-      "cache": 70,
-      "dust2": 69,
-      "inferno": 69,
+      "anubis": 69,
+      "cache": 71,
+      "dust2": 70,
+      "inferno": 70,
       "mirage": 61,
-      "nuke": 75
+      "nuke": 76
     },
     "money": 400000,
     "sponsors": [],
@@ -1938,12 +1938,12 @@
     ],
     "mapStrength": {
       "ancient": 79,
-      "anubis": 72,
-      "cache": 86,
-      "dust2": 77,
-      "inferno": 68,
-      "mirage": 79,
-      "nuke": 67
+      "anubis": 71,
+      "cache": 85,
+      "dust2": 76,
+      "inferno": 67,
+      "mirage": 78,
+      "nuke": 66
     },
     "money": 390000,
     "sponsors": [],
@@ -1995,8 +1995,8 @@
       "doc"
     ],
     "mapStrength": {
-      "ancient": 76,
-      "anubis": 74,
+      "ancient": 75,
+      "anubis": 73,
       "cache": 84,
       "dust2": 84,
       "inferno": 72,
@@ -2053,13 +2053,13 @@
       "jeorge"
     ],
     "mapStrength": {
-      "ancient": 70,
-      "anubis": 81,
+      "ancient": 69,
+      "anubis": 80,
       "cache": 86,
-      "dust2": 70,
-      "inferno": 77,
-      "mirage": 80,
-      "nuke": 72
+      "dust2": 69,
+      "inferno": 76,
+      "mirage": 79,
+      "nuke": 71
     },
     "money": 380000,
     "sponsors": [],
@@ -2111,13 +2111,13 @@
       "dawy"
     ],
     "mapStrength": {
-      "ancient": 82,
+      "ancient": 81,
       "anubis": 78,
       "cache": 66,
       "dust2": 71,
-      "inferno": 67,
+      "inferno": 66,
       "mirage": 78,
-      "nuke": 75
+      "nuke": 74
     },
     "money": 380000,
     "sponsors": [],
@@ -2228,9 +2228,9 @@
     ],
     "mapStrength": {
       "ancient": 66,
-      "anubis": 69,
-      "cache": 70,
-      "dust2": 62,
+      "anubis": 70,
+      "cache": 71,
+      "dust2": 63,
       "inferno": 80,
       "mirage": 69,
       "nuke": 75
@@ -2285,13 +2285,13 @@
       "stressarn"
     ],
     "mapStrength": {
-      "ancient": 72,
-      "anubis": 76,
-      "cache": 67,
-      "dust2": 72,
-      "inferno": 70,
-      "mirage": 66,
-      "nuke": 64
+      "ancient": 71,
+      "anubis": 75,
+      "cache": 65,
+      "dust2": 71,
+      "inferno": 68,
+      "mirage": 65,
+      "nuke": 62
     },
     "money": 370000,
     "sponsors": [],
@@ -2343,13 +2343,13 @@
       "rkzinho"
     ],
     "mapStrength": {
-      "ancient": 74,
+      "ancient": 75,
       "anubis": 62,
       "cache": 81,
-      "dust2": 81,
-      "inferno": 75,
+      "dust2": 82,
+      "inferno": 76,
       "mirage": 75,
-      "nuke": 77
+      "nuke": 78
     },
     "money": 360000,
     "sponsors": [],
@@ -2402,12 +2402,12 @@
     ],
     "mapStrength": {
       "ancient": 73,
-      "anubis": 69,
-      "cache": 78,
-      "dust2": 81,
-      "inferno": 79,
-      "mirage": 73,
-      "nuke": 81
+      "anubis": 68,
+      "cache": 77,
+      "dust2": 80,
+      "inferno": 78,
+      "mirage": 72,
+      "nuke": 80
     },
     "money": 360000,
     "sponsors": [],
@@ -2459,13 +2459,13 @@
       "fr3nd"
     ],
     "mapStrength": {
-      "ancient": 76,
+      "ancient": 77,
       "anubis": 81,
       "cache": 77,
-      "dust2": 70,
+      "dust2": 71,
       "inferno": 60,
       "mirage": 80,
-      "nuke": 64
+      "nuke": 65
     },
     "money": 360000,
     "sponsors": [],
@@ -2517,12 +2517,12 @@
       "c4llm3su3"
     ],
     "mapStrength": {
-      "ancient": 65,
+      "ancient": 64,
       "anubis": 80,
-      "cache": 63,
-      "dust2": 83,
+      "cache": 62,
+      "dust2": 82,
       "inferno": 78,
-      "mirage": 86,
+      "mirage": 85,
       "nuke": 64
     },
     "money": 350000,
@@ -2575,13 +2575,13 @@
       "qw1nk1"
     ],
     "mapStrength": {
-      "ancient": 69,
-      "anubis": 65,
+      "ancient": 70,
+      "anubis": 66,
       "cache": 68,
-      "dust2": 63,
-      "inferno": 75,
+      "dust2": 64,
+      "inferno": 76,
       "mirage": 70,
-      "nuke": 61
+      "nuke": 62
     },
     "money": 350000,
     "sponsors": [],
@@ -2634,12 +2634,12 @@
     ],
     "mapStrength": {
       "ancient": 72,
-      "anubis": 63,
-      "cache": 79,
-      "dust2": 74,
-      "inferno": 62,
-      "mirage": 83,
-      "nuke": 66
+      "anubis": 64,
+      "cache": 80,
+      "dust2": 75,
+      "inferno": 63,
+      "mirage": 84,
+      "nuke": 67
     },
     "money": 340000,
     "sponsors": [],
@@ -2691,13 +2691,13 @@
       "mzinho"
     ],
     "mapStrength": {
-      "ancient": 64,
-      "anubis": 76,
-      "cache": 77,
-      "dust2": 79,
-      "inferno": 66,
-      "mirage": 74,
-      "nuke": 71
+      "ancient": 63,
+      "anubis": 75,
+      "cache": 76,
+      "dust2": 78,
+      "inferno": 65,
+      "mirage": 73,
+      "nuke": 70
     },
     "money": 340000,
     "sponsors": [],
@@ -2865,13 +2865,13 @@
       "nickyb"
     ],
     "mapStrength": {
-      "ancient": 77,
-      "anubis": 72,
-      "cache": 76,
-      "dust2": 68,
-      "inferno": 69,
-      "mirage": 82,
-      "nuke": 71
+      "ancient": 75,
+      "anubis": 71,
+      "cache": 75,
+      "dust2": 66,
+      "inferno": 68,
+      "mirage": 80,
+      "nuke": 69
     },
     "money": 330000,
     "sponsors": [],
@@ -2981,13 +2981,13 @@
       "holy"
     ],
     "mapStrength": {
-      "ancient": 78,
-      "anubis": 60,
-      "cache": 79,
-      "dust2": 68,
-      "inferno": 64,
+      "ancient": 79,
+      "anubis": 61,
+      "cache": 80,
+      "dust2": 69,
+      "inferno": 65,
       "mirage": 77,
-      "nuke": 78
+      "nuke": 79
     },
     "money": 320000,
     "sponsors": [],
@@ -3039,13 +3039,13 @@
       "matheos"
     ],
     "mapStrength": {
-      "ancient": 86,
-      "anubis": 78,
-      "cache": 71,
-      "dust2": 69,
-      "inferno": 65,
-      "mirage": 81,
-      "nuke": 78
+      "ancient": 85,
+      "anubis": 77,
+      "cache": 70,
+      "dust2": 68,
+      "inferno": 64,
+      "mirage": 80,
+      "nuke": 77
     },
     "money": 320000,
     "sponsors": [],
@@ -3098,12 +3098,12 @@
     ],
     "mapStrength": {
       "ancient": 81,
-      "anubis": 58,
-      "cache": 75,
-      "dust2": 76,
-      "inferno": 69,
-      "mirage": 76,
-      "nuke": 73
+      "anubis": 59,
+      "cache": 76,
+      "dust2": 77,
+      "inferno": 70,
+      "mirage": 77,
+      "nuke": 74
     },
     "money": 310000,
     "sponsors": [],
@@ -3156,11 +3156,11 @@
     ],
     "mapStrength": {
       "ancient": 70,
-      "anubis": 73,
-      "cache": 64,
-      "dust2": 78,
-      "inferno": 67,
-      "mirage": 79,
+      "anubis": 74,
+      "cache": 65,
+      "dust2": 79,
+      "inferno": 68,
+      "mirage": 80,
       "nuke": 70
     },
     "money": 310000,
@@ -3214,12 +3214,12 @@
     ],
     "mapStrength": {
       "ancient": 64,
-      "anubis": 77,
+      "anubis": 78,
       "cache": 70,
       "dust2": 65,
       "inferno": 74,
       "mirage": 73,
-      "nuke": 62
+      "nuke": 63
     },
     "money": 300000,
     "sponsors": [],
@@ -3271,12 +3271,12 @@
       "timo"
     ],
     "mapStrength": {
-      "ancient": 71,
-      "anubis": 64,
-      "cache": 80,
-      "dust2": 68,
-      "inferno": 74,
-      "mirage": 62,
+      "ancient": 72,
+      "anubis": 65,
+      "cache": 81,
+      "dust2": 69,
+      "inferno": 75,
+      "mirage": 63,
       "nuke": 78
     },
     "money": 300000,
@@ -3329,10 +3329,10 @@
       "guty"
     ],
     "mapStrength": {
-      "ancient": 61,
-      "anubis": 63,
-      "cache": 60,
-      "dust2": 78,
+      "ancient": 62,
+      "anubis": 64,
+      "cache": 61,
+      "dust2": 79,
       "inferno": 77,
       "mirage": 61,
       "nuke": 65
@@ -3387,13 +3387,13 @@
       "linsel70"
     ],
     "mapStrength": {
-      "ancient": 69,
-      "anubis": 66,
+      "ancient": 70,
+      "anubis": 67,
       "cache": 63,
-      "dust2": 62,
+      "dust2": 63,
       "inferno": 67,
-      "mirage": 76,
-      "nuke": 79
+      "mirage": 77,
+      "nuke": 80
     },
     "money": 290000,
     "sponsors": [],
@@ -3445,12 +3445,12 @@
       "nettik"
     ],
     "mapStrength": {
-      "ancient": 65,
-      "anubis": 78,
+      "ancient": 66,
+      "anubis": 79,
       "cache": 83,
       "dust2": 78,
-      "inferno": 80,
-      "mirage": 74,
+      "inferno": 81,
+      "mirage": 75,
       "nuke": 78
     },
     "money": 290000,
@@ -3503,13 +3503,13 @@
       "tronic"
     ],
     "mapStrength": {
-      "ancient": 64,
+      "ancient": 63,
       "anubis": 73,
-      "cache": 66,
-      "dust2": 75,
-      "inferno": 83,
+      "cache": 65,
+      "dust2": 74,
+      "inferno": 82,
       "mirage": 71,
-      "nuke": 73
+      "nuke": 72
     },
     "money": 280000,
     "sponsors": [],
@@ -3561,13 +3561,13 @@
       "tikuak"
     ],
     "mapStrength": {
-      "ancient": 81,
-      "anubis": 74,
-      "cache": 78,
-      "dust2": 73,
-      "inferno": 65,
-      "mirage": 77,
-      "nuke": 73
+      "ancient": 83,
+      "anubis": 75,
+      "cache": 79,
+      "dust2": 74,
+      "inferno": 66,
+      "mirage": 78,
+      "nuke": 74
     },
     "money": 280000,
     "sponsors": [],
@@ -3619,13 +3619,13 @@
       "maggent"
     ],
     "mapStrength": {
-      "ancient": 78,
+      "ancient": 77,
       "anubis": 72,
-      "cache": 76,
+      "cache": 75,
       "dust2": 67,
-      "inferno": 70,
-      "mirage": 69,
-      "nuke": 71
+      "inferno": 69,
+      "mirage": 68,
+      "nuke": 70
     },
     "money": 280000,
     "sponsors": [],
@@ -3678,12 +3678,12 @@
     ],
     "mapStrength": {
       "ancient": 59,
-      "anubis": 77,
+      "anubis": 78,
       "cache": 59,
-      "dust2": 64,
-      "inferno": 63,
-      "mirage": 73,
-      "nuke": 63
+      "dust2": 65,
+      "inferno": 64,
+      "mirage": 74,
+      "nuke": 64
     },
     "money": 270000,
     "sponsors": [],
@@ -3740,7 +3740,7 @@
       "cache": 68,
       "dust2": 81,
       "inferno": 65,
-      "mirage": 74,
+      "mirage": 73,
       "nuke": 79
     },
     "money": 270000,
@@ -3793,13 +3793,13 @@
       "ltz"
     ],
     "mapStrength": {
-      "ancient": 74,
-      "anubis": 64,
-      "cache": 61,
-      "dust2": 62,
-      "inferno": 81,
-      "mirage": 72,
-      "nuke": 81
+      "ancient": 75,
+      "anubis": 65,
+      "cache": 62,
+      "dust2": 63,
+      "inferno": 82,
+      "mirage": 73,
+      "nuke": 82
     },
     "money": 260000,
     "sponsors": [],
@@ -3851,13 +3851,13 @@
       "tomate"
     ],
     "mapStrength": {
-      "ancient": 68,
+      "ancient": 67,
       "anubis": 68,
       "cache": 62,
       "dust2": 71,
-      "inferno": 76,
-      "mirage": 74,
-      "nuke": 76
+      "inferno": 75,
+      "mirage": 73,
+      "nuke": 75
     },
     "money": 260000,
     "sponsors": [],
@@ -3909,12 +3909,12 @@
       "kunai"
     ],
     "mapStrength": {
-      "ancient": 62,
-      "anubis": 75,
-      "cache": 77,
+      "ancient": 63,
+      "anubis": 76,
+      "cache": 78,
       "dust2": 68,
       "inferno": 61,
-      "mirage": 79,
+      "mirage": 80,
       "nuke": 70
     },
     "money": 260000,
@@ -4025,13 +4025,13 @@
       "dorjor49"
     ],
     "mapStrength": {
-      "ancient": 66,
-      "anubis": 58,
+      "ancient": 67,
+      "anubis": 59,
       "cache": 62,
-      "dust2": 81,
-      "inferno": 65,
-      "mirage": 74,
-      "nuke": 60
+      "dust2": 82,
+      "inferno": 66,
+      "mirage": 75,
+      "nuke": 61
     },
     "money": 250000,
     "sponsors": [],
@@ -4083,13 +4083,13 @@
       "divine"
     ],
     "mapStrength": {
-      "ancient": 62,
+      "ancient": 63,
       "anubis": 71,
-      "cache": 61,
-      "dust2": 78,
+      "cache": 62,
+      "dust2": 79,
       "inferno": 67,
-      "mirage": 59,
-      "nuke": 73
+      "mirage": 60,
+      "nuke": 74
     },
     "money": 240000,
     "sponsors": [],
@@ -4145,7 +4145,7 @@
       "anubis": 73,
       "cache": 68,
       "dust2": 81,
-      "inferno": 63,
+      "inferno": 62,
       "mirage": 76,
       "nuke": 64
     },
@@ -4199,13 +4199,13 @@
       "stormzyn"
     ],
     "mapStrength": {
-      "ancient": 61,
-      "anubis": 59,
-      "cache": 80,
-      "dust2": 59,
-      "inferno": 80,
-      "mirage": 69,
-      "nuke": 69
+      "ancient": 62,
+      "anubis": 60,
+      "cache": 81,
+      "dust2": 61,
+      "inferno": 81,
+      "mirage": 70,
+      "nuke": 70
     },
     "money": 240000,
     "sponsors": [],
@@ -4257,13 +4257,13 @@
       "sn0w"
     ],
     "mapStrength": {
-      "ancient": 81,
-      "anubis": 80,
-      "cache": 76,
-      "dust2": 68,
-      "inferno": 66,
-      "mirage": 65,
-      "nuke": 64
+      "ancient": 82,
+      "anubis": 81,
+      "cache": 77,
+      "dust2": 70,
+      "inferno": 67,
+      "mirage": 66,
+      "nuke": 65
     },
     "money": 230000,
     "sponsors": [],
@@ -4431,13 +4431,13 @@
       "to0ro"
     ],
     "mapStrength": {
-      "ancient": 68,
-      "anubis": 67,
-      "cache": 59,
-      "dust2": 75,
-      "inferno": 64,
-      "mirage": 76,
-      "nuke": 68
+      "ancient": 69,
+      "anubis": 69,
+      "cache": 60,
+      "dust2": 76,
+      "inferno": 65,
+      "mirage": 77,
+      "nuke": 69
     },
     "money": 220000,
     "sponsors": [],
@@ -4489,13 +4489,13 @@
       "sl3nd"
     ],
     "mapStrength": {
-      "ancient": 74,
-      "anubis": 62,
-      "cache": 64,
-      "dust2": 77,
-      "inferno": 68,
-      "mirage": 76,
-      "nuke": 62
+      "ancient": 75,
+      "anubis": 64,
+      "cache": 65,
+      "dust2": 79,
+      "inferno": 69,
+      "mirage": 77,
+      "nuke": 63
     },
     "money": 220000,
     "sponsors": [],
@@ -4547,13 +4547,13 @@
       "tyr1k"
     ],
     "mapStrength": {
-      "ancient": 63,
-      "anubis": 67,
-      "cache": 73,
-      "dust2": 73,
-      "inferno": 66,
-      "mirage": 68,
-      "nuke": 61
+      "ancient": 64,
+      "anubis": 68,
+      "cache": 74,
+      "dust2": 74,
+      "inferno": 67,
+      "mirage": 69,
+      "nuke": 62
     },
     "money": 210000,
     "sponsors": [],
@@ -4606,10 +4606,10 @@
     ],
     "mapStrength": {
       "ancient": 75,
-      "anubis": 84,
-      "cache": 61,
-      "dust2": 71,
-      "inferno": 81,
+      "anubis": 83,
+      "cache": 60,
+      "dust2": 70,
+      "inferno": 80,
       "mirage": 67,
       "nuke": 62
     },
@@ -4663,13 +4663,13 @@
       "mhn1"
     ],
     "mapStrength": {
-      "ancient": 81,
-      "anubis": 72,
-      "cache": 66,
-      "dust2": 82,
-      "inferno": 68,
-      "mirage": 76,
-      "nuke": 76
+      "ancient": 82,
+      "anubis": 74,
+      "cache": 67,
+      "dust2": 83,
+      "inferno": 70,
+      "mirage": 77,
+      "nuke": 77
     },
     "money": 200000,
     "sponsors": [],
@@ -4721,13 +4721,13 @@
       "kodak"
     ],
     "mapStrength": {
-      "ancient": 75,
-      "anubis": 61,
-      "cache": 77,
-      "dust2": 72,
-      "inferno": 70,
+      "ancient": 76,
+      "anubis": 62,
+      "cache": 78,
+      "dust2": 73,
+      "inferno": 71,
       "mirage": 64,
-      "nuke": 80
+      "nuke": 81
     },
     "money": 200000,
     "sponsors": [],
@@ -4779,13 +4779,13 @@
       "fang"
     ],
     "mapStrength": {
-      "ancient": 79,
-      "anubis": 76,
-      "cache": 68,
-      "dust2": 70,
-      "inferno": 62,
-      "mirage": 81,
-      "nuke": 69
+      "ancient": 80,
+      "anubis": 77,
+      "cache": 69,
+      "dust2": 71,
+      "inferno": 63,
+      "mirage": 82,
+      "nuke": 70
     },
     "money": 200000,
     "sponsors": [],
@@ -4837,13 +4837,13 @@
       "dan9armatura"
     ],
     "mapStrength": {
-      "ancient": 67,
-      "anubis": 61,
-      "cache": 61,
-      "dust2": 79,
-      "inferno": 57,
-      "mirage": 70,
-      "nuke": 75
+      "ancient": 69,
+      "anubis": 62,
+      "cache": 63,
+      "dust2": 81,
+      "inferno": 59,
+      "mirage": 71,
+      "nuke": 76
     },
     "money": 190000,
     "sponsors": [],
@@ -4895,12 +4895,12 @@
       "next"
     ],
     "mapStrength": {
-      "ancient": 65,
+      "ancient": 64,
       "anubis": 72,
-      "cache": 77,
-      "dust2": 65,
-      "inferno": 68,
-      "mirage": 70,
+      "cache": 76,
+      "dust2": 64,
+      "inferno": 67,
+      "mirage": 69,
       "nuke": 79
     },
     "money": 190000,
@@ -4953,13 +4953,13 @@
       "bexyz"
     ],
     "mapStrength": {
-      "ancient": 63,
-      "anubis": 60,
-      "cache": 62,
-      "dust2": 62,
+      "ancient": 64,
+      "anubis": 61,
+      "cache": 63,
+      "dust2": 63,
       "inferno": 60,
       "mirage": 79,
-      "nuke": 63
+      "nuke": 64
     },
     "money": 180000,
     "sponsors": [],
@@ -5011,13 +5011,13 @@
       "rack"
     ],
     "mapStrength": {
-      "ancient": 77,
-      "anubis": 64,
-      "cache": 69,
-      "dust2": 64,
-      "inferno": 64,
-      "mirage": 57,
-      "nuke": 79
+      "ancient": 79,
+      "anubis": 65,
+      "cache": 70,
+      "dust2": 66,
+      "inferno": 65,
+      "mirage": 58,
+      "nuke": 80
     },
     "money": 180000,
     "sponsors": [],
@@ -5070,12 +5070,12 @@
     ],
     "mapStrength": {
       "ancient": 59,
-      "anubis": 68,
-      "cache": 75,
-      "dust2": 68,
+      "anubis": 69,
+      "cache": 76,
+      "dust2": 69,
       "inferno": 64,
       "mirage": 76,
-      "nuke": 79
+      "nuke": 80
     },
     "money": 180000,
     "sponsors": [],
@@ -5127,10 +5127,10 @@
       "k0gass"
     ],
     "mapStrength": {
-      "ancient": 61,
+      "ancient": 62,
       "anubis": 63,
-      "cache": 63,
-      "dust2": 79,
+      "cache": 64,
+      "dust2": 80,
       "inferno": 72,
       "mirage": 63,
       "nuke": 79
@@ -5185,13 +5185,13 @@
       "maksilvl"
     ],
     "mapStrength": {
-      "ancient": 75,
-      "anubis": 67,
-      "cache": 79,
-      "dust2": 81,
-      "inferno": 70,
-      "mirage": 64,
-      "nuke": 58
+      "ancient": 76,
+      "anubis": 68,
+      "cache": 80,
+      "dust2": 82,
+      "inferno": 71,
+      "mirage": 65,
+      "nuke": 59
     },
     "money": 170000,
     "sponsors": [],
@@ -5243,13 +5243,13 @@
       "nxstep"
     ],
     "mapStrength": {
-      "ancient": 79,
-      "anubis": 77,
-      "cache": 76,
-      "dust2": 76,
-      "inferno": 72,
-      "mirage": 75,
-      "nuke": 72
+      "ancient": 80,
+      "anubis": 79,
+      "cache": 78,
+      "dust2": 77,
+      "inferno": 73,
+      "mirage": 77,
+      "nuke": 73
     },
     "money": 160000,
     "sponsors": [],
@@ -5301,13 +5301,13 @@
       "wumbo"
     ],
     "mapStrength": {
-      "ancient": 69,
-      "anubis": 61,
-      "cache": 71,
-      "dust2": 75,
-      "inferno": 72,
-      "mirage": 66,
-      "nuke": 78
+      "ancient": 71,
+      "anubis": 62,
+      "cache": 72,
+      "dust2": 76,
+      "inferno": 73,
+      "mirage": 67,
+      "nuke": 79
     },
     "money": 160000,
     "sponsors": [],
@@ -5359,12 +5359,12 @@
       "tamefear"
     ],
     "mapStrength": {
-      "ancient": 65,
+      "ancient": 66,
       "anubis": 66,
-      "cache": 81,
-      "dust2": 82,
-      "inferno": 79,
-      "mirage": 74,
+      "cache": 82,
+      "dust2": 83,
+      "inferno": 80,
+      "mirage": 75,
       "nuke": 73
     },
     "money": 160000,
@@ -5417,13 +5417,13 @@
       "kabro49"
     ],
     "mapStrength": {
-      "ancient": 60,
-      "anubis": 72,
-      "cache": 76,
-      "dust2": 60,
-      "inferno": 60,
-      "mirage": 63,
-      "nuke": 73
+      "ancient": 61,
+      "anubis": 74,
+      "cache": 78,
+      "dust2": 62,
+      "inferno": 61,
+      "mirage": 65,
+      "nuke": 74
     },
     "money": 150000,
     "sponsors": [],
@@ -5475,13 +5475,13 @@
       "brutmonster"
     ],
     "mapStrength": {
-      "ancient": 77,
-      "anubis": 73,
-      "cache": 65,
-      "dust2": 79,
-      "inferno": 74,
-      "mirage": 63,
-      "nuke": 80
+      "ancient": 78,
+      "anubis": 75,
+      "cache": 67,
+      "dust2": 81,
+      "inferno": 76,
+      "mirage": 64,
+      "nuke": 82
     },
     "money": 150000,
     "sponsors": [],
@@ -5533,13 +5533,13 @@
       "turbo"
     ],
     "mapStrength": {
-      "ancient": 81,
-      "anubis": 78,
-      "cache": 74,
-      "dust2": 82,
-      "inferno": 80,
-      "mirage": 58,
-      "nuke": 76
+      "ancient": 82,
+      "anubis": 79,
+      "cache": 75,
+      "dust2": 83,
+      "inferno": 81,
+      "mirage": 59,
+      "nuke": 77
     },
     "money": 150000,
     "sponsors": [],
@@ -5591,13 +5591,13 @@
       "chucky"
     ],
     "mapStrength": {
-      "ancient": 76,
-      "anubis": 75,
-      "cache": 76,
-      "dust2": 77,
-      "inferno": 64,
-      "mirage": 70,
-      "nuke": 64
+      "ancient": 78,
+      "anubis": 77,
+      "cache": 77,
+      "dust2": 79,
+      "inferno": 66,
+      "mirage": 71,
+      "nuke": 65
     },
     "money": 150000,
     "sponsors": [],
@@ -5649,13 +5649,13 @@
       "hfah"
     ],
     "mapStrength": {
-      "ancient": 77,
-      "anubis": 73,
-      "cache": 59,
-      "dust2": 79,
-      "inferno": 66,
-      "mirage": 62,
-      "nuke": 66
+      "ancient": 79,
+      "anubis": 75,
+      "cache": 61,
+      "dust2": 81,
+      "inferno": 68,
+      "mirage": 64,
+      "nuke": 68
     },
     "money": 150000,
     "sponsors": [],
@@ -5765,13 +5765,13 @@
       "rud"
     ],
     "mapStrength": {
-      "ancient": 66,
-      "anubis": 59,
-      "cache": 69,
-      "dust2": 75,
-      "inferno": 66,
-      "mirage": 69,
-      "nuke": 62
+      "ancient": 68,
+      "anubis": 61,
+      "cache": 72,
+      "dust2": 77,
+      "inferno": 69,
+      "mirage": 72,
+      "nuke": 65
     },
     "money": 150000,
     "sponsors": [],
@@ -5823,13 +5823,13 @@
       "matios"
     ],
     "mapStrength": {
-      "ancient": 76,
-      "anubis": 78,
-      "cache": 66,
-      "dust2": 73,
-      "inferno": 69,
-      "mirage": 65,
-      "nuke": 71
+      "ancient": 78,
+      "anubis": 80,
+      "cache": 68,
+      "dust2": 74,
+      "inferno": 71,
+      "mirage": 66,
+      "nuke": 73
     },
     "money": 150000,
     "sponsors": [],
@@ -5881,13 +5881,13 @@
       "fenpet80"
     ],
     "mapStrength": {
-      "ancient": 59,
-      "anubis": 58,
-      "cache": 74,
-      "dust2": 66,
-      "inferno": 68,
-      "mirage": 68,
-      "nuke": 59
+      "ancient": 61,
+      "anubis": 61,
+      "cache": 76,
+      "dust2": 68,
+      "inferno": 70,
+      "mirage": 70,
+      "nuke": 61
     },
     "money": 150000,
     "sponsors": [],

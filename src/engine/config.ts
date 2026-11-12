@@ -239,16 +239,16 @@ export const SIM = {
   regulationRounds: 24,
   roundsToWin: 13,
   overtimeHalf: 3,
-  /** Escala da logística dos duelos: menor = atributos pesam mais. */
+  /** Escala da logística dos duelos: menor = atributos pesam mais (65 desde o top 100: mais zebras). */
   /** Escala do equipamento nos duelos e penalidade de force/eco (full = 0). */
   equipScale: 6,
   equipForce: -4,
   equipEco: -9,
   /** Variação por round da leitura tática de cada time (desvio, em pontos). */
   roundNoise: 5,
-  duelScale: 45,
+  duelScale: 65,
   /** Variação de forma do jogador na partida (desvio, em pontos), reduzida pelo Mental. */
-  formSpread: 6,
+  formSpread: 8,
   /** Peso do IGL nas calls: pontos de duelo por ponto de "call" acima de 70. */
   iglCallWeight: 0.12,
   /** Força no mapa: pontos de duelo por ponto acima de 75. */

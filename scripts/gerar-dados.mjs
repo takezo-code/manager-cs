@@ -142,7 +142,8 @@ const WEIGHTS = {
   SUPPORT: { UTL: 0.3, EQP: 0.25, NOC: 0.15, MIR: 0.15, MEN: 0.1, REF: 0.05 },
   LURKER: { NOC: 0.3, MEN: 0.25, MIR: 0.2, REF: 0.15, UTL: 0.05, EQP: 0.05 },
 };
-const ovrOf = (a, role) => Math.round(Object.entries(WEIGHTS[role]).reduce((s, [k, w]) => s + a[k] * w, 0));
+// Mesma folga do motor (ovrFor): 75,5 não pode virar 75 pela ordem da soma.
+const ovrOf = (a, role) => Math.round(Object.entries(WEIGHTS[role]).reduce((s, [k, w]) => s + a[k] * w, 0) + 1e-9);
 // Mesmas fórmulas de src/engine/market/value.ts (só para os valores iniciais).
 const salaryFor = (ovr) => Math.round((2000 * Math.pow(1.13, ovr - 60)) / 500) * 500;
 const baseValue = (ovr) => 50000 * Math.pow(1.16, ovr - 60);
@@ -238,7 +239,19 @@ function attrsFrom(st, level) {
     EQP: clamp(level + sc('tr') * NOTE * 0.8),
   };
 }
-const fallbackRating = (rank) => 1.04 - rank * 0.0012;
+// Recalibragem (top 100): o rating 3.0 sozinho varia muito de jogador para jogador e achatava o ranking
+// (o #25 ficava mais forte que o #1). O nível parte de uma curva pelo ranking do time e soma o desvio da estatística:
+// #1 = 86, #10 ≈ 78, #32 ≈ 74, #100 ≈ 70. Sem estatística, só a curva.
+const rankLevel = (rank) => 86 - 3.5 * Math.log(Math.max(1, rank));
+// Acima da curva conta metade (as estrelas aparecem); abaixo, só um quarto.
+const STAT_UP = 0.5;
+const STAT_DOWN = 0.25;
+const levelOf = (rating, rank) => {
+  const base = rankLevel(rank);
+  if (rating == null) return base;
+  const dev = 73 + (rating - 1.0) * 75 - base;
+  return Math.min(93, base + dev * (dev > 0 ? STAT_UP : STAT_DOWN));
+};
 
 /** Funções: AWPer (maior Sniping), Entry (maior Entrying), IGL (conhecido ou o mais velho de Firepower mais baixo), resto Suporte/Lurker. */
 function assignRoles(ps) {
@@ -313,8 +326,7 @@ for (const t of RAW.teams) {
   const roles = assignRoles(ps);
   const ids = [];
   for (const p of ps) {
-    const rating = p.rating ?? fallbackRating(t.rank);
-    const level = Math.min(93, 73 + (rating - 1.0) * 75);
+    const level = levelOf(p.rating, t.rank);
     const id = playerId(p.nick, teamId ?? 'livre');
     ids.push(id);
     const age = p.age ?? 22 + (hash(p.nick) % 8);
@@ -325,10 +337,10 @@ for (const t of RAW.teams) {
   for (let n = 0; ids.length < 5; n++) {
     const roleSet = new Set(players.filter((p) => ids.includes(p.id)).map((p) => p.role));
     const need = ['IGL', 'AWPER', 'ENTRY', 'SUPPORT', 'LURKER'].find((r) => !roleSet.has(r)) ?? 'SUPPORT';
-    const avg = ps.reduce((s2, p) => s2 + (p.rating ?? fallbackRating(t.rank)), 0) / Math.max(1, ps.length);
+    const avg = ps.reduce((s2, p) => s2 + levelOf(p.rating, t.rank), 0) / Math.max(1, ps.length);
     const key = teamId + (n ? `-extra${n}` : '-quinto');
     const country = majority(ps.map((p) => p.country)) ?? 'EU';
-    const level = Math.min(93, 73 + (avg - 0.05 - 1.0) * 75);
+    const level = avg - 3;
     const id = playerId(fakeNick(key), teamId);
     ids.push(id);
     players.push(makePlayer({ id, nick: fakeNick(key), country, age: 19 + (hash(key) % 6), role: need, teamId, attrs: attrsFrom({}, level), key }));
