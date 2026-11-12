@@ -26,6 +26,7 @@ import { promote } from '../engine/academy';
 import { upgradeScout } from '../engine/scout';
 import type { BaseLeague } from '../engine/baseLeague';
 import type { Staff } from '../engine/types';
+import type { Manager, ManagerProfile } from '../engine/manager/model';
 import type { CalendarEvent } from '../engine/calendar';
 import type { EventResult, SeriesLogEntry } from '../engine/ranking';
 import type { MatchFormat, MatchResult, MatchStage, Player, SkillId, Team, TrainingPlan } from '../engine/types';
@@ -67,6 +68,7 @@ export interface GameState {
   amateurs: Amateur[];
   baseLeague: BaseLeague;
   staff: Record<string, Staff>;
+  manager: Manager;
   /** Avisos (os mais novos primeiro). */
   events: GameEvent[];
 
@@ -79,7 +81,7 @@ export interface GameState {
   lastDayIds: string[];
 
   openNewCareer(slot: Slot): void;
-  startCareer(teamId: string): void;
+  startCareer(teamId: string, profile?: ManagerProfile): void;
   loadCareer(slot: Slot, state: SavedState): void;
   toMenu(): void;
   upgrade(playerId: string): void;
@@ -129,6 +131,7 @@ type WorldFields =
   | 'amateurs'
   | 'baseLeague'
   | 'staff'
+  | 'manager'
   | 'myTeamId';
 
 export const worldOf = (s: Pick<GameState, WorldFields>): World => ({
@@ -148,6 +151,7 @@ export const worldOf = (s: Pick<GameState, WorldFields>): World => ({
   amateurs: s.amateurs,
   baseLeague: s.baseLeague,
   staff: s.staff,
+  manager: s.manager,
 });
 
 /** Campos do mundo para gravar de volta no estado. */
@@ -168,6 +172,7 @@ function fromWorld(w: World) {
     amateurs: w.amateurs,
     baseLeague: w.baseLeague,
     staff: w.staff,
+    manager: w.manager,
   };
 }
 
@@ -191,7 +196,7 @@ export function trimMyResults(results: Record<string, MatchResult>, me: string, 
 
 /** Campos do estado que vão para o save. */
 const SAVED_KEYS = [
-  'date', 'teams', 'players', 'relations', 'offers', 'transferLog', 'ledger', 'sponsorOffers', 'inbox', 'results', 'seriesLog', 'calendar', 'amateurs', 'baseLeague', 'staff', 'events',
+  'date', 'teams', 'players', 'relations', 'offers', 'transferLog', 'ledger', 'sponsorOffers', 'inbox', 'results', 'seriesLog', 'calendar', 'amateurs', 'baseLeague', 'staff', 'manager', 'events',
   'myTeamId', 'seriesResults', 'lastDayIds', 'activeSlot',
 ] as const satisfies ReadonlyArray<keyof GameState>;
 
@@ -225,11 +230,11 @@ export const useGame = create<GameState>((set, get) => {
 
     openNewCareer: (slot) => set({ screen: 'newCareer', pendingSlot: slot }),
 
-    startCareer: (teamId) => {
+    startCareer: (teamId, profile) => {
       const slot = get().pendingSlot;
       if (!slot) return;
       set({
-        ...fromWorld(createWorld(teamId, Date.now())),
+        ...fromWorld(createWorld(teamId, Date.now(), profile)),
         events: [],
         myTeamId: teamId,
         activeSlot: slot,
@@ -469,8 +474,9 @@ export function useWorld(): World {
   const amateurs = useGame((s) => s.amateurs);
   const baseLeague = useGame((s) => s.baseLeague);
   const staff = useGame((s) => s.staff);
+  const manager = useGame((s) => s.manager);
   return useMemo(
-    () => worldOf({ date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar, amateurs, baseLeague, staff }),
-    [date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar, amateurs, baseLeague, staff],
+    () => worldOf({ date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar, amateurs, baseLeague, staff, manager }),
+    [date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar, amateurs, baseLeague, staff, manager],
   );
 }

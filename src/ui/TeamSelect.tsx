@@ -1,9 +1,22 @@
+import { useState } from 'react';
+import { DEFAULT_PROFILE } from '../engine/manager/model';
 import { playerOvr } from '../engine/player';
 import { useGame } from '../store/game';
 import { money } from './format';
 import { TeamBadge } from './TeamBadge';
 
+const COUNTRIES: Array<[string, string]> = [
+  ['BR', 'Brasil'], ['PT', 'Portugal'], ['AR', 'Argentina'], ['US', 'Estados Unidos'], ['FR', 'França'], ['DE', 'Alemanha'], ['DK', 'Dinamarca'],
+  ['SE', 'Suécia'], ['FI', 'Finlândia'], ['PL', 'Polônia'], ['ES', 'Espanha'], ['GB', 'Reino Unido'], ['RU', 'Rússia'], ['UA', 'Ucrânia'],
+  ['KZ', 'Cazaquistão'], ['TR', 'Turquia'], ['CZ', 'Tchéquia'], ['MN', 'Mongólia'], ['CN', 'China'], ['AU', 'Austrália'],
+];
+const field = 'rounded-lg border border-line bg-panel-2 px-3 py-2 text-sm';
+
 export function TeamSelect() {
+  const [name, setName] = useState(DEFAULT_PROFILE.name);
+  const [age, setAge] = useState(DEFAULT_PROFILE.age);
+  const [country, setCountry] = useState(DEFAULT_PROFILE.country);
+  const profile = { name: name.trim() || DEFAULT_PROFILE.name, age: Math.min(60, Math.max(25, age || DEFAULT_PROFILE.age)), country };
   const teams = useGame((s) => s.teams);
   const players = useGame((s) => s.players);
   const choose = useGame((s) => s.startCareer);
@@ -18,7 +31,29 @@ export function TeamSelect() {
       </button>
       <p className="font-display text-sm font-semibold tracking-[0.3em] text-accent uppercase">Nova carreira · Slot {slot}</p>
       <h1 className="font-display mt-1 text-4xl font-bold sm:text-5xl">Escolha seu time</h1>
-      <p className="mt-2 max-w-xl text-muted">Top 32 do ranking HLTV de 9 de novembro de 2026. Você assume como manager.</p>
+      <p className="mt-2 max-w-xl text-muted">Top 32 do ranking HLTV de 9 de novembro de 2026. Você começa como um manager desconhecido: atributos e reputação baixos, e a diretoria cobrando metas.</p>
+
+      <fieldset className="mt-6 flex flex-wrap items-end gap-3 rounded-2xl border border-line bg-panel p-4">
+        <legend className="px-1 text-sm font-semibold">Seu manager</legend>
+        <label className="flex flex-col gap-1 text-xs text-muted">
+          Nome
+          <input className={field} value={name} maxLength={24} onChange={(e) => setName(e.target.value)} />
+        </label>
+        <label className="flex flex-col gap-1 text-xs text-muted">
+          Idade
+          <input className={`${field} w-20`} type="number" min={25} max={60} value={age} onChange={(e) => setAge(Number(e.target.value))} />
+        </label>
+        <label className="flex flex-col gap-1 text-xs text-muted">
+          País
+          <select className={field} value={country} onChange={(e) => setCountry(e.target.value)}>
+            {COUNTRIES.map(([code, label]) => (
+              <option key={code} value={code}>
+                {label}
+              </option>
+            ))}
+          </select>
+        </label>
+      </fieldset>
 
       <ul className="mt-8 grid gap-3 sm:grid-cols-2">
         {list.map((t) => {
@@ -27,7 +62,7 @@ export function TeamSelect() {
             <li key={t.id}>
               <button
                 type="button"
-                onClick={() => choose(t.id)}
+                onClick={() => choose(t.id, profile)}
                 className="flex w-full items-center gap-4 rounded-2xl border border-line bg-panel p-4 text-left transition hover:border-accent/60 hover:bg-panel-2"
               >
                 <span className="font-display w-8 text-2xl font-bold text-muted">#{t.hltvRank}</span>

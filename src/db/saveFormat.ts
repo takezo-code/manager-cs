@@ -3,6 +3,7 @@ import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_STAFF, INITIAL_TEAMS } from
 import { addToAcademy, generateYouth } from '../engine/academy';
 import { generateAmateurs } from '../engine/amateurs';
 import { newBaseSeason } from '../engine/baseLeague';
+import { DEFAULT_PROFILE, newManager } from '../engine/manager/model';
 import { buildYear, type CalendarEvent } from '../engine/calendar';
 import { ACADEMY, AMATEURS } from '../engine/config';
 import { START_DATE, addDays } from '../engine/date';
@@ -15,8 +16,8 @@ import type { Tournament } from '../engine/tournament/types';
 import type { MatchResult, Player, Team } from '../engine/types';
 import type { World, WorldEvent } from '../engine/world';
 
-/** v1: passo 6. v2: mercado. v3: finanças e satisfação. v4: calendário, ranking, prêmios e treino. v5: academy, olheiro, GC/FACEIT e idade. v6: comissão técnica. */
-export const SAVE_VERSION = 6;
+/** v1: passo 6. v2: mercado. v3: finanças e satisfação. v4: calendário, ranking, prêmios e treino. v5: academy, olheiro, GC/FACEIT e idade. v6: comissão técnica. v7: carreira do manager. */
+export const SAVE_VERSION = 7;
 export const SLOTS = [1, 2, 3] as const;
 export type Slot = (typeof SLOTS)[number];
 
@@ -75,6 +76,7 @@ export function migrateState(raw: Record<string, unknown>, version: number): Sav
   if (version < 4) s = migrateV3(s as SavedState & { tournament?: unknown });
   if (version < 5) s = migrateV4(s);
   if (version < 6) s = migrateV5(s);
+  if (version < 7) s = { ...s, manager: s.manager ?? newManager(DEFAULT_PROFILE, s.myTeamId, s.date) };
   return s;
 }
 

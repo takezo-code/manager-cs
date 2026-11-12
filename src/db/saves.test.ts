@@ -2,6 +2,7 @@ import 'fake-indexeddb/auto';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { INITIAL_PLAYERS, INITIAL_TEAMS } from '../data';
 import { buildYear } from '../engine/calendar';
+import { DEFAULT_PROFILE, newManager } from '../engine/manager/model';
 import { createLegacyTournament as createTournament, playDay } from '../engine/tournament/run';
 import { exportFileName, exportJson, makeRecord, parseImport, type SavedState } from './saveFormat';
 import { db, deleteSave, getSave, lastSave, listSaves, putSave } from './saves';
@@ -24,6 +25,7 @@ function sampleState(): SavedState {
     amateurs: [],
     baseLeague: { season: 2026, table: {}, lastRound: [] },
     staff: {},
+    manager: newManager(DEFAULT_PROFILE, 'furia', '2026-11-11'),
     calendar: [{ ...buildYear(2026).find((e) => e.templateId === 'iem-china')!, status: 'em_andamento', tournament: out.tournament }],
     teams,
     players: out.players,
@@ -156,5 +158,16 @@ describe('Migração v5 → v6', () => {
     expect(s.teams.furia.staff.tecnico).toBeTruthy();
     expect(s.staff[s.teams.furia.staff.tecnico!].nick).toBe('sidde');
     expect(Object.keys(s.staff).length).toBeGreaterThan(96);
+  });
+});
+
+describe('Migração v6 → v7', () => {
+  it('cria o manager padrão, com passagem no time atual', async () => {
+    const { migrateState } = await import('./saveFormat');
+    const s0 = sampleState();
+    const v6 = Object.fromEntries(Object.entries(s0).filter(([k]) => k !== 'manager'));
+    const s = migrateState(v6 as unknown as Record<string, unknown>, 6);
+    expect(s.manager.name).toBe('Manager');
+    expect(s.manager.stints[0]).toEqual({ teamId: 'furia', from: s0.date, to: null, reason: null });
   });
 });

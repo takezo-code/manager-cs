@@ -6,6 +6,7 @@ import { generateAmateurs, refreshAmateurs } from './amateurs';
 import { academyAgingWarning, academyYearEnd } from './academy';
 import { ageUp, monthlyDevelopment } from './development';
 import { newBaseSeason, playBaseRound } from './baseLeague';
+import { DEFAULT_PROFILE, newManager, type ManagerProfile } from './manager/model';
 import { finishCourses, monthlyStaffOffers } from './staff/career';
 import { staffMarketDay } from './staff/market';
 import { ACADEMY, AMATEURS } from './config';
@@ -26,7 +27,7 @@ import type { MatchResult } from './types';
 import type { World, WorldEvent } from './world';
 
 /** Mundo de um jogo novo: dados dos JSONs + patrocínios iniciais. */
-export function createWorld(managerTeamId: string, seed = 1): World {
+export function createWorld(managerTeamId: string, seed = 1, profile: ManagerProfile = DEFAULT_PROFILE): World {
   const rng = createRng(hashString(`mundo:${seed}`));
   const teams = Object.fromEntries(INITIAL_TEAMS.map((t) => [t.id, structuredClone(t)]));
   for (const t of Object.values(teams)) t.sponsors = initialSponsors(t, START_DATE, rng);
@@ -48,6 +49,7 @@ export function createWorld(managerTeamId: string, seed = 1): World {
     amateurs: [],
     baseLeague: newBaseSeason(Number(START_DATE.slice(0, 4))),
     staff: Object.fromEntries(INITIAL_STAFF.map((s) => [s.id, structuredClone(s)])),
+    manager: newManager(profile, managerTeamId, START_DATE),
   };
   w = { ...w, amateurs: generateAmateurs(rng, AMATEURS.poolSize, START_DATE) };
   // Academy inicial de cada time.

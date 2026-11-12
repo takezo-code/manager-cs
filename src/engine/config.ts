@@ -697,3 +697,13 @@ export const STAFF = {
   /** Prévia do analista exata a partir desta Leitura. */
   previewExactFrom: 85,
 };
+
+/** Carreira do manager. */
+export const MANAGER = {
+  startAttr: 30,
+  startReputation: 10,
+  startConfidence: 60,
+  /** Salário mensal do manager: base + por ponto de reputação. */
+  salaryBase: 8_000,
+  salaryPerRep: 300,
+};
