@@ -748,3 +748,24 @@ export const MANAGER = {
   /** Time que você deixou só volta a te chamar depois disto. */
   rehireDays: 365,
 };
+
+/** Mídia: torcida, notícias, Twitter e Instagram. */
+export const MEDIA = {
+  startMood: 55,
+  seriesMood: 1.5,
+  titleMood: 8,
+  rankMood: 1,
+  starOvr: 85,
+  starSigningMood: 4,
+  idolSaleMood: 8,
+  lateMood: 5,
+  /** Comunicação 100 reduz as perdas de humor em 30%. */
+  communicationShield: 0.3,
+  lowMood: 30,
+  highMood: 70,
+  lowSponsor: 0.15,
+  highSponsor: 0.1,
+  lowMoodMonthly: 1,
+  crowdMax: 1.5,
+  crowdPerPoint: 0.05,
+};

@@ -1,5 +1,7 @@
 // Monta os campeonatos (formatos em formats.ts) e avança um dia de cada vez.
 import { afterSeries, recoverDay } from '../form';
+import type { MatchStage } from '../types';
+import type { FanContext } from '../match';
 import type { StaffAttrs } from '../staff/effects';
 import { simulateMatch } from '../match';
 import { calcRating } from '../rating';
@@ -145,6 +147,7 @@ export function playDay(
   players: Record<string, Player>,
   /** Comissão técnica de cada time (sem ela, partidas sem efeito de staff). */
   staffOf?: (teamId: string) => StaffAttrs,
+  fanOf?: (teamId: string, stage: MatchStage) => FanContext,
 ): DayOutcome {
   if (tournament.championId) return { tournament, players, results: {} };
   const t: Tournament = structuredClone(tournament);
@@ -177,6 +180,8 @@ export function playDay(
       seed: hashString(`${t.seed}:${m.id}`),
       staffA: staffOf?.(m.teamAId),
       staffB: staffOf?.(m.teamBId),
+      fanA: fanOf?.(m.teamAId, m.stage),
+      fanB: fanOf?.(m.teamBId, m.stage),
     });
     results[m.id] = r;
     m.day = t.day;

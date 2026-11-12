@@ -1,5 +1,6 @@
 // Fechamento do mês (dia 1º): patrocínios entram, salários saem, atrasos e ofertas de patrocínio.
 import { FINANCE, MORALE } from '../config';
+import { fanSponsorFactor } from '../media/fans';
 import { roundTo } from '../format';
 import { sponsorBonus } from '../manager/effects';
 import { teamBusy } from '../calendar';
@@ -106,7 +107,7 @@ export function monthlyFinance(world: World, rng: Rng): { world: World; events: 
         const slot = slots.master && rng.chance(0.35) ? 'master' : 'regular';
         const raw = makeOffer(team, slot, w.date, rng, used);
         // Finanças do manager: patrocínios melhores.
-        const o = { ...raw, monthly: roundTo(raw.monthly * (1 + sponsorBonus(w)), 1000) };
+        const o = { ...raw, monthly: roundTo(raw.monthly * (1 + sponsorBonus(w)) * fanSponsorFactor(w), 1000) };
         used.push(o.brand);
         offers.push(o);
       }

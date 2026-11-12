@@ -1,5 +1,6 @@
 // Satisfação (0 a 100): faixas, efeitos mensais, eventos e ciúme no elenco.
-import { MANAGER, MORALE, STAFF } from '../config';
+import { MANAGER, MEDIA, MORALE, STAFF } from '../config';
+import { lowMood } from '../media/fans';
 import { lockerRoom } from '../manager/effects';
 import { staffAttr } from '../staff/model';
 import { daysBetween } from '../date';
@@ -80,6 +81,8 @@ export function monthlySatisfaction(world: World): World {
     if (p.mood.salaryBeforeCut && team.lateMonths === 0 && team.money > 0) delta += m.waitingRestore;
     // Sem nada pesando, volta devagar para o neutro.
     if (delta === 0 && p.satisfaction < m.driftTo) delta = Math.min(m.drift, m.driftTo - p.satisfaction);
+    // Torcida na bronca pesa em quem não tem Sangue Frio.
+    if (lowMood(w, team.id) && p.skillId !== 'sangue_frio') delta -= MEDIA.lowMoodMonthly;
     // Psicólogo (Motivação) segura as perdas; técnico (Gestão) ajuda todo mês.
     if (delta < 0) delta *= 1 - (staffAttr(w, team.id, 'MOT') - STAFF.minAttr) / 110;
     delta += (staffAttr(w, team.id, 'GES') - 70) * STAFF.managementMonthly;

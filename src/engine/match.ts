@@ -34,6 +34,14 @@ export interface MatchInput {
   /** Comissão técnica de cada time (atributos efetivos). Sem ela, a partida é a de antes do passo 11. */
   staffA?: StaffAttrs;
   staffB?: StaffAttrs;
+  /** Torcida: bônus em jogos com público e pressão de playoff nos grupos quando está na bronca. */
+  fanA?: FanContext;
+  fanB?: FanContext;
+}
+
+export interface FanContext {
+  crowd: number;
+  lowMood: boolean;
 }
 
 interface SimPlayer {
@@ -71,12 +79,13 @@ interface SimTeam {
 
 const has = (p: SimPlayer, s: SkillId) => p.skill === s;
 
-function buildSimTeam(team: Team, players: Player[], stage: MatchStage, rng: Rng, staff?: StaffAttrs): SimTeam {
+function buildSimTeam(team: Team, players: Player[], stage: MatchStage, rng: Rng, staff?: StaffAttrs, fan?: FanContext): SimTeam {
+  const pressureStage: MatchStage = fan?.lowMood && stage === 'grupos' ? 'playoffs' : stage;
   const sims: SimPlayer[] = players.map((pl) => {
     const attrs = effectiveAttributes(pl);
     const formFactor = 1 - (attrs.MEN - 50) / 100; // Mental alto = menos oscilação
     const form = rng.gaussian() * SIM.formSpread * Math.max(0.3, formFactor);
-    const pressure = pl.skillId === 'sangue_frio' ? 0 : SIM.pressure[stage] * Math.max(0, 85 - attrs.MEN) * (staff ? pressureFactor(staff.PRS) : 1);
+    const pressure = pl.skillId === 'sangue_frio' ? 0 : SIM.pressure[pressureStage] * Math.max(0, 85 - attrs.MEN) * (staff ? pressureFactor(staff.PRS) : 1);
     const fatigue = Math.max(0, SIM.energyThreshold - pl.energy) * SIM.energyPenaltyPerPoint;
     return {
       id: pl.id,
@@ -99,7 +108,7 @@ function buildSimTeam(team: Team, players: Player[], stage: MatchStage, rng: Rng
   const igl = sims.find((p) => p.role === 'IGL') ?? [...sims].sort((a, b) => b.attrs.EQP - a.attrs.EQP)[0];
   const call = igl.attrs.EQP * 0.6 + igl.attrs.NOC * 0.4;
   const callBonus =
-    (call - 70) * SIM.iglCallWeight + (has(igl, 'cerebro_tatico') ? PASSIVE_BONUS.cerebroTaticoTeam : 0) + (staff ? tacticBonus(staff.TAT) : 0);
+    (call - 70) * SIM.iglCallWeight + (has(igl, 'cerebro_tatico') ? PASSIVE_BONUS.cerebroTaticoTeam : 0) + (staff ? tacticBonus(staff.TAT) : 0) + (fan?.crowd ?? 0);
   const avg = (k: keyof Attributes) => sims.reduce((s, p) => s + p.attrs[k], 0) / sims.length;
   return {
     team,
@@ -532,8 +541,8 @@ export function simulateMatch(input: MatchInput): MatchResult {
     if (mapScore[teamA.id] === need || mapScore[teamB.id] === need) break;
     // Forma, pressão e cansaço são sorteados por mapa.
     const sims: [SimTeam, SimTeam] = [
-      buildSimTeam(teamA, input.playersA, input.stage, rng, staff?.[0]),
-      buildSimTeam(teamB, input.playersB, input.stage, rng, staff?.[1]),
+      buildSimTeam(teamA, input.playersA, input.stage, rng, staff?.[0], input.fanA),
+      buildSimTeam(teamB, input.playersB, input.stage, rng, staff?.[1], input.fanB),
     ];
     // Quem não escolheu o mapa escolhe o lado; no decider, faca (sorteio).
     const firstCT = rng.chance(0.5) ? 0 : 1;

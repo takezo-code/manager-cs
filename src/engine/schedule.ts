@@ -1,6 +1,7 @@
 // Agenda da temporada: convites pelo ranking, aceite/recusa, qualificatória (mata-mata MD3),
 // início dos eventos, um dia de cada evento ativo e o encerramento (premiação, prêmios, ranking).
 import { type CalendarEvent, overlaps } from './calendar';
+import { crowdBonus, lowMood } from './media/fans';
 import { staffAttrsOf } from './staff/effects';
 import { staffTitle } from './staff/career';
 import { titleReputation } from './manager/reputation';
@@ -223,7 +224,7 @@ export function playEvents(world: World, _rng?: Rng): Out & { results: Record<st
   const results: Record<string, MatchResult> = {};
   for (const ev of w.calendar) {
     if (ev.status !== 'em_andamento' || !ev.tournament) continue;
-    const out = playDay(ev.tournament, withStandins(w, ev.tournament.participants), w.players, (id) => staffAttrsOf(w, id));
+    const out = playDay(ev.tournament, withStandins(w, ev.tournament.participants), w.players, (id) => staffAttrsOf(w, id), (id, stage) => ({ crowd: crowdBonus(w, id, stage), lowMood: lowMood(w, id) }));
     w = { ...w, players: out.players };
     for (const [id, r] of Object.entries(out.results)) {
       results[id] = r;

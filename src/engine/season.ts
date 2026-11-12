@@ -13,7 +13,7 @@ import { expireManagerOffers, monthlyManagerOffers, weeklyUnemployedOffers } fro
 import { trackHistory } from './manager/history';
 import { finishCourses, monthlyStaffOffers } from './staff/career';
 import { staffMarketDay } from './staff/market';
-import { ACADEMY, AMATEURS } from './config';
+import { ACADEMY, AMATEURS, MEDIA } from './config';
 import { START_DATE, addDays, daysBetween } from './date';
 import { monthlyFinance } from './finance/monthly';
 import { recoverRest } from './form';
@@ -54,6 +54,7 @@ export function createWorld(managerTeamId: string, seed = 1, profile: ManagerPro
     baseLeague: newBaseSeason(Number(START_DATE.slice(0, 4))),
     staff: Object.fromEntries(INITIAL_STAFF.map((s) => [s.id, structuredClone(s)])),
     manager: newManager(profile, managerTeamId, START_DATE),
+    fans: Object.fromEntries(Object.keys(teams).map((id) => [id, MEDIA.startMood])),
   };
   w = { ...w, amateurs: generateAmateurs(rng, AMATEURS.poolSize, START_DATE) };
   if (managerTeamId) w = assignGoals(w, managerTeamId);

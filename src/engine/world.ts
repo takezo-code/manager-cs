@@ -133,6 +133,8 @@ export interface World {
   staff: Record<string, Staff>;
   /** O manager (você). `managerTeamId === ''` quando está desempregado. */
   manager: Manager;
+  /** Humor da torcida de cada time (0 a 100, oculto). */
+  fans: Record<string, number>;
 }
 
 /** Mensagem curta para o manager (vira notícia de verdade no passo 13). */
