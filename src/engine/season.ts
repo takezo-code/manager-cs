@@ -6,6 +6,7 @@ import { academySeasonEnd, markRevealed, startAsAcademyManager } from './tier2/a
 import { mediaDay } from './media/day';
 import { addToAcademy, generateYouth } from './academy';
 import { buildYear, hasCircuit, teamBusy } from './calendar';
+import { retireFreeAgents } from './market/retirement';
 import { generateAmateurs, refreshAmateurs } from './amateurs';
 import { academyAgingWarning, academyYearEnd } from './academy';
 import { ageUp, monthlyDevelopment } from './development';
@@ -166,6 +167,8 @@ export function dailyTick(world: World, opts: { rng?: Rng } = {}): { world: Worl
     calendar: w.calendar.filter((e) => daysBetween(e.endDate, w.date) <= 400),
   };
   // Mídia: torcida, notícias e rumores do dia.
+  // Virada do ano, depois de contratos vencidos e dispensas do dia: aposentadoria dos agentes livres.
+  if (w.date.endsWith('-01-01')) w = retireFreeAgents(w);
   w = mediaDay(world, w, played.results, createRng(hashString(`midia:${w.date}`)));
   return { world: w, events, results: played.results };
 }

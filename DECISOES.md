@@ -175,6 +175,12 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 | Empréstimo | Para times reais fora do top 32 com menos de 7 (elenco + emprestados); o emprestado joga pelo time (5 melhores titulares) e o time paga 50% do salário; chamar de volta US$ 20 mil |
 | Manager da academy | Time principal com a IA; usa o caixa da org só na academy; metas: top 8 das academies no tier 3 (100/70/50/20 por colocação), promover 1 jovem, um jovem +5 de OVR |
 | Patrocínio | Master 200 mil × 0,96^(posição − 1) até o 32º; depois × 0,99 por posição (#100 ≈ 28 mil) |
+| Só tier 1 | O top 20 do ranking nunca é chamado para tier 2/3; academies de qualquer time podem jogar o tier 3 |
+| Um torneio por vez | Um time nunca joga dois torneios ao mesmo tempo; as datas de cada evento cobrem o formato (teste simula todos) |
+| Títulos tier 2/3 | Sem bônus de MVP/EVP, sem ganho de staff e sem reputação do manager (só tier 1) |
+| Aposentadoria | Na virada do ano, agente livre com 31+ ou OVR < 62 sai do jogo; no máximo 300 agentes livres |
+| Folha da IA | Teto: patrocínio (o maior entre o atual e o esperado pelo ranking) × 1,3 + caixa ÷ 24; vale para reforço, completar elenco e renovação |
+| Reestruturação da IA | Time da IA com 4 meses de atraso renegocia a dívida e dispensa os salários mais caros até caber no patrocínio esperado |
 | Saves v9 → v10 | Saem a Tier 2 Cup e os fictícios; emprestados a eles voltam; entra o circuito tier 2/3 que ainda falta nos anos do save; o mundo continua com os 32 times |
 | Cor da carta evoluída | A cor da evolução (azul, vermelha ou rosa) substitui a cor da faixa; a faixa continua num selo |
 

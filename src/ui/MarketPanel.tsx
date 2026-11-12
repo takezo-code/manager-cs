@@ -307,9 +307,9 @@ function MovesTab() {
             <span className="w-24 shrink-0 text-muted">{formatDate(e.date)}</span>
             <span className="w-28 shrink-0 text-muted">{KIND_LABEL[e.kind]}</span>
             <span>
-              <span className="font-semibold">{p.nick}</span>{' '}
+              <span className="font-semibold">{p?.nick ?? e.playerId}</span>{' '}
               {e.kind === 'renovacao' ? `renovou com ${to}` : `${from} → ${to}`}
-              {e.kind === 'troca' && e.otherPlayerId && ` (por ${w.players[e.otherPlayerId].nick})`}
+              {e.kind === 'troca' && e.otherPlayerId && ` (por ${w.players[e.otherPlayerId]?.nick ?? e.otherPlayerId})`}
               {e.fee > 0 && e.kind !== 'troca' && ` · ${money(e.fee)}`}
             </span>
           </li>

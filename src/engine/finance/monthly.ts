@@ -9,9 +9,21 @@ import type { Rng } from '../rng';
 import type { Team } from '../types';
 import type { World, WorldEvent } from '../world';
 import { addMoney } from '../world';
-import { freeSlots, makeOffer, toContract } from './sponsors';
+import { expectedSponsorIncome, freeSlots, makeOffer, toContract } from './sponsors';
 import { fmtMoney } from '../format';
 
+
+// Parte paga pelos times que recebem emprestados, calculada uma vez por mapa de jogadores.
+const loanCostCache = new WeakMap<World['players'], Record<string, number>>();
+function loanCosts(w: World): Record<string, number> {
+  let out = loanCostCache.get(w.players);
+  if (!out) {
+    out = {};
+    for (const p of Object.values(w.players)) if (p.loan) out[p.loan.teamId] = (out[p.loan.teamId] ?? 0) + (p.contract?.salary ?? 0) * p.loan.salaryShare;
+    loanCostCache.set(w.players, out);
+  }
+  return out;
+}
 
 export const payroll = (w: World, team: Team) =>
   [...team.playerIds, ...(team.academyIds ?? [])].reduce((s, id) => {
@@ -21,7 +33,7 @@ export const payroll = (w: World, team: Team) =>
   }, 0) +
   Object.values(team.staff ?? {}).reduce((s, id) => s + (id ? (w.staff?.[id]?.contract?.salary ?? 0) : 0), 0) +
   // Emprestados a este time: paga a parte combinada.
-  Object.values(w.players).reduce((s, p) => s + (p.loan?.teamId === team.id ? (p.contract?.salary ?? 0) * p.loan.salaryShare : 0), 0);
+  (loanCosts(w)[team.id] ?? 0);
 
 export const sponsorIncome = (team: Team, date: string) =>
   team.sponsors.filter((s) => s.endDate >= date).reduce((s, x) => s + x.monthly, 0);
@@ -66,6 +78,19 @@ export function monthlyFinance(world: World, rng: Rng): { world: World; events: 
     // Patrocinadores vencidos saem da lista.
     team = { ...team, sponsors: team.sponsors.filter((s) => s.endDate >= w.date) };
     w = setTeam(w, team);
+
+    // Time da IA afundado em atrasos se reestrutura: renegocia a dívida e dispensa os salários mais caros
+    // até a folha caber no patrocínio esperado (os patrocinadores voltam no mês seguinte).
+    if (id !== mine && team.lateMonths >= FINANCE.aiRestructureAfter) {
+      const cap = expectedSponsorIncome(team) * FINANCE.aiPayrollSponsorShare;
+      const byCost = [...team.playerIds].sort((a, b) => (w.players[b].contract?.salary ?? 0) - (w.players[a].contract?.salary ?? 0));
+      for (const pid of byCost) {
+        if (payroll(w, w.teams[id]) <= cap) break;
+        w = releasePlayer(w, pid, 'rescisao');
+      }
+      w = setTeam(w, { ...w.teams[id], arrears: 0, lateMonths: 0, money: Math.max(0, w.teams[id].money) });
+      team = w.teams[id];
+    }
 
     // 1) Patrocínios entram.
     for (const s of team.sponsors) w = addMoney(w, id, s.monthly, 'patrocinio', s.brand);

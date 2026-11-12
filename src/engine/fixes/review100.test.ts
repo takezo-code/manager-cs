@@ -2,6 +2,10 @@
 import { describe, expect, it } from 'vitest';
 import { buildYear } from '../calendar';
 import { daysBetween } from '../date';
+import { monthlyFinance, payroll } from '../finance/monthly';
+import { expectedSponsorIncome } from '../finance/sponsors';
+import { aiMarketDay, aiPayrollCap } from '../market/ai';
+import { createRng } from '../rng';
 import { createTournament, playDay } from '../tournament/run';
 import { candidates, issueInvites, startEvents } from '../schedule';
 import { rivalPreview } from '../staff/preview';
@@ -104,6 +108,55 @@ describe('Revisão do top 100', () => {
     expect(w.seriesLog.some((s) => s.winner.endsWith('-ac') || s.loser.endsWith('-ac'))).toBe(false);
     expect(w.news.some((n) => /[a-z0-9]+-ac/.test(JSON.stringify(n)))).toBe(false);
   }, 30_000);
+
+  it('I4: na virada do ano, agentes livres velhos ou fracos se aposentam e sobram no máximo 300', () => {
+    const base = { ...createWorld('furia'), date: '2027-12-31', calendar: [] };
+    const extra = Object.fromEntries(
+      Array.from({ length: 500 }, (_, i) => {
+        const p = Object.values(base.players).find((x) => !x.teamId)!;
+        return [`fa${i}`, { ...p, id: `fa${i}`, age: 22 + (i % 6) }];
+      }),
+    );
+    const old = Object.values(base.players).find((x) => !x.teamId)!;
+    const w = { ...base, players: { ...base.players, ...extra, velho: { ...old, id: 'velho', age: 31 } } };
+    const out = dailyTick(w).world;
+    const free = Object.values(out.players).filter((p) => !p.teamId);
+    expect(free.length).toBeLessThanOrEqual(300);
+    expect(out.players.velho).toBeUndefined();
+    for (const t of Object.values(out.teams)) for (const id of [...t.playerIds, ...t.academyIds]) expect(out.players[id]).toBeDefined();
+  }, 30_000);
+
+  it('I3: a IA não contrata salário acima do teto da folha', () => {
+    const base = { ...createWorld('furia'), date: '2027-01-05' };
+    const team = Object.values(base.teams).find((t) => t.hltvRank === 60)!;
+    // Time rico em caixa (prêmio), mas com patrocínio de tier 2: não pode encher a folha de estrelas.
+    let w = { ...base, teams: { ...base.teams, [team.id]: { ...team, money: 3_000_000 } } };
+    for (let s = 1; s <= 30; s++) w = aiMarketDay(w, 'furia', createRng(s)).world;
+    expect(payroll(w, w.teams[team.id])).toBeLessThanOrEqual(Math.max(payroll(base, team), aiPayrollCap(w, w.teams[team.id])));
+  });
+
+  it('I3: time da IA atrasado há 4 meses se reestrutura (dívida zera, folha cabe no patrocínio esperado)', () => {
+    const base = { ...createWorld('furia'), date: '2027-03-01' };
+    const t = Object.values(base.teams).find((x) => x.hltvRank === 90)!;
+    const crisis = { ...t, money: -50_000, arrears: 900_000, lateMonths: 4, sponsors: [] };
+    const w = { ...base, teams: { ...base.teams, [t.id]: crisis } };
+    const out = monthlyFinance(w, createRng(1)).world.teams[t.id];
+    // A dívida antiga some; no próprio mês ainda pode faltar a folha (sem patrocinador até o mês seguinte).
+    expect(out.arrears).toBeLessThan(payroll(base, t) + 1);
+    expect(out.lateMonths).toBeLessThanOrEqual(1);
+    expect(payroll(monthlyFinance(w, createRng(1)).world, out)).toBeLessThanOrEqual(expectedSponsorIncome(out) * 1.3 + 1);
+    // O seu time não se reestrutura sozinho.
+    const mine = { ...base, teams: { ...base.teams, furia: { ...base.teams.furia, money: -50_000, arrears: 900_000, lateMonths: 4 } } };
+    expect(monthlyFinance(mine, createRng(1)).world.teams.furia.lateMonths).toBeGreaterThan(0);
+  });
+
+  it('I3/I4: três anos de jogo, economia de pé (< 1/8 atrasados) e agentes livres sob controle', () => {
+    let w = createWorld('furia', 3);
+    for (let d = 0; d < 365 * 3; d++) w = dailyTick(w).world;
+    const teams = Object.values(w.teams);
+    expect(teams.filter((t) => t.lateMonths > 0).length).toBeLessThan(teams.length / 8);
+    expect(Object.values(w.players).filter((p) => !p.teamId).length).toBeLessThan(500);
+  }, 180_000);
 
   it('C1: save antigo (32 times) roda um ano sem tier 2/3, com todo evento tier 1 com campeão', () => {
     let w = oldWorld();

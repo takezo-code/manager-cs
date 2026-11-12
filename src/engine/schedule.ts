@@ -97,12 +97,14 @@ export function withStandins(w: World, teamIds: string[], used: Set<string> = ne
     const roster = [...teams[id].playerIds, ...loaned[id]].sort((a, b) => playerOvr(w.players[b]) - playerOvr(w.players[a]));
     teams[id] = { ...teams[id], playerIds: roster, starters: roster.slice(0, 5) };
   }
-  const free = Object.values(w.players)
-    .filter((p) => !p.teamId)
-    .sort((a, b) => playerOvr(b) - playerOvr(a));
+  // Agentes livres por OVR: só monta a lista se algum time precisar de stand-in.
+  let free: World['players'][string][] | null = null;
   for (const id of teamIds) {
     const t = teams[id];
     if (t.playerIds.length >= 5) continue;
+    free ??= Object.values(w.players)
+      .filter((p) => !p.teamId)
+      .sort((a, b) => playerOvr(b) - playerOvr(a));
     const extra = free.filter((p) => !used.has(p.id)).slice(0, 5 - t.playerIds.length).map((p) => p.id);
     extra.forEach((p) => used.add(p));
     const roster = [...t.playerIds, ...extra];

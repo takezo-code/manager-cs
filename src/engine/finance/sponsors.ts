@@ -15,6 +15,9 @@ export function sponsorBase(team: Team, slot: SponsorSlot): number {
   return slot === 'master' ? master : master * FINANCE.regularShare;
 }
 
+/** Patrocínio mensal que o time teria com todas as vagas preenchidas (referência da IA). */
+export const expectedSponsorIncome = (team: Team) => sponsorBase(team, 'master') + FINANCE.regularSlots * sponsorBase(team, 'regular');
+
 export function freeSlots(team: Team, date: string): { master: boolean; regular: number } {
   const active = team.sponsors.filter((s) => s.endDate >= date);
   return {

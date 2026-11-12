@@ -4,7 +4,8 @@ import { teamBusy, windowOpen } from '../calendar';
 import { saleBonus } from '../manager/effects';
 import { promote } from '../academy';
 import { ACADEMY, AI_MARKET, FINANCE, MARKET } from '../config';
-import { payroll } from '../finance/monthly';
+import { payroll, sponsorIncome } from '../finance/monthly';
+import { expectedSponsorIncome } from '../finance/sponsors';
 import { bandOf } from '../morale/satisfaction';
 import { addDays, daysBetween, endOfMonthAfter } from '../date';
 import { baseOvr } from '../form';
@@ -18,6 +19,13 @@ import { executeRenewal, executeTransfer, releasePlayer } from './transfer';
 import { contractMonthsLeft, marketValue } from './value';
 import { fmtMoney, roundTo } from '../format';
 
+
+/** Quanto a IA aceita pagar de folha por mês (patrocínio + parte do caixa). */
+export const aiPayrollCap = (w: World, t: Team) =>
+  Math.max(sponsorIncome(t, w.date), expectedSponsorIncome(t)) * FINANCE.aiPayrollSponsorShare + Math.max(0, t.money) / FINANCE.aiPayrollCashMonths;
+
+/** A folha cabe no teto depois de trocar `out` (salário que sai) por `salary`? */
+const fits = (w: World, t: Team, salary: number, out = 0) => payroll(w, t) - out + salary <= aiPayrollCap(w, t);
 
 function aiContract(w: World, p: Player, teamId: string, rng: Rng): Contract {
   const st = playerStance(w, p.id, teamId, p.teamId === teamId ? 'renewal' : 'transfer');
@@ -69,7 +77,9 @@ export function aiMarketDay(world: World, myTeamId: string, rng: Rng): { world: 
     }
     const left = contractMonthsLeft(p, w.date);
     if (p.teamId !== myTeamId && left <= AI_MARKET.renewMonths && left > 0 && rng.chance(0.03)) {
-      w = executeRenewal(w, p.id, aiContract(w, p, p.teamId, rng));
+      const c = aiContract(w, p, p.teamId, rng);
+      // Renova se o novo salário cabe na folha (ou se não aumenta); senão, deixa o contrato acabar.
+      if (c.salary <= p.contract.salary || fits(w, w.teams[p.teamId], c.salary, p.contract.salary)) w = executeRenewal(w, p.id, c);
     } else if (p.contract.endDate < w.date) {
       const team = w.teams[p.teamId];
       w = releasePlayer(w, p.id, 'fim_contrato');
@@ -89,9 +99,11 @@ export function aiMarketDay(world: World, myTeamId: string, rng: Rng): { world: 
       const team = w.teams[t.id];
       const roles = new Set(team.playerIds.map((id) => w.players[id].role));
       const pool = freeAgents(w).sort((a, b) => Number(roles.has(a.role)) - Number(roles.has(b.role)) || playerOvr(b) - playerOvr(a));
-      const pick = pool[0];
+      // O melhor que cabe na folha; se nenhum cabe, o mais barato (o time precisa de 5).
+      const offers = pool.map((p) => ({ p, c: aiContract(w, p, t.id, rng) }));
+      const pick = offers.find((o) => fits(w, team, o.c.salary)) ?? [...offers].sort((a, b) => a.c.salary - b.c.salary)[0];
       if (!pick) break;
-      w = executeTransfer(w, pick.id, t.id, 0, aiContract(w, pick, t.id, rng), 'livre');
+      w = executeTransfer(w, pick.p.id, t.id, 0, pick.c, 'livre');
     }
   }
 
@@ -121,8 +133,12 @@ export function aiMarketDay(world: World, myTeamId: string, rng: Rng): { world: 
       .sort((a, b) => a.price - b.price);
     const pick = candidates[0];
     if (!pick) continue;
+    const contract = aiContract(w, pick.p, t.id, rng);
+    // Reforço só se o salário cabe na folha (contando quem sai para abrir vaga).
+    const outId = team.playerIds.length >= MARKET.squadMax ? [...team.playerIds].sort((a, b) => playerOvr(w.players[a]) - playerOvr(w.players[b]))[0] : null;
+    if (!fits(w, team, contract.salary, outId ? (w.players[outId].contract?.salary ?? 0) : 0)) continue;
     w = makeRoom(w, t.id);
-    w = executeTransfer(w, pick.p.id, t.id, pick.price, aiContract(w, pick.p, t.id, rng), pick.p.teamId ? 'transferencia' : 'livre');
+    w = executeTransfer(w, pick.p.id, t.id, pick.price, contract, pick.p.teamId ? 'transferencia' : 'livre');
   }
 
   // Manager desempregado: não há jogadores seus para receber propostas.

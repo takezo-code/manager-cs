@@ -305,6 +305,10 @@ export const ENERGY = {
 // ---------- Mercado ----------
 
 export const MARKET = {
+  /** Virada do ano: agente livre com essa idade ou com OVR abaixo do mínimo se aposenta; no máximo N livres. */
+  freeAgentRetireAge: 31,
+  freeAgentMinOvr: 62,
+  freeAgentCap: 300,
   squadMin: 5,
   squadMax: 7,
   /** Valor base: 50 mil × 1,16^(OVR − 60). OVR 80 ≈ US$ 970 mil; OVR 94 ≈ US$ 7,7 mi. */
@@ -392,11 +396,16 @@ export const FINANCE = {
   offersPerMonth: [1, 3],
   /** Meses de atraso para um patrocinador romper e para jogadores insatisfeitos rescindirem. */
   sponsorLeavesAfterLate: 2,
+  /** Time da IA com tantos meses de atraso se reestrutura: dívida renegociada e folha cortada. */
+  aiRestructureAfter: 4,
   playersLeaveAfterLate: 3,
   /** Abaixo disto de satisfação, o jogador rescinde por atraso. */
   rescindBelowSatisfaction: 40,
   /** A IA só contrata se sobrar pelo menos N meses de folha no caixa. */
   aiReserveMonths: 3,
+  /** Teto da folha da IA: patrocínio mensal × isto + caixa ÷ aiPayrollCashMonths. */
+  aiPayrollSponsorShare: 1.3,
+  aiPayrollCashMonths: 24,
 };
 
 /**

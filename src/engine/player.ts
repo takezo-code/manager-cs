@@ -63,8 +63,16 @@ export function ovrFor(attrs: Attributes, role: Role): number {
   return Math.round(sum + 1e-9);
 }
 
+// Jogadores são imutáveis (cada mudança cria um objeto novo): o OVR fica em cache pelo objeto.
+const ovrCache = new WeakMap<Player, number>();
+
 export function playerOvr(player: Player): number {
-  return ovrFor(effectiveAttributes(player), player.role);
+  let v = ovrCache.get(player);
+  if (v === undefined) {
+    v = ovrFor(effectiveAttributes(player), player.role);
+    ovrCache.set(player, v);
+  }
+  return v;
 }
 
 /** Carta base pelo OVR atual: um upgrade só muda a cor da faixa se o OVR alcançar o corte. */
