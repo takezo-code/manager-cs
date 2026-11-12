@@ -5798,5 +5798,121 @@
       "analista": "st-glitch-analista",
       "psicologo": "st-glitch-psicologo"
     }
+  },
+  {
+    "id": "turmadopagode",
+    "name": "Turma do Pagode",
+    "shortName": "TDP",
+    "country": "BR",
+    "region": "SA",
+    "hltvRank": 102,
+    "hltvPoints": 7,
+    "color": "#457b9d",
+    "playerIds": [
+      "wood7",
+      "tuurtle",
+      "naitte",
+      "pesadelo",
+      "matios"
+    ],
+    "starters": [
+      "wood7",
+      "tuurtle",
+      "naitte",
+      "pesadelo",
+      "matios"
+    ],
+    "mapStrength": {
+      "ancient": 76,
+      "anubis": 78,
+      "cache": 66,
+      "dust2": 73,
+      "inferno": 69,
+      "mirage": 65,
+      "nuke": 71
+    },
+    "money": 150000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 7,
+    "legacyRoster": [
+      "wood7",
+      "tuurtle",
+      "naitte",
+      "pesadelo",
+      "matios"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 9686,
+    "staff": {
+      "tecnico": "st-turmadopagode-tecnico",
+      "analista": "st-turmadopagode-analista",
+      "psicologo": "st-turmadopagode-psicologo"
+    }
+  },
+  {
+    "id": "oddik",
+    "name": "ODDIK",
+    "shortName": "ODDIK",
+    "country": "BR",
+    "region": "SA",
+    "hltvRank": 103,
+    "hltvPoints": 5,
+    "color": "#3a86ff",
+    "playerIds": [
+      "nekiz",
+      "righi",
+      "ksloks",
+      "kabro21",
+      "fenpet80"
+    ],
+    "starters": [
+      "nekiz",
+      "righi",
+      "ksloks",
+      "kabro21",
+      "fenpet80"
+    ],
+    "mapStrength": {
+      "ancient": 59,
+      "anubis": 58,
+      "cache": 74,
+      "dust2": 66,
+      "inferno": 68,
+      "mirage": 68,
+      "nuke": 59
+    },
+    "money": 150000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 5,
+    "legacyRoster": [
+      "nekiz",
+      "righi",
+      "ksloks",
+      "kabro21",
+      "fenpet80"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": null,
+    "staff": {
+      "tecnico": "st-oddik-tecnico",
+      "analista": "st-oddik-analista",
+      "psicologo": "st-oddik-psicologo"
+    }
   }
 ]

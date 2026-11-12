@@ -6400,6 +6400,134 @@
     "refusesRenewal": false
   },
   {
+    "id": "st-turmadopagode-tecnico",
+    "nick": "rikve34",
+    "country": "BR",
+    "age": 30,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 59,
+      "VET": 53,
+      "GES": 53
+    },
+    "teamId": "turmadopagode",
+    "contract": {
+      "teamId": "turmadopagode",
+      "salary": 2400,
+      "endDate": "2029-10-31",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-turmadopagode-analista",
+    "nick": "petfen33",
+    "country": "BR",
+    "age": 33,
+    "role": "analista",
+    "attrs": {
+      "LEI": 54,
+      "PRE": 50
+    },
+    "teamId": "turmadopagode",
+    "contract": {
+      "teamId": "turmadopagode",
+      "salary": 1900,
+      "endDate": "2028-12-31",
+      "releaseClause": 22800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-turmadopagode-psicologo",
+    "nick": "vanro37",
+    "country": "BR",
+    "age": 32,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 54,
+      "MOT": 47
+    },
+    "teamId": "turmadopagode",
+    "contract": {
+      "teamId": "turmadopagode",
+      "salary": 1700,
+      "endDate": "2028-07-31",
+      "releaseClause": 20400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-oddik-tecnico",
+    "nick": "lokomotioN",
+    "country": "AR",
+    "age": 40,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 58,
+      "VET": 51,
+      "GES": 53
+    },
+    "teamId": "oddik",
+    "contract": {
+      "teamId": "oddik",
+      "salary": 2200,
+      "endDate": "2029-08-31",
+      "releaseClause": 26400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-oddik-analista",
+    "nick": "linsel40",
+    "country": "BR",
+    "age": 38,
+    "role": "analista",
+    "attrs": {
+      "LEI": 53,
+      "PRE": 48
+    },
+    "teamId": "oddik",
+    "contract": {
+      "teamId": "oddik",
+      "salary": 1700,
+      "endDate": "2029-02-28",
+      "releaseClause": 20400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-oddik-psicologo",
+    "nick": "rikve37",
+    "country": "BR",
+    "age": 31,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 55,
+      "MOT": 52
+    },
+    "teamId": "oddik",
+    "contract": {
+      "teamId": "oddik",
+      "salary": 2200,
+      "endDate": "2027-12-31",
+      "releaseClause": 26400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
     "id": "st-livre-tecnico-01",
     "nick": "dorjor40",
     "country": "FR",
@@ -6435,7 +6563,7 @@
   },
   {
     "id": "st-livre-tecnico-03",
-    "nick": "rikve34",
+    "nick": "verik35",
     "country": "DK",
     "age": 46,
     "role": "tecnico",
@@ -6452,7 +6580,7 @@
   },
   {
     "id": "st-livre-tecnico-04",
-    "nick": "rikve37",
+    "nick": "vanro38",
     "country": "GB",
     "age": 29,
     "role": "tecnico",
@@ -6469,7 +6597,7 @@
   },
   {
     "id": "st-livre-tecnico-05",
-    "nick": "petfen33",
+    "nick": "rovan34",
     "country": "UA",
     "age": 28,
     "role": "tecnico",
@@ -6486,7 +6614,7 @@
   },
   {
     "id": "st-livre-tecnico-06",
-    "nick": "linsel40",
+    "nick": "sellin41",
     "country": "ES",
     "age": 35,
     "role": "tecnico",
@@ -6571,7 +6699,7 @@
   },
   {
     "id": "st-livre-tecnico-11",
-    "nick": "sellin41",
+    "nick": "makhal42",
     "country": "ES",
     "age": 31,
     "role": "tecnico",
@@ -6588,7 +6716,7 @@
   },
   {
     "id": "st-livre-tecnico-12",
-    "nick": "rovan34",
+    "nick": "dorjor35",
     "country": "UA",
     "age": 36,
     "role": "tecnico",
@@ -6605,7 +6733,7 @@
   },
   {
     "id": "st-livre-analista-01",
-    "nick": "vanro37",
+    "nick": "rikve38",
     "country": "PT",
     "age": 34,
     "role": "analista",
@@ -6717,7 +6845,7 @@
   },
   {
     "id": "st-livre-analista-08",
-    "nick": "makhal42",
+    "nick": "vanro43",
     "country": "ES",
     "age": 43,
     "role": "analista",
@@ -6781,7 +6909,7 @@
   },
   {
     "id": "st-livre-analista-12",
-    "nick": "rikve38",
+    "nick": "verik39",
     "country": "PT",
     "age": 30,
     "role": "analista",
@@ -6797,7 +6925,7 @@
   },
   {
     "id": "st-livre-psicologo-01",
-    "nick": "verik39",
+    "nick": "sellin40",
     "country": "PT",
     "age": 38,
     "role": "psicologo",
@@ -6909,7 +7037,7 @@
   },
   {
     "id": "st-livre-psicologo-08",
-    "nick": "vanro43",
+    "nick": "tugus44",
     "country": "ES",
     "age": 43,
     "role": "psicologo",
@@ -6973,7 +7101,7 @@
   },
   {
     "id": "st-livre-psicologo-12",
-    "nick": "sellin40",
+    "nick": "linsel41",
     "country": "PT",
     "age": 30,
     "role": "psicologo",

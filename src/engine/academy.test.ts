@@ -79,7 +79,7 @@ describe('Academy na temporada (dailyTick)', () => {
 
   it('segunda-feira de março: rodada da liga de base', () => {
     const out = dailyTick(at('2027-03-07')).world;
-    expect(out.baseLeague.lastRound).toHaveLength(50);
+    expect(out.baseLeague.lastRound).toHaveLength(51);
   });
 
   it('1º de janeiro: todos fazem aniversário e a liga de base recomeça', () => {

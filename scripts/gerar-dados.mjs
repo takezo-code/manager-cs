@@ -161,6 +161,11 @@ const flexFor = (key) => Math.round((0.3 + frac(key + 'f') * 0.7) * 100) / 100;
 // Snapshot do HLTV (ranking de 9/11/2026): elencos dos 150 primeiros e as estatísticas que a coleta conseguiu
 // (o Cloudflare bloqueou o resto). Jogador sem estatística recebe nível estimado pelo ranking do time.
 const RANKING = JSON.parse(fs.readFileSync(path.resolve('src/data/hltv/ranking.json'), 'utf8'));
+// Times brasileiros fora do top 100 que entram mesmo assim (pedido do Thales, 12/11/2026).
+// ODDIK não está no ranking: elenco do bo3.gg em 12/11/2026 (só 2 titulares; ksloks saiu em jul/2026 e volta),
+// o resto é completado com fictícios. Sharks e Case estão sem elenco e a RED Canids saiu do CS.
+const EXTRA_TEAMS = new Set(['Turma do Pagode', 'ODDIK']);
+RANKING.push([103, null, 'oddik', 'ODDIK', 5, 'Brazil', 'lokomotioN', 'AR', [['bo3-nekiz', 'nekiz', 'NEKIZ', 'BR'], ['bo3-righi', 'righi', 'righi', 'BR'], ['bo3-ksloks', 'ksloks', 'ksloks', 'BR']]]);
 const STATS = Object.assign({}, ...fs.readdirSync(path.resolve('src/data/hltv')).filter((f) => f.startsWith('stats')).map((f) => JSON.parse(fs.readFileSync(path.resolve('src/data/hltv', f), 'utf8'))));
 const RAW = {
   teams: RANKING.map(([rank, id, slug, name, points, country, coach, coachCountry, ps]) => ({
@@ -302,7 +307,7 @@ const teams = [];
 const players = [];
 const coachOf = {};
 for (const t of RAW.teams) {
-  const isTeam = t.rank <= 100;
+  const isTeam = t.rank <= 100 || EXTRA_TEAMS.has(t.name);
   const teamId = isTeam ? teamIdOf(t) : null;
   const ps = t.players.map((p) => ({ ...p, st: p }));
   const roles = assignRoles(ps);
@@ -316,12 +321,12 @@ for (const t of RAW.teams) {
     players.push(makePlayer({ id, nick: p.nick, country: p.country ?? 'EU', age, role: roles[p.id], teamId, attrs: attrsFrom(p, level), leadership: KNOWN_LEADERSHIP[p.nick.toLowerCase()], key: p.nick + (teamId ?? 'fa'), hltvId: p.id }));
   }
   if (!isTeam) continue;
-  // Time com 4: um quinto jogador fictício na função que falta.
-  if (ids.length < 5) {
-    const roleSet = new Set(Object.values(roles));
+  // Time com menos de 5: completa com fictícios nas funções que faltam.
+  for (let n = 0; ids.length < 5; n++) {
+    const roleSet = new Set(players.filter((p) => ids.includes(p.id)).map((p) => p.role));
     const need = ['IGL', 'AWPER', 'ENTRY', 'SUPPORT', 'LURKER'].find((r) => !roleSet.has(r)) ?? 'SUPPORT';
     const avg = ps.reduce((s2, p) => s2 + (p.rating ?? fallbackRating(t.rank)), 0) / Math.max(1, ps.length);
-    const key = teamId + '-quinto';
+    const key = teamId + (n ? `-extra${n}` : '-quinto');
     const country = majority(ps.map((p) => p.country)) ?? 'EU';
     const level = Math.min(93, 73 + (avg - 0.05 - 1.0) * 75);
     const id = playerId(fakeNick(key), teamId);

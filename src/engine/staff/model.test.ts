@@ -6,8 +6,8 @@ import { STAFF_ROLES, staffAttr, staffOvr, staffSalary, teamStaff } from './mode
 describe('Comissão técnica: modelo e dados', () => {
   const w = createWorld('furia');
 
-  it('os 100 times começam com técnico, analista e psicólogo', () => {
-    expect(Object.keys(w.teams)).toHaveLength(100);
+  it('os 102 times começam com técnico, analista e psicólogo', () => {
+    expect(Object.keys(w.teams)).toHaveLength(102);
     for (const t of Object.values(w.teams))
       for (const role of STAFF_ROLES) {
         const s = teamStaff(w, t.id, role)!;

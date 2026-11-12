@@ -70,7 +70,9 @@ describe('Manager da academy', () => {
     const r = promote(w, id);
     if (!r.ok) throw new Error(r.error);
     expect(r.world.players[id].satisfaction).toBe(70);
-    const main = { ...r.world, managerTeamId: 'furia' };
+    // Salário de US$ 20 mil: o arredondamento em 500 não distorce os 10%.
+    const pr = r.world.players[id];
+    const main = { ...r.world, managerTeamId: 'furia', players: { ...r.world.players, [id]: { ...pr, contract: { ...pr.contract!, salary: 20_000 } } } };
     const plain = { ...main, players: { ...main.players, [id]: { ...main.players[id], revealed: false } } };
     const a = playerStance(main, id, 'furia', 'renewal').desired.salary;
     const b = playerStance(plain, id, 'furia', 'renewal').desired.salary;
