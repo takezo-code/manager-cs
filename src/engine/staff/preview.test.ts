@@ -63,7 +63,8 @@ describe('Comissão na temporada', () => {
 
 describe('Correções da revisão', () => {
   it('entre um dia e outro do campeonato, a próxima série do seu time já está sorteada', async () => {
-    const { createLegacyTournament, playDay } = await import('../tournament/run');
+    const { playDay } = await import('../tournament/run');
+    const { createLegacyTournament } = await import('../tournament/legacy.testutil');
     const { INITIAL_TEAMS } = await import('../../data');
     const { buildYear } = await import('../calendar');
     const { nextOpponent } = await import('./preview');

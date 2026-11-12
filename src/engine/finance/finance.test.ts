@@ -165,7 +165,8 @@ describe('Um ano de jogo', () => {
 
 describe('Fim de campeonato', () => {
   it('paga premiação real, bônus de título e mexe na satisfação', async () => {
-    const { createLegacyTournament: createTournament, playDay } = await import('../tournament/run');
+    const { playDay } = await import('../tournament/run');
+    const { createLegacyTournament: createTournament } = await import('../tournament/legacy.testutil');
     const { awardTournament } = await import('./prizes');
     let w = createWorld('furia');
     let t = createTournament('iem', Object.values(w.teams), 11);
@@ -189,7 +190,7 @@ describe('Fim de campeonato', () => {
 describe('Correções do code review', () => {
   it('durante campeonato, o atraso de salário não tira jogadores do elenco', async () => {
     const { dailyTick } = await import('../season');
-    const { createLegacyTournament } = await import('../tournament/run');
+    const { createLegacyTournament } = await import('../tournament/legacy.testutil');
     let w = at(createWorld('furia'), '2026-11-30');
     // O Major está em andamento com a BIG participando.
     const major = w.calendar.find((e) => e.templateId === 'major-2')!;

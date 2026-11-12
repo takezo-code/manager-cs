@@ -16,7 +16,7 @@ import { mediaAfterAction } from '../engine/media/day';
 import { startCourse } from '../engine/staff/career';
 import { hireStaff, releaseStaff, respondStaffInbox } from '../engine/staff/market';
 import type { StaffAttr } from '../engine/types';
-import { denyExit, giveRaise, proposeCut, respondInbox, type InboxResponse } from '../engine/morale/conversations';
+import { denyExit, giveRaise, newInboxItems, proposeCut, respondInbox, type InboxResponse } from '../engine/morale/conversations';
 import { applyJealousy, applySatisfaction } from '../engine/morale/satisfaction';
 import { MORALE } from '../engine/config';
 import { buySkill, upgradeCard } from '../engine/player';
@@ -340,7 +340,7 @@ export const useGame = create<GameState>((set, get) => {
         if (Object.keys(out.results).length) lastDay = out.results;
         for (const [id, r] of Object.entries(out.results)) if (r.teamAId === me || r.teamBId === me) kept[id] = r;
         const myGame = Object.values(out.results).some((r) => r.teamAId === me || r.teamBId === me);
-        if (target === 'jogo' && (myGame || w.inbox.length > s.inbox.length)) break;
+        if (target === 'jogo' && (myGame || newInboxItems(s.inbox, w.inbox))) break;
         // Demitido (ou time trocado) no meio do avanço: para para você ver.
         if (w.managerTeamId !== me) break;
       }

@@ -3,7 +3,8 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { INITIAL_PLAYERS, INITIAL_TEAMS } from '../data';
 import { buildYear } from '../engine/calendar';
 import { DEFAULT_PROFILE, newManager } from '../engine/manager/model';
-import { createLegacyTournament as createTournament, playDay } from '../engine/tournament/run';
+import { playDay } from '../engine/tournament/run';
+import { createLegacyTournament as createTournament } from '../engine/tournament/legacy.testutil';
 import { exportFileName, exportJson, makeRecord, parseImport, type SavedState } from './saveFormat';
 import { db, deleteSave, getSave, lastSave, listSaves, putSave } from './saves';
 
@@ -103,7 +104,8 @@ describe('Exportar e importar JSON', () => {
 describe('Migração v3 → v4', () => {
   it('um save v3 com campeonato em andamento vira um evento em andamento no calendário', async () => {
     const { migrateState } = await import('./saveFormat');
-    const { createLegacyTournament, playDay } = await import('../engine/tournament/run');
+    const { playDay } = await import('../engine/tournament/run');
+    const { createLegacyTournament } = await import('../engine/tournament/legacy.testutil');
     const teams = byId(INITIAL_TEAMS);
     const players = byId(INITIAL_PLAYERS);
     // Campeonato no formato antigo (v3): sem format/options/prizePool/playerStats, com template.

@@ -39,9 +39,9 @@ const conflictFor = (w: World, teamId: string, ev: CalendarEvent) => commitments
  * Elenco temporário para o evento: time com menos de 5 joga com stand-ins (melhores agentes livres),
  * sem contrato e sem mudar o elenco de verdade.
  */
-export function withStandins(w: World, teamIds: string[]): Record<string, Team> {
+/** `used`: stand-ins já escalados hoje em outro evento (um agente livre não joga dois eventos ao mesmo tempo). */
+export function withStandins(w: World, teamIds: string[], used: Set<string> = new Set()): Record<string, Team> {
   const teams = { ...w.teams };
-  const used = new Set<string>();
   const free = Object.values(w.players)
     .filter((p) => !p.teamId)
     .sort((a, b) => playerOvr(b) - playerOvr(a));
@@ -222,9 +222,10 @@ export function playEvents(world: World, _rng?: Rng): Out & { results: Record<st
   let w = world;
   const events: WorldEvent[] = [];
   const results: Record<string, MatchResult> = {};
+  const standins = new Set<string>();
   for (const ev of w.calendar) {
     if (ev.status !== 'em_andamento' || !ev.tournament) continue;
-    const out = playDay(ev.tournament, withStandins(w, ev.tournament.participants), w.players, (id) => staffAttrsOf(w, id), (id, stage) => ({ crowd: crowdBonus(w, id, stage), lowMood: lowMood(w, id) }));
+    const out = playDay(ev.tournament, withStandins(w, ev.tournament.participants, standins), w.players, (id) => staffAttrsOf(w, id), (id, stage) => ({ crowd: crowdBonus(w, id, stage), lowMood: lowMood(w, id) }));
     w = { ...w, players: out.players };
     for (const [id, r] of Object.entries(out.results)) {
       results[id] = r;

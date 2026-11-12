@@ -59,6 +59,12 @@ export function monthlyRequests(world: World): { world: World; events: WorldEven
 }
 
 /** Pedidos vencidos sem resposta contam como recusa/ignorar. */
+/** Chegou algum item novo na caixa de entrada (por id, não pelo tamanho)? */
+export function newInboxItems(before: InboxItem[], after: InboxItem[]): boolean {
+  const seen = new Set(before.map((i) => i.id));
+  return after.some((i) => !seen.has(i.id));
+}
+
 export function expireInbox(world: World): { world: World; events: WorldEvent[] } {
   let w = world;
   const events: WorldEvent[] = [];

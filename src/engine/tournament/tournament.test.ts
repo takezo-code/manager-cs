@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { INITIAL_PLAYERS, INITIAL_TEAMS } from '../../data';
 import type { Player, Team } from '../types';
-import { allSeries, createLegacyTournament as createTournament, playDay, type TournamentTemplate } from './run';
+import { allSeries, playDay } from './run';
+import { createLegacyTournament as createTournament, type TournamentTemplate } from './legacy.testutil';
 import type { Tournament } from './types';
 
 const teams: Record<string, Team> = Object.fromEntries(INITIAL_TEAMS.map((t) => [t.id, t]));
