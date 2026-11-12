@@ -1,6 +1,6 @@
 import { visibleAmateurs, type Amateur } from '../engine/amateurs';
 import { baseStandings } from '../engine/baseLeague';
-import { ACADEMY, SCOUT } from '../engine/config';
+import { ACADEMY, MARKET, SCOUT } from '../engine/config';
 import { baseOvr } from '../engine/form';
 import { estimatePotential } from '../engine/scout';
 import { scoutNarrowing } from '../engine/manager/effects';
@@ -101,7 +101,7 @@ function YouthRow({ p, level, full }: { p: Player; level: number; full: boolean 
       <button
         className="rounded-lg border border-line px-3 py-1.5 text-sm font-semibold hover:border-accent disabled:opacity-40"
         disabled={full}
-        title={full ? 'Elenco principal cheio (7)' : undefined}
+        title={full ? `Elenco principal cheio (${MARKET.squadMax})` : undefined}
         onClick={() => promoteYouth(p.id)}
       >
         Promover
@@ -163,7 +163,7 @@ export function AcademyPanel() {
   const world = useWorld();
   const level = team.scoutLevel ?? 1;
   const youth = team.academyIds.map((id) => players[id]).filter(Boolean);
-  const full = team.playerIds.length >= 7;
+  const full = team.playerIds.length >= MARKET.squadMax;
   const academyFull = youth.length >= ACADEMY.maxSize;
   const amateurs = visibleAmateurs(world);
   const table = baseStandings(world);
@@ -177,7 +177,7 @@ export function AcademyPanel() {
         <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-3">
           <h2 className="font-display text-lg font-bold">Academy</h2>
           <span className="text-xs text-muted">
-            {youth.length}/{ACADEMY.maxSize} jovens · elenco principal {team.playerIds.length}/7
+            {youth.length}/{ACADEMY.maxSize} jovens · elenco principal {team.playerIds.length}/{MARKET.squadMax}
           </span>
         </div>
         {youth.length ? (

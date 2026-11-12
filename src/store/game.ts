@@ -26,7 +26,7 @@ import { validStarters } from '../engine/squad';
 import { windowOpen } from '../engine/calendar';
 import { acceptInvite, declineInvite } from '../engine/schedule';
 import { signAmateur, type Amateur } from '../engine/amateurs';
-import { promote } from '../engine/academy';
+import { promoteMine } from '../engine/academy';
 import { upgradeScout } from '../engine/scout';
 import type { BaseLeague } from '../engine/baseLeague';
 import type { Staff } from '../engine/types';
@@ -446,7 +446,7 @@ export const useGame = create<GameState>((set, get) => {
     },
 
     promoteYouth: (playerId) => {
-      const r = promote(worldOf(get()), playerId);
+      const r = promoteMine(worldOf(get()), playerId);
       if (!r.ok) return set({ message: { kind: 'erro', text: r.error } });
       commitWorld(onYouthPromoted(r.world), [], { message: { kind: 'ok', text: `${r.world.players[playerId].nick} subiu para o elenco principal.` } });
     },

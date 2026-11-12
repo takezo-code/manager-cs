@@ -95,6 +95,12 @@ export function promote(w: World, playerId: string): { ok: true; world: World } 
   return { ok: true, world: { ...w, teams, players: { ...w.players, [playerId]: { ...p, squad: 'principal' } } } };
 }
 
+/** Promoção pedida pelo manager: só jovens da academy do seu time. */
+export function promoteMine(w: World, playerId: string): { ok: true; world: World } | { ok: false; error: string } {
+  if (w.players[playerId]?.teamId !== w.managerTeamId) return { ok: false, error: 'Esse jovem não é da sua academy.' };
+  return promote(w, playerId);
+}
+
 /** Tira o jovem da academy e o deixa como agente livre. */
 function releaseYouth(w: World, playerId: string): World {
   const p = w.players[playerId];

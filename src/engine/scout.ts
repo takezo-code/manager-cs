@@ -24,7 +24,8 @@ export function estimatePotential(p: Player, level: number, narrowing = 0): Pote
     const sign = frac(`${p.id}:${level}:lado`) < 0.5 ? -1 : 1;
     center += sign * (cfg.range + 1 + Math.floor(frac(`${p.id}:${level}:tam`) * 4));
   }
-  const min = Math.max(40, center - cfg.range);
+  // O potencial nunca é menor que o OVR atual: a faixa não desce abaixo dele (senão entrega o erro).
+  const min = Math.min(99, Math.max(40, baseOvr(p), center - cfg.range));
   const max = Math.min(99, min + 2 * cfg.range);
   const alerts: string[] = [];
   if (level >= SCOUT.alertsFrom) {

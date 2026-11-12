@@ -20,10 +20,16 @@ export interface Amateur {
 
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
 
-export function generateAmateurs(rng: Rng, n: number, date: string): Amateur[] {
+/** `taken`: ids já usados (banco atual); os novos nunca repetem. */
+export function generateAmateurs(rng: Rng, n: number, date: string, taken: Set<string> = new Set()): Amateur[] {
   const out: Amateur[] = [];
+  const used = new Set(taken);
   for (let i = 0; i < n; i++) {
-    const p0 = makeYoungPlayer(rng, `am-${date}-${rng.int(10000, 99999)}`, null, rng.pick(AMATEURS.countries), date, [AMATEURS.levelMin, AMATEURS.levelMax]);
+    let id = '';
+    do id = `am-${date}-${rng.int(10000, 99999)}`;
+    while (used.has(id));
+    used.add(id);
+    const p0 = makeYoungPlayer(rng, id, null, rng.pick(AMATEURS.countries), date, [AMATEURS.levelMin, AMATEURS.levelMax]);
     const ovr = baseOvr(p0);
     const player = { ...p0, potential: Math.min(ACADEMY.maxPotential, ovr + rng.int(AMATEURS.potentialGapMin, AMATEURS.potentialGapMax)) };
     const platform = rng.chance(0.6) ? ('FACEIT' as const) : ('GC' as const);
@@ -62,7 +68,8 @@ export function visibleAmateurs(w: World): Amateur[] {
 /** Todo mês parte do banco sai (foi para outro lugar) e chegam amadores novos. */
 export function refreshAmateurs(w: World, rng: Rng): World {
   const keep = w.amateurs.filter(() => !rng.chance(AMATEURS.monthlyTurnover));
-  return { ...w, amateurs: [...keep, ...generateAmateurs(rng, AMATEURS.poolSize - keep.length, w.date)] };
+  const taken = new Set(w.amateurs.map((a) => a.player.id));
+  return { ...w, amateurs: [...keep, ...generateAmateurs(rng, AMATEURS.poolSize - keep.length, w.date, taken)] };
 }
 
 export function signAmateur(w: World, playerId: string): { ok: true; world: World } | { ok: false; error: string } {
