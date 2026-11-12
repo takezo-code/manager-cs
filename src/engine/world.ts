@@ -6,6 +6,7 @@ import type { Staff } from './types';
 import type { Manager } from './manager/model';
 import type { NewsItem } from './media/news';
 import type { Tweet } from './media/twitter';
+import type { Post } from './media/instagram';
 import type { CalendarEvent } from './calendar';
 import type { EventResult, SeriesLogEntry } from './ranking';
 import type { Player, Team } from './types';
@@ -141,6 +142,8 @@ export interface World {
   news: NewsItem[];
   /** Feed do Twitter (mais novo primeiro). */
   feed: Tweet[];
+  /** Posts do Instagram do seu time (mais novo primeiro). */
+  posts: Post[];
 }
 
 /** Mensagem curta para o manager (vira notícia de verdade no passo 13). */

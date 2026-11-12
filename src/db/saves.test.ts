@@ -29,6 +29,7 @@ function sampleState(): SavedState {
     fans: {},
     news: [],
     feed: [],
+    posts: [],
     calendar: [{ ...buildYear(2026).find((e) => e.templateId === 'iem-china')!, status: 'em_andamento', tournament: out.tournament }],
     teams,
     players: out.players,

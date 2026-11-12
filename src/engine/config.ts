@@ -781,4 +781,12 @@ export const MEDIA = {
   classicRelation: -30,
   critiqueChance: 0.2,
   gratitudeConfidence: 60,
+  /** Instagram. */
+  maxPosts: 50,
+  signingDays: 7,
+  momentDays: 3,
+  communicationPost: 2,
+  postNoise: 1,
+  goodPost: 2,
+  communicationGrowth: 0.5,
 };
