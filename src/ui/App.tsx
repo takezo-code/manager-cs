@@ -18,11 +18,14 @@ import { TimeBar } from './TimeBar';
 import { TrainingSection } from './TrainingSection';
 import { AcademyPanel } from './AcademyPanel';
 import { StaffPanel } from './StaffPanel';
+import { ManagerPanel } from './ManagerPanel';
+import { UnemployedView } from './UnemployedView';
 
-type Tab = 'elenco' | 'comissao' | 'academy' | 'calendario' | 'ranking' | 'mercado' | 'financas' | 'mensagens' | 'amistoso';
+type Tab = 'elenco' | 'manager' | 'comissao' | 'academy' | 'calendario' | 'ranking' | 'mercado' | 'financas' | 'mensagens' | 'amistoso';
 
 const TAB_LABEL: Record<Tab, string> = {
   elenco: 'Elenco',
+  manager: 'Manager',
   comissao: 'Comissão',
   academy: 'Academy',
   calendario: 'Calendário',
@@ -186,6 +189,10 @@ function Dashboard() {
         <div className="mt-4">
           <CalendarPanel />
         </div>
+      ) : tab === 'manager' ? (
+        <div className="mt-4">
+          <ManagerPanel />
+        </div>
       ) : tab === 'comissao' ? (
         <div className="mt-4">
           <StaffPanel />
@@ -213,5 +220,6 @@ export function App() {
   const myTeamId = useGame((s) => s.myTeamId);
   if (screen === 'newCareer') return <TeamSelect />;
   if (screen === 'game' && myTeamId) return <Dashboard />;
+  if (screen === 'game') return <UnemployedView />;
   return <MainMenu />;
 }

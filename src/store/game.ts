@@ -10,6 +10,7 @@ import type { Relations } from '../engine/market/relations';
 import { simulateMatch } from '../engine/match';
 import { staffAttrsOf } from '../engine/staff/effects';
 import { onYouthPromoted } from '../engine/manager/effects';
+import { acceptOffer, askBudget, declineOffer, resign } from '../engine/manager/offers';
 import { startCourse } from '../engine/staff/career';
 import { hireStaff, releaseStaff, respondStaffInbox } from '../engine/staff/market';
 import type { StaffAttr } from '../engine/types';
@@ -114,6 +115,10 @@ export interface GameState {
   releaseStaff(staffId: string): void;
   startStaffCourse(staffId: string, attr: StaffAttr): void;
   respondStaffItem(itemId: string, accept: boolean): void;
+  acceptManagerOffer(itemId: string): void;
+  declineManagerOffer(itemId: string): void;
+  askBoardBudget(itemId: string): void;
+  resignManager(): void;
 }
 
 type WorldFields =
@@ -296,8 +301,9 @@ export const useGame = create<GameState>((set, get) => {
 
     advance: (target) => {
       const s = get();
-      if (!s.myTeamId) return;
-      const me = s.myTeamId;
+      if (s.screen !== 'game') return;
+      // Desempregado também avança o tempo (me vazio).
+      const me = s.myTeamId ?? '';
       const maxDays = target === 'jogo' ? 60 : target;
       let w = worldOf(s);
       let events: GameEvent[] = [];
@@ -313,6 +319,8 @@ export const useGame = create<GameState>((set, get) => {
         for (const [id, r] of Object.entries(out.results)) if (r.teamAId === me || r.teamBId === me) kept[id] = r;
         const myGame = Object.values(out.results).some((r) => r.teamAId === me || r.teamBId === me);
         if (target === 'jogo' && (myGame || w.inbox.length > s.inbox.length)) break;
+        // Demitido (ou time trocado) no meio do avanço: para para você ver.
+        if (w.managerTeamId !== me) break;
       }
       set({
         ...fromWorld(w),
@@ -456,6 +464,27 @@ export const useGame = create<GameState>((set, get) => {
       const r = respondStaffInbox(worldOf(get()), itemId, accept);
       if (!r.ok) return set({ message: { kind: 'erro', text: r.error } });
       commitWorld(r.world, [], { message: { kind: 'ok', text: accept ? 'Resposta enviada: aceito.' : 'Resposta enviada: recusado.' } });
+    },
+
+    acceptManagerOffer: (itemId) => {
+      const r = acceptOffer(worldOf(get()), itemId);
+      if (!r.ok) return set({ message: { kind: 'erro', text: r.error } });
+      const team = r.world.teams[r.world.managerTeamId];
+      commitWorld(r.world, [{ kind: 'ok', text: `Você é o novo manager da ${team.name}.` }], { message: { kind: 'ok', text: `Bem-vindo à ${team.name}.` } });
+    },
+
+    declineManagerOffer: (itemId) => commitWorld(declineOffer(worldOf(get()), itemId), [], { message: { kind: 'ok', text: 'Proposta recusada.' } }),
+
+    askBoardBudget: (itemId) => {
+      const s = get();
+      const out = askBudget(worldOf(s), itemId, createRng(hashString(`orcamento:${itemId}`)));
+      commitWorld(out.world, [out.event], { message: { kind: out.event.kind === 'ok' ? 'ok' : 'erro', text: out.event.text } });
+    },
+
+    resignManager: () => {
+      const w = worldOf(get());
+      const team = w.teams[w.managerTeamId];
+      commitWorld(resign(w), [{ kind: 'alerta', text: `Você pediu demissão da ${team?.name ?? 'equipe'}.` }], { lastMatch: null });
     },
   };
 });

@@ -3,6 +3,7 @@ import { formatDate } from '../engine/date';
 import { BAND_LABEL, bandOf, fairSalary } from '../engine/morale/satisfaction';
 import type { InboxItem } from '../engine/world';
 import { ROLE_LABEL } from '../engine/staff/market';
+import { ManagerOfferItem } from './ManagerOffer';
 import { useGame, useWorld } from '../store/game';
 import { money } from './format';
 
@@ -188,7 +189,15 @@ export function InboxPanel() {
         ) : (
           <ul className="space-y-2">
             {w.inbox.map((i) =>
-              i.kind === 'convite' ? <InviteItem key={i.id} item={i} /> : i.staffId ? <StaffItem key={i.id} item={i} /> : <Item key={i.id} item={i} />,
+              i.kind === 'convite' ? (
+                <InviteItem key={i.id} item={i} />
+              ) : i.kind === 'manager_proposta' ? (
+                <ManagerOfferItem key={i.id} item={i} />
+              ) : i.staffId ? (
+                <StaffItem key={i.id} item={i} />
+              ) : (
+                <Item key={i.id} item={i} />
+              ),
             )}
           </ul>
         )}

@@ -10,6 +10,7 @@ import { DEFAULT_PROFILE, newManager, type ManagerProfile } from './manager/mode
 import { managerDealsDay, monthlyManagerGrowth } from './manager/effects';
 import { assignGoals, evaluateSeason } from './manager/board';
 import { expireManagerOffers, monthlyManagerOffers, weeklyUnemployedOffers } from './manager/offers';
+import { trackHistory } from './manager/history';
 import { finishCourses, monthlyStaffOffers } from './staff/career';
 import { staffMarketDay } from './staff/market';
 import { ACADEMY, AMATEURS } from './config';
@@ -123,6 +124,7 @@ export function dailyTick(world: World, opts: { rng?: Rng } = {}): { world: Worl
   w = finishCourses(w);
   w = managerDealsDay(w);
   w = expireManagerOffers(w);
+  w = trackHistory(w);
   add(staffMarketDay(w, rng));
 
   // Limpeza do histórico.
