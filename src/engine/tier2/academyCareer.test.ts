@@ -62,7 +62,8 @@ describe('Manager da academy', () => {
   });
 
   it('revelado por você: +10 de satisfação ao subir e −10% na renovação', () => {
-    let w = markRevealed(academyWorld());
+    // Revelado exige 1 mês na academy.
+    let w = markRevealed({ ...academyWorld(), date: '2026-12-11' });
     const id = w.teams.furia.academyIds[0];
     expect(w.players[id].revealed).toBe(true);
     w = { ...w, players: { ...w.players, [id]: { ...w.players[id], satisfaction: 60 } } };

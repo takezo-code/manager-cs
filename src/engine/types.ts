@@ -143,6 +143,8 @@ export interface Player {
   loan?: { teamId: string; until: string; salaryShare: number } | null;
   /** Passou pela academy da organização enquanto você era o manager. */
   revealed?: boolean;
+  /** Desde quando está na academy (para o "revelado" exigir 1 mês). */
+  academySince?: string;
 }
 
 export type TrainingFocus = 'mira' | 'utilidade' | 'taticas' | MapId;

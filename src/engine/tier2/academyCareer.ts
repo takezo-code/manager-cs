@@ -1,6 +1,7 @@
 // Carreira começando como manager da academy: metas próprias, recomendação de promoção e o caminho até o time principal.
 import { promote } from '../academy';
 import { MANAGER } from '../config';
+import { daysBetween } from '../date';
 import { baseOvr } from '../form';
 import { gainConfidence, gainReputation, type Goal } from '../manager/model';
 import { makeProposal } from '../manager/offers';
@@ -68,7 +69,8 @@ export function markRevealed(w: World): World {
   let changed = false;
   for (const id of w.teams[org]?.academyIds ?? []) {
     const p = players[id];
-    if (p && !p.revealed) {
+    // Só quem já está há pelo menos 1 mês na academy (saves antigos: sem data, conta como antigo).
+    if (p && !p.revealed && (!p.academySince || daysBetween(p.academySince, w.date) >= MANAGER.revealedDays)) {
       players[id] = { ...p, revealed: true };
       changed = true;
     }

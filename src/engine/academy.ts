@@ -78,7 +78,7 @@ export function generateYouth(w: World, rng: Rng, teamId: string, n: number): Pl
 /** Coloca jovens na academy do time. */
 export function addToAcademy(w: World, teamId: string, youth: Player[]): World {
   const players = { ...w.players };
-  for (const p of youth) players[p.id] = { ...p, teamId, squad: 'academy' };
+  for (const p of youth) players[p.id] = { ...p, teamId, squad: 'academy', academySince: w.date };
   const t = w.teams[teamId];
   return { ...w, players, teams: { ...w.teams, [teamId]: { ...t, academyIds: [...(t.academyIds ?? []), ...youth.map((p) => p.id)] } } };
 }

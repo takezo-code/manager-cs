@@ -113,8 +113,12 @@ export function restTier2(w: World): World {
 export const newTier2Season = (w: World, year: number): World => ({ ...w, tier2: { ...w.tier2, season: year, points: {}, cup: null } });
 
 export function tier2Ranking(w: World): Array<{ teamId: string; name: string; points: number }> {
-  const teams = tier2Teams(w);
-  return Object.values(teams)
-    .map((t) => ({ teamId: t.id, name: t.name, points: w.tier2.points[t.id] ?? 0 }))
+  // Só nomes e pontos: não precisa montar as escalações.
+  const all = [
+    ...Object.values(w.teams).map((t) => ({ teamId: academyTeamId(t.id), name: `${t.name} Academy` })),
+    ...Object.values(w.tier2.teams).map((t) => ({ teamId: t.id, name: t.name })),
+  ];
+  return all
+    .map((t) => ({ ...t, points: w.tier2.points[t.teamId] ?? 0 }))
     .sort((a, b) => b.points - a.points || a.name.localeCompare(b.name));
 }

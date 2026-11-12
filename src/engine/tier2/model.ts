@@ -74,6 +74,27 @@ export function generateTier2(rng: Rng, date: string): Tier2State {
   return { teams, players, points: {}, season: Number(date.slice(0, 4)), cup: null };
 }
 
+/** Virada do ano: fictícios com 32+ se aposentam e dão lugar a um jovem (18–22). */
+export function retireTier2(w: World, rng: Rng): World {
+  const players = { ...w.tier2.players };
+  const teams = { ...w.tier2.teams };
+  for (const t of Object.values(teams)) {
+    const ids = t.playerIds.map((id) => {
+      const p = players[id];
+      if (!p || p.age < TIER2.retireAge) return id;
+      delete players[id];
+      let nid = '';
+      do nid = `${t.id}-${rng.int(100, 999)}`;
+      while (players[nid]);
+      const y = makeYoungPlayer(rng, nid, t.id, t.country, w.date, [TIER2.levelMin, TIER2.levelMax]);
+      players[nid] = { ...y, age: rng.int(TIER2.ageMin, TIER2.rookieMaxAge), squad: 'principal', contract: null, potential: Math.min(95, baseOvr(y) + rng.int(0, 12)) };
+      return nid;
+    });
+    teams[t.id] = { ...t, playerIds: ids };
+  }
+  return { ...w, tier2: { ...w.tier2, teams, players } };
+}
+
 export const academyTeamId = (orgId: string) => `${orgId}-ac`;
 export const orgOfAcademy = (teamId: string) => (teamId.endsWith('-ac') ? teamId.slice(0, -3) : null);
 

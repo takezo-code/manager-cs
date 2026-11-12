@@ -86,6 +86,7 @@ export function signAmateur(w: World, playerId: string): { ok: true; world: Worl
     ...a.player,
     teamId: t.id,
     squad: 'academy',
+    academySince: w.date,
     contract: { teamId: t.id, salary: roundTo(1000 + (a.fee / AMATEURS.feeMax) * 2000, 500), endDate: endOfMonthAfter(w.date, ACADEMY.contractMonths), releaseClause: 100_000 },
   };
   let next: World = {

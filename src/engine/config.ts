@@ -746,6 +746,8 @@ export const MANAGER = {
   /** Jovem revelado por você: +10 de satisfação ao subir e −10% na renovação. */
   revealedBonus: 10,
   revealedDiscount: 0.1,
+  /** Tempo mínimo na academy para contar como revelado por você. */
+  revealedDays: 28,
   /** Propostas ao manager. */
   offerChanceEmployed: 0.12,
   offerChanceUnemployed: 0.35,
@@ -808,6 +810,9 @@ export const TIER2 = {
   ageMax: 27,
   /** Força média por mapa das academies (os fictícios ficam em torno de 68). */
   academyMapLevel: 62,
+  /** Fictícios se aposentam com esta idade; o substituto tem até rookieMaxAge. */
+  retireAge: 32,
+  rookieMaxAge: 22,
   /** Copa mensal. */
   cupDay: '05',
   firstMonth: 2,
