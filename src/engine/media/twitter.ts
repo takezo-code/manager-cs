@@ -6,6 +6,7 @@ import type { MatchResult } from '../types';
 import type { World } from '../world';
 import { fanMood, isIdol, newTransfers } from './fans';
 import { FANS, JOURNALISTS, NEWS_ACCOUNT, say, type Account, type TemplateVar, type TweetKind } from './templates';
+import { teamName } from '../tier2/model';
 
 export interface Tweet {
   id: string;
@@ -22,7 +23,7 @@ export const pushTweets = (w: World, tweets: Tweet[]): World =>
 export function tweetsForDay(prev: World, next: World, results: Record<string, MatchResult>, rng: Rng): Tweet[] {
   const out: Tweet[] = [];
   const today = next.date;
-  const name = (id: string | null | undefined) => (id ? (next.teams[id]?.name ?? id) : '');
+  const name = (id: string | null | undefined) => (id ? teamName(next, id) : '');
   const add = (kind: Tweet['author']['kind'], author: Account, tweet: TweetKind, vars: Partial<Record<TemplateVar, string>>) => {
     const seed = `${today}:${out.length}:${rng.next()}`;
     const reach = kind === 'pro' || kind === 'noticias' ? 20 : 1;
@@ -58,6 +59,7 @@ export function tweetsForDay(prev: World, next: World, results: Record<string, M
   for (const ev of next.calendar) {
     const champ = ev.tournament?.championId;
     if (ev.status !== 'encerrado' || !wasOpen.has(ev.id) || !champ) continue;
+    if ((ev.tier ?? 1) > 1 && !(ev.tournament!.participants ?? []).includes(me)) continue;
     add('noticias', NEWS_ACCOUNT, 'noticias_titulo', { time: name(champ), evento: ev.name });
     const p = pro(champ);
     if (p) add('pro', p, 'pro_comemoracao', { time: name(champ), evento: ev.name });

@@ -70,6 +70,12 @@ export function academyTeam(w: World, orgId: string): Team {
   return { ...asTeam({ id, name: `${t.name} Academy`, shortName: `${t.shortName}.A`, country: t.country, color: t.color, mapStrength: mapStrengthAround(id, TIER2.academyMapLevel) }, roster, 1000 + t.hltvRank), region: t.region };
 }
 
+/** Nome de um time ou de uma academy (`<org>-ac`). */
+export function teamName(w: World, id: string): string {
+  const org = orgOfAcademy(id);
+  return w.teams[id]?.name ?? (org && w.teams[org] ? `${w.teams[org].name} Academy` : id);
+}
+
 /** Times do mundo mais as academies que aparecem em `ids` (para telas de evento). */
 export function withAcademyTeams(w: World, ids: Iterable<string>): Record<string, Team> {
   const out = { ...w.teams };

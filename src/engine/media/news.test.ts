@@ -22,7 +22,7 @@ describe('Notícias', () => {
   });
 
   it('evento encerrado: campeão e MVP', () => {
-    const ev = w0.calendar[0];
+    const ev = w0.calendar.find((e) => e.tier === 1)!;
     const prev = { ...w0, calendar: [{ ...ev, status: 'em_andamento' as const }] };
     const mvp = w0.teams.vitality.playerIds[0];
     const next = {

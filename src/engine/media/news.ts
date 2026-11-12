@@ -8,6 +8,7 @@ import { playerOvr } from '../player';
 import type { Rng } from '../rng';
 import type { World } from '../world';
 import { newTransfers } from './fans';
+import { teamName } from '../tier2/model';
 import { say, type NewsKind, type TemplateVar } from './templates';
 
 export interface NewsItem {
@@ -38,7 +39,7 @@ export function pushNews(
   return { ...w, news: [item, ...(w.news ?? [])].slice(0, MEDIA.maxNews) };
 }
 
-const nameOf = (w: World, teamId: string | null) => (teamId ? (w.teams[teamId]?.name ?? teamId) : '');
+const nameOf = (w: World, teamId: string | null) => (teamId ? teamName(w, teamId) : '');
 
 /** Manchetes do que mudou entre ontem e hoje. */
 export function newsForDay(prev: World, next: World): World {
@@ -63,6 +64,8 @@ export function newsForDay(prev: World, next: World): World {
   const wasOpen = new Set(prev.calendar.filter((e) => e.status !== 'encerrado').map((e) => e.id));
   for (const ev of next.calendar) {
     if (ev.status !== 'encerrado' || !wasOpen.has(ev.id) || !ev.tournament?.championId) continue;
+    // Tier 2/3: só vira notícia se o seu time (ou a sua academy) jogou.
+    if ((ev.tier ?? 1) > 1 && !(ev.tournament.participants ?? []).some((id) => id === next.managerTeamId || id === `${next.manager?.academyOf}-ac`)) continue;
     w = pushNews(w, 'titulo', { time: nameOf(next, ev.tournament.championId), evento: ev.name }, [ev.tournament.championId], `c:${ev.id}`);
     const mvp = Object.values(next.players).find((p) => p.awards?.some((a) => a.kind === 'MVP' && a.date === today && a.event === ev.name));
     if (mvp) w = pushNews(w, 'mvp', { jogador: mvp.nick, evento: ev.name }, mvp.teamId ? [mvp.teamId] : [], `mvp:${ev.id}`);

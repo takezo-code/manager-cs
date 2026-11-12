@@ -55,5 +55,6 @@ export function awardTournament(world: World, t: Tournament, tier: 1 | 2 | 3 = 1
     }
   }
   if (t.championId && tier === 1 && w.teams[t.championId]) w = payTitleBonuses(w, t.championId, t.name);
-  return grantAwards(w, t);
+  // MVP/EVPs (bônus de atributo por um ano) só no tier 1.
+  return tier === 1 ? grantAwards(w, t) : w;
 }

@@ -62,20 +62,23 @@ export function candidates(w: World, ev: CalendarEvent): string[] {
     if (tierOf(e) > 1 && e.id !== ev.id && e.startDate.startsWith(year))
       for (const id of e.tournament?.participants ?? e.accepted) played[id] = (played[id] ?? 0) + 1;
   const byTurn = (ts: typeof all) => [...ts].sort((a, b) => (played[a.id] ?? 0) - (played[b.id] ?? 0) || a.hltvRank - b.hltvRank);
-  const region = all.filter((t) => !ev.regions || ev.regions.includes(t.region));
+  // O top 20 só joga tier 1.
+  const region = all.filter((t) => t.hltvRank > CALENDAR.tier1Only && (!ev.regions || ev.regions.includes(t.region)));
   const ids = [...byTurn(region.filter((t) => t.hltvRank >= lo && t.hltvRank <= hi)), ...byTurn(region.filter((t) => t.hltvRank > hi))].map((t) => t.id);
   const academies = (ts: typeof all) => ts.map((t) => academyTeamId(t.id)).filter((id) => academyLineupIds(w, orgOfAcademy(id)!).length >= 5);
+  // Academies não são time de tier 1: valem as de qualquer posição do time dono.
+  const inRegion = (t: (typeof all)[number]) => !ev.regions || ev.regions.includes(t.region);
   if (tierOf(ev) === 3) {
     // Manager da academy: a academy dele tem vaga garantida no tier 3 da região.
     const mine = w.manager?.academyOf;
-    if (mine && region.some((t) => t.id === mine) && academyLineupIds(w, mine).length >= 5) ids.unshift(academyTeamId(mine));
-    ids.push(...academies(region));
+    if (mine && w.teams[mine] && inRegion(w.teams[mine]) && academyLineupIds(w, mine).length >= 5) ids.unshift(academyTeamId(mine));
+    ids.push(...academies(all.filter(inRegion)));
   }
   else ids.push(...region.filter((t) => t.hltvRank < lo).reverse().map((t) => t.id));
   // Último recurso para fechar a chave: times livres de outras regiões (da faixa para baixo) e, no tier 3, academies.
-  const others = all.filter((t) => !region.includes(t));
+  const others = all.filter((t) => t.hltvRank > CALENDAR.tier1Only && !region.includes(t));
   ids.push(...others.filter((t) => t.hltvRank >= lo).map((t) => t.id));
-  if (tierOf(ev) === 3) ids.push(...academies(others));
+  if (tierOf(ev) === 3) ids.push(...academies(all.filter((t) => !inRegion(t))));
   return [...new Set(ids)].filter((id) => !conflictFor(w, id, ev));
 }
 
@@ -303,11 +306,11 @@ export function playEvents(world: World, _rng?: Rng): Out & { results: Record<st
       w = { ...w, players };
     }
     for (const [id, r] of Object.entries(out.results)) {
-      // Jogos de academy não entram no histórico nem nas notícias.
-      if (isAcademy(w, r.teamAId) || isAcademy(w, r.teamBId)) continue;
       results[id] = r;
+      // Jogos de academy não entram no histórico de séries (ranking, forma).
+      if (isAcademy(w, r.teamAId) || isAcademy(w, r.teamBId)) continue;
       const loser = r.winnerTeamId === r.teamAId ? r.teamBId : r.teamAId;
-      w = { ...w, seriesLog: [...w.seriesLog, { date: w.date, winner: r.winnerTeamId, loser, winnerRoster: [...w.teams[r.winnerTeamId].starters] }] };
+      w = { ...w, seriesLog: [...w.seriesLog, { date: w.date, winner: r.winnerTeamId, loser, winnerRoster: [...(teams[r.winnerTeamId]?.starters ?? [])] }] };
     }
     const t = out.tournament;
     if (!t.championId) {
@@ -317,8 +320,11 @@ export function playEvents(world: World, _rng?: Rng): Out & { results: Record<st
     // Encerramento: premiação, bônus de título, satisfação, MVP/EVPs e resultados para o ranking.
     w = setEvent(w, { ...ev, tournament: t, status: 'encerrado' });
     w = awardTournament(w, t, tierOf(ev));
-    w = staffTitle(w, t.championId, createRng(hashString(`staff-titulo:${ev.id}`)));
-    w = titleReputation(w, t.championId, t.format, t.participants.length, t.name);
+    // Staff e reputação do manager só crescem com título de tier 1.
+    if (tierOf(ev) === 1) {
+      w = staffTitle(w, t.championId, createRng(hashString(`staff-titulo:${ev.id}`)));
+      w = titleReputation(w, t.championId, t.format, t.participants.length, t.name);
+    }
     const weight = eventWeightOf(t.format, t.participants.length) * tierWeight(tierOf(ev));
     const res = Object.entries(t.placements).filter(([teamId]) => w.teams[teamId]).map(([teamId, label]) => ({
       eventId: ev.id,

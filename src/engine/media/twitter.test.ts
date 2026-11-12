@@ -29,7 +29,7 @@ describe('Twitter', () => {
   });
 
   it('título: conta de notícias e torcida do campeão', () => {
-    const ev = w0.calendar[0];
+    const ev = w0.calendar.find((e) => e.tier === 1)!;
     const prev = { ...w0, calendar: [{ ...ev, status: 'em_andamento' as const }] };
     const next = { ...w0, calendar: [{ ...ev, status: 'encerrado' as const, tournament: { ...(ev.tournament ?? ({} as never)), championId: 'furia' } }] };
     const out = tweetsForDay(prev, next, {}, rng());

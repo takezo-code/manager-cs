@@ -36,7 +36,7 @@ export const EVENT_TEMPLATES: EventTemplate[] = [
   },
   {
     key: 'iem-inverno', organizer: 'ESL', name: (c, y) => `IEM ${c} ${y}`, cities: ['Kraków', 'Katowice'],
-    start: '01-28', end: '02-08', format: 'epl24', options: { thirdPlace: true }, teams: 24, prizePool: 1_000_000, approximated: true,
+    start: '01-28', end: '02-09', format: 'epl24', options: { thirdPlace: true }, teams: 24, prizePool: 1_000_000, approximated: true,
   },
   {
     key: 'epl-1', organizer: 'ESL', name: (_c, y) => `ESL Pro League ${y} — Temporada ${eplSeason(y, 0)}`, cities: ['Estocolmo', 'Malta'],
@@ -64,7 +64,7 @@ export const EVENT_TEMPLATES: EventTemplate[] = [
   },
   {
     key: 'cs-asia', organizer: 'Perfect World', name: (c, y) => `CS Asia Championships ${c} ${y}`, cities: ['Xangai', 'Hangzhou'],
-    start: '05-20', end: '05-24', format: 'groups16', options: { openingBo1: true }, teams: 16, prizePool: 1_000_000,
+    start: '05-20', end: '05-26', format: 'groups16', options: { openingBo1: true }, teams: 16, prizePool: 1_000_000,
   },
   {
     key: 'major-1', organizer: 'Major', name: (c, y) => `${c} Major ${y}`, cities: ['IEM Colônia', 'BLAST Austin', 'PGL Copenhague'],
@@ -80,7 +80,7 @@ export const EVENT_TEMPLATES: EventTemplate[] = [
   },
   {
     key: 'epl-2', organizer: 'ESL', name: (_c, y) => `ESL Pro League ${y} — Temporada ${eplSeason(y, 1)}`, cities: ['Katowice', 'Estocolmo'],
-    start: '10-03', end: '10-11', format: 'epl24', options: { thirdPlace: true }, teams: 24, prizePool: 1_000_000,
+    start: '10-03', end: '10-15', format: 'epl24', options: { thirdPlace: true }, teams: 24, prizePool: 1_000_000,
   },
   {
     key: 'pgl-masters', organizer: 'PGL', name: (c, y) => `PGL Masters ${c} ${y}`, cities: ['Bucareste', 'Belgrado'],
@@ -92,7 +92,7 @@ export const EVENT_TEMPLATES: EventTemplate[] = [
   },
   {
     key: 'blast-rivals', organizer: 'BLAST', name: (c, y) => `BLAST Rivals ${c} ${y}`, cities: ['Hong Kong', 'Fort Worth'],
-    start: '11-11', end: '11-15', format: 'rivals8', teams: 8, prizePool: 1_000_000,
+    start: '11-11', end: '11-16', format: 'rivals8', teams: 8, prizePool: 1_000_000,
   },
   {
     key: 'major-2', organizer: 'Major', name: (c, y) => `${c} Major ${y}`, cities: ['PGL Singapura', 'StarLadder Budapeste', 'Perfect World Xangai'],

@@ -502,6 +502,8 @@ export const MORALE = {
 export const CALENDAR = {
   /** Convites saem N dias antes do evento. */
   inviteDaysBefore: 21,
+  /** O top N do ranking só joga tier 1 (nunca é chamado para tier 2/3). */
+  tier1Only: 20,
   /** Eventos com esse número de times (Majors, EWC) são obrigatórios para os convidados. */
   mandatoryTeams: 32,
   /** Qualificatória (mata-mata MD3) N dias antes do evento. */
