@@ -36,7 +36,7 @@ function ReputationLadder({ rep }: { rep: number }) {
       {/* Sem espaço entre as faixas: o marcador em rep% cai exatamente na faixa certa (cada uma vale 20 pontos). */}
       <div className="relative mt-2 grid grid-cols-5 overflow-hidden rounded-md" aria-label={`Reputação ${Math.round(rep)}: ${band}`}>
         {BANDS.map((b) => (
-          <div key={b} className={`border-r border-bg px-1 py-2 text-center text-[11px] font-semibold last:border-r-0 sm:text-xs ${b === band ? 'bg-accent text-bg' : 'bg-black/30 text-muted'}`}>
+          <div key={b} title={b} className={`truncate border-r border-bg px-0.5 py-2 text-center text-[10px] font-semibold last:border-r-0 sm:px-1 sm:text-xs ${b === band ? 'bg-accent text-bg' : 'bg-black/30 text-muted'}`}>
             {b}
           </div>
         ))}
