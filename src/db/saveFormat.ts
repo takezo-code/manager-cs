@@ -162,7 +162,7 @@ function migrateV3(s: SavedState & { tournament?: unknown }): SavedState {
     const tournament: Tournament = { ...old, format, options: {}, prizePool: 1_250_000, playerStats: {}, stages: stages as Tournament['stages'] };
     calendar.unshift({
       id: old.id, templateId: 'legado', name: old.name, city: '', startDate: s.date, endDate: addDays(s.date, 20), format, teams: old.participants.length,
-      prizePool: 1_250_000, status: 'em_andamento', invited: [...old.participants], accepted: [...old.participants], declined: [], qualifierSlots: 0,
+      prizePool: 1_250_000, tier: 1, status: 'em_andamento', invited: [...old.participants], accepted: [...old.participants], declined: [], qualifierSlots: 0,
       qualified: [], tournament,
     });
   }

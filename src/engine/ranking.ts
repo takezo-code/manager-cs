@@ -41,8 +41,8 @@ export function computeRanking(w: World): Array<{ teamId: string; points: number
     const mine = w.results.filter((r) => r.teamId === t.id && sameCore(t, r.roster));
     for (const r of mine) a += 1000 * r.weight * r.placeFactor * decay(daysBetween(r.date, w.date));
     rawA[t.id] = a;
-    // LANs: média do fator de colocação nas últimas 10.
-    const last = [...mine].sort((x, y) => y.date.localeCompare(x.date)).slice(0, RANKING.lanCount);
+    // LANs: média do fator de colocação nas últimas 10 do tier 1 (tier 2/3 não contam).
+    const last = mine.filter((r) => r.weight >= RANKING.eventWeights.small).sort((x, y) => y.date.localeCompare(x.date)).slice(0, RANKING.lanCount);
     rawL[t.id] = last.length ? last.reduce((s, r) => s + r.placeFactor, 0) / last.length : 0;
     rawF[t.id] = 0;
   }
@@ -52,7 +52,8 @@ export function computeRanking(w: World): Array<{ teamId: string; points: number
     const winner = w.teams[s.winner];
     const loser = w.teams[s.loser];
     if (!winner || !loser || !sameCore(winner, s.winnerRoster)) continue;
-    rawF[s.winner] += (teams.length + 1 - loser.hltvRank) / teams.length;
+    // Ao quadrado: vencer time fraco (comum no tier 2/3) vale pouco.
+    rawF[s.winner] += ((teams.length + 1 - loser.hltvRank) / teams.length) ** 2;
   }
   const max = (o: Record<string, number>) => Math.max(0, ...Object.values(o));
   const [mA, mF, mL] = [max(rawA), max(rawF), max(rawL)];
@@ -83,6 +84,8 @@ export function placeFactorOf(place: number): number {
   for (const f of RANKING.placeFactors) if (place <= f.upTo) return f.factor;
   return RANKING.placeFactors[RANKING.placeFactors.length - 1].factor;
 }
+
+export const tierWeight = (tier: 1 | 2 | 3 = 1) => RANKING.tierWeights[tier];
 
 export function eventWeightOf(format: string, teamsInEvent: number): number {
   if (format === 'major32') return RANKING.eventWeights.major;

@@ -67,7 +67,8 @@ describe('Temporada', () => {
     let w = createWorld('furia');
     while (w.date < '2027-12-31') w = dailyTick(w).world;
     const y2027 = w.calendar.filter((e) => e.startDate.startsWith('2027'));
-    expect(y2027).toHaveLength(17);
+    expect(y2027.filter((e) => e.tier === 1)).toHaveLength(17);
+    expect(y2027.length).toBeGreaterThan(80);
     for (const e of y2027) {
       expect(e.status, e.name).toBe('encerrado');
       expect(e.tournament?.championId, e.name).toBeTruthy();

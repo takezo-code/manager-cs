@@ -5,6 +5,7 @@ import { withSatisfaction } from '../morale/satisfaction';
 import { grantAwards } from '../tournament/awards';
 import type { Tournament } from '../tournament/types';
 import type { World } from '../world';
+import { academyLineupIds, orgOfAcademy } from '../tier2/model';
 import { addMoney } from '../world';
 import { payTitleBonuses } from './sponsors';
 
@@ -36,20 +37,23 @@ export function prizeFor(t: Pick<Tournament, 'format' | 'prizePool'>, label: str
   return roundTo((sum / (to - from + 1)) * t.prizePool, 10);
 }
 
-export function awardTournament(world: World, t: Tournament): World {
+/** `tier`: patrocinador só paga bônus de título no tier 1. Academy: prêmio vai para o time dono. */
+export function awardTournament(world: World, t: Tournament, tier: 1 | 2 | 3 = 1): World {
   let w = world;
   const half = t.participants.length / 2;
   for (const [teamId, label] of Object.entries(t.placements)) {
-    w = addMoney(w, teamId, prizeFor(t, label), 'premiacao', `${t.name} (${label})`);
+    const org = w.teams[teamId] ? teamId : orgOfAcademy(teamId);
+    if (!org || !w.teams[org]) continue;
+    w = addMoney(w, org, prizeFor(t, label), 'premiacao', `${t.name} (${label})`);
     const place = placeNumber(label);
     const delta =
       place === 1 ? MORALE.events.title : place === 2 ? MORALE.events.vice : place <= 4 ? MORALE.events.top4 : place > half ? MORALE.events.earlyExit : 0;
     if (delta) {
       const players = { ...w.players };
-      for (const pid of w.teams[teamId].playerIds) players[pid] = withSatisfaction(players[pid], delta);
+      for (const pid of w.teams[teamId]?.playerIds ?? academyLineupIds(w, org)) players[pid] = withSatisfaction(players[pid], delta);
       w = { ...w, players };
     }
   }
-  if (t.championId) w = payTitleBonuses(w, t.championId, t.name);
+  if (t.championId && tier === 1 && w.teams[t.championId]) w = payTitleBonuses(w, t.championId, t.name);
   return grantAwards(w, t);
 }

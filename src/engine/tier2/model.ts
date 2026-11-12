@@ -121,6 +121,14 @@ function asTeam(base: Pick<Team, 'id' | 'name' | 'shortName' | 'country' | 'colo
   };
 }
 
+/** A academy de um time como Team (sem stand-ins), para eventos do tier 3. */
+export function academyTeam(w: World, orgId: string): Team {
+  const t = w.teams[orgId];
+  const id = academyTeamId(orgId);
+  const roster = [...academyLineupIds(w, orgId)].sort((a, b) => baseOvr(w.players[b]) - baseOvr(w.players[a]));
+  return { ...asTeam({ id, name: `${t.name} Academy`, shortName: `${t.shortName}.A`, country: t.country, color: t.color, mapStrength: mapStrengthAround(id, TIER2.academyMapLevel) }, roster, 1000 + t.hltvRank), region: t.region };
+}
+
 /** Jovens da academy que jogam pela academy (os emprestados jogam no time do empréstimo). */
 export const academyLineupIds = (w: World, orgId: string) =>
   (w.teams[orgId]?.academyIds ?? []).filter((id) => w.players[id] && !w.players[id].loan);

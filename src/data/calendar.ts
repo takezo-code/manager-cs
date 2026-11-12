@@ -1,11 +1,12 @@
 // Calendário tier 1 baseado no calendário real de 2026 (datas e formatos pesquisados).
 // Cada edição troca a cidade-sede: a lista de cidades gira por ano (2026 = primeira da lista).
 import type { FormatId, FormatOptions } from '../engine/tournament/types';
+import type { Region } from '../engine/types';
 
 export interface EventTemplate {
   /** Identificador estável do evento (sem ano). */
   key: string;
-  organizer: 'ESL' | 'BLAST' | 'PGL' | 'Perfect World' | 'EWC' | 'Major';
+  organizer: string;
   /** Nome do evento; recebe a cidade e o ano. */
   name: (city: string, year: number) => string;
   cities: string[];
@@ -18,6 +19,12 @@ export interface EventTemplate {
   prizePool: number;
   /** Formato não confirmado nas fontes: aproximado. */
   approximated?: boolean;
+  /** 1 (padrão), 2 ou 3. */
+  tier?: 1 | 2 | 3;
+  /** Tier 2/3: faixa do ranking HLTV convidada [de, até]. */
+  rankBand?: [number, number];
+  /** Tier 2/3: regiões convidadas (sem isso, mundial). */
+  regions?: Region[];
 }
 
 const eplSeason = (year: number, half: 0 | 1) => 23 + (year - 2026) * 2 + half;

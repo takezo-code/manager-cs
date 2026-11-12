@@ -3,7 +3,7 @@ import { buildYear, onVacation, windowOpen } from './calendar';
 
 describe('Calendário anual', () => {
   it('2027 tem os 17 eventos, em ordem de data, com o ano no nome', () => {
-    const y = buildYear(2027);
+    const y = buildYear(2027).filter((e) => e.tier === 1);
     expect(y).toHaveLength(17);
     expect(y.map((e) => e.startDate)).toEqual([...y.map((e) => e.startDate)].sort());
     expect(y.every((e) => e.name.includes('2027') && e.id.endsWith('-2027'))).toBe(true);
@@ -37,7 +37,7 @@ describe('Calendário anual', () => {
   });
 
   it('vagas de qualificatória: 32 times sem qualificatória; demais com 2', () => {
-    const y = buildYear(2027);
+    const y = buildYear(2027).filter((e) => e.tier === 1);
     for (const e of y) expect(e.qualifierSlots).toBe(e.teams === 32 ? 0 : 2);
   });
 });

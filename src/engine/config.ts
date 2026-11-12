@@ -539,6 +539,8 @@ export const RANKING = {
     { upTo: 99, factor: 0.05 },
   ],
   eventWeights: { major: 1, big: 0.8, mid: 0.6, small: 0.4 },
+  /** Peso do tier sobre o peso do evento: tier 2 vale 1/4, tier 3 vale 1/10. */
+  tierWeights: { 1: 1, 2: 0.25, 3: 0.1 } as Record<1 | 2 | 3, number>,
 };
 
 // ---------- Treino e descanso ----------
