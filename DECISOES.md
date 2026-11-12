@@ -69,6 +69,14 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 - **Curso com prazo:** +2 no atributo depois de 28 dias.
 - Detalhes e fórmulas: `docs/superpowers/specs/2026-11-12-passo-11-comissao-design.md`.
 
+### Passo 12 (12/11/2026)
+
+- **Início na academy** fica para depois, junto com o tier 2 e o empréstimo.
+- **Orçamento = aporte no caixa** (metas batidas ou proposta usada para negociar).
+- **Demissão pela confiança da diretoria** (abaixo de 20 na avaliação de 31/12).
+- **Desempregado fica livre e o tempo passa**, esperando propostas.
+- Detalhes e números: `docs/superpowers/specs/2026-11-12-passo-12-carreira-design.md`.
+
 ## Criado por mim (revisar se quiser)
 
 | Item | Valor |
@@ -131,6 +139,11 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 | Força do staff | Com o mesmo elenco, staff 95 × 40 vence ~68% dos mapas MD1; entre times reais, o staff muda 1 a 3 pontos percentuais |
 | IA e staff | Renova sozinha; preenche vaga com o melhor que cabe no caixa (sem caixa, o mais barato); propõe pelo seu staff com OVR ≥ 75 (10% ao mês) |
 | Sorteio antecipado | Os jogos do dia seguinte de um campeonato são sorteados no fim do dia (para a prévia do analista) |
+| Atributos do manager | Começam em 30 (efeito zero) e vão a 100; Comunicação só tem efeito no passo 13 |
+| Reputação | 0–100, começa em 10; título de Major +12, evento 16+ +6, menor +3; meta ±; demissão −10, pedir demissão −5 |
+| Metas | Grande: título, top 5, caixa; médio: top 10, top 8 de Major, caixa; pequeno: jogar Major, top 20, caixa. Aporte 300/200/120 mil por meta |
+| Propostas ao manager | 12% no dia 1º (empregado), 35% às segundas (desempregado); o time que você deixou só volta a chamar depois de 1 ano |
+| Salário do manager | Só informativo por enquanto (não sai do caixa do clube) |
 | Cor da carta evoluída | A cor da evolução (azul, vermelha ou rosa) substitui a cor da faixa; a faixa continua num selo |
 
 ## Dados

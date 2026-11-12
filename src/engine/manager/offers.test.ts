@@ -77,3 +77,12 @@ describe('Propostas ao manager', () => {
     expect(w.date >= '2027-11-11').toBe(true);
   }, 120_000);
 });
+
+describe('Correções da revisão', () => {
+  it('o time que você deixou não faz proposta no mesmo ano', () => {
+    const w = resign(createWorld('big'));
+    expect(interestedTeams(w).some((t) => t.id === 'big')).toBe(false);
+    const later = { ...w, date: '2027-12-01' };
+    expect(interestedTeams(later).some((t) => t.id === 'big')).toBe(true);
+  });
+});

@@ -4,6 +4,7 @@ import { addToAcademy, generateYouth } from '../engine/academy';
 import { generateAmateurs } from '../engine/amateurs';
 import { newBaseSeason } from '../engine/baseLeague';
 import { DEFAULT_PROFILE, newManager } from '../engine/manager/model';
+import { assignGoals } from '../engine/manager/board';
 import { buildYear, type CalendarEvent } from '../engine/calendar';
 import { ACADEMY, AMATEURS } from '../engine/config';
 import { START_DATE, addDays } from '../engine/date';
@@ -77,7 +78,10 @@ export function migrateState(raw: Record<string, unknown>, version: number): Sav
   if (version < 4) s = migrateV3(s as SavedState & { tournament?: unknown });
   if (version < 5) s = migrateV4(s);
   if (version < 6) s = migrateV5(s);
-  if (version < 7) s = { ...s, manager: s.manager ?? newManager(DEFAULT_PROFILE, s.myTeamId, s.date) };
+  if (version < 7) {
+    s = { ...s, manager: s.manager ?? newManager(DEFAULT_PROFILE, s.myTeamId, s.date) };
+    if (s.myTeamId && !s.manager.goals.length) s = { ...s, ...assignGoals({ ...s, managerTeamId: s.myTeamId }, s.myTeamId) };
+  }
   return s;
 }
 

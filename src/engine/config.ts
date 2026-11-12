@@ -745,4 +745,6 @@ export const MANAGER = {
   offerChanceUnemployed: 0.35,
   offerDays: 14,
   budgetConfidence: 5,
+  /** Time que você deixou só volta a te chamar depois disto. */
+  rehireDays: 365,
 };

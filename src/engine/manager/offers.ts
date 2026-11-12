@@ -1,6 +1,6 @@
 // Propostas de outros times ao manager, pedido de orçamento, pedido de demissão e desemprego.
 import { MANAGER } from '../config';
-import { addDays } from '../date';
+import { addDays, daysBetween } from '../date';
 import type { Rng } from '../rng';
 import type { Team } from '../types';
 import { addMoney, type World, type WorldEvent } from '../world';
@@ -19,7 +19,9 @@ function allowedSizes(rep: number): ClubSize[] {
 
 export function interestedTeams(w: World): Team[] {
   const sizes = allowedSizes(w.manager.reputation);
-  return Object.values(w.teams).filter((t) => t.id !== w.managerTeamId && sizes.includes(clubSize(t)));
+  // O time que você deixou há menos de um ano não te chama de volta.
+  const recent = new Set(w.manager.stints.filter((s) => s.to && daysBetween(s.to, w.date) < MANAGER.rehireDays).map((s) => s.teamId));
+  return Object.values(w.teams).filter((t) => t.id !== w.managerTeamId && !recent.has(t.id) && sizes.includes(clubSize(t)));
 }
 
 /** Aporte que o time oferece ao contratar o manager. */

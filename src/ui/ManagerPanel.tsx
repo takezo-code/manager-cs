@@ -91,8 +91,9 @@ function Board() {
           <span className={`font-semibold tabular-nums ${danger ? 'text-loss' : 'text-ink'}`}>{Math.round(m.confidence)}</span>
         </div>
         <div className="relative mt-1 h-3 overflow-hidden rounded-full bg-black/40" aria-label={`Confiança ${Math.round(m.confidence)} de 100; abaixo de ${MANAGER.fireBelow} é demissão`}>
-          <span className="absolute inset-y-0 left-0 bg-loss/30" style={{ width: `${MANAGER.fireBelow}%` }} title="Zona de demissão" />
           <span className={`absolute inset-y-0 left-0 rounded-full ${danger ? 'bg-loss' : 'bg-win/80'}`} style={{ width: `${m.confidence}%` }} />
+          {/* Zona de demissão por cima da barra, sempre visível. */}
+          <span className="absolute inset-y-0 left-0 border-r-2 border-loss bg-loss/35" style={{ width: `${MANAGER.fireBelow}%` }} title="Zona de demissão" />
         </div>
         <p className="mt-1 text-[11px] text-muted">Abaixo de {MANAGER.fireBelow} na avaliação de 31/12, você é demitido.</p>
       </div>

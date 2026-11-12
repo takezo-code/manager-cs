@@ -169,6 +169,7 @@ describe('Migração v6 → v7', () => {
     const s = migrateState(v6 as unknown as Record<string, unknown>, 6);
     expect(s.manager.name).toBe('Manager');
     expect(s.manager.stints[0]).toEqual({ teamId: 'furia', from: s0.date, to: null, reason: null });
+    expect(s.manager.goals).toHaveLength(3);
   });
 });
 
