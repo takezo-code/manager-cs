@@ -3,6 +3,7 @@ import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_STAFF, INITIAL_TEAMS } from
 import { generateTier2 } from './tier2/model';
 import { cupDayWithEvents, newTier2Season, startCup } from './tier2/cups';
 import { loansDay } from './tier2/loans';
+import { academySeasonEnd, markRevealed, startAsAcademyManager } from './tier2/academyCareer';
 import { mediaDay } from './media/day';
 import { addToAcademy, generateYouth } from './academy';
 import { buildYear, teamBusy } from './calendar';
@@ -35,7 +36,7 @@ import type { MatchResult } from './types';
 import type { World, WorldEvent } from './world';
 
 /** Mundo de um jogo novo: dados dos JSONs + patrocínios iniciais. */
-export function createWorld(managerTeamId: string, seed = 1, profile: ManagerProfile = DEFAULT_PROFILE): World {
+export function createWorld(managerTeamId: string, seed = 1, profile: ManagerProfile = DEFAULT_PROFILE, opts: { academy?: boolean } = {}): World {
   const rng = createRng(hashString(`mundo:${seed}`));
   const teams = Object.fromEntries(INITIAL_TEAMS.map((t) => [t.id, structuredClone(t)]));
   for (const t of Object.values(teams)) t.sponsors = initialSponsors(t, START_DATE, rng);
@@ -68,6 +69,7 @@ export function createWorld(managerTeamId: string, seed = 1, profile: ManagerPro
   if (managerTeamId) w = assignGoals(w, managerTeamId);
   // Academy inicial de cada time.
   for (const id of Object.keys(w.teams)) w = addToAcademy(w, id, generateYouth(w, rng, id, ACADEMY.aiSize));
+  if (opts.academy && managerTeamId) w = startAsAcademyManager(w, managerTeamId);
   return w;
 }
 
@@ -107,6 +109,7 @@ export function dailyTick(world: World, opts: { rng?: Rng } = {}): { world: Worl
   // Virada do ano: aniversários, saída dos jovens de 20 anos e nova temporada da liga de base.
   if (w.date.endsWith('-01-01')) {
     add(evaluateSeason(w));
+    add(academySeasonEnd(w));
     w = ageUp(w);
     add(academyYearEnd(w));
     w = { ...w, baseLeague: newBaseSeason(year) };
@@ -117,6 +120,7 @@ export function dailyTick(world: World, opts: { rng?: Rng } = {}): { world: Worl
     w = refreshAmateurs(w, rng);
     add(monthlyStaffOffers(w, rng));
     w = monthlyManagerGrowth(w);
+    w = markRevealed(w);
     add(monthlyManagerOffers(w, rng));
     if (w.date.slice(5, 7) === '12') events.push(...academyAgingWarning(w));
     add(monthlyFinance(w, rng));

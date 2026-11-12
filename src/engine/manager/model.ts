@@ -5,7 +5,17 @@ import { MANAGER } from '../config';
 export type ManagerAttr = 'NEG' | 'FIN' | 'COM' | 'TAL' | 'VES';
 export const MANAGER_ATTRS: readonly ManagerAttr[] = ['NEG', 'FIN', 'COM', 'TAL', 'VES'];
 
-export type GoalKind = 'titulo' | 'top5' | 'top10' | 'top20' | 'major_top8' | 'jogar_major' | 'caixa';
+export type GoalKind =
+  | 'titulo'
+  | 'top5'
+  | 'top10'
+  | 'top20'
+  | 'major_top8'
+  | 'jogar_major'
+  | 'caixa'
+  | 'tier2_top8'
+  | 'promover_jovem'
+  | 'jovem_cresce5';
 
 export interface Goal {
   kind: GoalKind;
@@ -18,6 +28,8 @@ export interface Stint {
   to: string | null;
   /** Por que saiu: "demitido", "pediu demissão", "aceitou proposta". */
   reason: string | null;
+  /** Passagem pela academy da organização (não pelo time principal). */
+  academy?: boolean;
 }
 
 export interface Deal {
@@ -37,6 +49,8 @@ export interface ManagerProfile {
 export interface Manager extends ManagerProfile {
   /** Organização cuja academy ele comanda (carreira começando na academy). */
   academyOf?: string | null;
+  /** Manager da academy: promoções e OVR inicial dos jovens na temporada (metas). */
+  academyStats?: { promoted: number; startOvr: Record<string, number> };
   /** Tamanho do clube quando as metas foram definidas (define a paciência da diretoria). */
   clubSize: 'grande' | 'medio' | 'pequeno';
   attrs: Record<ManagerAttr, number>;
@@ -55,6 +69,10 @@ export interface Manager extends ManagerProfile {
   buys: Deal[];
   sales: Deal[];
 }
+
+/** Organização do manager: o time que ele comanda ou a org da academy que ele comanda. */
+export const managerOrg = (w: { managerTeamId: string; manager?: { academyOf?: string | null } }): string | null =>
+  w.managerTeamId || w.manager?.academyOf || null;
 
 export const DEFAULT_PROFILE: ManagerProfile = { name: 'Manager', age: 35, country: 'BR' };
 

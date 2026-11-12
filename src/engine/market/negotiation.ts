@@ -114,6 +114,7 @@ export function playerStance(w: World, playerId: string, buyerId: string, kind: 
     else if (bandOf(p.satisfaction) === 'quer_sair') refuses = `${p.nick} quer sair e se recusa a renovar.`;
     salary = Math.max(salary, p.contract?.salary ?? 0);
     if (p.satisfaction >= 70) salary *= 0.95; // satisfeito renova mais fácil
+    if (p.revealed && buyerId === w.managerTeamId) salary *= 1 - MANAGER.revealedDiscount; // revelado por você
   }
 
   // Finanças do manager: salários mais fáceis de acertar.

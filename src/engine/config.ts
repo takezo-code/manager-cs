@@ -740,6 +740,12 @@ export const MANAGER = {
   goalFailedConfidence: { pequeno: 15, medio: 18, grande: 22 },
   boardInjection: { pequeno: 120_000, medio: 200_000, grande: 300_000 },
   fireBelow: 20,
+  /** Academy: margem para a promoção recomendada e meta de crescimento. */
+  promoteMargin: 2,
+  academyGrowthGoal: 5,
+  /** Jovem revelado por você: +10 de satisfação ao subir e −10% na renovação. */
+  revealedBonus: 10,
+  revealedDiscount: 0.1,
   /** Propostas ao manager. */
   offerChanceEmployed: 0.12,
   offerChanceUnemployed: 0.35,

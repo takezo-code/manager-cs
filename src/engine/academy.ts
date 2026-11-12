@@ -1,5 +1,5 @@
 // Academy: jovens de 16 a 19 anos, fora do elenco principal, promovidos a qualquer momento.
-import { ACADEMY, MARKET } from './config';
+import { ACADEMY, MANAGER, MARKET } from './config';
 import { endOfMonthAfter } from './date';
 import { baseOvr } from './form';
 import { DEFAULT_MOOD } from './morale/satisfaction';
@@ -93,7 +93,9 @@ export function promote(w: World, playerId: string): { ok: true; world: World } 
     ...w.teams,
     [t.id]: { ...t, academyIds: t.academyIds.filter((id) => id !== playerId), playerIds: [...t.playerIds, playerId], starters: t.starters.length < 5 ? [...t.starters, playerId] : t.starters },
   };
-  return { ok: true, world: { ...w, teams, players: { ...w.players, [playerId]: { ...p, squad: 'principal' } } } };
+  // Revelado por você: sobe feliz.
+  const satisfaction = p.revealed ? Math.min(100, p.satisfaction + MANAGER.revealedBonus) : p.satisfaction;
+  return { ok: true, world: { ...w, teams, players: { ...w.players, [playerId]: { ...p, squad: 'principal', satisfaction } } } };
 }
 
 /** Promoção pedida pelo manager: só jovens da academy do seu time. */
@@ -153,7 +155,8 @@ export function academyYearEnd(world: World, rngIn?: Rng): { world: World; event
 
 /** Dezembro: aviso de quem vai deixar a sua academy na virada do ano. */
 export function academyAgingWarning(w: World): WorldEvent[] {
-  const t = w.teams[w.managerTeamId];
+  const org = w.managerTeamId || w.manager?.academyOf;
+  const t = org ? w.teams[org] : undefined;
   return (t?.academyIds ?? [])
     .map((id) => w.players[id])
     .filter((p) => p.age >= ACADEMY.maxAge)

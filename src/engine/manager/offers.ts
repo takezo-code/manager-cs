@@ -1,5 +1,6 @@
 // Propostas de outros times ao manager, pedido de orçamento, pedido de demissão e desemprego.
 import { MANAGER } from '../config';
+import { leaveAcademy } from '../tier2/academyCareer';
 import { addDays, daysBetween } from '../date';
 import type { Rng } from '../rng';
 import type { Team } from '../types';
@@ -21,7 +22,7 @@ export function interestedTeams(w: World): Team[] {
   const sizes = allowedSizes(w.manager.reputation);
   // O time que você deixou há menos de um ano não te chama de volta.
   const recent = new Set(w.manager.stints.filter((s) => s.to && daysBetween(s.to, w.date) < MANAGER.rehireDays).map((s) => s.teamId));
-  return Object.values(w.teams).filter((t) => t.id !== w.managerTeamId && !recent.has(t.id) && sizes.includes(clubSize(t)));
+  return Object.values(w.teams).filter((t) => t.id !== w.managerTeamId && t.id !== w.manager.academyOf && !recent.has(t.id) && sizes.includes(clubSize(t)));
 }
 
 /** Aporte que o time oferece ao contratar o manager. */
@@ -50,10 +51,12 @@ function maybePropose(w: World, rng: Rng, chance: number): { world: World; event
 }
 
 /** Dia 1º (empregado). */
-export const monthlyManagerOffers = (w: World, rng: Rng) => (w.managerTeamId ? maybePropose(w, rng, MANAGER.offerChanceEmployed) : { world: w, events: [] });
+export const monthlyManagerOffers = (w: World, rng: Rng) =>
+  w.managerTeamId || w.manager.academyOf ? maybePropose(w, rng, MANAGER.offerChanceEmployed) : { world: w, events: [] };
 
 /** Segundas-feiras (desempregado). */
-export const weeklyUnemployedOffers = (w: World, rng: Rng) => (w.managerTeamId ? { world: w, events: [] } : maybePropose(w, rng, MANAGER.offerChanceUnemployed));
+export const weeklyUnemployedOffers = (w: World, rng: Rng) =>
+  w.managerTeamId || w.manager.academyOf ? { world: w, events: [] } : maybePropose(w, rng, MANAGER.offerChanceUnemployed);
 
 /** Propostas vencidas somem. */
 export const expireManagerOffers = (w: World): World => ({ ...w, inbox: w.inbox.filter((i) => i.kind !== 'manager_proposta' || i.expires >= w.date) });
@@ -62,7 +65,7 @@ export function acceptOffer(world: World, itemId: string): OfferResult {
   const item = world.inbox.find((i) => i.id === itemId && i.kind === 'manager_proposta');
   if (!item?.offerTeamId) return { ok: false, error: 'Essa proposta não existe mais.' };
   const to = item.offerTeamId;
-  let w = world.managerTeamId ? leaveTeam(world, 'aceitou proposta') : world;
+  let w = world.managerTeamId ? leaveTeam(world, 'aceitou proposta') : world.manager.academyOf ? leaveAcademy(world, 'aceitou proposta') : world;
   w = {
     ...w,
     managerTeamId: to,
@@ -98,6 +101,10 @@ export function askBudget(world: World, itemId: string, rng: Rng): { world: Worl
 }
 
 export function resign(w: World): World {
+  if (!w.managerTeamId && w.manager.academyOf) {
+    const out = leaveAcademy(w, 'pediu demissão');
+    return { ...out, manager: gainReputation(out.manager, MANAGER.repResigned) };
+  }
   if (!w.managerTeamId) return w;
   const out = leaveTeam(w, 'pediu demissão');
   return { ...out, manager: gainReputation(out.manager, MANAGER.repResigned) };

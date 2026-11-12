@@ -1,5 +1,6 @@
 // Recrutamento na GC e na FACEIT: amadores fictícios, baratos, com o potencial real escondido.
 import { makeYoungPlayer } from './academy';
+import { managerOrg } from './manager/model';
 import { ACADEMY, AMATEURS, SCOUT } from './config';
 import { endOfMonthAfter } from './date';
 import { baseOvr } from './form';
@@ -57,7 +58,8 @@ export const isHiddenGem = (a: Amateur) =>
 
 /** O que o seu olheiro encontra: os mais conhecidos primeiro; joias escondidas só com olheiro 4+. */
 export function visibleAmateurs(w: World): Amateur[] {
-  const level = w.teams[w.managerTeamId]?.scoutLevel ?? 1;
+  const org = managerOrg(w);
+  const level = (org ? w.teams[org]?.scoutLevel : 1) ?? 1;
   const cfg = SCOUT.levels[Math.max(1, Math.min(5, level)) - 1];
   const normalized = (a: Amateur) => (a.platform === 'FACEIT' ? a.level / 10 : a.level / 21);
   const gems = level >= SCOUT.alertsFrom ? w.amateurs.filter(isHiddenGem) : [];
@@ -75,7 +77,9 @@ export function refreshAmateurs(w: World, rng: Rng): World {
 export function signAmateur(w: World, playerId: string): { ok: true; world: World } | { ok: false; error: string } {
   const a = w.amateurs.find((x) => x.player.id === playerId);
   if (!a) return { ok: false, error: 'Esse amador não está mais disponível.' };
-  const t = w.teams[w.managerTeamId];
+  const org = managerOrg(w);
+  if (!org) return { ok: false, error: 'Sem time, não há academy para contratar.' };
+  const t = w.teams[org];
   if ((t.academyIds ?? []).filter((id) => !w.players[id]?.loan).length >= ACADEMY.maxSize) return { ok: false, error: `A academy está cheia (${ACADEMY.maxSize}).` };
   if (t.money < a.fee) return { ok: false, error: 'Dinheiro insuficiente para as luvas.' };
   const player: Player = {

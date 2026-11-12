@@ -21,8 +21,8 @@ export function cupPoints(label: string): number {
   return 5;
 }
 
-/** Organização do manager no tier 2 (o time dele ou a academy que comanda). */
-export const managerOrg = (w: World): string | null => w.managerTeamId || w.manager?.academyOf || null;
+export { managerOrg } from '../manager/model';
+import { managerOrg } from '../manager/model';
 
 /** Dia 5 de fevereiro a novembro: abre a copa com os 16 de mais pontos (a academy do manager entra sempre). */
 export function startCup(w: World, rng: Rng): World {
