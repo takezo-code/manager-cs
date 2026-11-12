@@ -1,6 +1,7 @@
 // Negociação em duas etapas (dupla aprovação): primeiro o time aceita a proposta, depois o jogador aceita ir.
 // Cada etapa tem até 3 rodadas com contraproposta. As decisões são determinísticas (sem sorte).
 import { windowOpen } from '../calendar';
+import { financeSalaryDiscount, negotiationDiscount } from '../manager/effects';
 import { MARKET } from '../config';
 import { endOfMonthAfter } from '../date';
 import { baseOvr } from '../form';
@@ -61,6 +62,7 @@ export function askingPrice(w: World, playerId: string, buyerId: string): number
   if (p.transferListed) price *= 1 - MARKET.listedDiscount;
   // Relação boa barateia; ruim encarece (±25%).
   price *= 1 - rel / 400;
+  if (buyerId === w.managerTeamId) price *= 1 - negotiationDiscount(w);
   return roundTo(price, 10_000);
 }
 
@@ -112,6 +114,8 @@ export function playerStance(w: World, playerId: string, buyerId: string, kind: 
     if (p.satisfaction >= 70) salary *= 0.95; // satisfeito renova mais fácil
   }
 
+  // Finanças do manager: salários mais fáceis de acertar.
+  if (buyerId === w.managerTeamId) salary *= 1 - financeSalaryDiscount(w);
   const minMonths = p.age >= 30 ? 24 : 6;
   const releaseClause = roundTo(value * 2, 50_000);
   return { refuses, desired: { salary: roundTo(salary, 500), months: Math.max(minMonths, 24), releaseClause }, minMonths };

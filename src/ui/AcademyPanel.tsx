@@ -3,6 +3,7 @@ import { baseStandings } from '../engine/baseLeague';
 import { ACADEMY, SCOUT } from '../engine/config';
 import { baseOvr } from '../engine/form';
 import { estimatePotential } from '../engine/scout';
+import { scoutNarrowing } from '../engine/manager/effects';
 import type { Player } from '../engine/types';
 import { useGame, useWorld } from '../store/game';
 import { money, ROLE_LABEL } from './format';
@@ -75,7 +76,8 @@ function ScoutHeader({ level, cash }: { level: number; cash: number }) {
 
 function YouthRow({ p, level, full }: { p: Player; level: number; full: boolean }) {
   const promoteYouth = useGame((s) => s.promoteYouth);
-  const e = estimatePotential(p, level);
+  const w = useWorld();
+  const e = estimatePotential(p, level, scoutNarrowing(w));
   const leaving = p.age >= ACADEMY.maxAge;
   return (
     <li className="grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-2 border-t border-line/60 px-4 py-3 first:border-t-0 sm:grid-cols-[10rem_1fr_auto]">
@@ -125,7 +127,8 @@ function PlatformBadge({ a }: { a: Amateur }) {
 
 function AmateurRow({ a, level, canSign }: { a: Amateur; level: number; canSign: boolean }) {
   const sign = useGame((s) => s.signAmateur);
-  const e = estimatePotential(a.player, level);
+  const w = useWorld();
+  const e = estimatePotential(a.player, level, scoutNarrowing(w));
   return (
     <li className="flex flex-wrap items-center gap-3 border-t border-line/60 px-4 py-3 first:border-t-0">
       <PlatformBadge a={a} />

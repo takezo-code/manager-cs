@@ -9,6 +9,7 @@ import { failedNegotiationEffects, finalizeNegotiation, type Negotiation } from 
 import type { Relations } from '../engine/market/relations';
 import { simulateMatch } from '../engine/match';
 import { staffAttrsOf } from '../engine/staff/effects';
+import { onYouthPromoted } from '../engine/manager/effects';
 import { startCourse } from '../engine/staff/career';
 import { hireStaff, releaseStaff, respondStaffInbox } from '../engine/staff/market';
 import type { StaffAttr } from '../engine/types';
@@ -414,7 +415,7 @@ export const useGame = create<GameState>((set, get) => {
     promoteYouth: (playerId) => {
       const r = promote(worldOf(get()), playerId);
       if (!r.ok) return set({ message: { kind: 'erro', text: r.error } });
-      commitWorld(r.world, [], { message: { kind: 'ok', text: `${r.world.players[playerId].nick} subiu para o elenco principal.` } });
+      commitWorld(onYouthPromoted(r.world), [], { message: { kind: 'ok', text: `${r.world.players[playerId].nick} subiu para o elenco principal.` } });
     },
 
     signAmateur: (playerId) => {

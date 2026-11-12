@@ -7,6 +7,7 @@ import { academyAgingWarning, academyYearEnd } from './academy';
 import { ageUp, monthlyDevelopment } from './development';
 import { newBaseSeason, playBaseRound } from './baseLeague';
 import { DEFAULT_PROFILE, newManager, type ManagerProfile } from './manager/model';
+import { managerDealsDay, monthlyManagerGrowth } from './manager/effects';
 import { finishCourses, monthlyStaffOffers } from './staff/career';
 import { staffMarketDay } from './staff/market';
 import { ACADEMY, AMATEURS } from './config';
@@ -100,6 +101,7 @@ export function dailyTick(world: World, opts: { rng?: Rng } = {}): { world: Worl
     w = monthlyDevelopment(w);
     w = refreshAmateurs(w, rng);
     add(monthlyStaffOffers(w, rng));
+    w = monthlyManagerGrowth(w);
     if (w.date.slice(5, 7) === '12') events.push(...academyAgingWarning(w));
     add(monthlyFinance(w, rng));
     w = monthlySatisfaction(w);
@@ -113,6 +115,7 @@ export function dailyTick(world: World, opts: { rng?: Rng } = {}): { world: Worl
   add(aiMarketDay(w, w.managerTeamId, rng));
   // Comissão técnica: cursos, renovações, fim de contrato e vagas da IA.
   w = finishCourses(w);
+  w = managerDealsDay(w);
   add(staffMarketDay(w, rng));
 
   // Limpeza do histórico.

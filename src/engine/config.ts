@@ -706,4 +706,17 @@ export const MANAGER = {
   /** Salário mensal do manager: base + por ponto de reputação. */
   salaryBase: 8_000,
   salaryPerRep: 300,
+  /** Efeitos no máximo (atributo 100). */
+  negotiationMax: 0.1,
+  sponsorMax: 0.15,
+  salaryMax: 0.08,
+  talentMax: 0.5,
+  lockerMonthly: 1.5,
+  lockerCut: 0.1,
+  lockerJealousy: 0.5,
+  /** Crescimento. */
+  monthlyGrowth: 0.3,
+  happySquad: 65,
+  dealGrowth: 0.5,
+  promoteGrowth: 1,
 };

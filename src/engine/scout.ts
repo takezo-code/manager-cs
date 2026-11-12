@@ -14,8 +14,10 @@ export interface PotentialEstimate {
 }
 
 /** Estimativa estável (depende só do jogador e do nível). */
-export function estimatePotential(p: Player, level: number): PotentialEstimate {
-  const cfg = SCOUT.levels[Math.max(1, Math.min(5, level)) - 1];
+/** `narrowing`: Olho pra talento do manager (0 a 0,5) estreita a faixa. */
+export function estimatePotential(p: Player, level: number, narrowing = 0): PotentialEstimate {
+  const base = SCOUT.levels[Math.max(1, Math.min(5, level)) - 1];
+  const cfg = { ...base, range: Math.max(1, Math.round(base.range * (1 - narrowing))) };
   let center = p.potential;
   if (frac(`${p.id}:${level}:erro`) < cfg.wrongChance) {
     // Erro: o centro escapa para fora da faixa real.

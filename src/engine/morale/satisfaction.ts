@@ -1,5 +1,6 @@
 // Satisfação (0 a 100): faixas, efeitos mensais, eventos e ciúme no elenco.
-import { MORALE, STAFF } from '../config';
+import { MANAGER, MORALE, STAFF } from '../config';
+import { lockerRoom } from '../manager/effects';
 import { staffAttr } from '../staff/model';
 import { daysBetween } from '../date';
 import { baseOvr } from '../form';
@@ -82,6 +83,8 @@ export function monthlySatisfaction(world: World): World {
     // Psicólogo (Motivação) segura as perdas; técnico (Gestão) ajuda todo mês.
     if (delta < 0) delta *= 1 - (staffAttr(w, team.id, 'MOT') - STAFF.minAttr) / 110;
     delta += (staffAttr(w, team.id, 'GES') - 70) * STAFF.managementMonthly;
+    // Gestão de vestiário do manager.
+    if (team.id === w.managerTeamId) delta += MANAGER.lockerMonthly * lockerRoom(w);
     let next = applySatisfaction(w, p.id, delta);
     // Promessa quebrada é cobrada uma vez só.
     if (promised && !starter) {
@@ -108,7 +111,7 @@ export function applyJealousy(w: World, teamId: string, targetId: string): { wor
     if (!p.contract) continue;
     const similar = Math.abs(baseOvr(p) - baseOvr(target)) <= 3;
     if (similar && p.contract.salary < target.contract.salary * 0.7) {
-      next = applySatisfaction(next, id, MORALE.events.jealousy);
+      next = applySatisfaction(next, id, MORALE.events.jealousy * (teamId === w.managerTeamId ? 1 - MANAGER.lockerJealousy * lockerRoom(w) : 1));
       jealous.push(id);
     }
   }

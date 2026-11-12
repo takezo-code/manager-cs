@@ -1,6 +1,7 @@
 // Conversas com os jogadores: pedidos de aumento, conversa do insatisfeito, pedido de saída,
 // aumento por iniciativa, redução salarial (individual ou coletiva) e negar saída.
-import { MORALE, STAFF } from '../config';
+import { MANAGER, MORALE, STAFF } from '../config';
+import { lockerRoom } from '../manager/effects';
 import { staffAttr } from '../staff/model';
 import { addDays, daysBetween } from '../date';
 import { effectiveAttributes } from '../player';
@@ -208,7 +209,7 @@ export function proposeCut(world: World, playerIds: string[], pct: number, rng: 
     else if (pct > 20) chance -= 0.2;
     // IGL com Liderança (Equipe) alta ajuda a convencer o elenco.
     if (collective && igl) chance += (effectiveAttributes(igl).EQP - 70) * 0.01;
-    chance += (staffAttr(w, team.id, 'GES') - 70) * STAFF.managementCut;
+    chance += (staffAttr(w, team.id, 'GES') - 70) * STAFF.managementCut + MANAGER.lockerCut * lockerRoom(w);
     if (rng.chance(Math.max(0.02, Math.min(0.95, chance)))) {
       const salary = roundTo(p.contract.salary * (1 - pct / 100), 500);
       w = setMood(w, id, { lastCut: w.date, salaryBeforeCut: p.mood.salaryBeforeCut ?? p.contract.salary, cutRefusals: 0 });

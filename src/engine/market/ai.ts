@@ -1,6 +1,7 @@
 // IA do mercado: um passo por dia. Renova e encerra contratos, completa elencos, busca reforços,
 // faz propostas pelos jogadores do seu time e às vezes paga multas.
 import { teamBusy, windowOpen } from '../calendar';
+import { saleBonus } from '../manager/effects';
 import { promote } from '../academy';
 import { ACADEMY, AI_MARKET, FINANCE, MARKET } from '../config';
 import { payroll } from '../finance/monthly';
@@ -140,7 +141,7 @@ export function aiMarketDay(world: World, myTeamId: string, rng: Rng): { world: 
     );
     if (buyers.length) {
       const buyer = rng.pick(buyers);
-      const fee = roundTo(value * (target.transferListed ? 0.85 + rng.next() * 0.2 : 0.95 + rng.next() * 0.25), 10_000);
+      const fee = roundTo(value * (target.transferListed ? 0.85 + rng.next() * 0.2 : 0.95 + rng.next() * 0.25) * (1 + saleBonus(w)), 10_000);
       const offer: IncomingOffer = {
         id: `${w.date}-${buyer.id}-${target.id}`,
         fromTeamId: buyer.id,
