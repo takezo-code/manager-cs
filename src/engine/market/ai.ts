@@ -125,6 +125,9 @@ export function aiMarketDay(world: World, myTeamId: string, rng: Rng): { world: 
     w = executeTransfer(w, pick.p.id, t.id, pick.price, aiContract(w, pick.p, t.id, rng), pick.p.teamId ? 'transferencia' : 'livre');
   }
 
+  // Manager desempregado: não há jogadores seus para receber propostas.
+  if (!myTeamId) return { world: { ...w, offers: [] }, events };
+
   // 4) Propostas pelos seus jogadores (expiram em alguns dias).
   w = { ...w, offers: w.offers.filter((o) => o.expires >= w.date && w.players[o.playerId].teamId === myTeamId) };
   const mine = myTeam().playerIds.map((id) => w.players[id]);

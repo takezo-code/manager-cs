@@ -740,4 +740,9 @@ export const MANAGER = {
   goalFailedConfidence: { pequeno: 15, medio: 18, grande: 22 },
   boardInjection: { pequeno: 120_000, medio: 200_000, grande: 300_000 },
   fireBelow: 20,
+  /** Propostas ao manager. */
+  offerChanceEmployed: 0.12,
+  offerChanceUnemployed: 0.35,
+  offerDays: 14,
+  budgetConfidence: 5,
 };

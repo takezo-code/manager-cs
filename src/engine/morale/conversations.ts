@@ -28,6 +28,7 @@ export function monthlyRequests(world: World): { world: World; events: WorldEven
   let w = world;
   const events: WorldEvent[] = [];
   const team = w.teams[w.managerTeamId];
+  if (!team) return { world: w, events };
   for (const id of team.playerIds) {
     const p = w.players[id];
     if (!p.contract || w.inbox.some((i) => i.playerId === id)) continue;
@@ -61,7 +62,7 @@ export function monthlyRequests(world: World): { world: World; events: WorldEven
 export function expireInbox(world: World): { world: World; events: WorldEvent[] } {
   let w = world;
   const events: WorldEvent[] = [];
-  for (const item of w.inbox.filter((i) => i.expires < w.date && i.kind !== 'convite' && !i.staffId)) {
+  for (const item of w.inbox.filter((i) => i.expires < w.date && i.playerId && !i.staffId)) {
     const r = respondInbox(w, item.id, item.kind === 'saida' ? { kind: 'negar' } : item.kind === 'aumento' ? { kind: 'recusar' } : { kind: 'ignorar' });
     w = r.world;
     events.push({ kind: 'info', text: `Sem resposta: ${r.event.text}` });

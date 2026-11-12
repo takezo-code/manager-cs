@@ -174,16 +174,19 @@ function fromWorld(w: World) {
     baseLeague: w.baseLeague,
     staff: w.staff,
     manager: w.manager,
+    // Demissão ou troca de time mudam o time do manager.
+    myTeamId: w.managerTeamId || null,
   };
 }
 
 /** Extrai a parte salva do estado. */
 export function savedPart(s: GameState): SavedState | null {
-  if (!s.myTeamId) return null;
+  // Desempregado também salva (myTeamId vazio); fora do jogo, não.
+  if (s.screen !== 'game' || !s.activeSlot) return null;
   return {
     ...worldOf(s),
     events: s.events,
-    myTeamId: s.myTeamId,
+    myTeamId: s.myTeamId ?? '',
     seriesResults: s.seriesResults,
     lastDayIds: s.lastDayIds,
   };
@@ -250,7 +253,7 @@ export const useGame = create<GameState>((set, get) => {
     },
 
     loadCareer: (slot, state) =>
-      set({ ...state, activeSlot: slot, pendingSlot: null, screen: 'game', lastMatch: null, message: null, saveStatus: { kind: 'saved' } }),
+      set({ ...state, myTeamId: state.myTeamId || null, activeSlot: slot, pendingSlot: null, screen: 'game', lastMatch: null, message: null, saveStatus: { kind: 'saved' } }),
 
     toMenu: () => set({ screen: 'menu', activeSlot: null, pendingSlot: null, myTeamId: null, lastMatch: null, message: null }),
 

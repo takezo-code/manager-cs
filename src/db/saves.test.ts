@@ -171,3 +171,14 @@ describe('Migração v6 → v7', () => {
     expect(s.manager.stints[0]).toEqual({ teamId: 'furia', from: s0.date, to: null, reason: null });
   });
 });
+
+describe('Save com manager desempregado', () => {
+  it('grava, mostra "Desempregado" e importa de volta', () => {
+    const s = { ...sampleState(), myTeamId: '', managerTeamId: '' };
+    const rec = makeRecord(1, s);
+    expect(rec.meta.status).toBe('Desempregado');
+    expect(rec.meta.teamName).toBe('Sem time');
+    const back = parseImport(exportJson(rec));
+    expect(back.ok).toBe(true);
+  });
+});

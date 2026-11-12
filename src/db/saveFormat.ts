@@ -47,6 +47,7 @@ export interface SaveRecord {
 }
 
 export function buildMeta(state: SavedState): SaveMeta {
+  if (!state.myTeamId) return { teamId: '', teamName: 'Sem time', money: 0, date: state.date, status: 'Desempregado' };
   const team = state.teams[state.myTeamId];
   const me = state.myTeamId;
   const playing = state.calendar.find((e) => e.status === 'em_andamento' && e.tournament?.participants.includes(me) && !e.tournament.placements[me]);
@@ -216,7 +217,7 @@ export function parseImport(text: string): { ok: true; state: SavedState } | { o
   if (typeof data.version !== 'number' || data.version > SAVE_VERSION)
     return { ok: false, error: 'Esse save é de uma versão mais nova do jogo.' };
   const s = data.state;
-  if (!isObj(s) || !isObj(s.teams) || !isObj(s.players) || typeof s.myTeamId !== 'string' || !isObj(s.teams[s.myTeamId]))
+  if (!isObj(s) || !isObj(s.teams) || !isObj(s.players) || typeof s.myTeamId !== 'string' || (s.myTeamId !== '' && !isObj(s.teams[s.myTeamId])))
     return { ok: false, error: 'O save está incompleto ou corrompido.' };
   const base = {
     ...s,
