@@ -2,13 +2,14 @@
 // início dos eventos, um dia de cada evento ativo e o encerramento (premiação, prêmios, ranking).
 import { type CalendarEvent, overlaps } from './calendar';
 import { staffAttrsOf } from './staff/effects';
+import { staffTitle } from './staff/career';
 import { CALENDAR } from './config';
 import { addDays, daysBetween } from './date';
 import { awardTournament, placeNumber } from './finance/prizes';
 import { recoverBetweenEvents } from './form';
 import { simulateMatch } from './match';
 import { eventWeightOf, placeFactorOf } from './ranking';
-import { hashString, type Rng } from './rng';
+import { createRng, hashString, type Rng } from './rng';
 import { validStarters } from './squad';
 import { pickAwards } from './tournament/awards';
 import { createTournament, playDay } from './tournament/run';
@@ -236,6 +237,7 @@ export function playEvents(world: World, _rng?: Rng): Out & { results: Record<st
     // Encerramento: premiação, bônus de título, satisfação, MVP/EVPs e resultados para o ranking.
     w = setEvent(w, { ...ev, tournament: t, status: 'encerrado' });
     w = awardTournament(w, t);
+    w = staffTitle(w, t.championId, createRng(hashString(`staff-titulo:${ev.id}`)));
     const weight = eventWeightOf(t.format, t.participants.length);
     const res = Object.entries(t.placements).map(([teamId, label]) => ({
       eventId: ev.id,

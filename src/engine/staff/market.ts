@@ -2,6 +2,7 @@
 import { windowOpen } from '../calendar';
 import { STAFF } from '../config';
 import { addDays, daysBetween, endOfMonthAfter, monthsUntil } from '../date';
+import { hashString } from '../rng';
 import { fmtMoney } from '../format';
 import type { Rng } from '../rng';
 import type { Staff, StaffRole } from '../types';
@@ -40,6 +41,9 @@ export function freeStaff(w: World, staffId: string): World {
 /** Coloca o profissional no time, com contrato novo. */
 function sign(w: World, staffId: string, teamId: string, salary: number): World {
   let next = freeStaff(w, staffId);
+  // Quem ocupava o cargo no time de destino fica livre.
+  const holder = next.teams[teamId].staff[next.staff[staffId].role];
+  if (holder && holder !== staffId) next = freeStaff(next, holder);
   const s = next.staff[staffId];
   next = setRole(next, teamId, s.role, staffId);
   return { ...next, staff: { ...next.staff, [staffId]: { ...s, teamId, contract: newContract(w, teamId, salary) } } };
@@ -90,6 +94,22 @@ export function respondStaffInbox(w: World, itemId: string, accept: boolean): St
   if (item.kind === 'staff_renovacao' && accept && s.contract && s.teamId) {
     const salary = item.askedSalary ?? s.contract.salary;
     next = { ...next, staff: { ...next.staff, [s.id]: { ...s, contract: { ...s.contract, salary, releaseClause: salary * STAFF.clauseMonths, endDate: endOfMonthAfter(s.contract.endDate, STAFF.contractMonths) } } } };
+  }
+  if (item.kind === 'staff_aumento' && s.contract) {
+    if (accept) {
+      const salary = item.askedSalary ?? s.contract.salary;
+      next = { ...next, staff: { ...next.staff, [s.id]: { ...s, contract: { ...s.contract, salary } } } };
+    } else if ((hashString(item.id) % 1000) / 1000 < STAFF.refuseRenewalChance) {
+      next = { ...next, staff: { ...next.staff, [s.id]: { ...s, refusesRenewal: true } } };
+    }
+  }
+  if (item.kind === 'staff_proposta' && accept && s.contract && s.teamId && item.offerTeamId) {
+    const to = item.offerTeamId;
+    const clause = s.contract.releaseClause;
+    if (next.teams[to].money < clause) return { ok: false, error: `${next.teams[to].shortName} não tem mais caixa para pagar a multa.` };
+    next = addMoney(next, to, -clause, 'comissao', `Multa de ${s.nick}`);
+    next = addMoney(next, s.teamId, clause, 'comissao', `Saída de ${s.nick} (${next.teams[to].shortName})`);
+    next = sign(next, s.id, to, staffAsk(s));
   }
   return { ok: true, world: next };
 }

@@ -683,4 +683,15 @@ export const STAFF = {
   aiRenewDays: 30,
   /** IA só contrata se o caixa cobre estes meses de salário. */
   aiAffordMonths: 6,
+  /** Aumento pedido depois de um título. Recusar: chance de ele não renovar. */
+  raiseAfterTitle: 0.15,
+  refuseRenewalChance: 0.5,
+  /** Curso: preço base + por ponto acima de 40; dura estes dias e dá este ganho. */
+  courseBase: 20_000,
+  coursePerPoint: 1_500,
+  courseDays: 28,
+  courseGain: 2,
+  /** Propostas da IA pelo seu staff (dia 1º). */
+  offerMinOvr: 75,
+  offerChance: 0.1,
 };
