@@ -33,13 +33,16 @@ function ReputationLadder({ rep }: { rep: number }) {
         <h3 className="font-display text-lg font-bold">Reputação</h3>
         <span className="text-sm tabular-nums text-muted">{Math.round(rep)} de 100</span>
       </div>
-      <div className="relative mt-2 grid grid-cols-5 gap-1" aria-label={`Reputação ${Math.round(rep)}: ${band}`}>
+      {/* Sem espaço entre as faixas: o marcador em rep% cai exatamente na faixa certa (cada uma vale 20 pontos). */}
+      <div className="relative mt-2 grid grid-cols-5 overflow-hidden rounded-md" aria-label={`Reputação ${Math.round(rep)}: ${band}`}>
         {BANDS.map((b) => (
-          <div key={b} className={`rounded-md px-1 py-2 text-center text-[11px] font-semibold sm:text-xs ${b === band ? 'bg-accent text-bg' : 'bg-black/30 text-muted'}`}>
+          <div key={b} className={`border-r border-bg px-1 py-2 text-center text-[11px] font-semibold last:border-r-0 sm:text-xs ${b === band ? 'bg-accent text-bg' : 'bg-black/30 text-muted'}`}>
             {b}
           </div>
         ))}
-        <span className="absolute -bottom-2 h-2 w-0.5 bg-accent" style={{ left: `${rep}%` }} aria-hidden />
+      </div>
+      <div className="relative h-2" aria-hidden>
+        <span className="absolute top-0 h-2 w-0.5 bg-accent" style={{ left: `min(${rep}%, calc(100% - 2px))` }} />
       </div>
       <p className="mt-4 text-xs text-muted">Sobe com títulos, metas batidas e caixa saudável. Jogadores aceitam vir com mais facilidade e times maiores passam a chamar.</p>
     </div>

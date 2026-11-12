@@ -43,7 +43,12 @@ export function managerDealsDay(w: World): World {
   if (!m) return w;
   const me = w.managerTeamId;
   const deals = w.transferLog.filter(
-    (e) => e.date === w.date && (e.kind === 'transferencia' || e.kind === 'multa' || e.kind === 'troca') && (e.toTeamId === me || e.fromTeamId === me),
+    (e) =>
+      e.date === w.date &&
+      (e.kind === 'transferencia' || e.kind === 'multa' || e.kind === 'troca') &&
+      (e.toTeamId === me || e.fromTeamId === me) &&
+      // Multa paga por outro time pelo seu jogador não teve negociação sua.
+      !(e.kind === 'multa' && e.fromTeamId === me),
   );
   return deals.length ? withManager(w, gainAttr(m, 'NEG', MANAGER.dealGrowth * deals.length)) : w;
 }
