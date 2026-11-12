@@ -768,4 +768,12 @@ export const MEDIA = {
   lowMoodMonthly: 1,
   crowdMax: 1.5,
   crowdPerPoint: 0.05,
+  /** Notícias. */
+  maxNews: 200,
+  newsFreeOvr: 78,
+  rumorChance: 0.15,
+  rumorChanceHot: 0.4,
+  /** Parte dos rumores que vem de propostas reais (quando há). */
+  rumorTrueShare: 0.6,
+  rumorOvr: 80,
 };

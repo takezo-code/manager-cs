@@ -4,6 +4,7 @@ import type { Amateur } from './amateurs';
 import type { BaseLeague } from './baseLeague';
 import type { Staff } from './types';
 import type { Manager } from './manager/model';
+import type { NewsItem } from './media/news';
 import type { CalendarEvent } from './calendar';
 import type { EventResult, SeriesLogEntry } from './ranking';
 import type { Player, Team } from './types';
@@ -135,6 +136,8 @@ export interface World {
   manager: Manager;
   /** Humor da torcida de cada time (0 a 100, oculto). */
   fans: Record<string, number>;
+  /** Aba de notícias (mais nova primeiro). */
+  news: NewsItem[];
 }
 
 /** Mensagem curta para o manager (vira notícia de verdade no passo 13). */

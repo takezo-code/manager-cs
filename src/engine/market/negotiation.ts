@@ -1,6 +1,7 @@
 // Negociação em duas etapas (dupla aprovação): primeiro o time aceita a proposta, depois o jogador aceita ir.
 // Cada etapa tem até 3 rodadas com contraproposta. As decisões são determinísticas (sem sorte).
 import { windowOpen } from '../calendar';
+import { pushNews } from '../media/news';
 import { financeSalaryDiscount, negotiationDiscount } from '../manager/effects';
 import { reputationShare } from '../manager/reputation';
 import { MARKET, MANAGER } from '../config';
@@ -303,7 +304,9 @@ export function abandonNegotiation(neg: Negotiation): Negotiation | null {
 export function failedNegotiationEffects(w: World, neg: Negotiation): World {
   if (neg.phase !== 'failed' || !neg.sellerId) return w;
   const delta = neg.clubRound > 0 && neg.playerRound === 0 && neg.kind !== 'clause' ? MARKET.relationOnFailedTalks : MARKET.relationOnPlayerRefusal;
-  return { ...w, relations: changeRelation(w.relations, neg.buyerId, neg.sellerId, delta) };
+  const p = w.players[neg.playerId];
+  const out = { ...w, relations: changeRelation(w.relations, neg.buyerId, neg.sellerId, delta) };
+  return p ? pushNews(out, 'negociacao_frustrada', { jogador: p.nick, time: w.teams[neg.buyerId]?.name ?? '', rival: w.teams[neg.sellerId]?.name ?? '' }, [neg.buyerId, neg.sellerId], `neg:${neg.playerId}`) : out;
 }
 
 /** Termos sugeridos para começar a conversa (o que o jogador ganha hoje, ou a referência). */

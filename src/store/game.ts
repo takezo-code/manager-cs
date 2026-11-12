@@ -72,6 +72,7 @@ export interface GameState {
   staff: Record<string, Staff>;
   manager: Manager;
   fans: Record<string, number>;
+  news: World['news'];
   /** Avisos (os mais novos primeiro). */
   events: GameEvent[];
 
@@ -140,6 +141,7 @@ type WorldFields =
   | 'staff'
   | 'manager'
   | 'fans'
+  | 'news'
   | 'myTeamId';
 
 export const worldOf = (s: Pick<GameState, WorldFields>): World => ({
@@ -161,6 +163,7 @@ export const worldOf = (s: Pick<GameState, WorldFields>): World => ({
   staff: s.staff,
   manager: s.manager,
   fans: s.fans,
+  news: s.news,
 });
 
 /** Campos do mundo para gravar de volta no estado. */
@@ -183,6 +186,7 @@ function fromWorld(w: World) {
     staff: w.staff,
     manager: w.manager,
     fans: w.fans,
+    news: w.news,
     // Demissão ou troca de time mudam o time do manager.
     myTeamId: w.managerTeamId || null,
   };
@@ -209,7 +213,7 @@ export function trimMyResults(results: Record<string, MatchResult>, me: string, 
 
 /** Campos do estado que vão para o save. */
 const SAVED_KEYS = [
-  'date', 'teams', 'players', 'relations', 'offers', 'transferLog', 'ledger', 'sponsorOffers', 'inbox', 'results', 'seriesLog', 'calendar', 'amateurs', 'baseLeague', 'staff', 'manager', 'fans', 'events',
+  'date', 'teams', 'players', 'relations', 'offers', 'transferLog', 'ledger', 'sponsorOffers', 'inbox', 'results', 'seriesLog', 'calendar', 'amateurs', 'baseLeague', 'staff', 'manager', 'fans', 'news', 'events',
   'myTeamId', 'seriesResults', 'lastDayIds', 'activeSlot',
 ] as const satisfies ReadonlyArray<keyof GameState>;
 
@@ -513,8 +517,9 @@ export function useWorld(): World {
   const staff = useGame((s) => s.staff);
   const manager = useGame((s) => s.manager);
   const fans = useGame((s) => s.fans);
+  const news = useGame((s) => s.news);
   return useMemo(
-    () => worldOf({ date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar, amateurs, baseLeague, staff, manager, fans }),
-    [date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar, amateurs, baseLeague, staff, manager, fans],
+    () => worldOf({ date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar, amateurs, baseLeague, staff, manager, fans, news }),
+    [date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar, amateurs, baseLeague, staff, manager, fans, news],
   );
 }

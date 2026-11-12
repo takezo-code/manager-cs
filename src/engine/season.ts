@@ -1,5 +1,6 @@
 // Passagem do tempo: um dia de cada vez (calendário, treino, fechamento do mês, ranking e mercado).
 import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_STAFF, INITIAL_TEAMS } from '../data';
+import { mediaDay } from './media/day';
 import { addToAcademy, generateYouth } from './academy';
 import { buildYear, teamBusy } from './calendar';
 import { generateAmateurs, refreshAmateurs } from './amateurs';
@@ -55,6 +56,7 @@ export function createWorld(managerTeamId: string, seed = 1, profile: ManagerPro
     staff: Object.fromEntries(INITIAL_STAFF.map((s) => [s.id, structuredClone(s)])),
     manager: newManager(profile, managerTeamId, START_DATE),
     fans: Object.fromEntries(Object.keys(teams).map((id) => [id, MEDIA.startMood])),
+    news: [],
   };
   w = { ...w, amateurs: generateAmateurs(rng, AMATEURS.poolSize, START_DATE) };
   if (managerTeamId) w = assignGoals(w, managerTeamId);
@@ -135,5 +137,7 @@ export function dailyTick(world: World, opts: { rng?: Rng } = {}): { world: Worl
     results: w.results.filter((x) => daysBetween(x.date, w.date) <= 400),
     calendar: w.calendar.filter((e) => daysBetween(e.endDate, w.date) <= 400),
   };
+  // Mídia: torcida, notícias e rumores do dia.
+  w = mediaDay(world, w, played.results, createRng(hashString(`midia:${w.date}`)));
   return { world: w, events, results: played.results };
 }
