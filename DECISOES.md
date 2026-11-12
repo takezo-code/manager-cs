@@ -85,6 +85,15 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 - **Instagram:** 1 post por dia.
 - Detalhes e números: `docs/superpowers/specs/2026-11-12-passo-13-midia-design.md`.
 
+### Tier 2, empréstimo e início na academy (12/11/2026)
+
+- **Tier 2 = academies + 16 times fictícios**, com partidas simuladas como as do tier 1.
+- **Empréstimo para times do tier 2** (3, 6 ou 12 meses; o outro time paga parte do salário; dá para chamar de volta).
+- **Início como manager da academy**, com metas próprias e caminho até o time principal.
+- **Revelado por você:** +10 de satisfação ao subir com você e −10% de salário na renovação.
+- **Corte aprovado:** o tier 2 ainda não dá vaga nas qualificatórias do tier 1.
+- Detalhes: `docs/superpowers/specs/2026-11-12-tier2-design.md`.
+
 ## Criado por mim (revisar se quiser)
 
 | Item | Valor |
@@ -157,6 +166,10 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 | Rumores | 15% ao dia (40% nas férias e janelas); 60% vêm de propostas reais quando existem |
 | Instagram | Recepção = momento (tabela do spec) + até +2 de Comunicação ± 1; mesmo tipo seguido vale metade; recepção ≥ 2 dá +0,5 de Comunicação |
 | Notícias das suas ações | Contratações, propostas aceitas e demissão viram notícia e tuíte na hora (não só no fim do dia) |
+| Tier 2 Cup | Uma por mês (dia 5, fev–nov), 16 times no suíço com playoffs; pontos 100/70/50/30/15/5; ranking zera em janeiro; sua academy entra sempre |
+| Empréstimo | Só para os 16 fictícios, 1 por time (6 + 1); o outro time paga 50% do salário; chamar de volta US$ 20 mil; emprestado não ocupa vaga na academy |
+| Manager da academy | Time principal com a IA; usa o caixa da org só na academy; metas: top 8 do tier 2, promover 1 jovem, um jovem +5 de OVR; as 3 batidas trazem a proposta do time principal |
+| Descanso no tier 2 | Fora das copas, jovens e jogadores do tier 2 recuperam energia todo dia |
 | Cor da carta evoluída | A cor da evolução (azul, vermelha ou rosa) substitui a cor da faixa; a faixa continua num selo |
 
 ## Dados

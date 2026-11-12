@@ -94,7 +94,9 @@ export function promote(w: World, playerId: string): { ok: true; world: World } 
     [t.id]: { ...t, academyIds: t.academyIds.filter((id) => id !== playerId), playerIds: [...t.playerIds, playerId], starters: t.starters.length < 5 ? [...t.starters, playerId] : t.starters },
   };
   // Revelado por você: sobe feliz.
-  const satisfaction = p.revealed ? Math.min(100, p.satisfaction + MANAGER.revealedBonus) : p.satisfaction;
+  // "Sobem juntos": só vale com o manager ainda na organização (time ou academy).
+  const withManager = (w.managerTeamId || w.manager?.academyOf) === t.id;
+  const satisfaction = p.revealed && withManager ? Math.min(100, p.satisfaction + MANAGER.revealedBonus) : p.satisfaction;
   return { ok: true, world: { ...w, teams, players: { ...w.players, [playerId]: { ...p, squad: 'principal', satisfaction } } } };
 }
 

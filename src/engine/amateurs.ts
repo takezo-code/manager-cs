@@ -95,5 +95,9 @@ export function signAmateur(w: World, playerId: string): { ok: true; world: Worl
     teams: { ...w.teams, [t.id]: { ...t, academyIds: [...(t.academyIds ?? []), player.id] } },
   };
   next = addMoney(next, t.id, -a.fee, 'contratacao', `${player.nick} (${a.platform})`);
+  // Manager da academy: o novo jovem também conta para a meta de crescimento da temporada.
+  const stats = next.manager?.academyStats;
+  if (next.manager?.academyOf === t.id && stats)
+    next = { ...next, manager: { ...next.manager, academyStats: { ...stats, startOvr: { ...stats.startOvr, [player.id]: baseOvr(player) } } } };
   return { ok: true, world: next };
 }

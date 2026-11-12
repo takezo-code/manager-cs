@@ -1,6 +1,7 @@
 // Tier 2 Cup: uma copa por mês (fev–nov, começando no dia 5), 16 times no formato suíço com playoffs.
 import { DEVELOPMENT, TIER2 } from '../config';
 import { developPlayer } from '../development';
+import { recoverRest } from '../form';
 import { placeNumber } from '../finance/prizes';
 import { hashString, type Rng } from '../rng';
 import { createTournament, playDay } from '../tournament/run';
@@ -96,6 +97,16 @@ export function cupDayWithEvents(world: World): { world: World; events: WorldEve
     events.push({ kind: myPlace === 'Campeão' ? 'ok' : 'info', text: `${t.name}: campeão ${teams[t.championId]?.name ?? t.championId}.${myPlace ? ` Sua academy: ${myPlace}.` : ''}` });
   }
   return { world: w, events };
+}
+
+/** Sem copa em andamento: jovens das academies, emprestados e jogadores do tier 2 descansam. */
+export function restTier2(w: World): World {
+  if (w.tier2.cup) return w;
+  const players = { ...w.players };
+  for (const t of Object.values(w.teams))
+    for (const id of t.academyIds ?? []) if (players[id] && players[id].energy < 100) players[id] = recoverRest(players[id]);
+  const t2 = Object.fromEntries(Object.entries(w.tier2.players).map(([id, p]) => [id, p.energy < 100 ? recoverRest(p) : p]));
+  return { ...w, players, tier2: { ...w.tier2, players: t2 } };
 }
 
 /** Virada do ano: ranking do tier 2 zera. */

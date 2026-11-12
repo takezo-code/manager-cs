@@ -1,7 +1,7 @@
 // Passagem do tempo: um dia de cada vez (calendário, treino, fechamento do mês, ranking e mercado).
 import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_STAFF, INITIAL_TEAMS } from '../data';
 import { generateTier2 } from './tier2/model';
-import { cupDayWithEvents, newTier2Season, startCup } from './tier2/cups';
+import { cupDayWithEvents, newTier2Season, restTier2, startCup } from './tier2/cups';
 import { loansDay } from './tier2/loans';
 import { academySeasonEnd, markRevealed, startAsAcademyManager } from './tier2/academyCareer';
 import { mediaDay } from './media/day';
@@ -131,6 +131,7 @@ export function dailyTick(world: World, opts: { rng?: Rng } = {}): { world: Worl
   add(loansDay(w));
   w = startCup(w, rng);
   add(cupDayWithEvents(w));
+  w = restTier2(w);
   if (isMonday(w.date)) {
     w = applyRanking(w);
     w = playBaseRound(w, rng);
