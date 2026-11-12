@@ -7,6 +7,12 @@ import type { World } from '../world';
 
 export const fanMood = (w: World, teamId: string) => w.fans?.[teamId] ?? MEDIA.startMood;
 
+/** Transferências que entraram no log entre os dois mundos (comparação por identidade). */
+export function newTransfers(prev: World, next: World) {
+  const seen = new Set(prev.transferLog);
+  return next.transferLog.filter((e) => !seen.has(e));
+}
+
 /** Muda o humor; no time do manager, a Comunicação reduz as perdas (até 30%). */
 export function changeMood(w: World, teamId: string, delta: number): World {
   if (!delta || !w.teams[teamId]) return w;
@@ -43,7 +49,7 @@ export function fansDay(prev: World, next: World, results: Record<string, MatchR
     if (before.hltvRank !== t.hltvRank) w = changeMood(w, t.id, (before.hltvRank - t.hltvRank) * MEDIA.rankMood);
     if (t.lateMonths > before.lateMonths) w = changeMood(w, t.id, -MEDIA.lateMood);
   }
-  for (const e of next.transferLog.filter((x) => x.date === next.date)) {
+  for (const e of newTransfers(prev, next)) {
     const p = prev.players[e.playerId] ?? next.players[e.playerId];
     if (!p) continue;
     if (e.toTeamId && e.kind !== 'renovacao' && playerOvr(p) >= MEDIA.starOvr) w = changeMood(w, e.toTeamId, MEDIA.starSigningMood);

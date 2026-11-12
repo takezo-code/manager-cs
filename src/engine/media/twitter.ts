@@ -4,7 +4,7 @@ import { getRelation } from '../market/relations';
 import type { Rng } from '../rng';
 import type { MatchResult } from '../types';
 import type { World } from '../world';
-import { fanMood, isIdol } from './fans';
+import { fanMood, isIdol, newTransfers } from './fans';
 import { FANS, JOURNALISTS, NEWS_ACCOUNT, say, type Account, type TemplateVar, type TweetKind } from './templates';
 
 export interface Tweet {
@@ -66,7 +66,7 @@ export function tweetsForDay(prev: World, next: World, results: Record<string, M
 
   // Seu time: contratações, venda do ídolo e críticas com a torcida na bronca.
   if (me) {
-    for (const e of next.transferLog.filter((x) => x.date === today)) {
+    for (const e of newTransfers(prev, next)) {
       const p = prev.players[e.playerId] ?? next.players[e.playerId];
       if (!p) continue;
       if (e.toTeamId === me && e.kind !== 'renovacao') add('torcedor', fan(), 'fan_contratacao', { jogador: p.nick, time: name(me) });

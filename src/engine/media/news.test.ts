@@ -77,3 +77,19 @@ describe('Notícias', () => {
     expect(w.news.length).toBeGreaterThan(0);
   });
 });
+
+describe('Correções da revisão', () => {
+  it('ação do manager no mesmo dia: só anuncia o que é novo (sem repetir)', async () => {
+    const { mediaAfterAction } = await import('./day');
+    const w0 = createWorld('furia');
+    const [a, b] = w0.teams.mouz.playerIds;
+    const t1 = { date: w0.date, kind: 'transferencia' as const, playerId: a, fromTeamId: 'mouz', toTeamId: 'furia', fee: 500_000 };
+    const t2 = { ...t1, playerId: b };
+    const first = mediaAfterAction(w0, { ...w0, transferLog: [t1] });
+    expect(first.news.filter((n) => n.kind === 'transferencia')).toHaveLength(1);
+    const second = mediaAfterAction(first, { ...first, transferLog: [t2, ...first.transferLog] });
+    expect(second.news.filter((n) => n.kind === 'transferencia')).toHaveLength(2);
+    expect(second.news.filter((n) => n.title.includes(w0.players[a].nick))).toHaveLength(1);
+    expect(second.feed.some((t) => t.text.includes(w0.players[b].nick))).toBe(true);
+  });
+});

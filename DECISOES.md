@@ -77,6 +77,14 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 - **Desempregado fica livre e o tempo passa**, esperando propostas.
 - Detalhes e números: `docs/superpowers/specs/2026-11-12-passo-12-carreira-design.md`.
 
+### Passo 13 (12/11/2026)
+
+- **Uns 12 textos por situação** (templates em `src/data/media/`, fáceis de ampliar).
+- **Twitter:** pros com o nick real; torcedores, jornalistas e a conta de notícias fictícios.
+- **Tudo em português.**
+- **Instagram:** 1 post por dia.
+- Detalhes e números: `docs/superpowers/specs/2026-11-12-passo-13-midia-design.md`.
+
 ## Criado por mim (revisar se quiser)
 
 | Item | Valor |
@@ -144,6 +152,11 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 | Metas | Grande: título, top 5, caixa; médio: top 10, top 8 de Major, caixa; pequeno: jogar Major, top 20, caixa. Aporte 300/200/120 mil por meta |
 | Propostas ao manager | 12% no dia 1º (empregado), 35% às segundas (desempregado); o time que você deixou só volta a chamar depois de 1 ano |
 | Salário do manager | Só informativo por enquanto (não sai do caixa do clube) |
+| Humor da torcida | 0–100 (oculto), começa em 55; série ±1,5 (×2 em playoffs), título +8, ranking ±1 por posição, estrela +4, venda do ídolo −8, atraso −5 |
+| Efeitos da torcida | < 30: patrocínio −15%, pressão de playoff nos grupos, −1 de satisfação/mês sem Sangue Frio; > 70: patrocínio +10% e até +1,5 nos duelos em playoffs/final |
+| Rumores | 15% ao dia (40% nas férias e janelas); 60% vêm de propostas reais quando existem |
+| Instagram | Recepção = momento (tabela do spec) + até +2 de Comunicação ± 1; mesmo tipo seguido vale metade; recepção ≥ 2 dá +0,5 de Comunicação |
+| Notícias das suas ações | Contratações, propostas aceitas e demissão viram notícia e tuíte na hora (não só no fim do dia) |
 | Cor da carta evoluída | A cor da evolução (azul, vermelha ou rosa) substitui a cor da faixa; a faixa continua num selo |
 
 ## Dados

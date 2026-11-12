@@ -12,6 +12,7 @@ import { staffAttrsOf } from '../engine/staff/effects';
 import { onYouthPromoted } from '../engine/manager/effects';
 import { acceptOffer, askBudget, declineOffer, resign } from '../engine/manager/offers';
 import { makePost, POST_LABEL, type PostKind } from '../engine/media/instagram';
+import { mediaAfterAction } from '../engine/media/day';
 import { startCourse } from '../engine/staff/career';
 import { hireStaff, releaseStaff, respondStaffInbox } from '../engine/staff/market';
 import type { StaffAttr } from '../engine/types';
@@ -238,8 +239,11 @@ const stamp = (date: string, events: WorldEvent[]): GameEvent[] => events.map((e
 
 export const useGame = create<GameState>((set, get) => {
   /** Aplica uma mudança no mundo e acrescenta avisos. */
-  const commitWorld = (w: World, events: WorldEvent[] = [], extra: Partial<GameState> = {}) =>
+  const commitWorld = (next: World, events: WorldEvent[] = [], extra: Partial<GameState> = {}) => {
+    // Ações do manager também viram notícia, tuíte e humor da torcida.
+    const w = mediaAfterAction(worldOf(get()), next);
     set((s) => ({ ...fromWorld(w), events: [...stamp(w.date, events), ...s.events].slice(0, MAX_EVENTS), ...extra }));
+  };
 
   return {
     screen: 'menu',

@@ -6,6 +6,7 @@ import { bandOf } from '../morale/satisfaction';
 import { playerOvr } from '../player';
 import type { Rng } from '../rng';
 import type { World } from '../world';
+import { newTransfers } from './fans';
 import { say, type NewsKind, type TemplateVar } from './templates';
 
 export interface NewsItem {
@@ -32,16 +33,17 @@ export function newsForDay(prev: World, next: World): World {
   const today = next.date;
 
   // Transferências do dia (livres só de jogadores relevantes ou do seu time).
-  next.transferLog
-    .filter((e) => e.date === today && e.toTeamId)
+  newTransfers(prev, next)
+    .filter((e) => e.toTeamId)
     .forEach((e, i) => {
       const p = next.players[e.playerId];
       if (!p) return;
       const vars = { jogador: p.nick, time: nameOf(next, e.toTeamId), rival: nameOf(next, e.fromTeamId), valor: fmtMoney(e.fee) };
       const ids = [e.toTeamId!, ...(e.fromTeamId ? [e.fromTeamId] : [])];
-      if (e.kind === 'transferencia' && e.fromTeamId) w = pushNews(w, 'transferencia', vars, ids, `t${i}`);
-      else if (e.kind === 'multa' && e.fromTeamId) w = pushNews(w, 'multa', vars, ids, `m${i}`);
-      else if (e.kind === 'livre' && (playerOvr(p) >= MEDIA.newsFreeOvr || e.toTeamId === next.managerTeamId)) w = pushNews(w, 'livre', vars, ids, `l${i}`);
+      const key = `${e.playerId}:${i}`;
+      if (e.kind === 'transferencia' && e.fromTeamId) w = pushNews(w, 'transferencia', vars, ids, `t:${key}`);
+      else if (e.kind === 'multa' && e.fromTeamId) w = pushNews(w, 'multa', vars, ids, `m:${key}`);
+      else if (e.kind === 'livre' && (playerOvr(p) >= MEDIA.newsFreeOvr || e.toTeamId === next.managerTeamId)) w = pushNews(w, 'livre', vars, ids, `l:${key}`);
     });
 
   // Eventos encerrados hoje: campeão e MVP.
