@@ -61,6 +61,14 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 - **Contrato da academy** se renova sozinho, com o mesmo salário, até o jovem subir ou fazer 20.
 - Detalhes: `docs/superpowers/specs/2026-11-11-passo-10-academy-design.md`.
 
+### Passo 11 (12/11/2026)
+
+- **Técnicos reais** nos 32 times (os 11 sem confirmação são fictícios); analistas e psicólogos fictícios.
+- **Propostas e aumentos completos** para o staff, pela caixa de entrada.
+- **Prévia do analista** antes de cada série do seu time (no Calendário).
+- **Curso com prazo:** +2 no atributo depois de 28 dias.
+- Detalhes e fórmulas: .
+
 ## Criado por mim (revisar se quiser)
 
 | Item | Valor |
@@ -118,6 +126,11 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 | GC/FACEIT | Banco de 40 amadores, 25% trocados por mês; luvas de US$ 5 a 20 mil. Joias escondidas (POT 85+, nível baixo) só com olheiro 4+ |
 | Liga de base | Vitória pela força média dos 5 melhores (curva logística, escala 5). Menos de 5 jovens = W.O.; cada mapa dá +0,15 de crescimento até 21 anos |
 | Cor do lado TR | Token renomeado de `t` para `tr`: `border-t` herdava a cor dourada em todas as tabelas |
+| Comissão técnica | Atributos 40–95; cargo vago = 50; efeitos relativos a 70. Salário 1.000 + (OVR − 40)² × 6, multa = 12 salários, contratos de 24 meses |
+| Mercado da comissão | Livre a qualquer momento; empregado só na janela, com multa e +15% de salário; dispensar paga metade do restante; contratar exige cargo vago |
+| Força do staff | Com o mesmo elenco, staff 95 × 40 vence ~68% dos mapas MD1; entre times reais, o staff muda 1 a 3 pontos percentuais |
+| IA e staff | Renova sozinha; preenche vaga com o melhor que cabe no caixa (sem caixa, o mais barato); propõe pelo seu staff com OVR ≥ 75 (10% ao mês) |
+| Sorteio antecipado | Os jogos do dia seguinte de um campeonato são sorteados no fim do dia (para a prévia do analista) |
 | Cor da carta evoluída | A cor da evolução (azul, vermelha ou rosa) substitui a cor da faixa; a faixa continua num selo |
 
 ## Dados

@@ -118,7 +118,7 @@ function RoleCard({ role, s }: { role: StaffRole; s: Staff | null }) {
             </button>
           </div>
         )}
-        <button type="button" className="mt-2 text-xs text-muted underline-offset-2 hover:text-loss hover:underline" onClick={() => release(s.id)}>
+        <button type="button" className="mt-2 text-xs text-muted underline-offset-2 hover:text-loss hover:underline" onClick={() => window.confirm(`Dispensar ${s.nick}? A rescisão custa ${money(cost)} e o cargo fica vago.`) && release(s.id)}>
           Dispensar ({money(cost)} de rescisão)
         </button>
       </div>

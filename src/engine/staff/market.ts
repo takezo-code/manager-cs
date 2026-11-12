@@ -152,9 +152,11 @@ export function staffMarketDay(world: World, _rng: Rng): { world: World; events:
     if (t.id === me) continue;
     for (const role of ['tecnico', 'analista', 'psicologo'] as const) {
       if (w.teams[t.id].staff[role]) continue;
-      const pick = Object.values(w.staff)
-        .filter((s) => s.role === role && !s.teamId && w.teams[t.id].money >= staffAsk(s) * STAFF.aiAffordMonths)
-        .sort((a, b) => staffOvr(b) - staffOvr(a))[0];
+      const free = Object.values(w.staff).filter((s) => s.role === role && !s.teamId);
+      // O melhor que cabe no caixa; sem caixa, o mais barato (cargo vago custa mais caro em campo).
+      const pick =
+        free.filter((s) => w.teams[t.id].money >= staffAsk(s) * STAFF.aiAffordMonths).sort((a, b) => staffOvr(b) - staffOvr(a))[0] ??
+        [...free].sort((a, b) => staffAsk(a) - staffAsk(b))[0];
       if (pick) w = sign(w, pick.id, t.id, staffAsk(pick));
     }
   }

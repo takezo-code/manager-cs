@@ -206,5 +206,10 @@ export function playDay(
       if (t.championId) t.placements[t.championId] = 'Campeão';
     }
   }
+  // Sorteia já os jogos do próximo dia (a prévia do analista mostra o rival antes da série).
+  if (!t.championId) {
+    const cur = t.stages[t.stageIdx];
+    if (!pendingSeries(cur).length) generateMatches(t, cur);
+  }
   return { tournament: t, players: ps, results };
 }

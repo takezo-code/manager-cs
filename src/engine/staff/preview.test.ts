@@ -60,3 +60,36 @@ describe('Comissão na temporada', () => {
     expect(out.teams.mouz.staff.tecnico).not.toBeNull();
   });
 });
+
+describe('Correções da revisão', () => {
+  it('entre um dia e outro do campeonato, a próxima série do seu time já está sorteada', async () => {
+    const { createLegacyTournament, playDay } = await import('../tournament/run');
+    const { INITIAL_TEAMS } = await import('../../data');
+    const { buildYear } = await import('../calendar');
+    const { nextOpponent } = await import('./preview');
+    const base = createWorld('furia');
+    const t0 = createLegacyTournament('iem', INITIAL_TEAMS, 5);
+    const out = playDay(t0, base.teams, base.players);
+    const ev = { ...buildYear(2026).find((e) => e.templateId === 'iem-china')!, status: 'em_andamento' as const, tournament: out.tournament };
+    const w = { ...base, calendar: [ev] };
+    const next = nextOpponent(w);
+    expect(next).not.toBeNull();
+    // A prévia é a mesma até a série acontecer (não muda de um dia para o outro).
+    const low = withLei(w, 40);
+    expect(next!.rivalId).not.toBe('furia');
+    expect(rivalPreview(low, next!.rivalId, next!.seriesId)).toEqual(rivalPreview({ ...low, date: addDays(low.date, 1) }, next!.rivalId, next!.seriesId));
+  });
+
+  it('IA sem caixa ainda preenche a vaga com o profissional mais barato', async () => {
+    const { staffMarketDay } = await import('./market');
+    const { createRng } = await import('../rng');
+    let w = createWorld('furia');
+    const old = w.teams.mouz.staff.tecnico!;
+    w = {
+      ...w,
+      teams: { ...w.teams, mouz: { ...w.teams.mouz, money: -50_000, staff: { ...w.teams.mouz.staff, tecnico: null } } },
+      staff: { ...w.staff, [old]: { ...w.staff[old], teamId: null, contract: null } },
+    };
+    expect(staffMarketDay(w, createRng(1)).world.teams.mouz.staff.tecnico).not.toBeNull();
+  });
+});

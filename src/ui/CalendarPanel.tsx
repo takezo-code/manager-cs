@@ -47,11 +47,11 @@ const toneClass: Record<Mine['tone'], string> = {
 };
 
 /** Prévia do analista para a próxima série do seu time. */
-function RivalPreviewCard({ rivalId }: { rivalId: string }) {
+function RivalPreviewCard({ rivalId, seriesId }: { rivalId: string; seriesId: string }) {
   const world = useWorld();
   const me = useGame((s) => s.myTeamId)!;
   const rival = world.teams[rivalId];
-  const p = rivalPreview(world, rivalId);
+  const p = rivalPreview(world, rivalId, seriesId);
   const lei = staffAttr(world, me, 'LEI');
   const analyst = world.teams[me].staff.analista ? world.staff[world.teams[me].staff.analista!] : null;
   const Maps = ({ maps, tone }: { maps: string[]; tone: string }) => (
@@ -102,14 +102,14 @@ export function CalendarPanel() {
   if (opened) return <EventPanel ev={opened} onBack={() => setOpenId(null)} />;
 
   const years = [...new Set(calendar.map((e) => Number(e.startDate.slice(0, 4))))].sort();
-  const rival = nextOpponent(world);
+  const next = nextOpponent(world);
   const events = calendar.filter((e) => e.startDate.startsWith(String(year)));
   const months = MONTHS.map((name, i) => ({ name, i, list: events.filter((e) => Number(e.startDate.slice(5, 7)) === i + 1) }));
   const thisMonth = date.startsWith(String(year)) ? Number(date.slice(5, 7)) - 1 : -1;
 
   return (
     <div className="space-y-4">
-      {rival && <RivalPreviewCard rivalId={rival} />}
+      {next && <RivalPreviewCard rivalId={next.rivalId} seriesId={next.seriesId} />}
       <div className="flex flex-wrap items-center gap-2">
         {years.map((y) => (
           <button
