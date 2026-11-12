@@ -35,6 +35,8 @@ export interface ManagerProfile {
 }
 
 export interface Manager extends ManagerProfile {
+  /** Organização cuja academy ele comanda (carreira começando na academy). */
+  academyOf?: string | null;
   /** Tamanho do clube quando as metas foram definidas (define a paciência da diretoria). */
   clubSize: 'grande' | 'medio' | 'pequeno';
   attrs: Record<ManagerAttr, number>;

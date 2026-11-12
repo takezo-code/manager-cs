@@ -802,4 +802,9 @@ export const TIER2 = {
   ageMax: 27,
   /** Força média por mapa das academies (os fictícios ficam em torno de 68). */
   academyMapLevel: 62,
+  /** Copa mensal. */
+  cupDay: '05',
+  firstMonth: 2,
+  lastMonth: 11,
+  cupTeams: 16,
 };

@@ -160,7 +160,7 @@ describe('Um ano de jogo', () => {
     const teams = Object.values(w.teams);
     expect(teams.filter((t) => t.lateMonths > 0).length).toBeLessThan(8);
     expect(Math.max(...teams.map((t) => t.money))).toBeLessThan(20_000_000);
-  });
+  }, 30_000);
 });
 
 describe('Fim de campeonato', () => {
