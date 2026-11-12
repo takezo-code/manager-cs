@@ -5,7 +5,8 @@ import { crowdBonus, lowMood } from './media/fans';
 import { staffAttrsOf } from './staff/effects';
 import { staffTitle } from './staff/career';
 import { titleReputation } from './manager/reputation';
-import { CALENDAR } from './config';
+import { CALENDAR, DEVELOPMENT } from './config';
+import { developPlayer } from './development';
 import { addDays, daysBetween } from './date';
 import { awardTournament, placeNumber } from './finance/prizes';
 import { recoverBetweenEvents } from './form';
@@ -64,13 +65,18 @@ export function candidates(w: World, ev: CalendarEvent): string[] {
   const region = all.filter((t) => !ev.regions || ev.regions.includes(t.region));
   const ids = [...byTurn(region.filter((t) => t.hltvRank >= lo && t.hltvRank <= hi)), ...byTurn(region.filter((t) => t.hltvRank > hi))].map((t) => t.id);
   const academies = (ts: typeof all) => ts.map((t) => academyTeamId(t.id)).filter((id) => academyLineupIds(w, orgOfAcademy(id)!).length >= 5);
-  if (tierOf(ev) === 3) ids.push(...academies(region));
+  if (tierOf(ev) === 3) {
+    // Manager da academy: a academy dele tem vaga garantida no tier 3 da região.
+    const mine = w.manager?.academyOf;
+    if (mine && region.some((t) => t.id === mine) && academyLineupIds(w, mine).length >= 5) ids.unshift(academyTeamId(mine));
+    ids.push(...academies(region));
+  }
   else ids.push(...region.filter((t) => t.hltvRank < lo).reverse().map((t) => t.id));
   // Último recurso para fechar a chave: times livres de outras regiões (da faixa para baixo) e, no tier 3, academies.
   const others = all.filter((t) => !region.includes(t));
   ids.push(...others.filter((t) => t.hltvRank >= lo).map((t) => t.id));
   if (tierOf(ev) === 3) ids.push(...academies(others));
-  return ids.filter((id) => !conflictFor(w, id, ev));
+  return [...new Set(ids)].filter((id) => !conflictFor(w, id, ev));
 }
 
 /**
@@ -80,6 +86,14 @@ export function candidates(w: World, ev: CalendarEvent): string[] {
 /** `used`: stand-ins já escalados hoje em outro evento (um agente livre não joga dois eventos ao mesmo tempo). */
 export function withStandins(w: World, teamIds: string[], used: Set<string> = new Set()): Record<string, Team> {
   const teams = { ...w.teams };
+  // Emprestados jogam pelo time do empréstimo (os 5 melhores são titulares).
+  const loaned: Record<string, string[]> = {};
+  for (const p of Object.values(w.players)) if (p.loan && teams[p.loan.teamId]) (loaned[p.loan.teamId] ??= []).push(p.id);
+  for (const id of teamIds) {
+    if (!loaned[id]) continue;
+    const roster = [...teams[id].playerIds, ...loaned[id]].sort((a, b) => playerOvr(w.players[b]) - playerOvr(w.players[a]));
+    teams[id] = { ...teams[id], playerIds: roster, starters: roster.slice(0, 5) };
+  }
   const free = Object.values(w.players)
     .filter((p) => !p.teamId)
     .sort((a, b) => playerOvr(b) - playerOvr(a));
@@ -273,6 +287,15 @@ export function playEvents(world: World, _rng?: Rng): Out & { results: Record<st
     const own = (id: string) => ownerOf(w, id);
     const out = playDay(ev.tournament, teams, w.players, (id) => staffAttrsOf(w, own(id)), (id, stage) => ({ crowd: crowdBonus(w, own(id), stage), lowMood: lowMood(w, own(id)) }));
     w = { ...w, players: out.players };
+    // Tier 2/3: jovens (até 21) crescem a cada mapa jogado, como na liga de base.
+    if (tierOf(ev) > 1) {
+      const players = { ...w.players };
+      for (const r of Object.values(out.results))
+        for (const m of r.maps)
+          for (const pid of Object.keys(m.stats))
+            if (players[pid] && players[pid].age <= DEVELOPMENT.youngAge) players[pid] = developPlayer(players[pid], DEVELOPMENT.perMapYoung);
+      w = { ...w, players };
+    }
     for (const [id, r] of Object.entries(out.results)) {
       // Jogos de academy não entram no histórico nem nas notícias.
       if (isAcademy(w, r.teamAId) || isAcademy(w, r.teamBId)) continue;

@@ -1,23 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import { promote } from '../academy';
 import { signAmateur, visibleAmateurs } from '../amateurs';
-import { createWorld } from '../season';
+import { createWorld, dailyTick } from '../season';
 import type { World } from '../world';
-import { restTier2 } from './cups';
 
 describe('Correções da revisão do tier 2', () => {
-  it('fora das copas, jovens e jogadores do tier 2 recuperam energia', () => {
-    const w0 = createWorld('furia');
+  it('fora de evento, os jovens da academy recuperam energia', () => {
+    const w0 = { ...createWorld('furia'), calendar: [] };
     const youth = w0.teams.furia.academyIds[0];
-    const t2 = Object.keys(w0.tier2.players)[0];
-    const tired: World = {
-      ...w0,
-      players: { ...w0.players, [youth]: { ...w0.players[youth], energy: 50 } },
-      tier2: { ...w0.tier2, cup: null, players: { ...w0.tier2.players, [t2]: { ...w0.tier2.players[t2], energy: 50 } } },
-    };
-    const out = restTier2(tired);
-    expect(out.players[youth].energy).toBeGreaterThan(50);
-    expect(out.tier2.players[t2].energy).toBeGreaterThan(50);
+    const tired: World = { ...w0, players: { ...w0.players, [youth]: { ...w0.players[youth], energy: 50 } } };
+    expect(dailyTick(tired).world.players[youth].energy).toBeGreaterThan(50);
   });
 
   it('bônus de revelado só se o manager ainda está na organização', () => {

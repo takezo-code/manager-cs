@@ -3,7 +3,7 @@ import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_STAFF, INITIAL_TEAMS } from
 import { addToAcademy, generateYouth } from '../engine/academy';
 import { generateAmateurs } from '../engine/amateurs';
 import { newBaseSeason } from '../engine/baseLeague';
-import { generateTier2 } from '../engine/tier2/model';
+import { emptyTier2 } from '../engine/tier2/model';
 import { DEFAULT_PROFILE, newManager } from '../engine/manager/model';
 import { assignGoals } from '../engine/manager/board';
 import { buildYear, type CalendarEvent } from '../engine/calendar';
@@ -19,7 +19,7 @@ import type { MatchResult, Player, Team } from '../engine/types';
 import type { World, WorldEvent } from '../engine/world';
 
 /** v1: passo 6. v2: mercado. v3: finanças e satisfação. v4: calendário, ranking, prêmios e treino. v5: academy, olheiro, GC/FACEIT e idade. v6: comissão técnica. v7: carreira do manager. v8: mídia (notícias, Twitter, Instagram, torcida). v9: tier 2 e empréstimos. */
-export const SAVE_VERSION = 9;
+export const SAVE_VERSION = 10;
 export const SLOTS = [1, 2, 3] as const;
 export type Slot = (typeof SLOTS)[number];
 
@@ -94,7 +94,8 @@ export function migrateState(raw: Record<string, unknown>, version: number): Sav
       feed: s.feed ?? [],
       posts: s.posts ?? [],
     };
-  if (version < 9) s = { ...s, tier2: s.tier2 ?? generateTier2(createRng(hashString(`tier2:migracao:${s.date}`)), s.date) };
+  if (version < 9) s = { ...s, tier2: s.tier2 ?? emptyTier2(s.date) };
+  if (version < 10) s = migrateV9(s);
   return s;
 }
 
@@ -223,6 +224,15 @@ function migrateV1(s: SavedState): SavedState {
 }
 
 /** Valida um JSON importado. Devolve o estado ou uma mensagem de erro em português. */
+/** v9 → v10: saem a Tier 2 Cup e os times fictícios; quem estava emprestado a eles volta; calendário vira tier 1. */
+function migrateV9(s: SavedState): SavedState {
+  const players = Object.fromEntries(
+    Object.entries(s.players).map(([id, p]) => [id, p.loan && !s.teams[p.loan.teamId] ? { ...p, loan: null } : p]),
+  );
+  const calendar = s.calendar.map((e) => ({ ...e, tier: e.tier ?? 1 }));
+  return { ...s, players, calendar, tier2: emptyTier2(s.date) };
+}
+
 export function parseImport(text: string): { ok: true; state: SavedState } | { ok: false; error: string } {
   let data: unknown;
   try {

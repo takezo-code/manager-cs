@@ -205,14 +205,22 @@ describe('Migração v7 → v8', () => {
   });
 });
 
-describe('Migração v8 → v9', () => {
-  it('gera o tier 2', async () => {
+describe('Migração v9 → v10', () => {
+  it('tira os times fictícios do tier 2, devolve os emprestados a eles e marca o calendário como tier 1', async () => {
     const { migrateState } = await import('./saveFormat');
     const s0 = sampleState();
-    const v8 = Object.fromEntries(Object.entries(s0).filter(([k]) => k !== 'tier2'));
-    const s = migrateState(v8 as unknown as Record<string, unknown>, 8);
-    expect(Object.keys(s.tier2.teams)).toHaveLength(16);
+    const youth = Object.values(s0.players)[0];
+    const v9 = {
+      ...s0,
+      tier2: { teams: { nova: { id: 'nova', name: 'Nova Esports', shortName: 'NOVA', country: 'BR', color: '#fff', playerIds: [], mapStrength: {} } }, players: {}, points: { nova: 30 }, season: 2027, cup: null },
+      players: { ...s0.players, [youth.id]: { ...youth, loan: { teamId: 'nova', until: '2027-06-30', salaryShare: 0.5 } } },
+      calendar: s0.calendar.map(({ tier: _t, ...e }) => e),
+    };
+    const s = migrateState(v9 as unknown as Record<string, unknown>, 9);
+    expect(s.tier2.teams).toEqual({});
     expect(s.tier2.cup).toBeNull();
+    expect(s.players[youth.id].loan).toBeFalsy();
+    expect(s.calendar.every((e) => e.tier === 1)).toBe(true);
   });
 });
 

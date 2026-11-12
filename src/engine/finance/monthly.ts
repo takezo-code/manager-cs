@@ -19,7 +19,9 @@ export const payroll = (w: World, team: Team) =>
     // Emprestado: o outro time paga a parte dele.
     return s + (p?.contract?.salary ?? 0) * (1 - (p?.loan?.salaryShare ?? 0));
   }, 0) +
-  Object.values(team.staff ?? {}).reduce((s, id) => s + (id ? (w.staff?.[id]?.contract?.salary ?? 0) : 0), 0);
+  Object.values(team.staff ?? {}).reduce((s, id) => s + (id ? (w.staff?.[id]?.contract?.salary ?? 0) : 0), 0) +
+  // Emprestados a este time: paga a parte combinada.
+  Object.values(w.players).reduce((s, p) => s + (p.loan?.teamId === team.id ? (p.contract?.salary ?? 0) * p.loan.salaryShare : 0), 0);
 
 export const sponsorIncome = (team: Team, date: string) =>
   team.sponsors.filter((s) => s.endDate >= date).reduce((s, x) => s + x.monthly, 0);

@@ -1,7 +1,6 @@
 // Passagem do tempo: um dia de cada vez (calendário, treino, fechamento do mês, ranking e mercado).
 import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_STAFF, INITIAL_TEAMS } from '../data';
-import { generateTier2, retireTier2 } from './tier2/model';
-import { cupDayWithEvents, newTier2Season, restTier2, startCup } from './tier2/cups';
+import { academyTeamId, emptyTier2 } from './tier2/model';
 import { loansDay } from './tier2/loans';
 import { academySeasonEnd, markRevealed, startAsAcademyManager } from './tier2/academyCareer';
 import { mediaDay } from './media/day';
@@ -36,6 +35,22 @@ import type { MatchResult } from './types';
 import type { World, WorldEvent } from './world';
 
 /** Mundo de um jogo novo: dados dos JSONs + patrocínios iniciais. */
+/** Jovens da academy e emprestados descansam nos dias sem evento. */
+function restAcademies(w: World): World {
+  let players: World['players'] | null = null;
+  for (const t of Object.values(w.teams)) {
+    const academyBusy = teamBusy(w.calendar, academyTeamId(t.id));
+    for (const id of t.academyIds ?? []) {
+      const p = w.players[id];
+      if (!p || p.energy >= 100) continue;
+      if (p.loan ? teamBusy(w.calendar, p.loan.teamId) : academyBusy) continue;
+      players ??= { ...w.players };
+      players[id] = recoverRest(p);
+    }
+  }
+  return players ? { ...w, players } : w;
+}
+
 export function createWorld(managerTeamId: string, seed = 1, profile: ManagerProfile = DEFAULT_PROFILE, opts: { academy?: boolean } = {}): World {
   const rng = createRng(hashString(`mundo:${seed}`));
   const teams = Object.fromEntries(INITIAL_TEAMS.map((t) => [t.id, structuredClone(t)]));
@@ -63,7 +78,7 @@ export function createWorld(managerTeamId: string, seed = 1, profile: ManagerPro
     news: [],
     feed: [],
     posts: [],
-    tier2: generateTier2(createRng(hashString(`tier2:${seed}`)), START_DATE),
+    tier2: emptyTier2(START_DATE),
   };
   w = { ...w, amateurs: generateAmateurs(rng, AMATEURS.poolSize, START_DATE) };
   if (managerTeamId) w = assignGoals(w, managerTeamId);
@@ -113,8 +128,6 @@ export function dailyTick(world: World, opts: { rng?: Rng } = {}): { world: Worl
     w = ageUp(w);
     add(academyYearEnd(w));
     w = { ...w, baseLeague: newBaseSeason(year) };
-    w = newTier2Season(w, year);
-    w = retireTier2(w, rng);
   }
   if (isFirstOfMonth(w.date)) {
     w = monthlyDevelopment(w);
@@ -128,11 +141,9 @@ export function dailyTick(world: World, opts: { rng?: Rng } = {}): { world: Worl
     w = monthlySatisfaction(w);
     add(monthlyRequests(w));
   }
-  // Tier 2: empréstimos que acabaram e a copa do mês.
+  // Empréstimos que acabaram; jovens fora de evento (na academy ou emprestados) descansam.
   add(loansDay(w));
-  w = startCup(w, rng);
-  add(cupDayWithEvents(w));
-  w = restTier2(w);
+  w = restAcademies(w);
   if (isMonday(w.date)) {
     w = applyRanking(w);
     w = playBaseRound(w, rng);

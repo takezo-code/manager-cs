@@ -3,7 +3,7 @@ import { buildYear } from './calendar';
 import { eventWeightOf, tierWeight } from './ranking';
 import { candidates, issueInvites, startEvents } from './schedule';
 import { createWorld, dailyTick } from './season';
-import { orgOfAcademy } from './tier2/model';
+import { academyLineupIds, orgOfAcademy } from './tier2/model';
 import type { World } from './world';
 
 const atEvent = (w: World, templateId: string, year = 2027): World => {
@@ -56,6 +56,14 @@ describe('Circuito tier 2 e tier 3', () => {
     for (const id of ids) expect(w.teams[orgOfAcademy(id) ?? id].region).toBe('NA');
   });
 
+  it('a academy do manager da academy entra no tier 3 da região dela', () => {
+    const w = createWorld('furia', 1, undefined, { academy: true });
+    const ev = open(atEvent(w, 'challenger-sa-03'));
+    expect(ev.tournament!.participants).toContain('furia-ac');
+    const eu = open(atEvent({ ...createWorld('vitality', 1, undefined, { academy: true }) }, 'challenger-eu-03'));
+    expect(eu.tournament!.participants).toContain('vitality-ac');
+  });
+
   it('tier 2 e tier 3 pesam menos no ranking (1/4 e 1/10)', () => {
     expect(tierWeight(1)).toBe(1);
     expect(tierWeight(2)).toBe(0.25);
@@ -66,12 +74,16 @@ describe('Circuito tier 2 e tier 3', () => {
   it('um tier 3 com academy roda até o campeão, com prêmio para o time dono da academy', () => {
     let w = atEvent(createWorld('furia'), 'challenger-na-03');
     const before = w;
-    for (let d = 0; d < 8; d++) w = dailyTick(w).world;
+    for (let d = 0; d < 4; d++) w = dailyTick(w).world; // 24 a 27/03: sem segunda (liga de base) nem virada do mês
     const ev = w.calendar.find((e) => e.templateId === 'challenger-na-03')!;
     expect(ev.status).toBe('encerrado');
     expect(ev.tournament!.championId).toBeTruthy();
     const org = orgOfAcademy(ev.tournament!.championId!) ?? ev.tournament!.championId!;
     expect(w.teams[org].money).toBeGreaterThan(before.teams[org].money - 200_000);
+    // Jovens das academies que jogaram cresceram mapa a mapa.
+    const academies = ev.tournament!.participants.filter((id) => orgOfAcademy(id));
+    const young = academies.flatMap((id) => academyLineupIds(before, orgOfAcademy(id)!)).filter((id) => before.players[id].age <= 21);
+    expect(young.some((id) => JSON.stringify(w.players[id].growth) !== JSON.stringify(before.players[id].growth))).toBe(true);
     // Academies não entram no ranking HLTV.
     expect(w.results.some((r) => orgOfAcademy(r.teamId))).toBe(false);
   }, 30_000);

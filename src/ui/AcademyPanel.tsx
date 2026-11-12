@@ -4,7 +4,7 @@ import { baseStandings } from '../engine/baseLeague';
 import { ACADEMY, MARKET, SCOUT, TIER2 } from '../engine/config';
 import { formatDate } from '../engine/date';
 import { managerOrg } from '../engine/manager/model';
-import { LOAN_MONTHS } from '../engine/tier2/loans';
+import { LOAN_MONTHS, loanTargets } from '../engine/tier2/loans';
 import { baseOvr } from '../engine/form';
 import { estimatePotential } from '../engine/scout';
 import { scoutNarrowing } from '../engine/manager/effects';
@@ -87,20 +87,20 @@ function LoanControls({ p }: { p: Player }) {
   if (p.loan)
     return (
       <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
-        Emprestado à {w.tier2.teams[p.loan.teamId]?.name} até {formatDate(p.loan.until)}
+        Emprestado à {w.teams[p.loan.teamId]?.name} até {formatDate(p.loan.until)}
         <button type="button" className="rounded-lg border border-line px-2 py-1 font-semibold text-ink hover:border-accent" onClick={() => recall(p.id)}>
           Chamar de volta · {money(TIER2.recallFee)}
         </button>
       </div>
     );
-  const teams = Object.values(w.tier2.teams);
+  const teams = loanTargets(w);
   return (
     <div className="flex flex-wrap items-center gap-1.5 text-xs">
       <select className="rounded-lg border border-line bg-panel-2 px-2 py-1" value={to} onChange={(e) => setTo(e.target.value)} aria-label="Time do empréstimo">
         <option value="">Emprestar para…</option>
         {teams.map((t) => (
           <option key={t.id} value={t.id}>
-            {t.name}
+            #{t.hltvRank} {t.name} ({t.region})
           </option>
         ))}
       </select>

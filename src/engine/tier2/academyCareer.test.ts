@@ -46,7 +46,8 @@ describe('Manager da academy', () => {
     const id = w.teams.furia.academyIds[0];
     w = {
       ...w,
-      tier2: { ...w.tier2, points: { [ac]: 900 } },
+      // Campeã de um tier 3 em 2027.
+      calendar: [{ ...w.calendar[0], tier: 3, startDate: '2027-05-24', status: 'encerrado', tournament: { participants: [ac], placements: { [ac]: 'Campeão' } } as never }],
       manager: { ...w.manager, goalsSeason: 2027, academyStats: { promoted: 1, startOvr: { [id]: 40 } } },
     };
     const out = academySeasonEnd(w).world;

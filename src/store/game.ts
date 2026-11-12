@@ -527,7 +527,7 @@ export const useGame = create<GameState>((set, get) => {
       const r = loanPlayer(worldOf(get()), playerId, toTeamId, months);
       if (!r.ok) return set({ message: { kind: 'erro', text: r.error } });
       const p = r.world.players[playerId];
-      commitWorld(r.world, [], { message: { kind: 'ok', text: `${p.nick} foi emprestado à ${r.world.tier2.teams[toTeamId].name} por ${months} meses.` } });
+      commitWorld(r.world, [], { message: { kind: 'ok', text: `${p.nick} foi emprestado à ${r.world.teams[toTeamId].name} por ${months} meses.` } });
     },
 
     recallYouth: (playerId) => {

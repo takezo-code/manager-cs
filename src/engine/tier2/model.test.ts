@@ -1,40 +1,32 @@
 import { describe, expect, it } from 'vitest';
-import { baseOvr } from '../form';
 import { createWorld } from '../season';
-import { academyTeamId, tier2PlayersView, tier2Teams } from './model';
+import { academyLineupIds, academyTeam, academyTeamId, orgOfAcademy } from './model';
+import { academyRanking } from './ranking';
 
-describe('Tier 2: times', () => {
+describe('Tier 2: academies', () => {
   const w = createWorld('furia');
 
-  it('16 times fictícios com 6 jogadores (OVR 62–74, 18–27 anos), fora do mercado do tier 1', () => {
-    const teams = Object.values(w.tier2.teams);
-    expect(teams).toHaveLength(16);
-    for (const t of teams) {
-      expect(t.playerIds).toHaveLength(6);
-      for (const id of t.playerIds) {
-        const p = w.tier2.players[id];
-        expect(w.players[id]).toBeUndefined();
-        expect(baseOvr(p)).toBeGreaterThanOrEqual(58);
-        expect(baseOvr(p)).toBeLessThanOrEqual(78);
-        expect(p.age).toBeGreaterThanOrEqual(18);
-        expect(p.age).toBeLessThanOrEqual(27);
-      }
-    }
+  it('não há times nem jogadores fictícios no tier 2', () => {
+    expect(w.tier2.teams).toEqual({});
+    expect(w.tier2.players).toEqual({});
+    expect(w.tier2.cup).toBeNull();
   });
 
-  it('48 equipes no tier 2: academies do top 32 + 16 fictícios', () => {
-    const all = tier2Teams(w);
-    expect(Object.keys(all)).toHaveLength(48);
-    expect(all[academyTeamId('furia')].name).toBe('FURIA Academy');
-    expect(all[academyTeamId('furia')].starters).toHaveLength(5);
-  });
-
-  it('academy com 3 jovens joga com 2 stand-ins amadores', () => {
-    const cut = { ...w, teams: { ...w.teams, furia: { ...w.teams.furia, academyIds: w.teams.furia.academyIds.slice(0, 3) } } };
-    const t = tier2Teams(cut)[academyTeamId('furia')];
+  it('academy vira um time de evento com os jovens dela, na região do time', () => {
+    const t = academyTeam(w, 'furia');
+    expect(t.id).toBe(academyTeamId('furia'));
+    expect(orgOfAcademy(t.id)).toBe('furia');
+    expect(t.name).toBe('FURIA Academy');
+    expect(t.region).toBe(w.teams.furia.region);
     expect(t.starters).toHaveLength(5);
-    const view = tier2PlayersView(cut);
-    for (const id of t.starters) expect(view[id]).toBeTruthy();
-    expect(t.starters.filter((id) => cut.amateurs.some((a) => a.player.id === id))).toHaveLength(2);
+    expect(t.playerIds).toEqual(expect.arrayContaining(academyLineupIds(w, 'furia')));
+  });
+
+  it('ranking das academies soma os pontos do tier 3 do ano', () => {
+    const ev = { ...w.calendar[0], tier: 3 as const, startDate: '2026-11-20', status: 'encerrado' as const, tournament: { participants: ['furia-ac', 'mouz-ac'], placements: { 'furia-ac': 'Campeão', 'mouz-ac': '2º' } } as never };
+    const r = academyRanking({ ...w, calendar: [ev] }, 2026);
+    expect(r).toHaveLength(Object.keys(w.teams).length);
+    expect(r[0]).toMatchObject({ teamId: 'furia-ac', points: 100 });
+    expect(r[1]).toMatchObject({ teamId: 'mouz-ac', points: 70 });
   });
 });

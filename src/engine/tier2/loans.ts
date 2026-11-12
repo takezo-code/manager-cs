@@ -1,9 +1,9 @@
-// Empréstimo de jovens da sua academy para os times fictícios do tier 2.
+// Empréstimo de jovens da sua academy para times reais do tier 2/3 (fora do top 32).
 import { TIER2 } from '../config';
 import { endOfMonthAfter } from '../date';
 import { fmtMoney } from '../format';
 import { addMoney, type World, type WorldEvent } from '../world';
-import { managerOrg } from './cups';
+import { managerOrg } from '../manager/model';
 
 export type LoanResult = { ok: true; world: World } | { ok: false; error: string };
 export const LOAN_MONTHS = [3, 6, 12] as const;
@@ -11,18 +11,25 @@ export const LOAN_MONTHS = [3, 6, 12] as const;
 /** Jovens da organização emprestados agora. */
 export const loanedOut = (w: World, orgId: string) => (w.teams[orgId]?.academyIds ?? []).filter((id) => w.players[id]?.loan);
 
-/** Quantos estão emprestados a um time do tier 2. */
-const loanedTo = (w: World, teamId: string) => Object.values(w.players).filter((p) => p.loan?.teamId === teamId).length;
+/** Emprestados a um time agora. */
+export const loanedTo = (w: World, teamId: string) => Object.values(w.players).filter((p) => p.loan?.teamId === teamId).map((p) => p.id);
+
+/** Times que aceitam empréstimo: reais, fora do top 32, com vaga (elenco + emprestados abaixo de 7). */
+export const loanTargets = (w: World) =>
+  Object.values(w.teams)
+    .filter((t) => t.hltvRank > TIER2.academies && t.id !== managerOrg(w) && t.playerIds.length + loanedTo(w, t.id).length < TIER2.loanRosterMax)
+    .sort((a, b) => a.hltvRank - b.hltvRank);
 
 export function loanPlayer(w: World, playerId: string, toTeamId: string, months: number): LoanResult {
   const org = managerOrg(w);
   const p = w.players[playerId];
   if (!org || !p || p.teamId !== org || p.squad !== 'academy') return { ok: false, error: 'Só dá para emprestar jovens da sua academy.' };
   if (p.loan) return { ok: false, error: `${p.nick} já está emprestado.` };
-  const team = w.tier2.teams[toTeamId];
-  if (!team) return { ok: false, error: 'Empréstimo só para times do tier 2.' };
+  const team = w.teams[toTeamId];
+  if (!team || team.id === org) return { ok: false, error: 'Empréstimo só para outro time do ranking.' };
+  if (team.hltvRank <= TIER2.academies) return { ok: false, error: `Empréstimo só para times fora do top ${TIER2.academies}.` };
   if (!(LOAN_MONTHS as readonly number[]).includes(months)) return { ok: false, error: 'Prazo inválido: 3, 6 ou 12 meses.' };
-  if (team.playerIds.length + loanedTo(w, toTeamId) >= TIER2.loanRosterMax) return { ok: false, error: `${team.name} já está com o elenco cheio.` };
+  if (team.playerIds.length + loanedTo(w, toTeamId).length >= TIER2.loanRosterMax) return { ok: false, error: `${team.name} já está com o elenco cheio.` };
   const loan = { teamId: toTeamId, until: endOfMonthAfter(w.date, months), salaryShare: TIER2.loanSalaryShare };
   return { ok: true, world: { ...w, players: { ...w.players, [playerId]: { ...p, loan } } } };
 }
@@ -44,7 +51,7 @@ export function loansDay(world: World): { world: World; events: WorldEvent[] } {
   for (const p of Object.values(w.players)) {
     if (!p.loan || p.loan.until >= w.date) continue;
     w = { ...w, players: { ...w.players, [p.id]: { ...p, loan: null } } };
-    if (p.teamId === org) events.push({ kind: 'info', text: `${p.nick} voltou do empréstimo à ${w.tier2.teams[p.loan.teamId]?.name ?? 'equipe'}.` });
+    if (p.teamId === org) events.push({ kind: 'info', text: `${p.nick} voltou do empréstimo à ${w.teams[p.loan.teamId]?.name ?? 'equipe'}.` });
   }
   return { world: w, events };
 }

@@ -8,11 +8,11 @@ import { makeProposal } from '../manager/offers';
 import { playerOvr } from '../player';
 import { weakestRole } from '../squad';
 import type { World, WorldEvent } from '../world';
-import { tier2Ranking } from './cups';
+import { academyRanking } from './ranking';
 import { academyTeamId } from './model';
 
 export const ACADEMY_GOALS: Goal[] = [
-  { kind: 'tier2_top8', text: 'Terminar no top 8 do ranking do tier 2' },
+  { kind: 'tier2_top8', text: 'Terminar no top 8 das academies no tier 3' },
   { kind: 'promover_jovem', text: 'Promover ao menos 1 jovem ao time principal' },
   { kind: 'jovem_cresce5', text: 'Um jovem crescer +5 de OVR na temporada' },
 ];
@@ -93,7 +93,7 @@ export function academySeasonEnd(world: World): { world: World; events: WorldEve
   const year = Number(w.date.slice(0, 4)) - 1;
   if (w.manager.goalsSeason > year) return { world: w, events: [] };
   const stats = w.manager.academyStats ?? { promoted: 0, startOvr: {} };
-  const pos = tier2Ranking(w).findIndex((r) => r.teamId === academyTeamId(org)) + 1;
+  const pos = academyRanking(w, year).findIndex((r) => r.teamId === academyTeamId(org) && r.points > 0) + 1;
   const met: Record<string, boolean> = {
     tier2_top8: pos > 0 && pos <= 8,
     promover_jovem: stats.promoted >= 1,
