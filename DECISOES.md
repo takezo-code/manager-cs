@@ -181,7 +181,7 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 | Aposentadoria | Na virada do ano, agente livre com 31+ ou OVR < 62 sai do jogo; no máximo 300 agentes livres |
 | Folha da IA | Teto: patrocínio (o maior entre o atual e o esperado pelo ranking) × 1,3 + caixa ÷ 24; vale para reforço, completar elenco e renovação |
 | Reestruturação da IA | Time da IA com 4 meses de atraso renegocia a dívida e dispensa os salários mais caros até caber no patrocínio esperado |
-| Saves v9 → v10 | Saem a Tier 2 Cup e os fictícios; emprestados a eles voltam; entra o circuito tier 2/3 que ainda falta nos anos do save; o mundo continua com os 32 times |
+| Saves v9 → v10 | Saem a Tier 2 Cup e os fictícios; emprestados a eles voltam; o mundo continua com os 32 times e só com o tier 1 (evento que não fecha a chave é cancelado) |
 | Cor da carta evoluída | A cor da evolução (azul, vermelha ou rosa) substitui a cor da faixa; a faixa continua num selo |
 
 ## Dados
