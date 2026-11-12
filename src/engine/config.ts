@@ -776,4 +776,9 @@ export const MEDIA = {
   /** Parte dos rumores que vem de propostas reais (quando há). */
   rumorTrueShare: 0.6,
   rumorOvr: 80,
+  /** Twitter. */
+  maxTweets: 150,
+  classicRelation: -30,
+  critiqueChance: 0.2,
+  gratitudeConfidence: 60,
 };

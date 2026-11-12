@@ -4,10 +4,12 @@ import type { MatchResult } from '../types';
 import type { World } from '../world';
 import { fansDay } from './fans';
 import { dailyRumor, newsForDay } from './news';
+import { pushTweets, tweetsForDay } from './twitter';
 
 export function mediaDay(prev: World, next: World, results: Record<string, MatchResult>, rng: Rng): World {
   let w = fansDay(prev, next, results);
   w = newsForDay(prev, w);
   w = dailyRumor(w, rng);
+  w = pushTweets(w, tweetsForDay(prev, w, results, rng));
   return w;
 }

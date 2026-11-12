@@ -5,6 +5,7 @@ import type { BaseLeague } from './baseLeague';
 import type { Staff } from './types';
 import type { Manager } from './manager/model';
 import type { NewsItem } from './media/news';
+import type { Tweet } from './media/twitter';
 import type { CalendarEvent } from './calendar';
 import type { EventResult, SeriesLogEntry } from './ranking';
 import type { Player, Team } from './types';
@@ -138,6 +139,8 @@ export interface World {
   fans: Record<string, number>;
   /** Aba de notícias (mais nova primeiro). */
   news: NewsItem[];
+  /** Feed do Twitter (mais novo primeiro). */
+  feed: Tweet[];
 }
 
 /** Mensagem curta para o manager (vira notícia de verdade no passo 13). */

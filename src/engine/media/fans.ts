@@ -17,7 +17,7 @@ export function changeMood(w: World, teamId: string, delta: number): World {
 }
 
 /** Ídolo: o titular de maior OVR ou quem já foi MVP. */
-function isIdol(w: World, teamId: string, p: Player): boolean {
+export function isIdol(w: World, teamId: string, p: Player): boolean {
   const team = w.teams[teamId];
   if (!team?.starters.includes(p.id) && !team?.playerIds.includes(p.id)) return false;
   if (p.awards?.some((a) => a.kind === 'MVP')) return true;

@@ -57,6 +57,7 @@ export function createWorld(managerTeamId: string, seed = 1, profile: ManagerPro
     manager: newManager(profile, managerTeamId, START_DATE),
     fans: Object.fromEntries(Object.keys(teams).map((id) => [id, MEDIA.startMood])),
     news: [],
+    feed: [],
   };
   w = { ...w, amateurs: generateAmateurs(rng, AMATEURS.poolSize, START_DATE) };
   if (managerTeamId) w = assignGoals(w, managerTeamId);

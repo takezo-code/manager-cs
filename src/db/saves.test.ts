@@ -28,6 +28,7 @@ function sampleState(): SavedState {
     manager: newManager(DEFAULT_PROFILE, 'furia', '2026-11-11'),
     fans: {},
     news: [],
+    feed: [],
     calendar: [{ ...buildYear(2026).find((e) => e.templateId === 'iem-china')!, status: 'em_andamento', tournament: out.tournament }],
     teams,
     players: out.players,
