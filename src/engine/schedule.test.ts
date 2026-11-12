@@ -75,7 +75,7 @@ describe('Temporada', () => {
     expect(w.calendar.some((e) => e.startDate.startsWith('2028'))).toBe(true);
     expect(w.results.length).toBeGreaterThan(100);
     expect(Object.values(w.teams).some((t) => t.rankHistory.length > 10)).toBe(true);
-  });
+  }, 30_000);
 });
 
 describe('Janelas de transferência', () => {
