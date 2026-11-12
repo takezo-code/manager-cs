@@ -134,3 +134,22 @@ describe('Correções da revisão', () => {
     expect(out.amateurs[0].player.age).toBe(kept[0].player.age + 1);
   });
 });
+
+describe('Contrato da academy', () => {
+  it('renova sozinho com o mesmo salário quando acaba (seu time e IA)', async () => {
+    const { aiMarketDay } = await import('./market/ai');
+    const { createRng } = await import('./rng');
+    let w = { ...createWorld('furia'), date: '2028-12-01' };
+    const ai = Object.keys(w.teams).find((id) => id !== 'furia')!;
+    const ids = [w.teams.furia.academyIds[0], w.teams[ai].academyIds[0]];
+    const players = { ...w.players };
+    for (const id of ids) players[id] = { ...players[id], contract: { ...players[id].contract!, endDate: '2028-11-30' } };
+    w = { ...w, players };
+    const out = aiMarketDay(w, 'furia', createRng(1)).world;
+    for (const id of ids) {
+      expect(out.players[id].teamId).not.toBeNull();
+      expect(out.players[id].contract!.endDate > '2028-12-01').toBe(true);
+      expect(out.players[id].contract!.salary).toBe(w.players[id].contract!.salary);
+    }
+  });
+});

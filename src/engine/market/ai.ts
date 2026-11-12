@@ -2,7 +2,7 @@
 // faz propostas pelos jogadores do seu time e às vezes paga multas.
 import { teamBusy, windowOpen } from '../calendar';
 import { promote } from '../academy';
-import { AI_MARKET, FINANCE, MARKET } from '../config';
+import { ACADEMY, AI_MARKET, FINANCE, MARKET } from '../config';
 import { payroll } from '../finance/monthly';
 import { bandOf } from '../morale/satisfaction';
 import { addDays, daysBetween, endOfMonthAfter } from '../date';
@@ -60,6 +60,12 @@ export function aiMarketDay(world: World, myTeamId: string, rng: Rng): { world: 
   // 1) Contratos: a IA renova quem está acabando; quem passou da data vira agente livre.
   for (const p of Object.values(w.players)) {
     if (!p.contract || !p.teamId) continue;
+    // Academy: o contrato se renova sozinho, com o mesmo salário, até ele subir ou fazer 20.
+    if (p.squad === 'academy') {
+      if (p.contract.endDate < w.date)
+        w = { ...w, players: { ...w.players, [p.id]: { ...p, contract: { ...p.contract, endDate: endOfMonthAfter(w.date, ACADEMY.contractMonths) } } } };
+      continue;
+    }
     const left = contractMonthsLeft(p, w.date);
     if (p.teamId !== myTeamId && left <= AI_MARKET.renewMonths && left > 0 && rng.chance(0.03)) {
       w = executeRenewal(w, p.id, aiContract(w, p, p.teamId, rng));

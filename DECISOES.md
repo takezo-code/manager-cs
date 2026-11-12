@@ -58,6 +58,7 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 - **Idade vale para todos:** jovens crescem rumo ao POT, auge de 22 a 26, queda depois.
 - **IA com academy simples:** 5 jovens por time, promove os bons aos 20 e repõe.
 - **Empréstimo** fica para depois, junto com o tier 2.
+- **Contrato da academy** se renova sozinho, com o mesmo salário, até o jovem subir ou fazer 20.
 - Detalhes: `docs/superpowers/specs/2026-11-11-passo-10-academy-design.md`.
 
 ## Criado por mim (revisar se quiser)
