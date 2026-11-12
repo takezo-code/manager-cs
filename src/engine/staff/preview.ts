@@ -5,6 +5,7 @@ import { pendingSeries } from '../tournament/run';
 import { MAP_IDS, type MapId } from '../types';
 import type { World } from '../world';
 import { staffAttr } from './model';
+import { withAcademyTeams } from '../tier2/model';
 
 export interface RivalPreview {
   strong: MapId[];
@@ -18,7 +19,7 @@ const frac = (key: string) => (hashString(key) % 10_000) / 10_000;
  * (85 − Leitura)% de chance de estar errado.
  */
 export function rivalPreview(w: World, rivalId: string, key: string = w.date): RivalPreview {
-  const t = w.teams[rivalId];
+  const t = withAcademyTeams(w, [rivalId])[rivalId];
   const sorted = [...MAP_IDS].sort((a, b) => t.mapStrength[b] - t.mapStrength[a]);
   const strong = sorted.slice(0, 2);
   const weak = sorted.slice(-2).reverse();

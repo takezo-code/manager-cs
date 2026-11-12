@@ -6,7 +6,7 @@ import { newBaseSeason } from '../engine/baseLeague';
 import { emptyTier2 } from '../engine/tier2/model';
 import { DEFAULT_PROFILE, newManager } from '../engine/manager/model';
 import { assignGoals } from '../engine/manager/board';
-import { buildYear, type CalendarEvent } from '../engine/calendar';
+import { buildYear, hasCircuit, type CalendarEvent } from '../engine/calendar';
 import { ACADEMY, AMATEURS, MEDIA } from '../engine/config';
 import { START_DATE, addDays } from '../engine/date';
 import { createGroup } from '../engine/tournament/doubleElim';
@@ -232,7 +232,9 @@ function migrateV9(s: SavedState): SavedState {
   const old = s.calendar.map((e) => ({ ...e, tier: e.tier ?? 1 }));
   // Sem a Tier 2 Cup: entra o circuito tier 2/3 que ainda está por vir nos anos do calendário.
   const years = [...new Set(old.map((e) => Number(e.startDate.slice(0, 4))))];
-  const circuit = years.flatMap((y) => buildYear(y)).filter((e) => e.tier > 1 && e.startDate > s.date && !old.some((o) => o.id === e.id));
+  const circuit = hasCircuit(Object.keys(s.teams).length)
+    ? years.flatMap((y) => buildYear(y)).filter((e) => e.tier > 1 && e.startDate > s.date && !old.some((o) => o.id === e.id))
+    : [];
   const calendar = [...old, ...circuit].sort((a, b) => a.startDate.localeCompare(b.startDate));
   return { ...s, players, calendar, tier2: emptyTier2(s.date) };
 }

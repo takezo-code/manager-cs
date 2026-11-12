@@ -5,7 +5,7 @@ import { loansDay } from './tier2/loans';
 import { academySeasonEnd, markRevealed, startAsAcademyManager } from './tier2/academyCareer';
 import { mediaDay } from './media/day';
 import { addToAcademy, generateYouth } from './academy';
-import { buildYear, teamBusy } from './calendar';
+import { buildYear, hasCircuit, teamBusy } from './calendar';
 import { generateAmateurs, refreshAmateurs } from './amateurs';
 import { academyAgingWarning, academyYearEnd } from './academy';
 import { ageUp, monthlyDevelopment } from './development';
@@ -107,7 +107,7 @@ export function dailyTick(world: World, opts: { rng?: Rng } = {}): { world: Worl
   // Calendário do ano seguinte a partir de novembro (os convites de janeiro saem em dezembro).
   const year = Number(w.date.slice(0, 4));
   if (w.date.slice(5, 7) >= '11' && !w.calendar.some((e) => e.startDate.startsWith(String(year + 1))))
-    w = { ...w, calendar: [...w.calendar, ...buildYear(year + 1)] };
+    w = { ...w, calendar: [...w.calendar, ...buildYear(year + 1).filter((e) => e.tier === 1 || hasCircuit(Object.keys(w.teams).length))] };
   w = { ...w, players: Object.fromEntries(Object.entries(w.players).map(([id, p]) => [id, expireMvp(p, w.date)])) };
 
   add(issueInvites(w));

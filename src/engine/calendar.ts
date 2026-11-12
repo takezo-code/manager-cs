@@ -35,6 +35,9 @@ export interface CalendarEvent {
   tournament: Tournament | null;
 }
 
+/** O circuito tier 2/3 só existe no mundo do top 100 (saves antigos têm só 32 times). */
+export const hasCircuit = (teamCount: number) => teamCount > 32;
+
 export function buildYear(year: number): CalendarEvent[] {
   return [...EVENT_TEMPLATES, ...CIRCUIT_TEMPLATES].map((t) => {
     const city = t.cities[(((year - 2026) % t.cities.length) + t.cities.length) % t.cities.length];

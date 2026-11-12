@@ -264,6 +264,12 @@ export function startEvents(world: World): Out {
         if (canFill(id, strict)) ids.add(id);
       }
     const participants = [...ids].sort((a, b) => seedRank(w, a) - seedRank(w, b)).slice(0, ev.teams);
+    // Sem times para fechar a chave (mundo pequeno, todos ocupados): o evento é cancelado.
+    if (participants.length < ev.teams) {
+      w = { ...setEvent(w, { ...ev, status: 'encerrado', tournament: null }), inbox: w.inbox.filter((i) => i.eventId !== ev.id) };
+      if (ids.has(me)) events.push({ kind: 'alerta', text: `${ev.name} foi cancelado: não fechou ${ev.teams} times.` });
+      continue;
+    }
     const tournament = createTournament({ id: ev.id, name: ev.name, format: ev.format, options: ev.options, prizePool: ev.prizePool }, participants, hashString(ev.id));
     // Quem entra chega descansado (+30 de energia), e o convite sai da caixa de entrada.
     const players = { ...w.players };

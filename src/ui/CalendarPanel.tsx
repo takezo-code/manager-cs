@@ -63,7 +63,7 @@ const toneClass: Record<Mine['tone'], string> = {
 function RivalPreviewCard({ rivalId, seriesId }: { rivalId: string; seriesId: string }) {
   const world = useWorld();
   const me = useGame((s) => s.myTeamId)!;
-  const rival = world.teams[rivalId];
+  const rival = withAcademyTeams(world, [rivalId])[rivalId];
   const p = rivalPreview(world, rivalId, seriesId);
   const lei = staffAttr(world, me, 'LEI');
   const analyst = world.teams[me].staff.analista ? world.staff[world.teams[me].staff.analista!] : null;
