@@ -67,7 +67,7 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 - **Propostas e aumentos completos** para o staff, pela caixa de entrada.
 - **Prévia do analista** antes de cada série do seu time (no Calendário).
 - **Curso com prazo:** +2 no atributo depois de 28 dias.
-- Detalhes e fórmulas: .
+- Detalhes e fórmulas: `docs/superpowers/specs/2026-11-12-passo-11-comissao-design.md`.
 
 ## Criado por mim (revisar se quiser)
 
