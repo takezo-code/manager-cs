@@ -1,6 +1,7 @@
 // Aba de notícias (estilo HLTV): manchetes geradas do que mudou no dia, mais rumores.
 import { onVacation, windowOpen } from '../calendar';
 import { MEDIA } from '../config';
+import { daysBetween } from '../date';
 import { fmtMoney } from '../format';
 import { bandOf } from '../morale/satisfaction';
 import { playerOvr } from '../player';
@@ -17,11 +18,23 @@ export interface NewsItem {
   teamIds: string[];
   /** Rumor (pode não ser verdade). */
   rumor?: boolean;
+  /** Jogador da manchete (quando há um). */
+  playerId?: string;
+  /** Origem do rumor (id da proposta ou do jogador), para não repetir. */
+  ref?: string;
 }
 
 /** Acrescenta uma manchete (mais nova primeiro; guarda as últimas 200). */
-export function pushNews(w: World, kind: NewsKind, vars: Partial<Record<TemplateVar, string>>, teamIds: string[], seed: string, rumor = false): World {
-  const item: NewsItem = { id: `${w.date}:${kind}:${seed}`, date: w.date, kind, title: say('news', kind, vars, `${w.date}:${seed}`), teamIds, ...(rumor ? { rumor } : {}) };
+export function pushNews(
+  w: World,
+  kind: NewsKind,
+  vars: Partial<Record<TemplateVar, string>>,
+  teamIds: string[],
+  seed: string,
+  rumor = false,
+  extra: Pick<NewsItem, 'playerId' | 'ref'> = {},
+): World {
+  const item: NewsItem = { id: `${w.date}:${kind}:${seed}`, date: w.date, kind, title: say('news', kind, vars, `${w.date}:${seed}`), teamIds, ...(rumor ? { rumor } : {}), ...extra };
   return { ...w, news: [item, ...(w.news ?? [])].slice(0, MEDIA.maxNews) };
 }
 
@@ -88,15 +101,20 @@ export function newsForDay(prev: World, next: World): World {
 export function dailyRumor(w: World, rng: Rng): World {
   const hot = onVacation(w.date) || windowOpen(w.date);
   if (!rng.chance(hot ? MEDIA.rumorChanceHot : MEDIA.rumorChance)) return w;
-  if (w.offers.length && rng.chance(MEDIA.rumorTrueShare)) {
-    const o = rng.pick(w.offers);
+  // Rumores já publicados (a mesma proposta não vira rumor de novo; o mesmo jogador, só depois de uma semana).
+  const rumored = new Set((w.news ?? []).filter((n) => n.rumor && n.ref).map((n) => n.ref));
+  const recentPlayers = new Set((w.news ?? []).filter((n) => n.rumor && n.playerId && daysBetween(n.date, w.date) < MEDIA.rumorRepeatDays).map((n) => n.playerId));
+  const fresh = w.offers.filter((o) => !rumored.has(o.id));
+  if (fresh.length && rng.chance(MEDIA.rumorTrueShare)) {
+    const o = rng.pick(fresh);
     const p = w.players[o.playerId];
-    if (p) return pushNews(w, 'rumor', { jogador: p.nick, time: nameOf(w, o.fromTeamId), rival: nameOf(w, p.teamId) }, [o.fromTeamId, ...(p.teamId ? [p.teamId] : [])], `rumor:${o.id}`, true);
+    if (p)
+      return pushNews(w, 'rumor', { jogador: p.nick, time: nameOf(w, o.fromTeamId), rival: nameOf(w, p.teamId) }, [o.fromTeamId, ...(p.teamId ? [p.teamId] : [])], `rumor:${o.id}`, true, { playerId: p.id, ref: o.id });
   }
-  const stars = Object.values(w.players).filter((p) => p.teamId && playerOvr(p) >= MEDIA.rumorOvr);
+  const stars = Object.values(w.players).filter((p) => p.teamId && playerOvr(p) >= MEDIA.rumorOvr && !recentPlayers.has(p.id));
   if (!stars.length) return w;
   const p = rng.pick(stars);
   const teams = Object.values(w.teams).filter((t) => t.id !== p.teamId);
   const t = rng.pick(teams);
-  return pushNews(w, 'rumor', { jogador: p.nick, time: t.name, rival: nameOf(w, p.teamId) }, [t.id, p.teamId!], `rumor:${p.id}`, true);
+  return pushNews(w, 'rumor', { jogador: p.nick, time: t.name, rival: nameOf(w, p.teamId) }, [t.id, p.teamId!], `rumor:${p.id}`, true, { playerId: p.id, ref: `${p.id}:${w.date}` });
 }

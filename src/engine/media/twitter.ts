@@ -83,7 +83,7 @@ export function tweetsForDay(prev: World, next: World, results: Record<string, M
   // Rumores de hoje: um jornalista repercute.
   for (const n of (next.news ?? []).filter((x) => x.date === today && x.rumor)) {
     const target = n.teamIds[0];
-    const nick = Object.values(next.players).find((p) => n.title.includes(p.nick))?.nick;
+    const nick = n.playerId ? next.players[n.playerId]?.nick : undefined;
     if (nick && target) add('jornalista', rng.pick(JOURNALISTS), 'jornalista_rumor', { jogador: nick, time: name(target) });
   }
 

@@ -32,7 +32,16 @@ export const pick = <T>(list: readonly T[], seed: string): T => list[hashString(
 /** Frase de uma situação, preenchida. */
 export function say<G extends keyof typeof ALL_GROUPS>(group: G, key: keyof (typeof ALL_GROUPS)[G], vars: Partial<Record<TemplateVar, string>>, seed: string): string {
   const sit = (ALL_GROUPS[group] as TemplateGroup)[key as string];
-  return fill(pick(sit.lines, `${String(group)}:${String(key)}:${seed}`), vars);
+  const first = hashString(`${String(group)}:${String(key)}:${seed}`) % sit.lines.length;
+  // Uma frase com variável faltando não pode travar o dia: tenta as outras e, se nenhuma servir, limpa.
+  for (let i = 0; i < sit.lines.length; i++) {
+    try {
+      return fill(sit.lines[(first + i) % sit.lines.length], vars);
+    } catch {
+      // próxima frase
+    }
+  }
+  return sit.lines[first].replace(/\{\w+\}/g, '').replace(/\s{2,}/g, ' ').trim();
 }
 
 // ---------- Contas fictícias ----------

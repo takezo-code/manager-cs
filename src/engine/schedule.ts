@@ -135,6 +135,8 @@ function qualiMatch(w: World, a: string, b: string, seed: number): string {
     seed,
     staffA: staffAttrsOf(w, a),
     staffB: staffAttrsOf(w, b),
+    fanA: { crowd: crowdBonus(w, a, 'grupos'), lowMood: lowMood(w, a) },
+    fanB: { crowd: crowdBonus(w, b, 'grupos'), lowMood: lowMood(w, b) },
   });
   return r.winnerTeamId;
 }

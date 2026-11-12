@@ -776,6 +776,8 @@ export const MEDIA = {
   /** Parte dos rumores que vem de propostas reais (quando há). */
   rumorTrueShare: 0.6,
   rumorOvr: 80,
+  /** Mesmo jogador só volta a ser rumor depois destes dias. */
+  rumorRepeatDays: 7,
   /** Twitter. */
   maxTweets: 150,
   classicRelation: -30,
