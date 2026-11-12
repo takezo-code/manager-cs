@@ -236,7 +236,7 @@
   },
   {
     "id": "st-spirit-psicologo",
-    "nick": "fenpet",
+    "nick": "petfen",
     "country": "RU",
     "age": 37,
     "role": "psicologo",
@@ -279,7 +279,7 @@
   },
   {
     "id": "st-aurora-analista",
-    "nick": "kabro",
+    "nick": "vanro",
     "country": "TR",
     "age": 40,
     "role": "analista",
@@ -300,7 +300,7 @@
   },
   {
     "id": "st-aurora-psicologo",
-    "nick": "petfen",
+    "nick": "jordor",
     "country": "TR",
     "age": 36,
     "role": "psicologo",
@@ -343,7 +343,7 @@
   },
   {
     "id": "st-falcons-analista",
-    "nick": "kabro",
+    "nick": "tugus",
     "country": "SA",
     "age": 31,
     "role": "analista",
@@ -364,7 +364,7 @@
   },
   {
     "id": "st-falcons-psicologo",
-    "nick": "petfen",
+    "nick": "dorjor",
     "country": "SA",
     "age": 40,
     "role": "psicologo",
@@ -407,7 +407,7 @@
   },
   {
     "id": "st-betboom-analista",
-    "nick": "gustu",
+    "nick": "verik",
     "country": "RU",
     "age": 34,
     "role": "analista",
@@ -428,7 +428,7 @@
   },
   {
     "id": "st-betboom-psicologo",
-    "nick": "kabro",
+    "nick": "halmak",
     "country": "RU",
     "age": 38,
     "role": "psicologo",
@@ -471,7 +471,7 @@
   },
   {
     "id": "st-navi-analista",
-    "nick": "kabro",
+    "nick": "sellin",
     "country": "UA",
     "age": 37,
     "role": "analista",
@@ -492,7 +492,7 @@
   },
   {
     "id": "st-navi-psicologo",
-    "nick": "petfen",
+    "nick": "rikve",
     "country": "UA",
     "age": 48,
     "role": "psicologo",
@@ -535,7 +535,7 @@
   },
   {
     "id": "st-fut-analista",
-    "nick": "broka",
+    "nick": "sellin21",
     "country": "TR",
     "age": 35,
     "role": "analista",
@@ -556,7 +556,7 @@
   },
   {
     "id": "st-fut-psicologo",
-    "nick": "linsel",
+    "nick": "halmak21",
     "country": "TR",
     "age": 49,
     "role": "psicologo",
@@ -599,7 +599,7 @@
   },
   {
     "id": "st-mongolz-analista",
-    "nick": "kabro",
+    "nick": "fenpet21",
     "country": "MN",
     "age": 36,
     "role": "analista",
@@ -620,7 +620,7 @@
   },
   {
     "id": "st-mongolz-psicologo",
-    "nick": "petfen",
+    "nick": "jordor21",
     "country": "MN",
     "age": 32,
     "role": "psicologo",
@@ -641,7 +641,7 @@
   },
   {
     "id": "st-nemiga-tecnico",
-    "nick": "makhal",
+    "nick": "verik21",
     "country": "BY",
     "age": 33,
     "role": "tecnico",
@@ -663,7 +663,7 @@
   },
   {
     "id": "st-nemiga-analista",
-    "nick": "fenpet",
+    "nick": "dorjor21",
     "country": "BY",
     "age": 28,
     "role": "analista",
@@ -684,7 +684,7 @@
   },
   {
     "id": "st-nemiga-psicologo",
-    "nick": "makhal",
+    "nick": "rovan22",
     "country": "BY",
     "age": 47,
     "role": "psicologo",
@@ -727,7 +727,7 @@
   },
   {
     "id": "st-g2-analista",
-    "nick": "jordor",
+    "nick": "gustu21",
     "country": "DE",
     "age": 29,
     "role": "analista",
@@ -748,7 +748,7 @@
   },
   {
     "id": "st-g2-psicologo",
-    "nick": "rikve",
+    "nick": "vanro21",
     "country": "DE",
     "age": 33,
     "role": "psicologo",
@@ -791,7 +791,7 @@
   },
   {
     "id": "st-parivision-analista",
-    "nick": "gustu",
+    "nick": "broka21",
     "country": "RU",
     "age": 40,
     "role": "analista",
@@ -812,7 +812,7 @@
   },
   {
     "id": "st-parivision-psicologo",
-    "nick": "kabro",
+    "nick": "kabro22",
     "country": "RU",
     "age": 34,
     "role": "psicologo",
@@ -855,7 +855,7 @@
   },
   {
     "id": "st-legacy-analista",
-    "nick": "fenpet",
+    "nick": "rikve22",
     "country": "BR",
     "age": 30,
     "role": "analista",
@@ -876,7 +876,7 @@
   },
   {
     "id": "st-legacy-psicologo",
-    "nick": "makhal",
+    "nick": "dorjor23",
     "country": "BR",
     "age": 39,
     "role": "psicologo",
@@ -919,7 +919,7 @@
   },
   {
     "id": "st-1win-analista",
-    "nick": "tugus",
+    "nick": "kabro21",
     "country": "RU",
     "age": 36,
     "role": "analista",
@@ -940,7 +940,7 @@
   },
   {
     "id": "st-1win-psicologo",
-    "nick": "broka",
+    "nick": "makhal22",
     "country": "RU",
     "age": 43,
     "role": "psicologo",
@@ -983,7 +983,7 @@
   },
   {
     "id": "st-mibr-analista",
-    "nick": "petfen",
+    "nick": "petfen22",
     "country": "BR",
     "age": 30,
     "role": "analista",
@@ -1004,7 +1004,7 @@
   },
   {
     "id": "st-mibr-psicologo",
-    "nick": "halmak",
+    "nick": "tugus21",
     "country": "BR",
     "age": 34,
     "role": "psicologo",
@@ -1025,7 +1025,7 @@
   },
   {
     "id": "st-liquid-tecnico",
-    "nick": "petfen",
+    "nick": "fenpet23",
     "country": "US",
     "age": 42,
     "role": "tecnico",
@@ -1047,7 +1047,7 @@
   },
   {
     "id": "st-liquid-analista",
-    "nick": "dorjor",
+    "nick": "rikve21",
     "country": "US",
     "age": 32,
     "role": "analista",
@@ -1068,7 +1068,7 @@
   },
   {
     "id": "st-liquid-psicologo",
-    "nick": "gustu",
+    "nick": "gustu22",
     "country": "US",
     "age": 36,
     "role": "psicologo",
@@ -1111,7 +1111,7 @@
   },
   {
     "id": "st-faze-analista",
-    "nick": "vanro",
+    "nick": "linsel21",
     "country": "US",
     "age": 40,
     "role": "analista",
@@ -1132,7 +1132,7 @@
   },
   {
     "id": "st-faze-psicologo",
-    "nick": "sellin",
+    "nick": "makhal21",
     "country": "US",
     "age": 44,
     "role": "psicologo",
@@ -1153,7 +1153,7 @@
   },
   {
     "id": "st-9z-tecnico",
-    "nick": "rovan",
+    "nick": "petfen21",
     "country": "AR",
     "age": 43,
     "role": "tecnico",
@@ -1175,7 +1175,7 @@
   },
   {
     "id": "st-9z-analista",
-    "nick": "rikve",
+    "nick": "linsel22",
     "country": "AR",
     "age": 40,
     "role": "analista",
@@ -1196,7 +1196,7 @@
   },
   {
     "id": "st-9z-psicologo",
-    "nick": "rovan",
+    "nick": "jordor22",
     "country": "AR",
     "age": 39,
     "role": "psicologo",
@@ -1239,7 +1239,7 @@
   },
   {
     "id": "st-astralis-analista",
-    "nick": "rikve",
+    "nick": "sellin23",
     "country": "DK",
     "age": 30,
     "role": "analista",
@@ -1260,7 +1260,7 @@
   },
   {
     "id": "st-astralis-psicologo",
-    "nick": "rovan",
+    "nick": "kabro23",
     "country": "DK",
     "age": 35,
     "role": "psicologo",
@@ -1281,7 +1281,7 @@
   },
   {
     "id": "st-b8-tecnico",
-    "nick": "halmak",
+    "nick": "halmak22",
     "country": "UA",
     "age": 32,
     "role": "tecnico",
@@ -1303,7 +1303,7 @@
   },
   {
     "id": "st-b8-analista",
-    "nick": "gustu",
+    "nick": "tugus23",
     "country": "UA",
     "age": 40,
     "role": "analista",
@@ -1324,7 +1324,7 @@
   },
   {
     "id": "st-b8-psicologo",
-    "nick": "kabro",
+    "nick": "jordor23",
     "country": "UA",
     "age": 34,
     "role": "psicologo",
@@ -1345,7 +1345,7 @@
   },
   {
     "id": "st-nip-tecnico",
-    "nick": "linsel",
+    "nick": "tugus22",
     "country": "SE",
     "age": 31,
     "role": "tecnico",
@@ -1367,7 +1367,7 @@
   },
   {
     "id": "st-nip-analista",
-    "nick": "rovan",
+    "nick": "rikve24",
     "country": "SE",
     "age": 29,
     "role": "analista",
@@ -1388,7 +1388,7 @@
   },
   {
     "id": "st-nip-psicologo",
-    "nick": "fenpet",
+    "nick": "verik23",
     "country": "SE",
     "age": 33,
     "role": "psicologo",
@@ -1431,7 +1431,7 @@
   },
   {
     "id": "st-eternalfire-analista",
-    "nick": "linsel",
+    "nick": "gustu23",
     "country": "TR",
     "age": 26,
     "role": "analista",
@@ -1452,7 +1452,7 @@
   },
   {
     "id": "st-eternalfire-psicologo",
-    "nick": "jordor",
+    "nick": "broka22",
     "country": "TR",
     "age": 43,
     "role": "psicologo",
@@ -1473,7 +1473,7 @@
   },
   {
     "id": "st-m80-tecnico",
-    "nick": "fenpet",
+    "nick": "jordor24",
     "country": "US",
     "age": 41,
     "role": "tecnico",
@@ -1495,7 +1495,7 @@
   },
   {
     "id": "st-m80-analista",
-    "nick": "broka",
+    "nick": "vanro23",
     "country": "US",
     "age": 36,
     "role": "analista",
@@ -1516,7 +1516,7 @@
   },
   {
     "id": "st-m80-psicologo",
-    "nick": "linsel",
+    "nick": "makhal24",
     "country": "US",
     "age": 45,
     "role": "psicologo",
@@ -1559,7 +1559,7 @@
   },
   {
     "id": "st-heroic-analista",
-    "nick": "vanro",
+    "nick": "vanro22",
     "country": "DK",
     "age": 31,
     "role": "analista",
@@ -1580,7 +1580,7 @@
   },
   {
     "id": "st-heroic-psicologo",
-    "nick": "sellin",
+    "nick": "sellin22",
     "country": "DK",
     "age": 32,
     "role": "psicologo",
@@ -1623,7 +1623,7 @@
   },
   {
     "id": "st-gamerlegion-analista",
-    "nick": "vanro",
+    "nick": "makhal23",
     "country": "DE",
     "age": 36,
     "role": "analista",
@@ -1644,7 +1644,7 @@
   },
   {
     "id": "st-gamerlegion-psicologo",
-    "nick": "sellin",
+    "nick": "linsel23",
     "country": "DE",
     "age": 40,
     "role": "psicologo",
@@ -1665,7 +1665,7 @@
   },
   {
     "id": "st-fnatic-tecnico",
-    "nick": "fenpet",
+    "nick": "kabro25",
     "country": "GB",
     "age": 35,
     "role": "tecnico",
@@ -1687,7 +1687,7 @@
   },
   {
     "id": "st-fnatic-analista",
-    "nick": "broka",
+    "nick": "tugus24",
     "country": "GB",
     "age": 36,
     "role": "analista",
@@ -1708,7 +1708,7 @@
   },
   {
     "id": "st-fnatic-psicologo",
-    "nick": "linsel",
+    "nick": "vanro25",
     "country": "GB",
     "age": 45,
     "role": "psicologo",
@@ -1729,7 +1729,7 @@
   },
   {
     "id": "st-envy-tecnico",
-    "nick": "halmak",
+    "nick": "broka23",
     "country": "US",
     "age": 34,
     "role": "tecnico",
@@ -1751,7 +1751,7 @@
   },
   {
     "id": "st-envy-analista",
-    "nick": "gustu",
+    "nick": "vanro24",
     "country": "US",
     "age": 38,
     "role": "analista",
@@ -1772,7 +1772,7 @@
   },
   {
     "id": "st-envy-psicologo",
-    "nick": "kabro",
+    "nick": "verik24",
     "country": "US",
     "age": 42,
     "role": "psicologo",
@@ -1793,7 +1793,7 @@
   },
   {
     "id": "st-magic-tecnico",
-    "nick": "tugus",
+    "nick": "fenpet22",
     "country": "RU",
     "age": 37,
     "role": "tecnico",
@@ -1815,7 +1815,7 @@
   },
   {
     "id": "st-magic-analista",
-    "nick": "jordor",
+    "nick": "halmak23",
     "country": "RU",
     "age": 32,
     "role": "analista",
@@ -1836,7 +1836,7 @@
   },
   {
     "id": "st-magic-psicologo",
-    "nick": "rikve",
+    "nick": "broka24",
     "country": "RU",
     "age": 41,
     "role": "psicologo",
@@ -1857,7 +1857,7 @@
   },
   {
     "id": "st-tyloo-tecnico",
-    "nick": "tugus",
+    "nick": "petfen23",
     "country": "CN",
     "age": 35,
     "role": "tecnico",
@@ -1879,7 +1879,7 @@
   },
   {
     "id": "st-tyloo-analista",
-    "nick": "jordor",
+    "nick": "linsel24",
     "country": "CN",
     "age": 36,
     "role": "analista",
@@ -1900,7 +1900,7 @@
   },
   {
     "id": "st-tyloo-psicologo",
-    "nick": "rikve",
+    "nick": "halmak25",
     "country": "CN",
     "age": 45,
     "role": "psicologo",
@@ -1921,7 +1921,7 @@
   },
   {
     "id": "st-hotu-tecnico",
-    "nick": "vanro",
+    "nick": "gustu24",
     "country": "RU",
     "age": 32,
     "role": "tecnico",
@@ -1943,7 +1943,7 @@
   },
   {
     "id": "st-hotu-analista",
-    "nick": "petfen",
+    "nick": "dorjor24",
     "country": "RU",
     "age": 36,
     "role": "analista",
@@ -1964,7 +1964,7 @@
   },
   {
     "id": "st-hotu-psicologo",
-    "nick": "halmak",
+    "nick": "sellin24",
     "country": "RU",
     "age": 30,
     "role": "psicologo",
@@ -2007,7 +2007,7 @@
   },
   {
     "id": "st-big-analista",
-    "nick": "vanro",
+    "nick": "tugus25",
     "country": "DE",
     "age": 40,
     "role": "analista",
@@ -2028,7 +2028,7 @@
   },
   {
     "id": "st-big-psicologo",
-    "nick": "sellin",
+    "nick": "halmak24",
     "country": "DE",
     "age": 36,
     "role": "psicologo",
@@ -2049,7 +2049,7 @@
   },
   {
     "id": "st-livre-tecnico-01",
-    "nick": "kabro",
+    "nick": "rikve25",
     "country": "FR",
     "age": 36,
     "role": "tecnico",
@@ -2066,7 +2066,7 @@
   },
   {
     "id": "st-livre-tecnico-02",
-    "nick": "fenpet",
+    "nick": "fenpet26",
     "country": "US",
     "age": 43,
     "role": "tecnico",
@@ -2083,7 +2083,7 @@
   },
   {
     "id": "st-livre-tecnico-03",
-    "nick": "petfen",
+    "nick": "rovan25",
     "country": "DK",
     "age": 46,
     "role": "tecnico",
@@ -2100,7 +2100,7 @@
   },
   {
     "id": "st-livre-tecnico-04",
-    "nick": "rovan",
+    "nick": "verik25",
     "country": "GB",
     "age": 29,
     "role": "tecnico",
@@ -2117,7 +2117,7 @@
   },
   {
     "id": "st-livre-tecnico-05",
-    "nick": "dorjor",
+    "nick": "dorjor22",
     "country": "UA",
     "age": 28,
     "role": "tecnico",
@@ -2134,7 +2134,7 @@
   },
   {
     "id": "st-livre-tecnico-06",
-    "nick": "rikve",
+    "nick": "tugus26",
     "country": "ES",
     "age": 35,
     "role": "tecnico",
@@ -2151,7 +2151,7 @@
   },
   {
     "id": "st-livre-tecnico-07",
-    "nick": "verik",
+    "nick": "rovan21",
     "country": "PL",
     "age": 34,
     "role": "tecnico",
@@ -2168,7 +2168,7 @@
   },
   {
     "id": "st-livre-tecnico-08",
-    "nick": "makhal",
+    "nick": "fenpet24",
     "country": "SE",
     "age": 45,
     "role": "tecnico",
@@ -2185,7 +2185,7 @@
   },
   {
     "id": "st-livre-tecnico-09",
-    "nick": "vanro",
+    "nick": "halmak26",
     "country": "CZ",
     "age": 40,
     "role": "tecnico",
@@ -2202,7 +2202,7 @@
   },
   {
     "id": "st-livre-tecnico-10",
-    "nick": "verik",
+    "nick": "verik22",
     "country": "PL",
     "age": 42,
     "role": "tecnico",
@@ -2219,7 +2219,7 @@
   },
   {
     "id": "st-livre-tecnico-11",
-    "nick": "rikve",
+    "nick": "gustu27",
     "country": "ES",
     "age": 31,
     "role": "tecnico",
@@ -2236,7 +2236,7 @@
   },
   {
     "id": "st-livre-tecnico-12",
-    "nick": "dorjor",
+    "nick": "rovan23",
     "country": "UA",
     "age": 36,
     "role": "tecnico",
@@ -2253,7 +2253,7 @@
   },
   {
     "id": "st-livre-analista-01",
-    "nick": "gustu",
+    "nick": "makhal25",
     "country": "PT",
     "age": 34,
     "role": "analista",
@@ -2269,7 +2269,7 @@
   },
   {
     "id": "st-livre-analista-02",
-    "nick": "broka",
+    "nick": "gustu25",
     "country": "RU",
     "age": 37,
     "role": "analista",
@@ -2285,7 +2285,7 @@
   },
   {
     "id": "st-livre-analista-03",
-    "nick": "halmak",
+    "nick": "linsel25",
     "country": "KZ",
     "age": 40,
     "role": "analista",
@@ -2301,7 +2301,7 @@
   },
   {
     "id": "st-livre-analista-04",
-    "nick": "linsel",
+    "nick": "linsel26",
     "country": "BR",
     "age": 35,
     "role": "analista",
@@ -2317,7 +2317,7 @@
   },
   {
     "id": "st-livre-analista-05",
-    "nick": "sellin",
+    "nick": "broka25",
     "country": "FI",
     "age": 34,
     "role": "analista",
@@ -2333,7 +2333,7 @@
   },
   {
     "id": "st-livre-analista-06",
-    "nick": "makhal",
+    "nick": "petfen25",
     "country": "SE",
     "age": 41,
     "role": "analista",
@@ -2349,7 +2349,7 @@
   },
   {
     "id": "st-livre-analista-07",
-    "nick": "vanro",
+    "nick": "broka27",
     "country": "CZ",
     "age": 36,
     "role": "analista",
@@ -2365,7 +2365,7 @@
   },
   {
     "id": "st-livre-analista-08",
-    "nick": "rikve",
+    "nick": "jordor28",
     "country": "ES",
     "age": 43,
     "role": "analista",
@@ -2381,7 +2381,7 @@
   },
   {
     "id": "st-livre-analista-09",
-    "nick": "verik",
+    "nick": "rikve23",
     "country": "PL",
     "age": 42,
     "role": "analista",
@@ -2397,7 +2397,7 @@
   },
   {
     "id": "st-livre-analista-10",
-    "nick": "halmak",
+    "nick": "vanro26",
     "country": "KZ",
     "age": 32,
     "role": "analista",
@@ -2413,7 +2413,7 @@
   },
   {
     "id": "st-livre-analista-11",
-    "nick": "broka",
+    "nick": "broka26",
     "country": "RU",
     "age": 33,
     "role": "analista",
@@ -2429,7 +2429,7 @@
   },
   {
     "id": "st-livre-analista-12",
-    "nick": "gustu",
+    "nick": "sellin26",
     "country": "PT",
     "age": 30,
     "role": "analista",
@@ -2445,7 +2445,7 @@
   },
   {
     "id": "st-livre-psicologo-01",
-    "nick": "gustu",
+    "nick": "linsel27",
     "country": "PT",
     "age": 38,
     "role": "psicologo",
@@ -2461,7 +2461,7 @@
   },
   {
     "id": "st-livre-psicologo-02",
-    "nick": "broka",
+    "nick": "halmak27",
     "country": "RU",
     "age": 29,
     "role": "psicologo",
@@ -2477,7 +2477,7 @@
   },
   {
     "id": "st-livre-psicologo-03",
-    "nick": "halmak",
+    "nick": "makhal27",
     "country": "KZ",
     "age": 28,
     "role": "psicologo",
@@ -2493,7 +2493,7 @@
   },
   {
     "id": "st-livre-psicologo-04",
-    "nick": "linsel",
+    "nick": "sellin27",
     "country": "BR",
     "age": 43,
     "role": "psicologo",
@@ -2509,7 +2509,7 @@
   },
   {
     "id": "st-livre-psicologo-05",
-    "nick": "sellin",
+    "nick": "gustu26",
     "country": "FI",
     "age": 46,
     "role": "psicologo",
@@ -2525,7 +2525,7 @@
   },
   {
     "id": "st-livre-psicologo-06",
-    "nick": "makhal",
+    "nick": "jordor26",
     "country": "SE",
     "age": 41,
     "role": "psicologo",
@@ -2541,7 +2541,7 @@
   },
   {
     "id": "st-livre-psicologo-07",
-    "nick": "vanro",
+    "nick": "petfen28",
     "country": "CZ",
     "age": 40,
     "role": "psicologo",
@@ -2557,7 +2557,7 @@
   },
   {
     "id": "st-livre-psicologo-08",
-    "nick": "rikve",
+    "nick": "kabro29",
     "country": "ES",
     "age": 43,
     "role": "psicologo",
@@ -2573,7 +2573,7 @@
   },
   {
     "id": "st-livre-psicologo-09",
-    "nick": "verik",
+    "nick": "kabro24",
     "country": "PL",
     "age": 34,
     "role": "psicologo",
@@ -2589,7 +2589,7 @@
   },
   {
     "id": "st-livre-psicologo-10",
-    "nick": "halmak",
+    "nick": "verik28",
     "country": "KZ",
     "age": 36,
     "role": "psicologo",
@@ -2605,7 +2605,7 @@
   },
   {
     "id": "st-livre-psicologo-11",
-    "nick": "broka",
+    "nick": "fenpet28",
     "country": "RU",
     "age": 33,
     "role": "psicologo",
@@ -2621,7 +2621,7 @@
   },
   {
     "id": "st-livre-psicologo-12",
-    "nick": "gustu",
+    "nick": "dorjor28",
     "country": "PT",
     "age": 30,
     "role": "psicologo",

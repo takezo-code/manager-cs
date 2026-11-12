@@ -241,7 +241,18 @@ const REAL_COACHES = {
 const STAFF_ATTRS = { tecnico: ['TAT', 'VET', 'GES'], analista: ['LEI', 'PRE'], psicologo: ['PRS', 'MOT'] };
 const SYL = ['ka', 'ro', 've', 'lin', 'dor', 'mak', 'sel', 'tu', 'van', 'bro', 'gus', 'fen', 'hal', 'jor', 'pet', 'rik'];
 const COUNTRIES = ['BR', 'DK', 'SE', 'FR', 'DE', 'PL', 'RU', 'UA', 'US', 'FI', 'TR', 'CZ', 'ES', 'PT', 'GB', 'KZ'];
-const staffNick = (key) => SYL[hash(key + 'a') % SYL.length] + SYL[hash(key + 'b') % SYL.length];
+// Apelidos fictícios únicos (não repetem entre si nem com os técnicos reais).
+const usedNicks = new Set(Object.values(REAL_COACHES).map(([n]) => n.toLowerCase()));
+function staffNick(key) {
+  for (let i = 0; ; i++) {
+    const k = key + (i ? i : '');
+    const nick = SYL[hash(k + 'a') % SYL.length] + SYL[hash(k + 'b') % SYL.length] + (i > 20 ? i : '');
+    if (!usedNicks.has(nick)) {
+      usedNicks.add(nick);
+      return nick;
+    }
+  }
+}
 const sClamp = (v) => Math.max(40, Math.min(95, Math.round(v)));
 const staffSalary = (ovr) => Math.round((1000 + (ovr - 40) ** 2 * 6) / 100) * 100;
 function makeStaff(id, role, nick, country, age, level, teamId) {

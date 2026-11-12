@@ -1,5 +1,5 @@
 // Formato do save: o que vai para o IndexedDB e para o arquivo JSON de backup.
-import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_TEAMS } from '../data';
+import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_STAFF, INITIAL_TEAMS } from '../data';
 import { addToAcademy, generateYouth } from '../engine/academy';
 import { generateAmateurs } from '../engine/amateurs';
 import { newBaseSeason } from '../engine/baseLeague';
@@ -15,8 +15,8 @@ import type { Tournament } from '../engine/tournament/types';
 import type { MatchResult, Player, Team } from '../engine/types';
 import type { World, WorldEvent } from '../engine/world';
 
-/** v1: passo 6. v2: mercado. v3: finanças e satisfação. v4: calendário, ranking, prêmios e treino. v5: academy, olheiro, GC/FACEIT e idade. */
-export const SAVE_VERSION = 5;
+/** v1: passo 6. v2: mercado. v3: finanças e satisfação. v4: calendário, ranking, prêmios e treino. v5: academy, olheiro, GC/FACEIT e idade. v6: comissão técnica. */
+export const SAVE_VERSION = 6;
 export const SLOTS = [1, 2, 3] as const;
 export type Slot = (typeof SLOTS)[number];
 
@@ -74,7 +74,20 @@ export function migrateState(raw: Record<string, unknown>, version: number): Sav
   if (version < 3) s = migrateV2(s);
   if (version < 4) s = migrateV3(s as SavedState & { tournament?: unknown });
   if (version < 5) s = migrateV4(s);
+  if (version < 6) s = migrateV5(s);
   return s;
+}
+
+/** v5 → v6: comissão técnica inicial (técnicos reais e profissionais fictícios), como num jogo novo. */
+function migrateV5(s: SavedState): SavedState {
+  const initTeams = Object.fromEntries(INITIAL_TEAMS.map((t) => [t.id, t]));
+  const staff = Object.fromEntries(INITIAL_STAFF.map((x) => [x.id, structuredClone(x)]));
+  const teams: Record<string, Team> = {};
+  for (const [id, t] of Object.entries(s.teams))
+    teams[id] = { ...t, staff: t.staff ?? { ...(initTeams[id]?.staff ?? { tecnico: null, analista: null, psicologo: null }) } };
+  // Contratos com datas no futuro do save.
+  for (const x of Object.values(staff)) if (x.contract && x.contract.endDate <= s.date) x.contract = { ...x.contract, endDate: addDays(s.date, 365) };
+  return { ...s, teams, staff: s.staff ?? staff };
 }
 
 /** v4 → v5: elenco principal/academy, crescimento por idade, olheiro nível 1, academies e amadores gerados. */

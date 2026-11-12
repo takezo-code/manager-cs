@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import { CALENDAR } from '../engine/config';
+import { CALENDAR, MAP_NAMES } from '../engine/config';
+import { nextOpponent, rivalPreview } from '../engine/staff/preview';
+import { staffAttr } from '../engine/staff/model';
 import type { CalendarEvent } from '../engine/calendar';
 import { formatDate } from '../engine/date';
-import { useGame } from '../store/game';
+import { useGame, useWorld } from '../store/game';
+import { TeamBadge } from './TeamBadge';
 import { money } from './format';
 import { EventPanel } from './TournamentView';
 
@@ -43,7 +46,49 @@ const toneClass: Record<Mine['tone'], string> = {
   muted: 'bg-white/5 text-muted',
 };
 
+/** Prévia do analista para a próxima série do seu time. */
+function RivalPreviewCard({ rivalId }: { rivalId: string }) {
+  const world = useWorld();
+  const me = useGame((s) => s.myTeamId)!;
+  const rival = world.teams[rivalId];
+  const p = rivalPreview(world, rivalId);
+  const lei = staffAttr(world, me, 'LEI');
+  const analyst = world.teams[me].staff.analista ? world.staff[world.teams[me].staff.analista!] : null;
+  const Maps = ({ maps, tone }: { maps: string[]; tone: string }) => (
+    <span className="flex flex-wrap gap-1">
+      {maps.map((m) => (
+        <span key={m} className={`rounded px-2 py-0.5 text-sm font-semibold ${tone}`}>
+          {MAP_NAMES[m as keyof typeof MAP_NAMES] ?? m}
+        </span>
+      ))}
+    </span>
+  );
+  return (
+    <section className="flex flex-wrap items-center gap-4 rounded-2xl border border-accent/40 bg-panel px-4 py-3">
+      <TeamBadge team={rival} size={36} />
+      <div className="min-w-[10rem]">
+        <p className="font-semibold">Próximo jogo: {rival.name}</p>
+        <p className="text-xs text-muted">
+          {analyst ? `Leitura de ${analyst.nick} (${lei})` : 'Sem analista'}
+          {lei < 85 ? ': pode ter erro.' : ': leitura confiável.'}
+        </p>
+      </div>
+      <div className="flex flex-wrap gap-4 text-xs text-muted">
+        <div>
+          <p className="mb-1">Mapas fortes</p>
+          <Maps maps={p.strong} tone="bg-loss/15 text-loss" />
+        </div>
+        <div>
+          <p className="mb-1">Mapas fracos</p>
+          <Maps maps={p.weak} tone="bg-win/15 text-win" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function CalendarPanel() {
+  const world = useWorld();
   const calendar = useGame((s) => s.calendar);
   const teams = useGame((s) => s.teams);
   const date = useGame((s) => s.date);
@@ -57,12 +102,14 @@ export function CalendarPanel() {
   if (opened) return <EventPanel ev={opened} onBack={() => setOpenId(null)} />;
 
   const years = [...new Set(calendar.map((e) => Number(e.startDate.slice(0, 4))))].sort();
+  const rival = nextOpponent(world);
   const events = calendar.filter((e) => e.startDate.startsWith(String(year)));
   const months = MONTHS.map((name, i) => ({ name, i, list: events.filter((e) => Number(e.startDate.slice(5, 7)) === i + 1) }));
   const thisMonth = date.startsWith(String(year)) ? Number(date.slice(5, 7)) - 1 : -1;
 
   return (
     <div className="space-y-4">
+      {rival && <RivalPreviewCard rivalId={rival} />}
       <div className="flex flex-wrap items-center gap-2">
         {years.map((y) => (
           <button

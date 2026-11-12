@@ -17,11 +17,13 @@ import { RankingPanel } from './RankingPanel';
 import { TimeBar } from './TimeBar';
 import { TrainingSection } from './TrainingSection';
 import { AcademyPanel } from './AcademyPanel';
+import { StaffPanel } from './StaffPanel';
 
-type Tab = 'elenco' | 'academy' | 'calendario' | 'ranking' | 'mercado' | 'financas' | 'mensagens' | 'amistoso';
+type Tab = 'elenco' | 'comissao' | 'academy' | 'calendario' | 'ranking' | 'mercado' | 'financas' | 'mensagens' | 'amistoso';
 
 const TAB_LABEL: Record<Tab, string> = {
   elenco: 'Elenco',
+  comissao: 'Comissão',
   academy: 'Academy',
   calendario: 'Calendário',
   ranking: 'Ranking',
@@ -183,6 +185,10 @@ function Dashboard() {
       ) : tab === 'calendario' ? (
         <div className="mt-4">
           <CalendarPanel />
+        </div>
+      ) : tab === 'comissao' ? (
+        <div className="mt-4">
+          <StaffPanel />
         </div>
       ) : tab === 'academy' ? (
         <div className="mt-4">

@@ -1,0 +1,62 @@
+import { describe, expect, it } from 'vitest';
+import { MAP_IDS } from '../types';
+import { addDays } from '../date';
+import { createWorld, dailyTick } from '../season';
+import type { World } from '../world';
+import { rivalPreview } from './preview';
+
+const withLei = (w: World, lei: number): World => {
+  const id = w.teams.furia.staff.analista!;
+  return { ...w, staff: { ...w.staff, [id]: { ...w.staff[id], attrs: { ...w.staff[id].attrs, LEI: lei } } } };
+};
+
+describe('Prévia do analista', () => {
+  const w = createWorld('furia');
+
+  it('Leitura 85+: os 2 mapas mais fortes e os 2 mais fracos, exatos', () => {
+    const rival = w.teams.vitality;
+    const sorted = [...MAP_IDS].sort((a, b) => rival.mapStrength[b] - rival.mapStrength[a]);
+    const p = rivalPreview(withLei(w, 90), 'vitality');
+    expect(p.strong).toEqual(sorted.slice(0, 2));
+    expect(p.weak).toEqual(sorted.slice(-2).reverse());
+  });
+
+  it('Leitura 40: erra em parte dos rivais', () => {
+    const low = withLei(w, 40);
+    const wrong = Object.keys(w.teams).filter((id) => {
+      if (id === 'furia') return false;
+      const t = w.teams[id];
+      const sorted = [...MAP_IDS].sort((a, b) => t.mapStrength[b] - t.mapStrength[a]);
+      const p = rivalPreview(low, id);
+      return p.strong.join() !== sorted.slice(0, 2).join() || p.weak.join() !== sorted.slice(-2).reverse().join();
+    });
+    expect(wrong.length).toBeGreaterThan(0);
+  });
+
+  it('é estável para o mesmo rival e data', () => {
+    const low = withLei(w, 40);
+    expect(rivalPreview(low, 'mouz')).toEqual(rivalPreview(low, 'mouz'));
+  });
+});
+
+describe('Comissão na temporada', () => {
+  it('dailyTick: curso termina, renovação avisa e a IA preenche vagas', () => {
+    let w: World = { ...createWorld('furia'), date: '2027-03-09', calendar: [] };
+    const ana = w.teams.furia.staff.analista!;
+    const tec = w.teams.mouz.staff.tecnico!;
+    const lei = w.staff[ana].attrs.LEI!;
+    w = {
+      ...w,
+      teams: { ...w.teams, mouz: { ...w.teams.mouz, staff: { ...w.teams.mouz.staff, tecnico: null } } },
+      staff: {
+        ...w.staff,
+        [tec]: { ...w.staff[tec], teamId: null, contract: null },
+        [ana]: { ...w.staff[ana], course: { attr: 'LEI', until: '2027-03-10' }, contract: { ...w.staff[ana].contract!, endDate: addDays('2027-03-10', 60) } },
+      },
+    };
+    const out = dailyTick(w).world;
+    expect(out.staff[ana].attrs.LEI).toBe(Math.min(95, lei + 2));
+    expect(out.inbox.some((i) => i.kind === 'staff_renovacao' && i.staffId === ana)).toBe(true);
+    expect(out.teams.mouz.staff.tecnico).not.toBeNull();
+  });
+});

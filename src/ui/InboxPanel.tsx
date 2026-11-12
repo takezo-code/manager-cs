@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { formatDate } from '../engine/date';
 import { BAND_LABEL, bandOf, fairSalary } from '../engine/morale/satisfaction';
 import type { InboxItem } from '../engine/world';
+import { ROLE_LABEL } from '../engine/staff/market';
 import { useGame, useWorld } from '../store/game';
 import { money } from './format';
 
@@ -29,6 +30,53 @@ function InviteItem({ item }: { item: InboxItem }) {
         </button>
         <button type="button" onClick={() => decline(ev.id)} className={`${btn} border border-line text-muted hover:text-ink`}>
           Recusar
+        </button>
+      </div>
+    </li>
+  );
+}
+
+function StaffItem({ item }: { item: InboxItem }) {
+  const w = useWorld();
+  const respond = useGame((s) => s.respondStaffItem);
+  const s = w.staff[item.staffId!];
+  if (!s) return null;
+  const role = ROLE_LABEL[s.role];
+  const salary = s.contract?.salary ?? 0;
+  const content =
+    item.kind === 'staff_renovacao'
+      ? {
+          title: `${s.nick} (${role}) quer renovar`,
+          text: `O contrato acaba em ${formatDate(s.contract?.endDate ?? item.date)}. Pede ${money(item.askedSalary ?? salary)}/mês por mais 2 anos. Recusar ou não responder: ele sai no fim do contrato.`,
+          yes: 'Renovar',
+          no: 'Deixar sair',
+        }
+      : item.kind === 'staff_aumento'
+        ? {
+            title: `${s.nick} (${role}) pede aumento`,
+            text: `Depois do título, pede ${money(item.askedSalary ?? salary)}/mês (hoje ganha ${money(salary)}). Recusar pode fazer ele não renovar no fim do contrato.`,
+            yes: 'Aceitar',
+            no: 'Recusar',
+          }
+        : {
+            title: `${w.teams[item.offerTeamId!]?.shortName ?? 'Um time'} quer ${s.nick} (${role})`,
+            text: `Pagam a multa de ${money(s.contract?.releaseClause ?? 0)}. Aceitando, ele sai na hora e o cargo fica vago.`,
+            yes: 'Aceitar e liberar',
+            no: 'Recusar',
+          };
+  return (
+    <li className="rounded-xl border border-line bg-panel p-4">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <p className="font-semibold">{content.title}</p>
+        <span className="text-xs text-muted">Responder até {formatDate(item.expires)}</span>
+      </div>
+      <p className="mt-1 text-sm text-muted">{content.text}</p>
+      <div className="mt-3 flex gap-2">
+        <button type="button" onClick={() => respond(item.id, true)} className={`${btn} bg-accent text-black`}>
+          {content.yes}
+        </button>
+        <button type="button" onClick={() => respond(item.id, false)} className={`${btn} border border-line text-muted hover:text-ink`}>
+          {content.no}
         </button>
       </div>
     </li>
@@ -136,10 +184,12 @@ export function InboxPanel() {
       <section>
         <h3 className="font-display mb-2 text-xl font-bold">Conversas pendentes</h3>
         {w.inbox.length === 0 ? (
-          <p className="text-sm text-muted">Nenhum jogador pediu conversa. Pedidos aparecem no começo de cada mês.</p>
+          <p className="text-sm text-muted">Nada pendente. Pedidos de jogadores e da comissão aparecem aqui.</p>
         ) : (
           <ul className="space-y-2">
-            {w.inbox.map((i) => (i.kind === 'convite' ? <InviteItem key={i.id} item={i} /> : <Item key={i.id} item={i} />))}
+            {w.inbox.map((i) =>
+              i.kind === 'convite' ? <InviteItem key={i.id} item={i} /> : i.staffId ? <StaffItem key={i.id} item={i} /> : <Item key={i.id} item={i} />,
+            )}
           </ul>
         )}
       </section>

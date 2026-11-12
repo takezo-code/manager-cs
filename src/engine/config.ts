@@ -694,4 +694,6 @@ export const STAFF = {
   /** Propostas da IA pelo seu staff (dia 1º). */
   offerMinOvr: 75,
   offerChance: 0.1,
+  /** Prévia do analista exata a partir desta Leitura. */
+  previewExactFrom: 85,
 };

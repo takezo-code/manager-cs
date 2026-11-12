@@ -9,6 +9,9 @@ import { failedNegotiationEffects, finalizeNegotiation, type Negotiation } from 
 import type { Relations } from '../engine/market/relations';
 import { simulateMatch } from '../engine/match';
 import { staffAttrsOf } from '../engine/staff/effects';
+import { startCourse } from '../engine/staff/career';
+import { hireStaff, releaseStaff, respondStaffInbox } from '../engine/staff/market';
+import type { StaffAttr } from '../engine/types';
 import { denyExit, giveRaise, proposeCut, respondInbox, type InboxResponse } from '../engine/morale/conversations';
 import { applyJealousy, applySatisfaction } from '../engine/morale/satisfaction';
 import { MORALE } from '../engine/config';
@@ -104,6 +107,10 @@ export interface GameState {
   promoteYouth(playerId: string): void;
   signAmateur(playerId: string): void;
   upgradeScout(): void;
+  hireStaff(staffId: string): void;
+  releaseStaff(staffId: string): void;
+  startStaffCourse(staffId: string, attr: StaffAttr): void;
+  respondStaffItem(itemId: string, accept: boolean): void;
 }
 
 type WorldFields =
@@ -416,6 +423,30 @@ export const useGame = create<GameState>((set, get) => {
       if (!r.ok) return set({ message: { kind: 'erro', text: r.error } });
       const me = get().myTeamId!;
       commitWorld(r.world, [], { message: { kind: 'ok', text: `Olheiro agora é nível ${r.world.teams[me].scoutLevel}.` } });
+    },
+
+    hireStaff: (staffId) => {
+      const r = hireStaff(worldOf(get()), staffId);
+      if (!r.ok) return set({ message: { kind: 'erro', text: r.error } });
+      commitWorld(r.world, [], { message: { kind: 'ok', text: `${r.world.staff[staffId].nick} foi contratado.` } });
+    },
+
+    releaseStaff: (staffId) => {
+      const r = releaseStaff(worldOf(get()), staffId);
+      if (!r.ok) return set({ message: { kind: 'erro', text: r.error } });
+      commitWorld(r.world, [], { message: { kind: 'ok', text: `${r.world.staff[staffId].nick} foi dispensado.` } });
+    },
+
+    startStaffCourse: (staffId, attr) => {
+      const r = startCourse(worldOf(get()), staffId, attr);
+      if (!r.ok) return set({ message: { kind: 'erro', text: r.error } });
+      commitWorld(r.world, [], { message: { kind: 'ok', text: `${r.world.staff[staffId].nick} começou um curso.` } });
+    },
+
+    respondStaffItem: (itemId, accept) => {
+      const r = respondStaffInbox(worldOf(get()), itemId, accept);
+      if (!r.ok) return set({ message: { kind: 'erro', text: r.error } });
+      commitWorld(r.world, [], { message: { kind: 'ok', text: accept ? 'Resposta enviada: aceito.' : 'Resposta enviada: recusado.' } });
     },
   };
 });

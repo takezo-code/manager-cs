@@ -141,3 +141,20 @@ describe('Migração v4 → v5', () => {
     expect(s.baseLeague).toEqual({ season: 2026, table: {}, lastRound: [] });
   });
 });
+
+describe('Migração v5 → v6', () => {
+  it('cria a comissão técnica de todos os times', async () => {
+    const { migrateState } = await import('./saveFormat');
+    const s0 = sampleState();
+    const v5 = {
+      ...Object.fromEntries(Object.entries(s0).filter(([k]) => k !== 'staff')),
+      amateurs: [],
+      baseLeague: { season: 2026, table: {}, lastRound: [] },
+      teams: Object.fromEntries(Object.entries(s0.teams).map(([id, t]) => [id, Object.fromEntries(Object.entries(t).filter(([k]) => k !== 'staff'))])),
+    };
+    const s = migrateState(v5 as unknown as Record<string, unknown>, 5);
+    expect(s.teams.furia.staff.tecnico).toBeTruthy();
+    expect(s.staff[s.teams.furia.staff.tecnico!].nick).toBe('sidde');
+    expect(Object.keys(s.staff).length).toBeGreaterThan(96);
+  });
+});
