@@ -33,6 +33,16 @@ const SEQUENCE: Record<MatchFormat, Array<{ team: 0 | 1; action: 'ban' | 'pick' 
   ],
 };
 
+/** Ordem do veto do formato (índice 0 = time de melhor seed). O decider vem depois. */
+export const vetoSequence = (format: MatchFormat) => SEQUENCE[format];
+
+/** Escolha da IA num passo do veto, sem ruído: bane o mapa de pior vantagem e escolhe o de melhor. */
+export function aiVetoChoice(me: Team, opp: Team, action: 'ban' | 'pick', remaining: MapId[]): MapId {
+  const edge = (m: MapId) => me.mapStrength[m] - opp.mapStrength[m];
+  const sorted = [...remaining].sort((a, b) => (action === 'pick' ? edge(b) - edge(a) : edge(a) - edge(b)));
+  return sorted[0];
+}
+
 /**
  * Time A (índice 0) é o de melhor seed e começa o veto. Com staff, o técnico (Veto) define o ruído e o
  * analista (Leitura) a precisão com que cada lado lê a força do rival; sem staff, ruído de ±3.

@@ -7,7 +7,7 @@ import { simulateMatch } from '../match';
 import { calcRating } from '../rating';
 import { hashString } from '../rng';
 import { validStarters } from '../squad';
-import type { MatchResult, Player, Team } from '../types';
+import type { MatchResult, Player, Team, VetoStep } from '../types';
 import { bracketChampion, bracketDone, nextBracketMatches } from './bracket';
 import { DE_SLOTS, groupDone, groupSeries, nextGroupMatches } from './doubleElim';
 import { FORMATS } from './formats';
@@ -74,6 +74,13 @@ export function allSeries(t: Tournament): Series[] {
   );
 }
 
+/** Torneio recém-criado: sorteia os jogos do primeiro dia (para o dia de jogo do manager). */
+export function prepareFirstDay(t: Tournament): Tournament {
+  const s = t.stages[t.stageIdx];
+  if (!pendingSeries(s).length) generateMatches(t, s);
+  return t;
+}
+
 function generateMatches(t: Tournament, s: Stage): Series[] {
   const prefix = `${t.stageIdx}`;
   if (s.kind === 'swiss') return nextSwissRound(s, (i) => `${prefix}-r${s.rounds.length + 1}-${i}`);
@@ -119,6 +126,8 @@ export function playDay(
   /** Comissão técnica de cada time (sem ela, partidas sem efeito de staff). */
   staffOf?: (teamId: string) => StaffAttrs,
   fanOf?: (teamId: string, stage: MatchStage) => FanContext,
+  /** Veto feito pelo manager para uma série (id da série no torneio). */
+  vetoOf?: (seriesId: string) => VetoStep[] | undefined,
 ): DayOutcome {
   if (tournament.championId) return { tournament, players, results: {} };
   const t: Tournament = structuredClone(tournament);
@@ -153,6 +162,7 @@ export function playDay(
       staffB: staffOf?.(m.teamBId),
       fanA: fanOf?.(m.teamAId, m.stage),
       fanB: fanOf?.(m.teamBId, m.stage),
+      veto: vetoOf?.(m.id),
     });
     results[m.id] = r;
     m.day = t.day;

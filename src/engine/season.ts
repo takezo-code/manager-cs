@@ -32,7 +32,7 @@ import { createRng, hashString, type Rng } from './rng';
 import { issueInvites, playEvents, runQualifiers, startEvents } from './schedule';
 import { expireMvp } from './tournament/awards';
 import { trainTeams } from './training';
-import type { MatchResult } from './types';
+import type { MatchResult, VetoStep } from './types';
 import type { World, WorldEvent } from './world';
 
 /** Mundo de um jogo novo: dados dos JSONs + patrocínios iniciais. */
@@ -96,7 +96,7 @@ const isMonday = (date: string) => new Date(`${date}T00:00:00Z`).getUTCDay() ===
  * Avança um dia: calendário (convites, qualificatórias, eventos), treino/descanso de quem está livre,
  * fechamento do mês, ranking às segundas e mercado da IA (que respeita as janelas).
  */
-export function dailyTick(world: World, opts: { rng?: Rng } = {}): { world: World; events: WorldEvent[]; results: Record<string, MatchResult> } {
+export function dailyTick(world: World, opts: { rng?: Rng; veto?: Record<string, VetoStep[]> } = {}): { world: World; events: WorldEvent[]; results: Record<string, MatchResult> } {
   let w: World = { ...world, date: addDays(world.date, 1) };
   const rng = opts.rng ?? createRng(hashString(`${w.date}:${w.managerTeamId}`));
   const events: WorldEvent[] = [];
@@ -115,7 +115,7 @@ export function dailyTick(world: World, opts: { rng?: Rng } = {}): { world: Worl
   add(expireInbox(w));
   add(runQualifiers(w));
   add(startEvents(w));
-  const played = playEvents(w);
+  const played = playEvents(w, undefined, { veto: opts.veto });
   add(played);
 
   // Dias livres: treino/descanso para quem não está em evento; agentes livres descansam.

@@ -16,9 +16,9 @@ import { academyLineupIds, academyTeam, academyTeamId, orgOfAcademy } from './ti
 import { createRng, hashString, type Rng } from './rng';
 import { validStarters } from './squad';
 import { pickAwards } from './tournament/awards';
-import { createTournament, playDay } from './tournament/run';
+import { createTournament, pendingSeries, playDay, prepareFirstDay } from './tournament/run';
 import { playerOvr } from './player';
-import type { MatchResult, Team } from './types';
+import type { MatchFormat, MatchResult, MatchStage, Team, VetoStep } from './types';
 import type { World, WorldEvent } from './world';
 
 type Out = { world: World; events: WorldEvent[] };
@@ -255,7 +255,8 @@ export function startEvents(world: World): Out {
   let w = world;
   const events: WorldEvent[] = [];
   for (const ev of w.calendar) {
-    if (ev.status !== 'convites' || ev.startDate > w.date) continue;
+    // Abre na véspera, com os jogos do primeiro dia sorteados (o manager vê o rival e faz o veto).
+    if (ev.status !== 'convites' || ev.startDate > addDays(w.date, 1)) continue;
     const ids = new Set([...ev.accepted, ...ev.qualified]);
     // Completa se faltar alguém: primeiro quem está livre e com 5 jogadores (inclusive quem recusou por
     // elenco incompleto e já se recompôs); o seu time só entra se não tiver recusado.
@@ -275,7 +276,7 @@ export function startEvents(world: World): Out {
       if (ids.has(me)) events.push({ kind: 'alerta', text: `${ev.name} foi cancelado: não fechou ${ev.teams} times.` });
       continue;
     }
-    const tournament = createTournament({ id: ev.id, name: ev.name, format: ev.format, options: ev.options, prizePool: ev.prizePool }, participants, hashString(ev.id));
+    const tournament = prepareFirstDay(createTournament({ id: ev.id, name: ev.name, format: ev.format, options: ev.options, prizePool: ev.prizePool }, participants, hashString(ev.id)));
     // Quem entra chega descansado (+30 de energia), e o convite sai da caixa de entrada.
     const players = { ...w.players };
     for (const id of participants) for (const pid of rosterOf(w, id)) players[pid] = recoverBetweenEvents(players[pid]);
@@ -285,18 +286,33 @@ export function startEvents(world: World): Out {
   return { world: w, events };
 }
 
+/** Série do seu time que será jogada no próximo dia (o "dia de jogo"), se houver. */
+export function myMatchToday(w: World): { eventId: string; eventName: string; seriesId: string; teamAId: string; teamBId: string; format: MatchFormat; stage: MatchStage } | null {
+  const me = w.managerTeamId;
+  if (!me) return null;
+  const tomorrow = addDays(w.date, 1);
+  for (const ev of w.calendar) {
+    const t = ev.tournament;
+    if (ev.status !== 'em_andamento' || !t || t.championId || ev.startDate > tomorrow) continue;
+    const s = pendingSeries(t.stages[t.stageIdx]).find((x) => x.teamAId === me || x.teamBId === me);
+    if (s) return { eventId: ev.id, eventName: ev.name, seriesId: `${ev.id}:${s.id}`, teamAId: s.teamAId, teamBId: s.teamBId, format: s.format, stage: s.stage };
+  }
+  return null;
+}
+
 /** Joga um dia de cada evento em andamento e encerra os que terminarem. */
-export function playEvents(world: World, _rng?: Rng): Out & { results: Record<string, MatchResult> } {
+export function playEvents(world: World, _rng?: Rng, opts: { veto?: Record<string, VetoStep[]> } = {}): Out & { results: Record<string, MatchResult> } {
   let w = world;
   const events: WorldEvent[] = [];
   const results: Record<string, MatchResult> = {};
   const standins = new Set<string>();
   for (const ev of w.calendar) {
-    if (ev.status !== 'em_andamento' || !ev.tournament) continue;
+    // Aberto na véspera: só joga a partir da data de início.
+    if (ev.status !== 'em_andamento' || !ev.tournament || ev.startDate > w.date) continue;
     const teams = withStandins(w, ev.tournament.participants.filter((id) => w.teams[id]), standins);
     for (const id of ev.tournament.participants) if (isAcademy(w, id)) teams[id] = academyTeam(w, orgOfAcademy(id)!);
     const own = (id: string) => ownerOf(w, id);
-    const out = playDay(ev.tournament, teams, w.players, (id) => staffAttrsOf(w, own(id)), (id, stage) => ({ crowd: crowdBonus(w, own(id), stage), lowMood: lowMood(w, own(id)) }));
+    const out = playDay(ev.tournament, teams, w.players, (id) => staffAttrsOf(w, own(id)), (id, stage) => ({ crowd: crowdBonus(w, own(id), stage), lowMood: lowMood(w, own(id)) }), (sid) => opts.veto?.[`${ev.id}:${sid}`]);
     w = { ...w, players: out.players };
     // Tier 2/3: jovens (até 21) crescem a cada mapa jogado, como na liga de base.
     if (tierOf(ev) > 1) {

@@ -20,6 +20,7 @@ import type {
   Side,
   SkillId,
   Team,
+  VetoStep,
 } from './types';
 
 export interface MatchInput {
@@ -37,6 +38,8 @@ export interface MatchInput {
   /** Torcida: bônus em jogos com público e pressão de playoff nos grupos quando está na bronca. */
   fanA?: FanContext;
   fanB?: FanContext;
+  /** Veto já feito (dia de jogo do manager); sem ele, o veto é simulado. */
+  veto?: VetoStep[];
 }
 
 export interface FanContext {
@@ -531,7 +534,7 @@ export function simulateMatch(input: MatchInput): MatchResult {
   const rng = createRng(input.seed);
   const { teamA, teamB } = input;
   const staff = input.staffA || input.staffB ? ([input.staffA ?? NO_STAFF, input.staffB ?? NO_STAFF] as [StaffAttrs, StaffAttrs]) : undefined;
-  const veto = runVeto([teamA, teamB], input.format, rng, staff);
+  const veto = input.veto ?? runVeto([teamA, teamB], input.format, rng, staff);
   const toPlay = mapsToPlay(veto);
   const need = MAPS_TO_WIN[input.format];
   const mapScore = { [teamA.id]: 0, [teamB.id]: 0 };
