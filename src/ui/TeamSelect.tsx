@@ -16,6 +16,7 @@ export function TeamSelect() {
   const [name, setName] = useState(DEFAULT_PROFILE.name);
   const [age, setAge] = useState(DEFAULT_PROFILE.age);
   const [country, setCountry] = useState(DEFAULT_PROFILE.country);
+  const [academy, setAcademy] = useState(false);
   const profile = { name: name.trim() || DEFAULT_PROFILE.name, age: Math.min(60, Math.max(25, age || DEFAULT_PROFILE.age)), country };
   const teams = useGame((s) => s.teams);
   const players = useGame((s) => s.players);
@@ -53,6 +54,15 @@ export function TeamSelect() {
             ))}
           </select>
         </label>
+        <label className="flex items-center gap-2 text-sm">
+          <input type="checkbox" checked={academy} onChange={(e) => setAcademy(e.target.checked)} />
+          Começar na academy do time escolhido
+        </label>
+        {academy && (
+          <p className="w-full text-xs text-muted">
+            Você cuida só da academy (jovens, tier 2, GC/FACEIT, empréstimos) e o time principal fica com a diretoria. Bata as metas da academy para ser chamado ao time principal.
+          </p>
+        )}
       </fieldset>
 
       <ul className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -62,7 +72,7 @@ export function TeamSelect() {
             <li key={t.id}>
               <button
                 type="button"
-                onClick={() => choose(t.id, profile)}
+                onClick={() => choose(t.id, profile, academy)}
                 className="flex w-full items-center gap-4 rounded-2xl border border-line bg-panel p-4 text-left transition hover:border-accent/60 hover:bg-panel-2"
               >
                 <span className="font-display w-8 text-2xl font-bold text-muted">#{t.hltvRank}</span>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { formatDate } from '../engine/date';
 import { flushSave } from '../store/autosave';
 import { useGame, useWorld } from '../store/game';
@@ -19,6 +19,12 @@ export function UnemployedView() {
   const events = useGame((s) => s.events);
   const toMenu = useGame((s) => s.toMenu);
   const message = useGame((s) => s.message);
+  const clearMessage = useGame((s) => s.clearMessage);
+  useEffect(() => {
+    if (!message) return;
+    const t = setTimeout(clearMessage, 3000);
+    return () => clearTimeout(t);
+  }, [message, clearMessage]);
   const [tab, setTab] = useState<Tab>('propostas');
   const offers = w.inbox.filter((i) => i.kind === 'manager_proposta');
   return (

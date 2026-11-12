@@ -22,14 +22,17 @@ import { ManagerPanel } from './ManagerPanel';
 import { UnemployedView } from './UnemployedView';
 import { NewsPanel } from './NewsPanel';
 import { SocialPanel } from './SocialPanel';
+import { Tier2Panel } from './Tier2Panel';
+import { AcademyManagerView } from './AcademyManagerView';
 
-type Tab = 'elenco' | 'manager' | 'comissao' | 'academy' | 'calendario' | 'ranking' | 'mercado' | 'financas' | 'noticias' | 'social' | 'mensagens' | 'amistoso';
+type Tab = 'elenco' | 'manager' | 'comissao' | 'academy' | 'tier2' | 'calendario' | 'ranking' | 'mercado' | 'financas' | 'noticias' | 'social' | 'mensagens' | 'amistoso';
 
 const TAB_LABEL: Record<Tab, string> = {
   elenco: 'Elenco',
   manager: 'Manager',
   comissao: 'Comissão',
   academy: 'Academy',
+  tier2: 'Tier 2',
   calendario: 'Calendário',
   ranking: 'Ranking',
   mercado: 'Mercado',
@@ -209,6 +212,10 @@ function Dashboard() {
         <div className="mt-4">
           <StaffPanel />
         </div>
+      ) : tab === 'tier2' ? (
+        <div className="mt-4">
+          <Tier2Panel />
+        </div>
       ) : tab === 'academy' ? (
         <div className="mt-4">
           <AcademyPanel />
@@ -230,8 +237,10 @@ function Dashboard() {
 export function App() {
   const screen = useGame((s) => s.screen);
   const myTeamId = useGame((s) => s.myTeamId);
+  const academyOf = useGame((s) => s.manager?.academyOf);
   if (screen === 'newCareer') return <TeamSelect />;
   if (screen === 'game' && myTeamId) return <Dashboard />;
+  if (screen === 'game' && academyOf) return <AcademyManagerView />;
   if (screen === 'game') return <UnemployedView />;
   return <MainMenu />;
 }

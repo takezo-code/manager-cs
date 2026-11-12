@@ -1,6 +1,10 @@
+import { useState } from 'react';
 import { visibleAmateurs, type Amateur } from '../engine/amateurs';
 import { baseStandings } from '../engine/baseLeague';
-import { ACADEMY, MARKET, SCOUT } from '../engine/config';
+import { ACADEMY, MARKET, SCOUT, TIER2 } from '../engine/config';
+import { formatDate } from '../engine/date';
+import { managerOrg } from '../engine/manager/model';
+import { LOAN_MONTHS } from '../engine/tier2/loans';
 import { baseOvr } from '../engine/form';
 import { estimatePotential } from '../engine/scout';
 import { scoutNarrowing } from '../engine/manager/effects';
@@ -74,9 +78,50 @@ function ScoutHeader({ level, cash }: { level: number; cash: number }) {
   );
 }
 
+function LoanControls({ p }: { p: Player }) {
+  const w = useWorld();
+  const loan = useGame((s) => s.loanYouth);
+  const recall = useGame((s) => s.recallYouth);
+  const [to, setTo] = useState('');
+  const [months, setMonths] = useState<number>(6);
+  if (p.loan)
+    return (
+      <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
+        Emprestado à {w.tier2.teams[p.loan.teamId]?.name} até {formatDate(p.loan.until)}
+        <button type="button" className="rounded-lg border border-line px-2 py-1 font-semibold text-ink hover:border-accent" onClick={() => recall(p.id)}>
+          Chamar de volta · {money(TIER2.recallFee)}
+        </button>
+      </div>
+    );
+  const teams = Object.values(w.tier2.teams);
+  return (
+    <div className="flex flex-wrap items-center gap-1.5 text-xs">
+      <select className="rounded-lg border border-line bg-panel-2 px-2 py-1" value={to} onChange={(e) => setTo(e.target.value)} aria-label="Time do empréstimo">
+        <option value="">Emprestar para…</option>
+        {teams.map((t) => (
+          <option key={t.id} value={t.id}>
+            {t.name}
+          </option>
+        ))}
+      </select>
+      <select className="rounded-lg border border-line bg-panel-2 px-2 py-1" value={months} onChange={(e) => setMonths(Number(e.target.value))} aria-label="Prazo do empréstimo">
+        {LOAN_MONTHS.map((m) => (
+          <option key={m} value={m}>
+            {m} meses
+          </option>
+        ))}
+      </select>
+      <button type="button" disabled={!to} className="rounded-lg border border-line px-2 py-1 font-semibold hover:border-accent disabled:opacity-40" onClick={() => loan(p.id, to, months)}>
+        Emprestar
+      </button>
+    </div>
+  );
+}
+
 function YouthRow({ p, level, full }: { p: Player; level: number; full: boolean }) {
   const promoteYouth = useGame((s) => s.promoteYouth);
   const w = useWorld();
+  const recommend = !!w.manager.academyOf && !w.managerTeamId;
   const e = estimatePotential(p, level, scoutNarrowing(w));
   const leaving = p.age >= ACADEMY.maxAge;
   return (
@@ -97,14 +142,17 @@ function YouthRow({ p, level, full }: { p: Player; level: number; full: boolean 
           </span>
         </div>
         <Alerts alerts={e.alerts} />
+        <div className="mt-2">
+          <LoanControls p={p} />
+        </div>
       </div>
       <button
         className="rounded-lg border border-line px-3 py-1.5 text-sm font-semibold hover:border-accent disabled:opacity-40"
-        disabled={full}
-        title={full ? `Elenco principal cheio (${MARKET.squadMax})` : undefined}
+        disabled={full || !!p.loan}
+        title={p.loan ? 'Chame de volta antes de promover' : full ? `Elenco principal cheio (${MARKET.squadMax})` : recommend ? 'A diretoria aceita se ele for quase tão bom quanto o pior titular' : undefined}
         onClick={() => promoteYouth(p.id)}
       >
-        Promover
+        {recommend ? 'Recomendar' : 'Promover'}
       </button>
     </li>
   );
@@ -157,14 +205,15 @@ function AmateurRow({ a, level, canSign }: { a: Amateur; level: number; canSign:
 }
 
 export function AcademyPanel() {
-  const me = useGame((s) => s.myTeamId)!;
-  const team = useGame((s) => s.teams[me]);
-  const players = useGame((s) => s.players);
   const world = useWorld();
+  // Time do manager ou a org da academy que ele comanda.
+  const me = managerOrg(world)!;
+  const team = world.teams[me];
+  const players = world.players;
   const level = team.scoutLevel ?? 1;
   const youth = team.academyIds.map((id) => players[id]).filter(Boolean);
   const full = team.playerIds.length >= MARKET.squadMax;
-  const academyFull = youth.length >= ACADEMY.maxSize;
+  const academyFull = youth.filter((p) => !p.loan).length >= ACADEMY.maxSize;
   const amateurs = visibleAmateurs(world);
   const table = baseStandings(world);
   const myGame = world.baseLeague.lastRound.find((g) => g.a === me || g.b === me);
@@ -177,7 +226,7 @@ export function AcademyPanel() {
         <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-3">
           <h2 className="font-display text-lg font-bold">Academy</h2>
           <span className="text-xs text-muted">
-            {youth.length}/{ACADEMY.maxSize} jovens · elenco principal {team.playerIds.length}/{MARKET.squadMax}
+            {youth.filter((p) => !p.loan).length}/{ACADEMY.maxSize} jovens{youth.some((p) => p.loan) ? ` (+${youth.filter((p) => p.loan).length} emprestado)` : ''} · elenco principal {team.playerIds.length}/{MARKET.squadMax}
           </span>
         </div>
         {youth.length ? (

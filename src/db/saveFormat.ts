@@ -49,6 +49,9 @@ export interface SaveRecord {
 }
 
 export function buildMeta(state: SavedState): SaveMeta {
+  const org = state.manager?.academyOf;
+  if (!state.myTeamId && org && state.teams[org])
+    return { teamId: org, teamName: `${state.teams[org].name} Academy`, money: state.teams[org].money, date: state.date, status: 'Manager da academy' };
   if (!state.myTeamId) return { teamId: '', teamName: 'Sem time', money: 0, date: state.date, status: 'Desempregado' };
   const team = state.teams[state.myTeamId];
   const me = state.myTeamId;

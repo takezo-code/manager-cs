@@ -215,3 +215,14 @@ describe('Migração v8 → v9', () => {
     expect(s.tier2.cup).toBeNull();
   });
 });
+
+describe('Save do manager da academy', () => {
+  it('mostra a academy no menu, não "Desempregado"', () => {
+    const s0 = sampleState();
+    const s = { ...s0, myTeamId: '', managerTeamId: '', manager: { ...s0.manager, academyOf: 'furia' } };
+    const rec = makeRecord(1, s);
+    expect(rec.meta.teamName).toBe(`${s0.teams.furia.name} Academy`);
+    expect(rec.meta.teamId).toBe('furia');
+    expect(rec.meta.status).toBe('Manager da academy');
+  });
+});
