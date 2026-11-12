@@ -113,6 +113,13 @@ describe('Satisfação', () => {
     w = respondInbox(w, item.id, { kind: 'prometer' }).world;
     expect(w.players.yuurih.mood.promiseUntil).toBeTruthy();
     w = { ...w, teams: { ...w.teams, furia: { ...w.teams.furia, starters: w.teams.furia.starters.filter((id) => id !== 'yuurih') } } };
+    // Comissão neutra (Gestão 70, Motivação 40): só a promessa quebrada conta.
+    const staff = { ...w.staff };
+    for (const id of Object.values(w.teams.furia.staff)) {
+      const s = staff[id!];
+      staff[id!] = { ...s, attrs: { ...s.attrs, ...(s.role === 'tecnico' ? { GES: 70 } : s.role === 'psicologo' ? { MOT: 40 } : {}) } };
+    }
+    w = { ...w, staff };
     const before = w.players.yuurih.satisfaction;
     w = monthlySatisfaction(w);
     expect(w.players.yuurih.satisfaction).toBe(before + MORALE.monthly.brokenPromise);

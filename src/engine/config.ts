@@ -663,4 +663,9 @@ export const STAFF = {
   /** Preparação: pontos de duelo por ponto acima de 70, nos primeiros rounds. */
   prepWeight: 0.08,
   prepRounds: 3,
+  /** Gestão: satisfação mensal por ponto acima de 70 (÷10) e chance extra de aceitar redução (÷200). */
+  managementMonthly: 0.1,
+  managementCut: 0.005,
+  /** Motivação: quanto as faixas de abaixo/má fase estreitam por ponto acima de 70. */
+  motivationBand: 0.001,
 };

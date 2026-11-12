@@ -1,5 +1,5 @@
 // Fases (pelo rating recente comparado ao esperado para o OVR) e cansaço.
-import { ENERGY, FORM, MORALE } from './config';
+import { ENERGY, FORM, MORALE, STAFF } from './config';
 import { playerOvr } from './player';
 import type { Phase, Player } from './types';
 
@@ -13,7 +13,8 @@ export function recentAverage(p: Player): number | null {
   return p.recentRatings.reduce((a, b) => a + b, 0) / p.recentRatings.length;
 }
 
-export function phaseFor(p: Player): Phase {
+/** `motivation`: Motivação do psicólogo do time (estreita as faixas ruins); sem ela, faixas padrão. */
+export function phaseFor(p: Player, motivation?: number): Phase {
   const avg = recentAverage(p);
   if (avg === null) return 'normal';
   let diff = avg - expectedRating(baseOvr(p));
@@ -24,17 +25,18 @@ export function phaseFor(p: Player): Phase {
   if (diff >= t.destaque) return 'destaque';
   if (diff >= t.em_alta) return 'em_alta';
   if (diff >= t.boa_fase) return 'boa_fase';
-  if (diff > t.abaixo) return 'normal';
-  if (diff > t.ma_fase) return 'abaixo';
+  const shift = motivation === undefined ? 0 : (motivation - 70) * STAFF.motivationBand;
+  if (diff > t.abaixo - shift) return 'normal';
+  if (diff > t.ma_fase - shift) return 'abaixo';
   return 'ma_fase';
 }
 
 /** Depois de uma série: registra os ratings por mapa, gasta energia e recalcula a fase. */
-export function afterSeries(p: Player, mapRatings: number[]): Player {
+export function afterSeries(p: Player, mapRatings: number[], motivation?: number): Player {
   const recentRatings = [...p.recentRatings, ...mapRatings].slice(-FORM.windowMaps);
   const energy = Math.max(0, p.energy - mapRatings.length * ENERGY.perMap);
   const next = { ...p, recentRatings, energy };
-  const phase = phaseFor(next);
+  const phase = phaseFor(next, motivation);
   return { ...next, phase, phaseStreak: phase === p.phase ? p.phaseStreak + 1 : 1 };
 }
 

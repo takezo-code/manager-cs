@@ -189,7 +189,7 @@ export function playDay(
       const mapRatings = r.maps.map((x) => calcRating(x.stats[pid]));
       const st = t.playerStats[pid] ?? { maps: 0, ratingSum: 0, teamId: startersA.includes(pid) ? ta.id : tb.id };
       t.playerStats[pid] = { ...st, maps: st.maps + mapRatings.length, ratingSum: st.ratingSum + mapRatings.reduce((a, b) => a + b, 0) };
-      ps = { ...ps, [pid]: afterSeries(ps[pid], mapRatings) };
+      ps = { ...ps, [pid]: afterSeries(ps[pid], mapRatings, staffOf?.(startersA.includes(pid) ? ta.id : tb.id).MOT) };
     }
   }
   recordPlacements(t, stage, todays);
