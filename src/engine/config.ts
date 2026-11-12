@@ -731,4 +731,13 @@ export const MANAGER = {
   /** Lenda: salário pedido até −10%; estrela aceita time até 12 + 8 posições abaixo. */
   repSalaryMax: 0.1,
   repRankSlack: 8,
+  /** Diretoria. */
+  bigClubRank: 5,
+  midClubRank: 15,
+  /** Assumindo depois deste mês, a primeira avaliação é no fim do ano seguinte. */
+  lateStartMonth: 10,
+  goalMetConfidence: 10,
+  goalFailedConfidence: { pequeno: 15, medio: 18, grande: 22 },
+  boardInjection: { pequeno: 120_000, medio: 200_000, grande: 300_000 },
+  fireBelow: 20,
 };

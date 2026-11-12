@@ -35,6 +35,8 @@ export interface ManagerProfile {
 }
 
 export interface Manager extends ManagerProfile {
+  /** Tamanho do clube quando as metas foram definidas (define a paciência da diretoria). */
+  clubSize: 'grande' | 'medio' | 'pequeno';
   attrs: Record<ManagerAttr, number>;
   /** 0 a 100. */
   reputation: number;
@@ -61,6 +63,7 @@ export function newManager(profile: ManagerProfile, teamId: string, date: string
     reputation: MANAGER.startReputation,
     confidence: MANAGER.startConfidence,
     goals: [],
+    clubSize: 'pequeno',
     goalsSeason: Number(date.slice(0, 4)),
     salary: managerSalary(MANAGER.startReputation),
     stints: teamId ? [{ teamId, from: date, to: null, reason: null }] : [],

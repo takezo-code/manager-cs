@@ -8,6 +8,7 @@ import { ageUp, monthlyDevelopment } from './development';
 import { newBaseSeason, playBaseRound } from './baseLeague';
 import { DEFAULT_PROFILE, newManager, type ManagerProfile } from './manager/model';
 import { managerDealsDay, monthlyManagerGrowth } from './manager/effects';
+import { assignGoals, evaluateSeason } from './manager/board';
 import { finishCourses, monthlyStaffOffers } from './staff/career';
 import { staffMarketDay } from './staff/market';
 import { ACADEMY, AMATEURS } from './config';
@@ -53,6 +54,7 @@ export function createWorld(managerTeamId: string, seed = 1, profile: ManagerPro
     manager: newManager(profile, managerTeamId, START_DATE),
   };
   w = { ...w, amateurs: generateAmateurs(rng, AMATEURS.poolSize, START_DATE) };
+  if (managerTeamId) w = assignGoals(w, managerTeamId);
   // Academy inicial de cada time.
   for (const id of Object.keys(w.teams)) w = addToAcademy(w, id, generateYouth(w, rng, id, ACADEMY.aiSize));
   return w;
@@ -93,6 +95,7 @@ export function dailyTick(world: World, opts: { rng?: Rng } = {}): { world: Worl
 
   // Virada do ano: aniversários, saída dos jovens de 20 anos e nova temporada da liga de base.
   if (w.date.endsWith('-01-01')) {
+    add(evaluateSeason(w));
     w = ageUp(w);
     add(academyYearEnd(w));
     w = { ...w, baseLeague: newBaseSeason(year) };

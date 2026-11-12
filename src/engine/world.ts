@@ -42,7 +42,8 @@ export type LedgerCategory =
   | 'upgrade'
   | 'habilidade'
   | 'olheiro'
-  | 'comissao';
+  | 'comissao'
+  | 'diretoria';
 
 export const LEDGER_LABEL: Record<LedgerCategory, string> = {
   patrocinio: 'Patrocínios',
@@ -55,6 +56,7 @@ export const LEDGER_LABEL: Record<LedgerCategory, string> = {
   habilidade: 'Habilidades',
   olheiro: 'Olheiro',
   comissao: 'Comissão técnica',
+  diretoria: 'Aporte da diretoria',
 };
 
 /** Movimento de caixa do seu time (positivo entra, negativo sai). */
@@ -85,7 +87,7 @@ export interface SponsorOffer extends SponsorContract {
 
 // ---------- Caixa de entrada ----------
 
-export type InboxKind = 'aumento' | 'conversa' | 'saida' | 'convite' | 'staff_renovacao' | 'staff_aumento' | 'staff_proposta';
+export type InboxKind = 'aumento' | 'conversa' | 'saida' | 'convite' | 'staff_renovacao' | 'staff_aumento' | 'staff_proposta' | 'manager_proposta';
 
 export interface InboxItem {
   id: string;
