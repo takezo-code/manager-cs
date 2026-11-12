@@ -1,6 +1,6 @@
 // Academy: jovens de 16 a 19 anos, fora do elenco principal, promovidos a qualquer momento.
 import { ACADEMY, MANAGER, MARKET, REGION_COUNTRIES } from './config';
-import { endOfMonthAfter } from './date';
+import { daysBetween, endOfMonthAfter } from './date';
 import { baseOvr } from './form';
 import { DEFAULT_MOOD } from './morale/satisfaction';
 import { createRng, hashString, type Rng } from './rng';
@@ -86,10 +86,25 @@ export function addToAcademy(w: World, teamId: string, youth: Player[]): World {
   return { ...w, players, teams: { ...w.teams, [teamId]: { ...t, academyIds: [...(t.academyIds ?? []), ...youth.map((p) => p.id)] } } };
 }
 
+/** Dia 1º: jovens que estão na sua academy há pelo menos 1 mês ficam marcados como revelados por você. */
+export function markRevealed(w: World): World {
+  const org = w.managerTeamId;
+  if (!org) return w;
+  const players = { ...w.players };
+  let changed = false;
+  for (const id of w.teams[org]?.academyIds ?? []) {
+    const p = players[id];
+    if (p && !p.revealed && (!p.academySince || daysBetween(p.academySince, w.date) >= MANAGER.revealedDays)) {
+      players[id] = { ...p, revealed: true };
+      changed = true;
+    }
+  }
+  return changed ? { ...w, players } : w;
+}
+
 export function promote(w: World, playerId: string): { ok: true; world: World } | { ok: false; error: string } {
   const p = w.players[playerId];
   if (!p || p.squad !== 'academy' || !p.teamId) return { ok: false, error: 'Esse jogador não está numa academy.' };
-  if (p.loan) return { ok: false, error: `${p.nick} está emprestado. Chame de volta antes de promover.` };
   const t = w.teams[p.teamId];
   if (t.playerIds.length >= MARKET.squadMax) return { ok: false, error: `O elenco principal está cheio (${MARKET.squadMax}). Venda ou troque alguém antes.` };
   const teams = {
@@ -98,7 +113,7 @@ export function promote(w: World, playerId: string): { ok: true; world: World } 
   };
   // Revelado por você: sobe feliz.
   // "Sobem juntos": só vale com o manager ainda na organização (time ou academy).
-  const withManager = (w.managerTeamId || w.manager?.academyOf) === t.id;
+  const withManager = w.managerTeamId === t.id;
   const satisfaction = p.revealed && withManager ? Math.min(100, p.satisfaction + MANAGER.revealedBonus) : p.satisfaction;
   return { ok: true, world: { ...w, teams, players: { ...w.players, [playerId]: { ...p, squad: 'principal', satisfaction } } } };
 }
@@ -116,7 +131,7 @@ function releaseYouth(w: World, playerId: string): World {
   return {
     ...w,
     teams: { ...w.teams, [t.id]: { ...t, academyIds: t.academyIds.filter((id) => id !== playerId) } },
-    players: { ...w.players, [playerId]: { ...p, teamId: null, contract: null, squad: 'principal', loan: null } },
+    players: { ...w.players, [playerId]: { ...p, teamId: null, contract: null, squad: 'principal' } },
     transferLog: [{ date: w.date, kind: 'dispensa' as const, playerId, fromTeamId: t.id, toTeamId: null, fee: 0 }, ...w.transferLog].slice(0, 300),
   };
 }
@@ -132,13 +147,8 @@ export function academyYearEnd(world: World, rngIn?: Rng): { world: World; event
   const me = w.managerTeamId;
   for (const t of Object.values(w.teams)) {
     for (const id of t.academyIds ?? []) {
-      let p = w.players[id];
+      const p = w.players[id];
       if (p.age <= ACADEMY.maxAge) continue;
-      // Fez 20 emprestado: o empréstimo acaba e vale a regra da academy.
-      if (p.loan) {
-        p = { ...p, loan: null };
-        w = { ...w, players: { ...w.players, [id]: p } };
-      }
       if (t.id === me) {
         w = releaseYouth(w, id);
         events.push({ kind: 'alerta', text: `${p.nick} fez ${p.age} anos e deixou a academy como agente livre.` });
@@ -160,7 +170,7 @@ export function academyYearEnd(world: World, rngIn?: Rng): { world: World; event
 
 /** Dezembro: aviso de quem vai deixar a sua academy na virada do ano. */
 export function academyAgingWarning(w: World): WorldEvent[] {
-  const org = w.managerTeamId || w.manager?.academyOf;
+  const org = w.managerTeamId;
   const t = org ? w.teams[org] : undefined;
   return (t?.academyIds ?? [])
     .map((id) => w.players[id])

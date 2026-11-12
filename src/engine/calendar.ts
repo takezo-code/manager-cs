@@ -1,9 +1,7 @@
 // Calendário: eventos de cada ano, janelas de transferência e férias.
 import { EVENT_TEMPLATES } from '../data/calendar';
-import { CIRCUIT_TEMPLATES } from '../data/circuit';
 import { CALENDAR } from './config';
 import type { FormatId, FormatOptions, Tournament } from './tournament/types';
-import type { Region } from './types';
 
 export type EventStatus = 'futuro' | 'convites' | 'em_andamento' | 'encerrado';
 
@@ -20,10 +18,6 @@ export interface CalendarEvent {
   teams: number;
   prizePool: number;
   approximated?: boolean;
-  /** 1 = tier 1 (padrão nos saves antigos), 2 ou 3. */
-  tier: 1 | 2 | 3;
-  rankBand?: [number, number];
-  regions?: Region[];
   status: EventStatus;
   /** Convidados pelo ranking (em ordem de seed). */
   invited: string[];
@@ -35,11 +29,8 @@ export interface CalendarEvent {
   tournament: Tournament | null;
 }
 
-/** O circuito tier 2/3 só existe no mundo do top 100 (saves antigos têm só 32 times). */
-export const hasCircuit = (teamCount: number) => teamCount > 32;
-
 export function buildYear(year: number): CalendarEvent[] {
-  return [...EVENT_TEMPLATES, ...CIRCUIT_TEMPLATES].map((t) => {
+  return EVENT_TEMPLATES.map((t) => {
     const city = t.cities[(((year - 2026) % t.cities.length) + t.cities.length) % t.cities.length];
     return {
       id: `${t.key}-${year}`,
@@ -53,14 +44,11 @@ export function buildYear(year: number): CalendarEvent[] {
       teams: t.teams,
       prizePool: t.prizePool,
       approximated: t.approximated,
-      tier: t.tier ?? 1,
-      rankBand: t.rankBand,
-      regions: t.regions,
       status: 'futuro' as const,
       invited: [],
       accepted: [],
       declined: [],
-      qualifierSlots: t.teams === 32 || (t.tier ?? 1) > 1 ? 0 : CALENDAR.qualifierSlots,
+      qualifierSlots: t.teams === 32 ? 0 : CALENDAR.qualifierSlots,
       qualified: [],
       tournament: null,
     };

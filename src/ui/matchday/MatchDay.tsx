@@ -4,7 +4,7 @@ import { MAP_NAMES } from '../../engine/config';
 import { playerOvr } from '../../engine/player';
 import { myMatchToday } from '../../engine/schedule';
 import { rivalPreview } from '../../engine/staff/preview';
-import { withAcademyTeams } from '../../engine/tier2/model';
+import type { Team } from '../../engine/types';
 import { MAP_IDS, type MapId, type MatchResult, type VetoStep } from '../../engine/types';
 import { aiVetoChoice, vetoSequence } from '../../engine/veto';
 import { useGame, useWorld } from '../../store/game';
@@ -25,7 +25,7 @@ const MAP_TINT: Record<MapId, string> = {
   nuke: '#5b9dff',
 };
 
-function Lineup({ teamId, teams, align }: { teamId: string; teams: ReturnType<typeof withAcademyTeams>; align: 'left' | 'right' }) {
+function Lineup({ teamId, teams, align }: { teamId: string; teams: Record<string, Team>; align: 'left' | 'right' }) {
   const w = useWorld();
   const t = teams[teamId];
   return (
@@ -49,7 +49,7 @@ function Lineup({ teamId, teams, align }: { teamId: string; teams: ReturnType<ty
 function MatchDayResult({ result, onClose }: { result: MatchResult; onClose: () => void }) {
   const w = useWorld();
   const me = w.managerTeamId;
-  const teams = withAcademyTeams(w, [result.teamAId, result.teamBId]);
+  const teams = w.teams;
   const won = result.winnerTeamId === me;
   const [a, b] = [result.teamAId, result.teamBId];
   return (
@@ -109,7 +109,7 @@ export function MatchDay({ onClose }: { onClose: () => void }) {
       </div>
     );
 
-  const teams = withAcademyTeams(w, [match.teamAId, match.teamBId]);
+  const teams = w.teams;
   const rivalId = match.teamAId === me ? match.teamBId : match.teamAId;
   const preview = rivalPreview(w, rivalId, match.seriesId);
 
@@ -192,7 +192,7 @@ function VetoBoard({
 }: {
   match: NonNullable<ReturnType<typeof myMatchToday>>;
   me: string;
-  teams: ReturnType<typeof withAcademyTeams>;
+  teams: Record<string, Team>;
   strong: MapId[];
   weak: MapId[];
   steps: VetoStep[];

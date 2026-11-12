@@ -82,7 +82,7 @@ export function signAmateur(w: World, playerId: string): { ok: true; world: Worl
   const org = managerOrg(w);
   if (!org) return { ok: false, error: 'Sem time, não há academy para contratar.' };
   const t = w.teams[org];
-  if ((t.academyIds ?? []).filter((id) => !w.players[id]?.loan).length >= ACADEMY.maxSize) return { ok: false, error: `A academy está cheia (${ACADEMY.maxSize}).` };
+  if ((t.academyIds ?? []).length >= ACADEMY.maxSize) return { ok: false, error: `A academy está cheia (${ACADEMY.maxSize}).` };
   if (t.money < a.fee) return { ok: false, error: 'Dinheiro insuficiente para as luvas.' };
   const player: Player = {
     ...a.player,
@@ -98,9 +98,5 @@ export function signAmateur(w: World, playerId: string): { ok: true; world: Worl
     teams: { ...w.teams, [t.id]: { ...t, academyIds: [...(t.academyIds ?? []), player.id] } },
   };
   next = addMoney(next, t.id, -a.fee, 'contratacao', `${player.nick} (${a.platform})`);
-  // Manager da academy: o novo jovem também conta para a meta de crescimento da temporada.
-  const stats = next.manager?.academyStats;
-  if (next.manager?.academyOf === t.id && stats)
-    next = { ...next, manager: { ...next.manager, academyStats: { ...stats, startOvr: { ...stats.startOvr, [player.id]: baseOvr(player) } } } };
   return { ok: true, world: next };
 }

@@ -11,7 +11,7 @@ import { roundTo } from '../format';
 /** Valor mensal de referência para o slot, pela posição no ranking. */
 export function sponsorBase(team: Team, slot: SponsorSlot): number {
   const r = team.hltvRank;
-  const master = FINANCE.masterBase * Math.pow(FINANCE.masterDecay, Math.min(r, 32) - 1) * Math.pow(FINANCE.masterTailDecay, Math.max(0, r - 32));
+  const master = FINANCE.masterBase * Math.pow(FINANCE.masterDecay, r - 1);
   return slot === 'master' ? master : master * FINANCE.regularShare;
 }
 

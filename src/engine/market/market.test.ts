@@ -22,7 +22,7 @@ import { marketValue } from './value';
 const fresh = (): World => ({ ...createWorld('furia'), date: '2027-01-05' });
 /** Mesmo mundo com caixa folgado para o comprador (o teste é da negociação, não do dinheiro). */
 const rich = (w: World, teamId: string): World => ({ ...w, teams: { ...w.teams, [teamId]: { ...w.teams[teamId], money: 50_000_000 } } });
-const FREE = ['kwezz', 'queenix', 'altekz'];
+const FREE = ['maka', 'lucky', 'misutaaa'];
 
 describe('Valor de mercado', () => {
   it('estrelas valem milhões; jovem vale mais que veterano de OVR parecido', () => {
@@ -102,7 +102,7 @@ describe('Negociação com o time', () => {
 
 describe('Multa e jogador', () => {
   it('estrela não quer ir para time muito abaixo no ranking', () => {
-    expect(playerStance(fresh(), 'zywoo', 'big', 'transfer').refuses).toBeTruthy();
+    expect(playerStance(fresh(), 'zywoo', 'fluxo', 'transfer').refuses).toBeTruthy();
   });
 
   it('multa paga piora muito a relação', () => {

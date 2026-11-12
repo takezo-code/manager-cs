@@ -33,7 +33,7 @@ export function movePlayer(w: World, playerId: string, toTeamId: string | null, 
   const teams = { ...w.teams };
   if (p.teamId) teams[p.teamId] = withoutPlayer(teams[p.teamId], playerId);
   // Quem sai do time deixa também a academy.
-  const moved: Player = { ...p, teamId: toTeamId, contract, transferListed: false, squad: 'principal', loan: null };
+  const moved: Player = { ...p, teamId: toTeamId, contract, transferListed: false, squad: 'principal' };
   const players = { ...w.players, [playerId]: moved };
   if (toTeamId) {
     const t = teams[toTeamId];

@@ -1,13 +1,11 @@
 // "Mundo" do jogo: tudo que muda com o tempo, com o mercado e com as finanças.
 import type { Relations } from './market/relations';
 import type { Amateur } from './amateurs';
-import type { BaseLeague } from './baseLeague';
 import type { Staff } from './types';
 import type { Manager } from './manager/model';
 import type { NewsItem } from './media/news';
 import type { Tweet } from './media/twitter';
 import type { Post } from './media/instagram';
-import type { Tier2State } from './tier2/model';
 import type { CalendarEvent } from './calendar';
 import type { EventResult, SeriesLogEntry } from './ranking';
 import type { Player, Team } from './types';
@@ -131,8 +129,6 @@ export interface World {
   calendar: CalendarEvent[];
   /** Banco de amadores da GC/FACEIT. */
   amateurs: Amateur[];
-  /** Liga de base das academies (temporada atual). */
-  baseLeague: BaseLeague;
   /** Comissão técnica: todos os profissionais, empregados e livres. */
   staff: Record<string, Staff>;
   /** O manager (você). `managerTeamId === ''` quando está desempregado. */
@@ -145,8 +141,6 @@ export interface World {
   feed: Tweet[];
   /** Posts do Instagram do seu time (mais novo primeiro). */
   posts: Post[];
-  /** Tier 2: times fictícios, ranking e a copa do mês. */
-  tier2: Tier2State;
 }
 
 /** Mensagem curta para o manager (vira notícia de verdade no passo 13). */

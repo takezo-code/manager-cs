@@ -197,13 +197,13 @@ describe('Correções do code review', () => {
     const major = w.calendar.find((e) => e.templateId === 'major-2')!;
     const tournament = createLegacyTournament('major', Object.values(w.teams), 1);
     w = { ...w, calendar: w.calendar.map((e) => (e.id === major.id ? { ...e, status: 'em_andamento' as const, tournament } : e)) };
-    const big = w.teams.big;
-    w = { ...w, teams: { ...w.teams, big: { ...big, money: -5_000_000, sponsors: [], lateMonths: 2 } } };
+    const big = w.teams.fluxo;
+    w = { ...w, teams: { ...w.teams, fluxo: { ...big, money: -5_000_000, sponsors: [], lateMonths: 2 } } };
     for (const id of big.playerIds) w = { ...w, players: { ...w.players, [id]: { ...w.players[id], satisfaction: 10 } } };
     const out = dailyTick(w).world;
     expect(out.date).toBe('2026-12-01');
-    expect(out.teams.big.lateMonths).toBe(3);
-    expect(out.teams.big.playerIds).toHaveLength(big.playerIds.length);
+    expect(out.teams.fluxo.lateMonths).toBe(3);
+    expect(out.teams.fluxo.playerIds).toHaveLength(big.playerIds.length);
   });
 
   it('fora de campeonato, os dias de descanso recuperam energia', async () => {

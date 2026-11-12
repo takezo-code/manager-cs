@@ -32,24 +32,24 @@ describe('Propostas ao manager', () => {
   it('aceitar: assume o novo time como está, com aporte, confiança 60, metas e passagem novas', () => {
     let w = createWorld('furia');
     w = { ...w, inbox: [{ id: 'conversa', kind: 'conversa', playerId: w.teams.furia.playerIds[0], date: w.date, expires: w.date }], manager: { ...w.manager, confidence: 35 } };
-    w = makeProposal(w, 'big');
+    w = makeProposal(w, 'fluxo');
     const item = w.inbox.find((i) => i.kind === 'manager_proposta')!;
-    const money = w.teams.big.money;
+    const money = w.teams.fluxo.money;
     const r = acceptOffer(w, item.id);
     expect(r.ok).toBe(true);
     if (!r.ok) return;
     const out = r.world;
-    expect(out.managerTeamId).toBe('big');
+    expect(out.managerTeamId).toBe('fluxo');
     expect(out.inbox).toHaveLength(0);
-    expect(out.teams.big.money).toBe(money + 120_000);
+    expect(out.teams.fluxo.money).toBe(money + 120_000);
     expect(out.manager.confidence).toBe(60);
     expect(out.manager.goals.length).toBe(3);
-    expect(out.manager.stints.map((s) => [s.teamId, s.reason])).toEqual([['furia', 'aceitou proposta'], ['big', null]]);
+    expect(out.manager.stints.map((s) => [s.teamId, s.reason])).toEqual([['furia', 'aceitou proposta'], ['fluxo', null]]);
     expect(out.manager.salary).toBe(item.askedSalary);
   });
 
   it('pedir mais orçamento: aporte e +5 ou −5 (chance = confiança/100)', () => {
-    let w = makeProposal(createWorld('furia'), 'big');
+    let w = makeProposal(createWorld('furia'), 'fluxo');
     const item = w.inbox[0];
     w = { ...w, manager: { ...w.manager, confidence: 100 } };
     const yes = askBudget(w, item.id, createRng(1));
@@ -80,9 +80,9 @@ describe('Propostas ao manager', () => {
 
 describe('Correções da revisão', () => {
   it('o time que você deixou não faz proposta no mesmo ano', () => {
-    const w = resign(createWorld('big'));
-    expect(interestedTeams(w).some((t) => t.id === 'big')).toBe(false);
+    const w = resign(createWorld('fluxo'));
+    expect(interestedTeams(w).some((t) => t.id === 'fluxo')).toBe(false);
     const later = { ...w, date: '2027-12-01' };
-    expect(interestedTeams(later).some((t) => t.id === 'big')).toBe(true);
+    expect(interestedTeams(later).some((t) => t.id === 'fluxo')).toBe(true);
   });
 });

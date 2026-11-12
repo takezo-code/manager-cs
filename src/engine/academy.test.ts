@@ -55,14 +55,14 @@ describe('Academy', () => {
   it('virada do ano: quem tem 20 anos sai da academy; a IA repõe até 5', () => {
     let w = createWorld('furia');
     const mine = w.teams.furia.academyIds[0];
-    const theirs = w.teams.big.academyIds[0];
+    const theirs = w.teams.fluxo.academyIds[0];
     w = { ...w, players: { ...w.players, [mine]: { ...w.players[mine], age: 20 }, [theirs]: { ...w.players[theirs], age: 20 } } };
     const out = academyYearEnd(w);
     expect(out.world.players[mine].teamId).toBeNull();
     expect(out.world.teams.furia.academyIds).not.toContain(mine);
     expect(out.events.some((e) => e.text.includes(w.players[mine].nick))).toBe(true);
-    expect(out.world.teams.big.academyIds).not.toContain(theirs);
-    expect(out.world.teams.big.academyIds).toHaveLength(5);
+    expect(out.world.teams.fluxo.academyIds).not.toContain(theirs);
+    expect(out.world.teams.fluxo.academyIds).toHaveLength(5);
   });
 });
 
@@ -77,18 +77,21 @@ describe('Academy na temporada (dailyTick)', () => {
     expect(out.amateurs.map((a) => a.player.id)).not.toEqual(before.amateurs.map((a) => a.player.id));
   });
 
-  it('segunda-feira de março: rodada da liga de base', () => {
-    const out = dailyTick(at('2027-03-07')).world;
-    expect(out.baseLeague.lastRound).toHaveLength(51);
+  it('academy não joga: no dia 1º o jovem cresce mais que um jogador de mesma idade fora da academy', () => {
+    const before = at('2027-02-28');
+    const id = before.teams.furia.academyIds[0];
+    const y = before.players[id];
+    const twin = { ...y, id: 'gemeo', squad: 'principal' as const, teamId: null, contract: null };
+    const out = dailyTick({ ...before, players: { ...before.players, gemeo: twin } }).world;
+    const gain = (p: typeof y) => Object.values(p.growth ?? {}).reduce((s, v) => s + v, 0) + Object.values(p.baseAttributes).reduce((s, v) => s + v, 0);
+    expect(gain(out.players[id]) - gain(y)).toBeGreaterThan(gain(out.players.gemeo) - gain(twin));
   });
 
-  it('1º de janeiro: todos fazem aniversário e a liga de base recomeça', () => {
+  it('1º de janeiro: todos fazem aniversário', () => {
     const before = at('2027-12-31');
     const vet = Object.values(before.players).find((p) => p.squad === 'principal' && p.teamId)!;
-    const out = dailyTick({ ...before, baseLeague: { season: 2027, table: { furia: { w: 3, l: 1 } }, lastRound: [] } }).world;
+    const out = dailyTick(before).world;
     expect(out.players[vet.id].age).toBe(vet.age + 1);
-    expect(out.baseLeague.season).toBe(2028);
-    expect(out.baseLeague.table).toEqual({});
   });
 
   it('1º de dezembro: aviso de quem vai fazer 20 anos', () => {

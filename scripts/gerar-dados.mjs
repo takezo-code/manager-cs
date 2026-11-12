@@ -162,10 +162,11 @@ const flexFor = (key) => Math.round((0.3 + frac(key + 'f') * 0.7) * 100) / 100;
 // Snapshot do HLTV (ranking de 9/11/2026): elencos dos 150 primeiros e as estatísticas que a coleta conseguiu
 // (o Cloudflare bloqueou o resto). Jogador sem estatística recebe nível estimado pelo ranking do time.
 const RANKING = JSON.parse(fs.readFileSync(path.resolve('src/data/hltv/ranking.json'), 'utf8'));
-// Times brasileiros fora do top 100 que entram mesmo assim (pedido do Thales, 12/11/2026).
-// ODDIK não está no ranking: elenco do bo3.gg em 12/11/2026 (só 2 titulares; ksloks saiu em jul/2026 e volta),
-// o resto é completado com fictícios. Sharks e Case estão sem elenco e a RED Canids saiu do CS.
-const EXTRA_TEAMS = new Set(['Turma do Pagode', 'ODDIK']);
+// 32 times (decisão do Thales, 12/11/2026): os 8 brasileiros maiores + os 24 melhores do ranking que não são
+// brasileiros. ODDIK não está no ranking: elenco do bo3.gg em 12/11/2026 (só 2 titulares; ksloks volta), o resto
+// é completado com fictícios. Os jogadores reais dos times que ficaram de fora viram agentes livres (os 200 melhores).
+const BR_TEAMS = ['FURIA', 'Legacy', 'MIBR', 'paiN', 'Imperial', 'Fluxo', 'DENDELE', 'ODDIK'];
+const FREE_AGENTS = 200;
 RANKING.push([103, null, 'oddik', 'ODDIK', 5, 'Brazil', 'lokomotioN', 'AR', [['bo3-nekiz', 'nekiz', 'NEKIZ', 'BR'], ['bo3-righi', 'righi', 'righi', 'BR'], ['bo3-ksloks', 'ksloks', 'ksloks', 'BR']]]);
 const STATS = Object.assign({}, ...fs.readdirSync(path.resolve('src/data/hltv')).filter((f) => f.startsWith('stats')).map((f) => JSON.parse(fs.readFileSync(path.resolve('src/data/hltv', f), 'utf8'))));
 const RAW = {
@@ -325,8 +326,12 @@ function makePlayer({ id, nick, country, age, role, teamId, attrs, leadership, k
 const teams = [];
 const players = [];
 const coachOf = {};
+const SELECTED = [...RAW.teams.filter((t) => BR_TEAMS.includes(t.name)), ...RAW.teams.filter((t) => !BR_TEAMS.includes(t.name)).slice(0, 32 - BR_TEAMS.length)]
+  .sort((a, b) => a.rank - b.rank);
+// Posição no jogo (1–32) pela ordem do ranking HLTV; o nível dos jogadores segue a posição real no HLTV.
+const GAME_RANK = Object.fromEntries(SELECTED.map((t, i) => [t.name, i + 1]));
 for (const t of RAW.teams) {
-  const isTeam = t.rank <= 100 || EXTRA_TEAMS.has(t.name);
+  const isTeam = t.name in GAME_RANK;
   const teamId = isTeam ? teamIdOf(t) : null;
   const ps = t.players.map((p) => ({ ...p, st: p }));
   const roles = assignRoles(ps);
@@ -357,8 +362,8 @@ for (const t of RAW.teams) {
   const teamLevel = players.filter((p) => ids.includes(p.id)).reduce((s2, p) => s2 + ovrOf(p.baseAttributes, p.role), 0) / ids.length;
   const mapStrength = {};
   for (const m of MAPS) mapStrength[m] = clampTo(75 + (teamLevel - 78) * 0.6 + noise(teamId + m, 12), 45, 95);
-  const rank = t.rank;
-  const money = rank <= 32 ? Math.max(400_000, Math.round((3_500_000 - (rank - 1) * 230_000) / 50_000) * 50_000) : Math.max(150_000, Math.round((400_000 - (rank - 32) * 4_000) / 10_000) * 10_000);
+  const rank = GAME_RANK[t.name];
+  const money = Math.max(400_000, Math.round((3_500_000 - (rank - 1) * 230_000) / 50_000) * 50_000);
   teams.push({
     id: teamId, name: k?.name ?? t.name, shortName: k?.shortName ?? shortNameOf(t.name), country, region, hltvRank: rank, hltvPoints: t.points,
     color: k?.color ?? PALETTE[hash(teamId) % PALETTE.length],
@@ -367,6 +372,13 @@ for (const t of RAW.teams) {
     hltvId: t.id,
   });
   if (t.coach) coachOf[teamId] = [t.coach, t.coachCountry ?? country, 28 + (hash(t.coach) % 16)];
+}
+
+// Agentes livres: só os melhores jogadores reais dos times que ficaram de fora.
+{
+  const free = players.filter((p) => !p.teamId).sort((a, b) => ovrOf(b.baseAttributes, b.role) - ovrOf(a.baseAttributes, a.role));
+  const drop = new Set(free.slice(FREE_AGENTS).map((p) => p.id));
+  for (let i = players.length - 1; i >= 0; i--) if (drop.has(players[i].id)) players.splice(i, 1);
 }
 
 // ---------- Comissão técnica ----------

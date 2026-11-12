@@ -1,16 +1,12 @@
 // Passagem do tempo: um dia de cada vez (calendário, treino, fechamento do mês, ranking e mercado).
 import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_STAFF, INITIAL_TEAMS } from '../data';
-import { academyTeamId, emptyTier2 } from './tier2/model';
-import { loansDay } from './tier2/loans';
-import { academySeasonEnd, markRevealed, startAsAcademyManager } from './tier2/academyCareer';
 import { mediaDay } from './media/day';
 import { addToAcademy, generateYouth } from './academy';
-import { buildYear, hasCircuit, teamBusy } from './calendar';
+import { buildYear, teamBusy } from './calendar';
 import { retireFreeAgents } from './market/retirement';
 import { generateAmateurs, refreshAmateurs } from './amateurs';
-import { academyAgingWarning, academyYearEnd } from './academy';
+import { academyAgingWarning, academyYearEnd, markRevealed } from './academy';
 import { ageUp, monthlyDevelopment } from './development';
-import { newBaseSeason, playBaseRound } from './baseLeague';
 import { DEFAULT_PROFILE, newManager, type ManagerProfile } from './manager/model';
 import { managerDealsDay, monthlyManagerGrowth } from './manager/effects';
 import { assignGoals, evaluateSeason } from './manager/board';
@@ -36,23 +32,7 @@ import type { MatchResult, VetoStep } from './types';
 import type { World, WorldEvent } from './world';
 
 /** Mundo de um jogo novo: dados dos JSONs + patrocínios iniciais. */
-/** Jovens da academy e emprestados descansam nos dias sem evento. */
-function restAcademies(w: World): World {
-  let players: World['players'] | null = null;
-  for (const t of Object.values(w.teams)) {
-    const academyBusy = teamBusy(w.calendar, academyTeamId(t.id));
-    for (const id of t.academyIds ?? []) {
-      const p = w.players[id];
-      if (!p || p.energy >= 100) continue;
-      if (p.loan ? teamBusy(w.calendar, p.loan.teamId) : academyBusy) continue;
-      players ??= { ...w.players };
-      players[id] = recoverRest(p);
-    }
-  }
-  return players ? { ...w, players } : w;
-}
-
-export function createWorld(managerTeamId: string, seed = 1, profile: ManagerProfile = DEFAULT_PROFILE, opts: { academy?: boolean } = {}): World {
+export function createWorld(managerTeamId: string, seed = 1, profile: ManagerProfile = DEFAULT_PROFILE): World {
   const rng = createRng(hashString(`mundo:${seed}`));
   const teams = Object.fromEntries(INITIAL_TEAMS.map((t) => [t.id, structuredClone(t)]));
   for (const t of Object.values(teams)) t.sponsors = initialSponsors(t, START_DATE, rng);
@@ -72,20 +52,17 @@ export function createWorld(managerTeamId: string, seed = 1, profile: ManagerPro
     // Eventos de 2026 que ainda não começaram + o ano seguinte.
     calendar: [...buildYear(2026).filter((e) => e.startDate > START_DATE), ...buildYear(2027)],
     amateurs: [],
-    baseLeague: newBaseSeason(Number(START_DATE.slice(0, 4))),
     staff: Object.fromEntries(INITIAL_STAFF.map((s) => [s.id, structuredClone(s)])),
     manager: newManager(profile, managerTeamId, START_DATE),
     fans: Object.fromEntries(Object.keys(teams).map((id) => [id, MEDIA.startMood])),
     news: [],
     feed: [],
     posts: [],
-    tier2: emptyTier2(START_DATE),
   };
   w = { ...w, amateurs: generateAmateurs(rng, AMATEURS.poolSize, START_DATE) };
   if (managerTeamId) w = assignGoals(w, managerTeamId);
   // Academy inicial de cada time.
   for (const id of Object.keys(w.teams)) w = addToAcademy(w, id, generateYouth(w, rng, id, ACADEMY.aiSize));
-  if (opts.academy && managerTeamId) w = startAsAcademyManager(w, managerTeamId);
   return w;
 }
 
@@ -108,7 +85,7 @@ export function dailyTick(world: World, opts: { rng?: Rng; veto?: Record<string,
   // Calendário do ano seguinte a partir de novembro (os convites de janeiro saem em dezembro).
   const year = Number(w.date.slice(0, 4));
   if (w.date.slice(5, 7) >= '11' && !w.calendar.some((e) => e.startDate.startsWith(String(year + 1))))
-    w = { ...w, calendar: [...w.calendar, ...buildYear(year + 1).filter((e) => e.tier === 1 || hasCircuit(Object.keys(w.teams).length))] };
+    w = { ...w, calendar: [...w.calendar, ...buildYear(year + 1)] };
   w = { ...w, players: Object.fromEntries(Object.entries(w.players).map(([id, p]) => [id, expireMvp(p, w.date)])) };
 
   add(issueInvites(w));
@@ -122,13 +99,11 @@ export function dailyTick(world: World, opts: { rng?: Rng; veto?: Record<string,
   w = trainTeams(w, Object.keys(w.teams).filter((id) => !teamBusy(w.calendar, id)));
   w = { ...w, players: Object.fromEntries(Object.entries(w.players).map(([id, p]) => [id, p.teamId ? p : recoverRest(p)])) };
 
-  // Virada do ano: aniversários, saída dos jovens de 20 anos e nova temporada da liga de base.
+  // Virada do ano: aniversários e saída dos jovens de 20 anos.
   if (w.date.endsWith('-01-01')) {
     add(evaluateSeason(w));
-    add(academySeasonEnd(w));
     w = ageUp(w);
     add(academyYearEnd(w));
-    w = { ...w, baseLeague: newBaseSeason(year) };
   }
   if (isFirstOfMonth(w.date)) {
     w = monthlyDevelopment(w);
@@ -142,12 +117,8 @@ export function dailyTick(world: World, opts: { rng?: Rng; veto?: Record<string,
     w = monthlySatisfaction(w);
     add(monthlyRequests(w));
   }
-  // Empréstimos que acabaram; jovens fora de evento (na academy ou emprestados) descansam.
-  add(loansDay(w));
-  w = restAcademies(w);
   if (isMonday(w.date)) {
     w = applyRanking(w);
-    w = playBaseRound(w, rng);
     add(weeklyUnemployedOffers(w, rng));
   }
   w = { ...w, sponsorOffers: w.sponsorOffers.filter((o) => o.expires >= w.date) };

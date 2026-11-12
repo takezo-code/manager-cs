@@ -16,7 +16,6 @@ export function TeamSelect() {
   const [name, setName] = useState(DEFAULT_PROFILE.name);
   const [age, setAge] = useState(DEFAULT_PROFILE.age);
   const [country, setCountry] = useState(DEFAULT_PROFILE.country);
-  const [academy, setAcademy] = useState(false);
   const profile = { name: name.trim() || DEFAULT_PROFILE.name, age: Math.min(60, Math.max(25, age || DEFAULT_PROFILE.age)), country };
   const teams = useGame((s) => s.teams);
   const players = useGame((s) => s.players);
@@ -32,7 +31,7 @@ export function TeamSelect() {
       </button>
       <p className="font-display text-sm font-semibold tracking-[0.3em] text-accent uppercase">Nova carreira · Slot {slot}</p>
       <h1 className="font-display mt-1 text-4xl font-bold sm:text-5xl">Escolha seu time</h1>
-      <p className="mt-2 max-w-xl text-muted">Os 100 primeiros do ranking HLTV de 9 de novembro de 2026, mais Turma do Pagode e ODDIK. Do 33º para baixo, o time joga o circuito tier 2 e tier 3. Você começa como um manager desconhecido: atributos e reputação baixos, e a diretoria cobrando metas.</p>
+      <p className="mt-2 max-w-xl text-muted">32 times: os 24 melhores do ranking HLTV de 9 de novembro de 2026 e os 8 maiores brasileiros. Você começa como um manager desconhecido: atributos e reputação baixos, e a diretoria cobrando metas.</p>
 
       <fieldset className="mt-6 flex flex-wrap items-end gap-3 rounded-2xl border border-line bg-panel p-4">
         <legend className="px-1 text-sm font-semibold">Seu manager</legend>
@@ -54,15 +53,6 @@ export function TeamSelect() {
             ))}
           </select>
         </label>
-        <label className="flex items-center gap-2 text-sm">
-          <input type="checkbox" checked={academy} onChange={(e) => setAcademy(e.target.checked)} />
-          Começar na academy do time escolhido
-        </label>
-        {academy && (
-          <p className="w-full text-xs text-muted">
-            Você cuida só da academy (jovens, tier 2, GC/FACEIT, empréstimos) e o time principal fica com a diretoria. Bata as metas da academy para ser chamado ao time principal.
-          </p>
-        )}
       </fieldset>
 
       <ul className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -72,7 +62,7 @@ export function TeamSelect() {
             <li key={t.id}>
               <button
                 type="button"
-                onClick={() => choose(t.id, profile, academy)}
+                onClick={() => choose(t.id, profile)}
                 className="flex w-full items-center gap-4 rounded-2xl border border-line bg-panel p-4 text-left transition hover:border-accent/60 hover:bg-panel-2"
               >
                 <span className="font-display w-8 text-2xl font-bold text-muted">#{t.hltvRank}</span>

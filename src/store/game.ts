@@ -10,8 +10,6 @@ import type { Relations } from '../engine/market/relations';
 import { simulateMatch } from '../engine/match';
 import { staffAttrsOf } from '../engine/staff/effects';
 import { onYouthPromoted } from '../engine/manager/effects';
-import { recommendPromotion } from '../engine/tier2/academyCareer';
-import { loanPlayer, recallLoan } from '../engine/tier2/loans';
 import { acceptOffer, askBudget, declineOffer, resign } from '../engine/manager/offers';
 import { makePost, POST_LABEL, type PostKind } from '../engine/media/instagram';
 import { mediaAfterAction } from '../engine/media/day';
@@ -31,7 +29,6 @@ import { addDays } from '../engine/date';
 import { signAmateur, type Amateur } from '../engine/amateurs';
 import { promoteMine } from '../engine/academy';
 import { upgradeScout } from '../engine/scout';
-import type { BaseLeague } from '../engine/baseLeague';
 import type { Staff } from '../engine/types';
 import type { Manager, ManagerProfile } from '../engine/manager/model';
 import type { CalendarEvent } from '../engine/calendar';
@@ -73,14 +70,12 @@ export interface GameState {
   seriesLog: SeriesLogEntry[];
   calendar: CalendarEvent[];
   amateurs: Amateur[];
-  baseLeague: BaseLeague;
   staff: Record<string, Staff>;
   manager: Manager;
   fans: Record<string, number>;
   news: World['news'];
   feed: World['feed'];
   posts: World['posts'];
-  tier2: World['tier2'];
   /** Avisos (os mais novos primeiro). */
   events: GameEvent[];
 
@@ -95,7 +90,7 @@ export interface GameState {
   matchDayResult: MatchResult | null;
 
   openNewCareer(slot: Slot): void;
-  startCareer(teamId: string, profile?: ManagerProfile, academy?: boolean): void;
+  startCareer(teamId: string, profile?: ManagerProfile): void;
   loadCareer(slot: Slot, state: SavedState): void;
   toMenu(): void;
   upgrade(playerId: string): void;
@@ -134,8 +129,6 @@ export interface GameState {
   declineManagerOffer(itemId: string): void;
   askBoardBudget(itemId: string): void;
   resignManager(): void;
-  loanYouth(playerId: string, toTeamId: string, months: number): void;
-  recallYouth(playerId: string): void;
   postInstagram(kind: PostKind): void;
 }
 
@@ -153,14 +146,12 @@ type WorldFields =
   | 'seriesLog'
   | 'calendar'
   | 'amateurs'
-  | 'baseLeague'
   | 'staff'
   | 'manager'
   | 'fans'
   | 'news'
   | 'feed'
   | 'posts'
-  | 'tier2'
   | 'myTeamId';
 
 export const worldOf = (s: Pick<GameState, WorldFields>): World => ({
@@ -178,14 +169,12 @@ export const worldOf = (s: Pick<GameState, WorldFields>): World => ({
   seriesLog: s.seriesLog,
   calendar: s.calendar,
   amateurs: s.amateurs,
-  baseLeague: s.baseLeague,
   staff: s.staff,
   manager: s.manager,
   fans: s.fans,
   news: s.news,
   feed: s.feed,
   posts: s.posts,
-  tier2: s.tier2,
 });
 
 /** Campos do mundo para gravar de volta no estado. */
@@ -204,14 +193,12 @@ function fromWorld(w: World) {
     seriesLog: w.seriesLog,
     calendar: w.calendar,
     amateurs: w.amateurs,
-    baseLeague: w.baseLeague,
     staff: w.staff,
     manager: w.manager,
     fans: w.fans,
     news: w.news,
     feed: w.feed,
     posts: w.posts,
-    tier2: w.tier2,
     // Demissão ou troca de time mudam o time do manager.
     myTeamId: w.managerTeamId || null,
   };
@@ -238,7 +225,7 @@ export function trimMyResults(results: Record<string, MatchResult>, me: string, 
 
 /** Campos do estado que vão para o save. */
 const SAVED_KEYS = [
-  'date', 'teams', 'players', 'relations', 'offers', 'transferLog', 'ledger', 'sponsorOffers', 'inbox', 'results', 'seriesLog', 'calendar', 'amateurs', 'baseLeague', 'staff', 'manager', 'fans', 'news', 'feed', 'posts', 'tier2', 'events',
+  'date', 'teams', 'players', 'relations', 'offers', 'transferLog', 'ledger', 'sponsorOffers', 'inbox', 'results', 'seriesLog', 'calendar', 'amateurs', 'staff', 'manager', 'fans', 'news', 'feed', 'posts', 'events',
   'myTeamId', 'seriesResults', 'lastDayIds', 'activeSlot',
 ] as const satisfies ReadonlyArray<keyof GameState>;
 
@@ -276,14 +263,13 @@ export const useGame = create<GameState>((set, get) => {
 
     openNewCareer: (slot) => set({ screen: 'newCareer', pendingSlot: slot }),
 
-    startCareer: (teamId, profile, academy) => {
+    startCareer: (teamId, profile) => {
       const slot = get().pendingSlot;
       if (!slot) return;
       set({
-        ...fromWorld(createWorld(teamId, Date.now(), profile, { academy })),
+        ...fromWorld(createWorld(teamId, Date.now(), profile)),
         events: [],
-        // Na academy, o time principal fica com a IA (o manager não tem time no tier 1).
-        myTeamId: academy ? null : teamId,
+        myTeamId: teamId,
         activeSlot: slot,
         pendingSlot: null,
         screen: 'game',
@@ -490,8 +476,7 @@ export const useGame = create<GameState>((set, get) => {
 
     promoteYouth: (playerId) => {
       const w = worldOf(get());
-      // Manager da academy recomenda; manager do time promove direto.
-      const r = w.manager.academyOf && !w.managerTeamId ? recommendPromotion(w, playerId) : promoteMine(w, playerId);
+      const r = promoteMine(w, playerId);
       if (!r.ok) return set({ message: { kind: 'erro', text: r.error } });
       commitWorld(onYouthPromoted(r.world), [], { message: { kind: 'ok', text: `${r.world.players[playerId].nick} subiu para o elenco principal.` } });
     },
@@ -557,23 +542,10 @@ export const useGame = create<GameState>((set, get) => {
       commitWorld(r.world, [], { message: { kind: p.reception <= -2 ? 'erro' : 'ok', text: `Post "${POST_LABEL[kind]}" ${how}.` } });
     },
 
-    loanYouth: (playerId, toTeamId, months) => {
-      const r = loanPlayer(worldOf(get()), playerId, toTeamId, months);
-      if (!r.ok) return set({ message: { kind: 'erro', text: r.error } });
-      const p = r.world.players[playerId];
-      commitWorld(r.world, [], { message: { kind: 'ok', text: `${p.nick} foi emprestado à ${r.world.teams[toTeamId].name} por ${months} meses.` } });
-    },
-
-    recallYouth: (playerId) => {
-      const r = recallLoan(worldOf(get()), playerId);
-      if (!r.ok) return set({ message: { kind: 'erro', text: r.error } });
-      commitWorld(r.world, [], { message: { kind: 'ok', text: `${r.world.players[playerId].nick} voltou do empréstimo.` } });
-    },
-
     resignManager: () => {
       const w = worldOf(get());
       const team = w.teams[w.managerTeamId];
-      const where = team?.name ?? (w.manager.academyOf ? `${w.teams[w.manager.academyOf].name} Academy` : 'equipe');
+      const where = team?.name ?? 'equipe';
       commitWorld(resign(w), [{ kind: 'alerta', text: `Você pediu demissão da ${where}.` }], { lastMatch: null });
     },
   };
@@ -595,16 +567,14 @@ export function useWorld(): World {
   const seriesLog = useGame((s) => s.seriesLog);
   const calendar = useGame((s) => s.calendar);
   const amateurs = useGame((s) => s.amateurs);
-  const baseLeague = useGame((s) => s.baseLeague);
   const staff = useGame((s) => s.staff);
   const manager = useGame((s) => s.manager);
   const fans = useGame((s) => s.fans);
   const news = useGame((s) => s.news);
   const feed = useGame((s) => s.feed);
   const posts = useGame((s) => s.posts);
-  const tier2 = useGame((s) => s.tier2);
   return useMemo(
-    () => worldOf({ date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar, amateurs, baseLeague, staff, manager, fans, news, feed, posts, tier2 }),
-    [date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar, amateurs, baseLeague, staff, manager, fans, news, feed, posts, tier2],
+    () => worldOf({ date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar, amateurs, staff, manager, fans, news, feed, posts }),
+    [date, myTeamId, teams, players, relations, offers, transferLog, ledger, sponsorOffers, inbox, results, seriesLog, calendar, amateurs, staff, manager, fans, news, feed, posts],
   );
 }

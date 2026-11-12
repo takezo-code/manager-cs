@@ -139,8 +139,7 @@ export interface Player {
   growth: Partial<Attributes>;
   /** Elenco principal ou academy do time. */
   squad: 'principal' | 'academy';
-  /** Emprestado a um time do tier 2 (até a data; o outro time paga essa parte do salário). */
-  loan?: { teamId: string; until: string; salaryShare: number } | null;
+
   /** Passou pela academy da organização enquanto você era o manager. */
   revealed?: boolean;
   /** Desde quando está na academy (para o "revelado" exigir 1 mês). */

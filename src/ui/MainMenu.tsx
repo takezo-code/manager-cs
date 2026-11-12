@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { SLOTS, exportFileName, exportJson, makeRecord, migrateState, parseImport, type SaveRecord, type Slot } from '../db/saveFormat';
+import { SLOTS, exportFileName, exportJson, isCompatible, makeRecord, parseImport, type SaveRecord, type Slot } from '../db/saveFormat';
 import { deleteSave, getSave, listSaves, putSave } from '../db/saves';
 import { useGame } from '../store/game';
 import { money } from './format';
@@ -45,11 +45,14 @@ export function MainMenu() {
     void refresh();
   }, [refresh]);
 
-  const latest = Object.values(saves).sort((a, b) => b.updatedAt - a.updatedAt)[0];
+  const latest = Object.values(saves)
+    .filter((r) => isCompatible(r.version))
+    .sort((a, b) => b.updatedAt - a.updatedAt)[0];
 
   const load = async (slot: Slot) => {
     const r = await getSave(slot);
-    if (r) loadCareer(slot, migrateState(r.state as unknown as Record<string, unknown>, r.version));
+    if (r && isCompatible(r.version)) loadCareer(slot, r.state);
+    else if (r) setFeedback({ kind: 'erro', text: `O save do slot ${slot} é de uma versão antiga e não abre mais. Comece uma carreira nova nele.` });
   };
 
   const runConfirmed = async (c: NonNullable<Confirm>) => {
@@ -139,6 +142,7 @@ export function MainMenu() {
                     <div className="text-sm text-muted">{r.meta.status}</div>
                     <div className="text-sm text-muted">Caixa {money(r.meta.money)}</div>
                     <div className="mt-1 text-xs text-muted">Salvo em {fmtDate(r.updatedAt)}</div>
+                    {!isCompatible(r.version) && <div className="mt-1 text-xs font-semibold text-loss">Versão antiga: não abre mais</div>}
                   </div>
                 </div>
               ) : (
@@ -159,7 +163,7 @@ export function MainMenu() {
                 </div>
               ) : (
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {r && (
+                  {r && isCompatible(r.version) && (
                     <button type="button" onClick={() => load(slot)} className="rounded-lg bg-accent px-3 py-1.5 text-sm font-semibold text-black hover:brightness-110">
                       Carregar
                     </button>

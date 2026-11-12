@@ -6,7 +6,6 @@ import { payroll, sponsorIncome } from '../../engine/finance/monthly';
 import { playerOvr } from '../../engine/player';
 import { myMatchToday } from '../../engine/schedule';
 import { rivalPreview } from '../../engine/staff/preview';
-import { withAcademyTeams } from '../../engine/tier2/model';
 import { MAP_NAMES } from '../../engine/config';
 import { useGame, useWorld } from '../../store/game';
 import { TeamBadge } from '../TeamBadge';
@@ -39,7 +38,7 @@ function NextMatch({ onPlay, go }: { onPlay: () => void; go: (l: HomeLink) => vo
   const me = w.managerTeamId;
   const advance = useGame((s) => s.advance);
   const match = myMatchToday(w);
-  const teams = match ? withAcademyTeams(w, [match.teamAId, match.teamBId]) : w.teams;
+  const teams = w.teams;
   const upcoming = w.calendar
     .filter((e) => e.status !== 'encerrado' && involves(e, me) && !e.tournament?.placements[me])
     .sort((a, b) => a.startDate.localeCompare(b.startDate))[0];
@@ -82,7 +81,7 @@ function NextMatch({ onPlay, go }: { onPlay: () => void; go: (l: HomeLink) => vo
     <div className="flex w-28 flex-col items-center gap-1.5 text-center">
       <TeamBadge team={teams[id]} size={56} />
       <span className={`font-display text-base leading-tight font-bold ${id === me ? 'text-accent' : ''}`}>{teams[id].name}</span>
-      <span className="text-[11px] text-muted">{w.teams[id] ? `#${w.teams[id].hltvRank} HLTV` : 'Academy'}</span>
+      <span className="text-[11px] text-muted">#{w.teams[id].hltvRank} HLTV</span>
     </div>
   );
   return (
@@ -181,7 +180,7 @@ function MonthCalendar({ go }: { go: (l: HomeLink) => void }) {
   const lead = first.getUTCDay();
   const iso = (d: number) => `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
   const mine = w.calendar.filter((e) => involves(e, me) || e.invited.includes(me));
-  const tier1 = w.calendar.filter((e) => (e.tier ?? 1) === 1);
+  const tier1 = w.calendar;
   const cells = [...Array(lead).fill(null), ...Array.from({ length: days }, (_, i) => i + 1)];
   return (
     <Card
@@ -228,7 +227,7 @@ function MonthCalendar({ go }: { go: (l: HomeLink) => void }) {
         </span>
         <span>
           <span className="mr-1 inline-block h-2 w-2 rounded-sm bg-ct/40" />
-          tier 1
+          outros eventos
         </span>
       </div>
     </Card>
@@ -269,7 +268,7 @@ function Table({ go }: { go: (l: HomeLink) => void }) {
   const myRank = w.teams[me].hltvRank;
   const window = ranked.slice(Math.max(0, Math.min(myRank - 4, ranked.length - 8)), Math.max(8, Math.min(myRank + 4, ranked.length)));
   const rows = view === 'ranking' || !live ? (myRank <= 8 ? ranked.slice(0, 8) : [...ranked.slice(0, 3), ...window.slice(-5)]) : null;
-  const eventTeams = live ? withAcademyTeams(w, live.tournament!.participants) : null;
+  const eventTeams = live ? w.teams : null;
   return (
     <Card
       title={view === 'evento' && live ? live.name : 'Ranking HLTV'}

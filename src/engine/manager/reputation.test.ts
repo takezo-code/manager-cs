@@ -23,17 +23,17 @@ describe('Reputação do manager', () => {
   });
 
   it('Lenda: jogador pede 10% menos para vir; estrela aceita time até 20 posições abaixo', () => {
-    const w = { ...createWorld('big'), date: '2027-01-05' };
+    const w = { ...createWorld('fluxo'), date: '2027-01-05' };
     const star = Object.values(w.players).find((p) => p.teamId === 'vitality' && w.teams.vitality.starters.includes(p.id) && p.age < 30)!;
-    const s0 = playerStance(w, star.id, 'big', 'transfer');
-    const s1 = playerStance(withRep(w, 100), star.id, 'big', 'transfer');
+    const s0 = playerStance(w, star.id, 'fluxo', 'transfer');
+    const s1 = playerStance(withRep(w, 100), star.id, 'fluxo', 'transfer');
     expect(s1.desired.salary / s0.desired.salary).toBeCloseTo(0.9, 1);
     // BIG é o #32: estrela de time top recusa com reputação baixa; com Lenda, o limite é 20 posições.
     const top = Object.values(w.players).find((p) => p.teamId === 'g2' && p.contract && w.teams.g2.starters.includes(p.id))!;
-    expect(w.teams.big.hltvRank - w.teams.g2.hltvRank).toBeGreaterThan(12);
-    expect(w.teams.big.hltvRank - w.teams.g2.hltvRank).toBeLessThanOrEqual(20);
+    expect(w.teams.fluxo.hltvRank - w.teams.g2.hltvRank).toBeGreaterThan(12);
+    expect(w.teams.fluxo.hltvRank - w.teams.g2.hltvRank).toBeLessThanOrEqual(20);
     const ovrStar = { ...w, players: { ...w.players, [top.id]: { ...top, baseAttributes: Object.fromEntries(Object.keys(top.baseAttributes).map((k) => [k, 90])) as typeof top.baseAttributes } } };
-    expect(playerStance(ovrStar, top.id, 'big', 'transfer').refuses).toBeTruthy();
-    expect(playerStance(withRep(ovrStar, 100), top.id, 'big', 'transfer').refuses).toBeNull();
+    expect(playerStance(ovrStar, top.id, 'fluxo', 'transfer').refuses).toBeTruthy();
+    expect(playerStance(withRep(ovrStar, 100), top.id, 'fluxo', 'transfer').refuses).toBeNull();
   });
 });

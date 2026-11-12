@@ -1,17 +1,11 @@
-import { useState } from 'react';
 import { visibleAmateurs, type Amateur } from '../engine/amateurs';
-import { baseStandings } from '../engine/baseLeague';
-import { ACADEMY, MARKET, SCOUT, TIER2 } from '../engine/config';
-import { formatDate } from '../engine/date';
-import { managerOrg } from '../engine/manager/model';
-import { LOAN_MONTHS, loanTargets } from '../engine/tier2/loans';
+import { ACADEMY, MARKET, SCOUT } from '../engine/config';
 import { baseOvr } from '../engine/form';
 import { estimatePotential } from '../engine/scout';
 import { scoutNarrowing } from '../engine/manager/effects';
 import type { Player } from '../engine/types';
 import { useGame, useWorld } from '../store/game';
 import { money, ROLE_LABEL } from './format';
-import { TeamBadge } from './TeamBadge';
 
 /** Escala das barras de potencial. */
 const LO = 40;
@@ -78,50 +72,9 @@ function ScoutHeader({ level, cash }: { level: number; cash: number }) {
   );
 }
 
-function LoanControls({ p }: { p: Player }) {
-  const w = useWorld();
-  const loan = useGame((s) => s.loanYouth);
-  const recall = useGame((s) => s.recallYouth);
-  const [to, setTo] = useState('');
-  const [months, setMonths] = useState<number>(6);
-  if (p.loan)
-    return (
-      <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
-        Emprestado à {w.teams[p.loan.teamId]?.name} até {formatDate(p.loan.until)}
-        <button type="button" className="rounded-lg border border-line px-2 py-1 font-semibold text-ink hover:border-accent" onClick={() => recall(p.id)}>
-          Chamar de volta · {money(TIER2.recallFee)}
-        </button>
-      </div>
-    );
-  const teams = loanTargets(w);
-  return (
-    <div className="flex flex-wrap items-center gap-1.5 text-xs">
-      <select className="rounded-lg border border-line bg-panel-2 px-2 py-1" value={to} onChange={(e) => setTo(e.target.value)} aria-label="Time do empréstimo">
-        <option value="">Emprestar para…</option>
-        {teams.map((t) => (
-          <option key={t.id} value={t.id}>
-            #{t.hltvRank} {t.name} ({t.region})
-          </option>
-        ))}
-      </select>
-      <select className="rounded-lg border border-line bg-panel-2 px-2 py-1" value={months} onChange={(e) => setMonths(Number(e.target.value))} aria-label="Prazo do empréstimo">
-        {LOAN_MONTHS.map((m) => (
-          <option key={m} value={m}>
-            {m} meses
-          </option>
-        ))}
-      </select>
-      <button type="button" disabled={!to} className="rounded-lg border border-line px-2 py-1 font-semibold hover:border-accent disabled:opacity-40" onClick={() => loan(p.id, to, months)}>
-        Emprestar
-      </button>
-    </div>
-  );
-}
-
 function YouthRow({ p, level, full }: { p: Player; level: number; full: boolean }) {
   const promoteYouth = useGame((s) => s.promoteYouth);
   const w = useWorld();
-  const recommend = !!w.manager.academyOf && !w.managerTeamId;
   const e = estimatePotential(p, level, scoutNarrowing(w));
   const leaving = p.age >= ACADEMY.maxAge;
   return (
@@ -142,17 +95,14 @@ function YouthRow({ p, level, full }: { p: Player; level: number; full: boolean 
           </span>
         </div>
         <Alerts alerts={e.alerts} />
-        <div className="mt-2">
-          <LoanControls p={p} />
-        </div>
       </div>
       <button
         className="rounded-lg border border-line px-3 py-1.5 text-sm font-semibold hover:border-accent disabled:opacity-40"
-        disabled={full || !!p.loan}
-        title={p.loan ? 'Chame de volta antes de promover' : full ? `Elenco principal cheio (${MARKET.squadMax})` : recommend ? 'A diretoria aceita se ele for quase tão bom quanto o pior titular' : undefined}
+        disabled={full}
+        title={full ? `Elenco principal cheio (${MARKET.squadMax})` : undefined}
         onClick={() => promoteYouth(p.id)}
       >
-        {recommend ? 'Recomendar' : 'Promover'}
+        Promover
       </button>
     </li>
   );
@@ -206,17 +156,14 @@ function AmateurRow({ a, level, canSign }: { a: Amateur; level: number; canSign:
 
 export function AcademyPanel() {
   const world = useWorld();
-  // Time do manager ou a org da academy que ele comanda.
-  const me = managerOrg(world)!;
+  const me = world.managerTeamId;
   const team = world.teams[me];
   const players = world.players;
   const level = team.scoutLevel ?? 1;
   const youth = team.academyIds.map((id) => players[id]).filter(Boolean);
   const full = team.playerIds.length >= MARKET.squadMax;
-  const academyFull = youth.filter((p) => !p.loan).length >= ACADEMY.maxSize;
+  const academyFull = youth.length >= ACADEMY.maxSize;
   const amateurs = visibleAmateurs(world);
-  const table = baseStandings(world);
-  const myGame = world.baseLeague.lastRound.find((g) => g.a === me || g.b === me);
 
   return (
     <div className="space-y-4">
@@ -226,7 +173,7 @@ export function AcademyPanel() {
         <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-3">
           <h2 className="font-display text-lg font-bold">Academy</h2>
           <span className="text-xs text-muted">
-            {youth.filter((p) => !p.loan).length}/{ACADEMY.maxSize} jovens{youth.some((p) => p.loan) ? ` (+${youth.filter((p) => p.loan).length} emprestado)` : ''} · elenco principal {team.playerIds.length}/{MARKET.squadMax}
+            {youth.length}/{ACADEMY.maxSize} jovens · elenco principal {team.playerIds.length}/{MARKET.squadMax} · treinam e evoluem todo mês
           </span>
         </div>
         {youth.length ? (
@@ -240,12 +187,9 @@ export function AcademyPanel() {
             Academy vazia. Contrate jovens na GC/FACEIT abaixo.
           </p>
         )}
-        {youth.length < 5 && youth.length > 0 && (
-          <p className="mt-2 text-xs text-loss">Com menos de 5 jovens a academy perde os jogos da liga de base por W.O.</p>
-        )}
       </section>
 
-      <div className="grid gap-4 lg:grid-cols-[1fr_20rem]">
+      <div>
         <section>
           <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-3">
             <h2 className="font-display text-lg font-bold">GC / FACEIT</h2>
@@ -259,34 +203,6 @@ export function AcademyPanel() {
           {academyFull && <p className="mt-2 text-xs text-muted">Academy cheia ({ACADEMY.maxSize}). Promova alguém para abrir vaga.</p>}
         </section>
 
-        <section>
-          <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-3">
-            <h2 className="font-display text-lg font-bold">Liga de base {world.baseLeague.season}</h2>
-            <span className="text-xs text-muted">segundas, fev–nov</span>
-          </div>
-          {myGame && (
-            <p className="mb-2 text-sm">
-              Última rodada:{' '}
-              <span className={myGame.winner === me ? 'font-semibold text-win' : 'font-semibold text-loss'}>
-                {myGame.winner === me ? 'vitória' : 'derrota'}
-              </span>{' '}
-              contra {world.teams[myGame.a === me ? myGame.b : myGame.a].name}
-              {myGame.wo && ' (W.O.)'}
-            </p>
-          )}
-          <ol className="overflow-hidden rounded-2xl border border-line bg-panel text-sm">
-            {table.map((r, i) => (
-              <li key={r.teamId} className={`flex items-center gap-2 border-t border-line/60 px-3 py-1.5 first:border-t-0 ${r.teamId === me ? 'bg-accent/10' : ''}`}>
-                <span className="w-6 tabular-nums text-muted">{i + 1}</span>
-                <TeamBadge team={world.teams[r.teamId]} size={18} />
-                <span className={`min-w-0 flex-1 truncate ${r.teamId === me ? 'font-semibold text-accent' : ''}`}>{world.teams[r.teamId].shortName}</span>
-                <span className="w-14 text-right tabular-nums">
-                  <span className="text-win">{r.w}</span>–<span className="text-loss">{r.l}</span>
-                </span>
-              </li>
-            ))}
-          </ol>
-        </section>
       </div>
     </div>
   );

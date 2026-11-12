@@ -18,14 +18,12 @@ import { ManagerPanel } from './ManagerPanel';
 import { UnemployedView } from './UnemployedView';
 import { NewsPanel } from './NewsPanel';
 import { SocialPanel } from './SocialPanel';
-import { Tier2Panel } from './Tier2Panel';
-import { AcademyManagerView } from './AcademyManagerView';
 import { GameShell, SubTabs, type NavTab } from './shell/GameShell';
 import { Home, type HomeLink } from './home/Home';
 import { MatchDay } from './matchday/MatchDay';
 
 type Tab = 'inicio' | 'elenco' | 'partidas' | 'mercado' | 'academy' | 'ranking' | 'carreira' | 'midia' | 'mensagens';
-type PartidasTab = 'calendario' | 'tier2' | 'amistoso';
+type PartidasTab = 'calendario' | 'amistoso';
 type CarreiraTab = 'manager' | 'comissao' | 'financas';
 type MidiaTab = 'noticias' | 'social';
 
@@ -132,7 +130,6 @@ function Dashboard() {
           <SubTabs<PartidasTab>
             tabs={[
               { id: 'calendario', label: 'Calendário' },
-              { id: 'tier2', label: 'Tier 2/3' },
               { id: 'amistoso', label: 'Amistoso' },
             ]}
             value={partidas}
@@ -140,8 +137,6 @@ function Dashboard() {
           />
           {partidas === 'calendario' ? (
             <CalendarPanel />
-          ) : partidas === 'tier2' ? (
-            <Tier2Panel />
           ) : (
             <div className="space-y-4">
               <MatchSetup />
@@ -190,10 +185,8 @@ function Dashboard() {
 export function App() {
   const screen = useGame((s) => s.screen);
   const myTeamId = useGame((s) => s.myTeamId);
-  const academyOf = useGame((s) => s.manager?.academyOf);
   if (screen === 'newCareer') return <TeamSelect />;
   if (screen === 'game' && myTeamId) return <Dashboard />;
-  if (screen === 'game' && academyOf) return <AcademyManagerView />;
   if (screen === 'game') return <UnemployedView />;
   return <MainMenu />;
 }

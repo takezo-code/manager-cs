@@ -99,7 +99,7 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 | Item | Valor |
 | --- | --- |
 | Ciclo financeiro | Dia 1º de cada mês: patrocínios entram, folha sai. Sem dinheiro para a folha inteira, nada é pago e tudo vira atraso |
-| Patrocínio | Master: 200 mil × 0,93^(posição − 1) por mês (±20%); comum: 30% disso. Contratos de 6 a 24 meses, bônus por título de 5% a 15% do valor anual. 1 a 3 ofertas por mês, que expiram em 14 dias. Times começam com master + 2 comuns |
+| Patrocínio | Master: 200 mil × 0,96^(posição − 1) por mês (±20%); comum: 30% disso. Contratos de 6 a 24 meses, bônus por título de 5% a 15% do valor anual. 1 a 3 ofertas por mês, que expiram em 14 dias. Times começam com master + 2 comuns |
 | Premiação | O time recebe o valor total da colocação. Faixas compartilhadas (3º–4º) recebem a média das duas posições |
 | Atrasos | −15 de satisfação por mês para o elenco; sem ofertas de patrocínio; com 2 meses um patrocinador rompe; com 3, jogadores com satisfação abaixo de 40 rescindem de graça |
 | Faixas de satisfação | Satisfeito 65+, Incomodado 45–64 (rumor), Insatisfeito 25–44 (pede conversa), Querendo sair abaixo de 25 (pede saída, recusa renovar, IA faz mais propostas) |
@@ -166,22 +166,17 @@ Registro do que não estava no documento de design e foi decidido com o Thales o
 | Rumores | 15% ao dia (40% nas férias e janelas); 60% vêm de propostas reais quando existem |
 | Instagram | Recepção = momento (tabela do spec) + até +2 de Comunicação ± 1; mesmo tipo seguido vale metade; recepção ≥ 2 dá +0,5 de Comunicação |
 | Notícias das suas ações | Contratações, propostas aceitas e demissão viram notícia e tuíte na hora (não só no fim do dia) |
-| Top 100 real | Times 1–100 do ranking HLTV de 09/11/2026 + Turma do Pagode e ODDIK (102); jogadores dos times 101–150 entram como agentes livres; time com menos de 5 completa com fictício na função que falta |
+| 32 times | Os 8 maiores brasileiros (FURIA, Legacy, MIBR, paiN, Imperial, Fluxo, DENDELE, ODDIK) + os 24 melhores do ranking HLTV de 09/11/2026; o jogo só começa num deles. Jogadores reais dos times de fora: os 200 melhores viram agentes livres |
 | Nível do jogador | Curva pelo ranking do time (86 − 3,5·ln posição) + desvio do rating 3.0 (metade se acima da curva, um quarto se abaixo); sem estatística: só a curva, com o perfil da função |
-| Circuito tier 2/3 | 99 eventos por ano (datas aproximadas, online); convite pela faixa do ranking e região; rodízio (quem jogou menos no ano primeiro); faltando time: abaixo da faixa, academies da região (tier 3) e, por último, outras regiões |
-| Peso no ranking | Tier 2 vale 1/4 de um evento do mesmo tamanho; tier 3, 1/10; fator LAN só com tier 1; forma pesa (força do rival)² |
-| Prêmios tier 2/3 | US$ 10 mil (Challenger) a 250 mil (StarSeries); bônus de título de patrocinador só no tier 1; prêmio de academy vai para o time dono |
-| Academies no tier 3 | Entram com 5 jovens; a do manager da academy tem vaga garantida no tier 3 da região; jovens (até 21) crescem por mapa jogado no tier 2/3 |
-| Empréstimo | Para times reais fora do top 32 com menos de 7 (elenco + emprestados); o emprestado joga pelo time (5 melhores titulares) e o time paga 50% do salário; chamar de volta US$ 20 mil |
-| Manager da academy | Time principal com a IA; usa o caixa da org só na academy; metas: top 8 das academies no tier 3 (100/70/50/20 por colocação), promover 1 jovem, um jovem +5 de OVR |
-| Patrocínio | Master 200 mil × 0,96^(posição − 1) até o 32º; depois × 0,99 por posição (#100 ≈ 28 mil) |
-| Só tier 1 | O top 20 do ranking nunca é chamado para tier 2/3; academies de qualquer time podem jogar o tier 3 |
+| Patrocínio | Master 200 mil × 0,96^(posição − 1) |
+| Só tier 1 | Sem tier 2/3: só os 17 eventos principais, que trocam de cidade-sede a cada ano |
+| Academy | Os jovens não jogam partidas: treinam e evoluem (crescimento por idade + 0,6 de OVR por mês de treino); compra na GC/FACEIT; sem liga de base, sem empréstimo e sem carreira de manager da academy |
+| Dia de jogo | O avanço para na véspera do jogo do seu time; você faz o veto (ban/pick alternado, a IA bane o pior e escolhe o melhor mapa para ela) ou deixa o técnico decidir; o evento abre na véspera com os jogos do 1º dia sorteados |
 | Um torneio por vez | Um time nunca joga dois torneios ao mesmo tempo; as datas de cada evento cobrem o formato (teste simula todos) |
-| Títulos tier 2/3 | Sem bônus de MVP/EVP, sem ganho de staff e sem reputação do manager (só tier 1) |
 | Aposentadoria | Na virada do ano, agente livre com 31+ ou OVR < 62 sai do jogo; no máximo 300 agentes livres |
 | Folha da IA | Teto: patrocínio (o maior entre o atual e o esperado pelo ranking) × 1,3 + caixa ÷ 24; vale para reforço, completar elenco e renovação |
 | Reestruturação da IA | Time da IA com 4 meses de atraso renegocia a dívida e dispensa os salários mais caros até caber no patrocínio esperado |
-| Saves v9 → v10 | Saem a Tier 2 Cup e os fictícios; emprestados a eles voltam; o mundo continua com os 32 times e só com o tier 1 (evento que não fecha a chave é cancelado) |
+| Saves | Versão 11; saves anteriores não abrem mais (comece uma carreira nova). Evento que não fecha a chave é cancelado |
 | Cor da carta evoluída | A cor da evolução (azul, vermelha ou rosa) substitui a cor da faixa; a faixa continua num selo |
 
 ## Dados

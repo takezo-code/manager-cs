@@ -3,7 +3,6 @@ import { MAP_NAMES } from '../engine/config';
 import { adr, calcRating } from '../engine/rating';
 import type { MapResult, MatchFormat, MatchResult, MatchStage, Player, Team } from '../engine/types';
 import { useGame, useWorld } from '../store/game';
-import { withAcademyTeams } from '../engine/tier2/model';
 import { ratingColor } from './format';
 import { TeamBadge } from './TeamBadge';
 
@@ -159,8 +158,7 @@ function RoundStrip({ map, teamA, teamB }: { map: MapResult; teamA: Team; teamB:
 
 export function MatchView({ result }: { result: MatchResult }) {
   const world = useWorld();
-  // Academies (tier 3) não ficam em teams: monta na hora.
-  const teams = withAcademyTeams(world, [result.teamAId, result.teamBId]);
+  const teams = world.teams;
   const players = useGame((s) => s.players);
   const teamA = teams[result.teamAId];
   const teamB = teams[result.teamBId];

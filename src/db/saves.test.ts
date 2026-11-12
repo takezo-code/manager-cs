@@ -5,7 +5,7 @@ import { buildYear } from '../engine/calendar';
 import { DEFAULT_PROFILE, newManager } from '../engine/manager/model';
 import { playDay } from '../engine/tournament/run';
 import { createLegacyTournament as createTournament } from '../engine/tournament/legacy.testutil';
-import { exportFileName, exportJson, makeRecord, parseImport, type SavedState } from './saveFormat';
+import { exportFileName, exportJson, isCompatible, makeRecord, parseImport, type SavedState } from './saveFormat';
 import { db, deleteSave, getSave, lastSave, listSaves, putSave } from './saves';
 
 const byId = <T extends { id: string }>(xs: T[]) => Object.fromEntries(xs.map((x) => [x.id, structuredClone(x)]));
@@ -24,14 +24,12 @@ function sampleState(): SavedState {
     results: [],
     seriesLog: [],
     amateurs: [],
-    baseLeague: { season: 2026, table: {}, lastRound: [] },
     staff: {},
     manager: newManager(DEFAULT_PROFILE, 'furia', '2026-11-11'),
     fans: {},
     news: [],
     feed: [],
     posts: [],
-    tier2: { teams: {}, players: {}, points: {}, season: 2026, cup: null },
     calendar: [{ ...buildYear(2026).find((e) => e.templateId === 'iem-china')!, status: 'em_andamento', tournament: out.tournament }],
     teams,
     players: out.players,
@@ -91,92 +89,17 @@ describe('Exportar e importar JSON', () => {
     expect(parseImport('{"app":"outro"}').ok).toBe(false);
     expect(parseImport(JSON.stringify({ app: 'manager-cs', version: 999, state: {} }))).toEqual({
       ok: false,
-      error: 'Esse save é de uma versão mais nova do jogo.',
+      error: 'Esse save é de outra versão do jogo e não abre mais. Comece uma carreira nova.',
     });
     expect(parseImport(JSON.stringify({ app: 'manager-cs', version: 1, state: { teams: {}, players: {}, myTeamId: 'x' } })).ok).toBe(false);
+    // Saves de versões antigas (top 100, tier 2) não abrem mais.
+    expect(isCompatible(10)).toBe(false);
+    expect(isCompatible(11)).toBe(true);
   });
 
   it('nome do arquivo tem slot, time e data', () => {
     const name = exportFileName(makeRecord(3, sampleState(), Date.UTC(2026, 10, 11)));
     expect(name).toBe('manager-cs-slot3-furia-2026-11-11.json');
-  });
-});
-
-describe('Migração v3 → v4', () => {
-  it('um save v3 com campeonato em andamento vira um evento em andamento no calendário', async () => {
-    const { migrateState } = await import('./saveFormat');
-    const { playDay } = await import('../engine/tournament/run');
-    const { createLegacyTournament } = await import('../engine/tournament/legacy.testutil');
-    const teams = byId(INITIAL_TEAMS);
-    const players = byId(INITIAL_PLAYERS);
-    // Campeonato no formato antigo (v3): sem format/options/prizePool/playerStats, com template.
-    let t = createLegacyTournament('major', INITIAL_TEAMS, 3);
-    t = playDay(t, teams, players).tournament;
-    const { format: _f, options: _o, prizePool: _p, playerStats: _s, ...rest } = t;
-    const old = { ...rest, template: 'major' };
-    const v3 = {
-      date: '2026-11-20', managerTeamId: 'furia', teams, players, relations: {}, offers: [], transferLog: [], ledger: [], sponsorOffers: [],
-      inbox: [], events: [], myTeamId: 'furia', tournament: old, seriesResults: {}, lastDayIds: [],
-    };
-    const s = migrateState(v3 as unknown as Record<string, unknown>, 3);
-    const ev = s.calendar.find((e) => e.status === 'em_andamento')!;
-    expect(ev.tournament!.id).toBe(t.id);
-    expect(ev.tournament!.format).toBe('major32');
-    expect(ev.tournament!.stages).toHaveLength(1);
-    expect(s.calendar.some((e) => e.status === 'futuro')).toBe(true);
-    expect(s.players.fallen.awards).toEqual([]);
-    expect(s.teams.furia.training).toEqual({ mode: 'dividido', focus: 'mira' });
-    expect(s.teams.furia.legacyPoints).toBe(teams.furia.hltvPoints);
-  });
-});
-
-describe('Migração v4 → v5', () => {
-  it('cria academies, olheiro, amadores e liga de base', async () => {
-    const { migrateState } = await import('./saveFormat');
-    const s0 = sampleState();
-    const strip = <T extends object>(o: T, keys: string[]) => Object.fromEntries(Object.entries(o).filter(([k]) => !keys.includes(k)));
-    const v4 = {
-      ...strip(s0, ['amateurs', 'baseLeague']),
-      teams: Object.fromEntries(Object.entries(s0.teams).map(([id, t]) => [id, strip(t, ['academyIds', 'scoutLevel'])])),
-      players: Object.fromEntries(Object.entries(s0.players).map(([id, p]) => [id, strip(p, ['squad', 'growth'])])),
-    };
-    const s = migrateState(v4 as unknown as Record<string, unknown>, 4);
-    expect(s.teams.furia.academyIds).toHaveLength(5);
-    expect(s.teams.furia.scoutLevel).toBe(1);
-    expect(s.players.fallen.squad).toBe('principal');
-    expect(s.players.fallen.growth).toEqual({});
-    expect(s.players[s.teams.furia.academyIds[0]].squad).toBe('academy');
-    expect(s.amateurs).toHaveLength(40);
-    expect(s.baseLeague).toEqual({ season: 2026, table: {}, lastRound: [] });
-  });
-});
-
-describe('Migração v5 → v6', () => {
-  it('cria a comissão técnica de todos os times', async () => {
-    const { migrateState } = await import('./saveFormat');
-    const s0 = sampleState();
-    const v5 = {
-      ...Object.fromEntries(Object.entries(s0).filter(([k]) => k !== 'staff')),
-      amateurs: [],
-      baseLeague: { season: 2026, table: {}, lastRound: [] },
-      teams: Object.fromEntries(Object.entries(s0.teams).map(([id, t]) => [id, Object.fromEntries(Object.entries(t).filter(([k]) => k !== 'staff'))])),
-    };
-    const s = migrateState(v5 as unknown as Record<string, unknown>, 5);
-    expect(s.teams.furia.staff.tecnico).toBeTruthy();
-    expect(s.staff[s.teams.furia.staff.tecnico!].nick).toBe('sidde');
-    expect(Object.keys(s.staff).length).toBeGreaterThan(96);
-  });
-});
-
-describe('Migração v6 → v7', () => {
-  it('cria o manager padrão, com passagem no time atual', async () => {
-    const { migrateState } = await import('./saveFormat');
-    const s0 = sampleState();
-    const v6 = Object.fromEntries(Object.entries(s0).filter(([k]) => k !== 'manager'));
-    const s = migrateState(v6 as unknown as Record<string, unknown>, 6);
-    expect(s.manager.name).toBe('Manager');
-    expect(s.manager.stints[0]).toEqual({ teamId: 'furia', from: s0.date, to: null, reason: null });
-    expect(s.manager.goals).toHaveLength(3);
   });
 });
 
@@ -188,54 +111,5 @@ describe('Save com manager desempregado', () => {
     expect(rec.meta.teamName).toBe('Sem time');
     const back = parseImport(exportJson(rec));
     expect(back.ok).toBe(true);
-  });
-});
-
-describe('Migração v7 → v8', () => {
-  it('cria notícias, feed e posts vazios e humor 55 para todos', async () => {
-    const { migrateState } = await import('./saveFormat');
-    const s0 = sampleState();
-    const v7 = Object.fromEntries(Object.entries(s0).filter(([k]) => !['fans', 'news', 'feed', 'posts'].includes(k)));
-    const s = migrateState(v7 as unknown as Record<string, unknown>, 7);
-    expect(s.news).toEqual([]);
-    expect(s.feed).toEqual([]);
-    expect(s.posts).toEqual([]);
-    expect(Object.keys(s.fans)).toHaveLength(Object.keys(s0.teams).length);
-    expect(s.fans.furia).toBe(55);
-  });
-});
-
-describe('Migração v9 → v10', () => {
-  it('tira os times fictícios do tier 2, devolve os emprestados a eles e marca o calendário como tier 1', async () => {
-    const { migrateState } = await import('./saveFormat');
-    const s0 = sampleState();
-    const youth = Object.values(s0.players)[0];
-    const v9 = {
-      ...s0,
-      tier2: { teams: { nova: { id: 'nova', name: 'Nova Esports', shortName: 'NOVA', country: 'BR', color: '#fff', playerIds: [], mapStrength: {} } }, players: {}, points: { nova: 30 }, season: 2027, cup: null },
-      players: { ...s0.players, [youth.id]: { ...youth, loan: { teamId: 'nova', until: '2027-06-30', salaryShare: 0.5 } } },
-      calendar: s0.calendar.map(({ tier: _t, ...e }) => e),
-    };
-    const s = migrateState(v9 as unknown as Record<string, unknown>, 9);
-    expect(s.tier2.teams).toEqual({});
-    expect(s.tier2.cup).toBeNull();
-    expect(s.players[youth.id].loan).toBeFalsy();
-    expect(s.calendar.filter((e) => e.tier === 1)).toHaveLength(v9.calendar.length);
-    // Ganha o circuito tier 2/3 que ainda está por vir nos anos do calendário.
-    const circuit = s.calendar.filter((e) => e.tier > 1);
-    expect(circuit.length).toBeGreaterThan(0); // save de 11/11/2026: só o que resta de novembro
-    expect(circuit.every((e) => e.startDate > s.date && e.status === 'futuro')).toBe(true);
-    expect(s.calendar.map((e) => e.startDate)).toEqual([...s.calendar.map((e) => e.startDate)].sort());
-  });
-});
-
-describe('Save do manager da academy', () => {
-  it('mostra a academy no menu, não "Desempregado"', () => {
-    const s0 = sampleState();
-    const s = { ...s0, myTeamId: '', managerTeamId: '', manager: { ...s0.manager, academyOf: 'furia' } };
-    const rec = makeRecord(1, s);
-    expect(rec.meta.teamName).toBe(`${s0.teams.furia.name} Academy`);
-    expect(rec.meta.teamId).toBe('furia');
-    expect(rec.meta.status).toBe('Manager da academy');
   });
 });

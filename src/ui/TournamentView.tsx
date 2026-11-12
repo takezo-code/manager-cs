@@ -20,7 +20,6 @@ export const FORMAT_LABEL: Record<FormatId, string> = {
 };
 import type { Team } from '../engine/types';
 import { useGame, useWorld } from '../store/game';
-import { withAcademyTeams } from '../engine/tier2/model';
 import { MatchView } from './MatchView';
 import { TeamBadge } from './TeamBadge';
 
@@ -220,8 +219,7 @@ function myStatus(ev: CalendarEvent, myTeamId: string): string {
 /** Detalhe de um evento do calendário: chaves, jogos do último dia, colocações e prêmios. */
 export function EventPanel({ ev, onBack }: { ev: CalendarEvent; onBack: () => void }) {
   const world = useWorld();
-  // Academies (tier 3) não são times do ranking: monta na hora.
-  const teams = withAcademyTeams(world, [...(ev.tournament?.participants ?? []), ...ev.accepted, ...ev.qualified]);
+  const teams = world.teams;
   const players = useGame((s) => s.players);
   const myTeamId = useGame((s) => s.myTeamId)!;
   const results = useGame((s) => s.seriesResults);

@@ -23,9 +23,6 @@ const GOAL_TEXT: Record<GoalKind, string> = {
   major_top8: 'Chegar ao top 8 de um Major',
   jogar_major: 'Jogar um Major',
   caixa: 'Terminar com caixa positivo',
-  tier2_top8: 'Terminar no top 8 do ranking do tier 2',
-  promover_jovem: 'Promover ao menos 1 jovem ao time principal',
-  jovem_cresce5: 'Um jovem crescer +5 de OVR na temporada',
 };
 
 const GOALS_BY_SIZE: Record<ClubSize, GoalKind[]> = {
@@ -70,7 +67,6 @@ function goalMet(w: World, teamId: string, kind: GoalKind, year: number): boolea
     case 'caixa':
       return team.money > 0;
     default:
-      // Metas da academy são avaliadas em tier2/academyCareer.
       return false;
   }
 }

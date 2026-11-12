@@ -5,14 +5,12 @@ import { crowdBonus, lowMood } from './media/fans';
 import { staffAttrsOf } from './staff/effects';
 import { staffTitle } from './staff/career';
 import { titleReputation } from './manager/reputation';
-import { CALENDAR, DEVELOPMENT } from './config';
-import { developPlayer } from './development';
+import { CALENDAR } from './config';
 import { addDays, daysBetween } from './date';
 import { awardTournament, placeNumber } from './finance/prizes';
 import { recoverBetweenEvents } from './form';
 import { simulateMatch } from './match';
-import { eventWeightOf, placeFactorOf, tierWeight } from './ranking';
-import { academyLineupIds, academyTeam, academyTeamId, orgOfAcademy } from './tier2/model';
+import { eventWeightOf, placeFactorOf } from './ranking';
 import { createRng, hashString, type Rng } from './rng';
 import { validStarters } from './squad';
 import { pickAwards } from './tournament/awards';
@@ -37,51 +35,6 @@ function commitments(w: World, teamId: string): CalendarEvent[] {
 
 const conflictFor = (w: World, teamId: string, ev: CalendarEvent) => commitments(w, teamId).find((e) => e.id !== ev.id && overlaps(e, ev));
 
-const tierOf = (ev: CalendarEvent) => ev.tier ?? 1;
-/** Academy jogando um evento (não é time do ranking). */
-const isAcademy = (w: World, id: string) => !w.teams[id] && !!orgOfAcademy(id);
-/** Dono do cadastro: a academy usa o staff, a torcida e o caixa do time. */
-const ownerOf = (w: World, id: string) => (isAcademy(w, id) ? orgOfAcademy(id)! : id);
-const rosterOf = (w: World, id: string) => (isAcademy(w, id) ? academyLineupIds(w, orgOfAcademy(id)!) : w.teams[id].playerIds);
-/** Seed do evento: ranking; academies depois de todos os times. */
-const seedRank = (w: World, id: string) => w.teams[id]?.hltvRank ?? 1000 + (w.teams[orgOfAcademy(id) ?? '']?.hltvRank ?? 0);
-
-/**
- * Quem pode jogar o evento, na ordem de convite. Tier 1: o ranking inteiro. Tier 2/3: os times da região
- * na faixa do ranking e livres nas datas; faltando, os de ranking abaixo da faixa e, no tier 3, as academies
- * da região (no tier 2, os de cima da faixa).
- */
-export function candidates(w: World, ev: CalendarEvent): string[] {
-  const all = ranked(w);
-  if (tierOf(ev) === 1) return all.map((t) => t.id);
-  const [lo, hi] = ev.rankBand ?? [1, Infinity];
-  // Rodízio: quem jogou menos tier 2/3 no ano vem primeiro (empate pelo ranking).
-  const year = ev.startDate.slice(0, 4);
-  const played: Record<string, number> = {};
-  for (const e of w.calendar)
-    if (tierOf(e) > 1 && e.id !== ev.id && e.startDate.startsWith(year))
-      for (const id of e.tournament?.participants ?? e.accepted) played[id] = (played[id] ?? 0) + 1;
-  const byTurn = (ts: typeof all) => [...ts].sort((a, b) => (played[a.id] ?? 0) - (played[b.id] ?? 0) || a.hltvRank - b.hltvRank);
-  // O top 20 só joga tier 1.
-  const region = all.filter((t) => t.hltvRank > CALENDAR.tier1Only && (!ev.regions || ev.regions.includes(t.region)));
-  const ids = [...byTurn(region.filter((t) => t.hltvRank >= lo && t.hltvRank <= hi)), ...byTurn(region.filter((t) => t.hltvRank > hi))].map((t) => t.id);
-  const academies = (ts: typeof all) => ts.map((t) => academyTeamId(t.id)).filter((id) => academyLineupIds(w, orgOfAcademy(id)!).length >= 5);
-  // Academies não são time de tier 1: valem as de qualquer posição do time dono.
-  const inRegion = (t: (typeof all)[number]) => !ev.regions || ev.regions.includes(t.region);
-  if (tierOf(ev) === 3) {
-    // Manager da academy: a academy dele tem vaga garantida no tier 3 da região.
-    const mine = w.manager?.academyOf;
-    if (mine && w.teams[mine] && inRegion(w.teams[mine]) && academyLineupIds(w, mine).length >= 5) ids.unshift(academyTeamId(mine));
-    ids.push(...academies(all.filter(inRegion)));
-  }
-  else ids.push(...region.filter((t) => t.hltvRank < lo).reverse().map((t) => t.id));
-  // Último recurso para fechar a chave: times livres de outras regiões (da faixa para baixo) e, no tier 3, academies.
-  const others = all.filter((t) => t.hltvRank > CALENDAR.tier1Only && !region.includes(t));
-  ids.push(...others.filter((t) => t.hltvRank >= lo).map((t) => t.id));
-  if (tierOf(ev) === 3) ids.push(...academies(all.filter((t) => !inRegion(t))));
-  return [...new Set(ids)].filter((id) => !conflictFor(w, id, ev));
-}
-
 /**
  * Elenco temporário para o evento: time com menos de 5 joga com stand-ins (melhores agentes livres),
  * sem contrato e sem mudar o elenco de verdade.
@@ -89,14 +42,6 @@ export function candidates(w: World, ev: CalendarEvent): string[] {
 /** `used`: stand-ins já escalados hoje em outro evento (um agente livre não joga dois eventos ao mesmo tempo). */
 export function withStandins(w: World, teamIds: string[], used: Set<string> = new Set()): Record<string, Team> {
   const teams = { ...w.teams };
-  // Emprestados jogam pelo time do empréstimo (os 5 melhores são titulares).
-  const loaned: Record<string, string[]> = {};
-  for (const p of Object.values(w.players)) if (p.loan && teams[p.loan.teamId]) (loaned[p.loan.teamId] ??= []).push(p.id);
-  for (const id of teamIds) {
-    if (!loaned[id]) continue;
-    const roster = [...teams[id].playerIds, ...loaned[id]].sort((a, b) => playerOvr(w.players[b]) - playerOvr(w.players[a]));
-    teams[id] = { ...teams[id], playerIds: roster, starters: roster.slice(0, 5) };
-  }
   // Agentes livres por OVR: só monta a lista se algum time precisar de stand-in.
   let free: World['players'][string][] | null = null;
   for (const id of teamIds) {
@@ -122,7 +67,7 @@ export function issueInvites(world: World): Out {
   const events: WorldEvent[] = [];
   for (const ev0 of w.calendar) {
     if (ev0.status !== 'futuro' || daysBetween(w.date, ev0.startDate) > CALENDAR.inviteDaysBefore) continue;
-    const invited = (tierOf(ev0) === 1 ? ranked(w).map((t) => t.id) : candidates(w, ev0)).slice(0, ev0.teams - ev0.qualifierSlots);
+    const invited = ranked(w).slice(0, ev0.teams - ev0.qualifierSlots).map((t) => t.id);
     let ev: CalendarEvent = { ...ev0, status: 'convites', invited };
     if (ev.teams >= CALENDAR.mandatoryTeams) {
       w = setEvent(w, { ...ev, accepted: [...invited] });
@@ -131,10 +76,6 @@ export function issueInvites(world: World): Out {
       continue;
     }
     for (const teamId of invited) {
-      if (isAcademy(w, teamId)) {
-        ev = { ...ev, accepted: [...ev.accepted, teamId] };
-        continue;
-      }
       const team = w.teams[teamId];
       if (team.playerIds.length < 5) {
         ev = { ...ev, declined: [...ev.declined, teamId] };
@@ -226,7 +167,9 @@ export function runQualifiers(world: World): Out {
       ev = w.calendar.find((e) => e.id === ev.id)!;
     }
     const slots = ev.teams - ev.accepted.length;
-    const pool = candidates(w, ev).filter((id) => !ev.accepted.includes(id) && !ev.declined.includes(id) && rosterOf(w, id).length >= 5 && !conflictFor(w, id, ev));
+    const pool = ranked(w)
+      .map((t) => t.id)
+      .filter((id) => !ev.accepted.includes(id) && !ev.declined.includes(id) && w.teams[id].playerIds.length >= 5 && !conflictFor(w, id, ev));
     const qualified: string[] = [];
     if (ev.qualifierSlots === 0 || pool.length < slots * 4) {
       qualified.push(...pool.slice(0, slots)); // sem qualificatória: entram direto os próximos do ranking
@@ -262,14 +205,13 @@ export function startEvents(world: World): Out {
     // elenco incompleto e já se recompôs); o seu time só entra se não tiver recusado.
     const me = w.managerTeamId;
     const canFill = (id: string, strict: boolean) =>
-      !ids.has(id) && !(id === me && ev.declined.includes(me)) && !conflictFor(w, id, ev) && (!strict || rosterOf(w, id).length >= 5);
-    const pool = candidates(w, ev);
+      !ids.has(id) && !(id === me && ev.declined.includes(me)) && !conflictFor(w, id, ev) && (!strict || w.teams[id].playerIds.length >= 5);
     for (const strict of [true, false])
-      for (const id of pool) {
+      for (const t of ranked(w)) {
         if (ids.size >= ev.teams) break;
-        if (canFill(id, strict)) ids.add(id);
+        if (canFill(t.id, strict)) ids.add(t.id);
       }
-    const participants = [...ids].sort((a, b) => seedRank(w, a) - seedRank(w, b)).slice(0, ev.teams);
+    const participants = ranked(w).map((t) => t.id).filter((id) => ids.has(id)).slice(0, ev.teams);
     // Sem times para fechar a chave (mundo pequeno, todos ocupados): o evento é cancelado.
     if (participants.length < ev.teams) {
       w = { ...setEvent(w, { ...ev, status: 'encerrado', tournament: null }), inbox: w.inbox.filter((i) => i.eventId !== ev.id) };
@@ -279,7 +221,7 @@ export function startEvents(world: World): Out {
     const tournament = prepareFirstDay(createTournament({ id: ev.id, name: ev.name, format: ev.format, options: ev.options, prizePool: ev.prizePool }, participants, hashString(ev.id)));
     // Quem entra chega descansado (+30 de energia), e o convite sai da caixa de entrada.
     const players = { ...w.players };
-    for (const id of participants) for (const pid of rosterOf(w, id)) players[pid] = recoverBetweenEvents(players[pid]);
+    for (const id of participants) for (const pid of w.teams[id].playerIds) players[pid] = recoverBetweenEvents(players[pid]);
     w = { ...setEvent(w, { ...ev, status: 'em_andamento', tournament }), players, inbox: w.inbox.filter((i) => i.eventId !== ev.id) };
     if (participants.includes(w.managerTeamId)) events.push({ kind: 'info', text: `Começou ${ev.name}, em ${ev.city}.` });
   }
@@ -309,26 +251,13 @@ export function playEvents(world: World, _rng?: Rng, opts: { veto?: Record<strin
   for (const ev of w.calendar) {
     // Aberto na véspera: só joga a partir da data de início.
     if (ev.status !== 'em_andamento' || !ev.tournament || ev.startDate > w.date) continue;
-    const teams = withStandins(w, ev.tournament.participants.filter((id) => w.teams[id]), standins);
-    for (const id of ev.tournament.participants) if (isAcademy(w, id)) teams[id] = academyTeam(w, orgOfAcademy(id)!);
-    const own = (id: string) => ownerOf(w, id);
-    const out = playDay(ev.tournament, teams, w.players, (id) => staffAttrsOf(w, own(id)), (id, stage) => ({ crowd: crowdBonus(w, own(id), stage), lowMood: lowMood(w, own(id)) }), (sid) => opts.veto?.[`${ev.id}:${sid}`]);
+    const teams = withStandins(w, ev.tournament.participants, standins);
+    const out = playDay(ev.tournament, teams, w.players, (id) => staffAttrsOf(w, id), (id, stage) => ({ crowd: crowdBonus(w, id, stage), lowMood: lowMood(w, id) }), (sid) => opts.veto?.[`${ev.id}:${sid}`]);
     w = { ...w, players: out.players };
-    // Tier 2/3: jovens (até 21) crescem a cada mapa jogado, como na liga de base.
-    if (tierOf(ev) > 1) {
-      const players = { ...w.players };
-      for (const r of Object.values(out.results))
-        for (const m of r.maps)
-          for (const pid of Object.keys(m.stats))
-            if (players[pid] && players[pid].age <= DEVELOPMENT.youngAge) players[pid] = developPlayer(players[pid], DEVELOPMENT.perMapYoung);
-      w = { ...w, players };
-    }
     for (const [id, r] of Object.entries(out.results)) {
       results[id] = r;
-      // Jogos de academy não entram no histórico de séries (ranking, forma).
-      if (isAcademy(w, r.teamAId) || isAcademy(w, r.teamBId)) continue;
       const loser = r.winnerTeamId === r.teamAId ? r.teamBId : r.teamAId;
-      w = { ...w, seriesLog: [...w.seriesLog, { date: w.date, winner: r.winnerTeamId, loser, winnerRoster: [...(teams[r.winnerTeamId]?.starters ?? [])] }] };
+      w = { ...w, seriesLog: [...w.seriesLog, { date: w.date, winner: r.winnerTeamId, loser, winnerRoster: [...w.teams[r.winnerTeamId].starters] }] };
     }
     const t = out.tournament;
     if (!t.championId) {
@@ -337,14 +266,11 @@ export function playEvents(world: World, _rng?: Rng, opts: { veto?: Record<strin
     }
     // Encerramento: premiação, bônus de título, satisfação, MVP/EVPs e resultados para o ranking.
     w = setEvent(w, { ...ev, tournament: t, status: 'encerrado' });
-    w = awardTournament(w, t, tierOf(ev));
-    // Staff e reputação do manager só crescem com título de tier 1.
-    if (tierOf(ev) === 1) {
-      w = staffTitle(w, t.championId, createRng(hashString(`staff-titulo:${ev.id}`)));
-      w = titleReputation(w, t.championId, t.format, t.participants.length, t.name);
-    }
-    const weight = eventWeightOf(t.format, t.participants.length) * tierWeight(tierOf(ev));
-    const res = Object.entries(t.placements).filter(([teamId]) => w.teams[teamId]).map(([teamId, label]) => ({
+    w = awardTournament(w, t);
+    w = staffTitle(w, t.championId, createRng(hashString(`staff-titulo:${ev.id}`)));
+    w = titleReputation(w, t.championId, t.format, t.participants.length, t.name);
+    const weight = eventWeightOf(t.format, t.participants.length);
+    const res = Object.entries(t.placements).map(([teamId, label]) => ({
       eventId: ev.id,
       teamId,
       date: w.date,
@@ -355,11 +281,9 @@ export function playEvents(world: World, _rng?: Rng, opts: { veto?: Record<strin
     w = { ...w, results: [...w.results, ...res] };
     const { mvp } = pickAwards(t);
     const myPlace = t.placements[w.managerTeamId];
-    // Tier 2/3: só avisa quando o seu time jogou.
-    if (tierOf(ev) > 1 && !myPlace) continue;
     events.push({
       kind: myPlace === 'Campeão' ? 'ok' : 'info',
-      text: `${t.name}: campeão ${(w.teams[t.championId] ?? teams[t.championId]).shortName}${mvp ? `, MVP ${w.players[mvp].nick}` : ''}.${myPlace ? ` Seu time: ${myPlace}.` : ''}`,
+      text: `${t.name}: campeão ${w.teams[t.championId].shortName}${mvp ? `, MVP ${w.players[mvp].nick}` : ''}.${myPlace ? ` Seu time: ${myPlace}.` : ''}`,
     });
   }
   return { world: w, events, results };

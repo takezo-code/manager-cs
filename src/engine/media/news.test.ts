@@ -22,7 +22,7 @@ describe('Notícias', () => {
   });
 
   it('evento encerrado: campeão e MVP', () => {
-    const ev = w0.calendar.find((e) => e.tier === 1)!;
+    const ev = w0.calendar[0];
     const prev = { ...w0, calendar: [{ ...ev, status: 'em_andamento' as const }] };
     const mvp = w0.teams.vitality.playerIds[0];
     const next = {
@@ -39,7 +39,7 @@ describe('Notícias', () => {
     const p = w0.teams.furia.playerIds[0];
     const fired = { ...w0, managerTeamId: '', manager: { ...w0.manager, stints: [{ ...w0.manager.stints[0], to: today(w0), reason: 'demitido' }] } };
     expect(mediaDay(w0, fired, {}, noRumor).news.some((n) => n.kind === 'manager_demitido')).toBe(true);
-    const hired = { ...fired, managerTeamId: 'big' };
+    const hired = { ...fired, managerTeamId: 'fluxo' };
     expect(mediaDay(fired, hired, {}, noRumor).news.some((n) => n.kind === 'manager_contratado')).toBe(true);
     const late = { ...w0, teams: { ...w0.teams, furia: { ...w0.teams.furia, lateMonths: 1 } } };
     expect(mediaDay(w0, late, {}, noRumor).news.some((n) => n.kind === 'salarios_atrasados')).toBe(true);

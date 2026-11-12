@@ -13,27 +13,12 @@ import { expectedSponsorIncome, freeSlots, makeOffer, toContract } from './spons
 import { fmtMoney } from '../format';
 
 
-// Parte paga pelos times que recebem emprestados, calculada uma vez por mapa de jogadores.
-const loanCostCache = new WeakMap<World['players'], Record<string, number>>();
-function loanCosts(w: World): Record<string, number> {
-  let out = loanCostCache.get(w.players);
-  if (!out) {
-    out = {};
-    for (const p of Object.values(w.players)) if (p.loan) out[p.loan.teamId] = (out[p.loan.teamId] ?? 0) + (p.contract?.salary ?? 0) * p.loan.salaryShare;
-    loanCostCache.set(w.players, out);
-  }
-  return out;
-}
-
 export const payroll = (w: World, team: Team) =>
   [...team.playerIds, ...(team.academyIds ?? [])].reduce((s, id) => {
     const p = w.players[id];
-    // Emprestado: o outro time paga a parte dele.
-    return s + (p?.contract?.salary ?? 0) * (1 - (p?.loan?.salaryShare ?? 0));
+    return s + (p?.contract?.salary ?? 0);
   }, 0) +
-  Object.values(team.staff ?? {}).reduce((s, id) => s + (id ? (w.staff?.[id]?.contract?.salary ?? 0) : 0), 0) +
-  // Emprestados a este time: paga a parte combinada.
-  (loanCosts(w)[team.id] ?? 0);
+  Object.values(team.staff ?? {}).reduce((s, id) => s + (id ? (w.staff?.[id]?.contract?.salary ?? 0) : 0), 0);
 
 export const sponsorIncome = (team: Team, date: string) =>
   team.sponsors.filter((s) => s.endDate >= date).reduce((s, x) => s + x.monthly, 0);

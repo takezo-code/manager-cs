@@ -380,8 +380,6 @@ export const FINANCE = {
   /** Master por mês: 200 mil × 0,96^(posição − 1) até o 32º, depois × 0,99 por posição. #1 = 200 mil; #10 ≈ 138 mil; #32 ≈ 56 mil; #100 ≈ 28 mil. */
   masterBase: 200_000,
   masterDecay: 0.96,
-  /** Depois do 32º a queda é mais lenta (tier 2/3 ainda tem patrocínio). */
-  masterTailDecay: 0.99,
   /** Comum vale 30% do master. */
   regularShare: 0.3,
   /** Variação das ofertas (±). */
@@ -511,8 +509,6 @@ export const MORALE = {
 export const CALENDAR = {
   /** Convites saem N dias antes do evento. */
   inviteDaysBefore: 21,
-  /** O top N do ranking só joga tier 1 (nunca é chamado para tier 2/3). */
-  tier1Only: 20,
   /** Eventos com esse número de times (Majors, EWC) são obrigatórios para os convidados. */
   mandatoryTeams: 32,
   /** Qualificatória (mata-mata MD3) N dias antes do evento. */
@@ -550,8 +546,6 @@ export const RANKING = {
     { upTo: 99, factor: 0.05 },
   ],
   eventWeights: { major: 1, big: 0.8, mid: 0.6, small: 0.4 },
-  /** Peso do tier sobre o peso do evento: tier 2 vale 1/4, tier 3 vale 1/10. */
-  tierWeights: { 1: 1, 2: 0.25, 3: 0.1 } as Record<1 | 2 | 3, number>,
 };
 
 // ---------- Treino e descanso ----------
@@ -590,8 +584,6 @@ export const DEVELOPMENT = {
   ],
   /** Piso de cada atributo na queda por idade. */
   minAttr: 40,
-  /** Crescimento extra por mapa jogado (até 21 anos), na liga de base. */
-  perMapYoung: 0.15,
   youngAge: 21,
 };
 
@@ -599,6 +591,8 @@ export const DEVELOPMENT = {
 
 export const ACADEMY = {
   maxSize: 6,
+  /** OVR extra por mês de treino na academy (os jovens não jogam partidas). */
+  trainingGrowth: 0.6,
   /** Tamanho da academy dos times da IA. */
   aiSize: 5,
   minAge: 16,
@@ -654,14 +648,6 @@ export const AMATEURS = {
   gemMaxGc: 8,
   gemPotential: 85,
   countries: ['BR', 'AR', 'US', 'RU', 'UA', 'KZ', 'PL', 'DK', 'SE', 'FR', 'DE', 'TR', 'MN', 'CN', 'FI', 'ES', 'PT', 'CZ'],
-};
-
-/** Liga de base das academies (MD1 simulada toda segunda). */
-export const BASE_LEAGUE = {
-  firstMonth: 2,
-  lastMonth: 11,
-  /** Diferença de OVR médio que dá ~73% de chance ao mais forte. */
-  ratingScale: 5,
 };
 
 /** Comissão técnica. */
@@ -816,31 +802,6 @@ export const MEDIA = {
   postNoise: 1,
   goodPost: 2,
   communicationGrowth: 0.5,
-};
-
-/** Tier 2: academies + times fictícios, copas mensais e empréstimos. */
-export const TIER2 = {
-  rosterSize: 6,
-  /** Academies na Tier 2 Cup: as dos times até esta posição do ranking. */
-  academies: 32,
-  levelMin: 62,
-  levelMax: 74,
-  ageMin: 18,
-  ageMax: 27,
-  /** Força média por mapa das academies (os fictícios ficam em torno de 68). */
-  academyMapLevel: 62,
-  /** Fictícios se aposentam com esta idade; o substituto tem até rookieMaxAge. */
-  retireAge: 32,
-  rookieMaxAge: 22,
-  /** Copa mensal. */
-  cupDay: '05',
-  firstMonth: 2,
-  lastMonth: 11,
-  cupTeams: 16,
-  /** Empréstimos. */
-  loanRosterMax: 7,
-  loanSalaryShare: 0.5,
-  recallFee: 20_000,
 };
 
 /** Países de onde vêm os jovens da academy e os amadores, por região (repetição = mais comum). */
