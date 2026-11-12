@@ -31,6 +31,7 @@ function sampleState(): SavedState {
     news: [],
     feed: [],
     posts: [],
+    tier2: { teams: {}, players: {}, points: {}, season: 2026, cup: null },
     calendar: [{ ...buildYear(2026).find((e) => e.templateId === 'iem-china')!, status: 'em_andamento', tournament: out.tournament }],
     teams,
     players: out.players,
@@ -201,5 +202,16 @@ describe('Migração v7 → v8', () => {
     expect(s.posts).toEqual([]);
     expect(Object.keys(s.fans)).toHaveLength(Object.keys(s0.teams).length);
     expect(s.fans.furia).toBe(55);
+  });
+});
+
+describe('Migração v8 → v9', () => {
+  it('gera o tier 2', async () => {
+    const { migrateState } = await import('./saveFormat');
+    const s0 = sampleState();
+    const v8 = Object.fromEntries(Object.entries(s0).filter(([k]) => k !== 'tier2'));
+    const s = migrateState(v8 as unknown as Record<string, unknown>, 8);
+    expect(Object.keys(s.tier2.teams)).toHaveLength(16);
+    expect(s.tier2.cup).toBeNull();
   });
 });

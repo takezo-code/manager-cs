@@ -1,5 +1,6 @@
 // Passagem do tempo: um dia de cada vez (calendário, treino, fechamento do mês, ranking e mercado).
 import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_STAFF, INITIAL_TEAMS } from '../data';
+import { generateTier2 } from './tier2/model';
 import { mediaDay } from './media/day';
 import { addToAcademy, generateYouth } from './academy';
 import { buildYear, teamBusy } from './calendar';
@@ -59,6 +60,7 @@ export function createWorld(managerTeamId: string, seed = 1, profile: ManagerPro
     news: [],
     feed: [],
     posts: [],
+    tier2: generateTier2(createRng(hashString(`tier2:${seed}`)), START_DATE),
   };
   w = { ...w, amateurs: generateAmateurs(rng, AMATEURS.poolSize, START_DATE) };
   if (managerTeamId) w = assignGoals(w, managerTeamId);

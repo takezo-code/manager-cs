@@ -792,3 +792,14 @@ export const MEDIA = {
   goodPost: 2,
   communicationGrowth: 0.5,
 };
+
+/** Tier 2: academies + times fictícios, copas mensais e empréstimos. */
+export const TIER2 = {
+  rosterSize: 6,
+  levelMin: 62,
+  levelMax: 74,
+  ageMin: 18,
+  ageMax: 27,
+  /** Força média por mapa das academies (os fictícios ficam em torno de 68). */
+  academyMapLevel: 62,
+};

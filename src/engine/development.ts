@@ -33,7 +33,10 @@ export function developPlayer(p: Player, ovrDelta: number): Player {
 export function monthlyDevelopment(w: World): World {
   const players = { ...w.players };
   for (const [id, p] of Object.entries(players)) players[id] = developPlayer(p, monthlyGrowth(p.age));
-  return { ...w, players };
+  // Jogadores fictícios do tier 2 também evoluem.
+  const t2 = { ...(w.tier2?.players ?? {}) };
+  for (const [id, p] of Object.entries(t2)) t2[id] = developPlayer(p, monthlyGrowth(p.age));
+  return { ...w, players, ...(w.tier2 ? { tier2: { ...w.tier2, players: t2 } } : {}) };
 }
 
 /** 1º de janeiro: jogadores e comissão fazem aniversário; amadores que passam de 19 anos saem do banco da GC/FACEIT. */
@@ -42,6 +45,7 @@ export function ageUp(w: World): World {
     ...w,
     players: Object.fromEntries(Object.entries(w.players).map(([id, p]) => [id, { ...p, age: p.age + 1 }])),
     staff: Object.fromEntries(Object.entries(w.staff ?? {}).map(([id, s]) => [id, { ...s, age: s.age + 1 }])),
+    ...(w.tier2 ? { tier2: { ...w.tier2, players: Object.fromEntries(Object.entries(w.tier2.players).map(([id, p]) => [id, { ...p, age: p.age + 1 }])) } } : {}),
     amateurs: (w.amateurs ?? [])
       .map((a) => ({ ...a, player: { ...a.player, age: a.player.age + 1 } }))
       .filter((a) => a.player.age <= ACADEMY.maxAge),
