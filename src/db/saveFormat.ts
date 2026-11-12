@@ -6,7 +6,7 @@ import { newBaseSeason } from '../engine/baseLeague';
 import { DEFAULT_PROFILE, newManager } from '../engine/manager/model';
 import { assignGoals } from '../engine/manager/board';
 import { buildYear, type CalendarEvent } from '../engine/calendar';
-import { ACADEMY, AMATEURS } from '../engine/config';
+import { ACADEMY, AMATEURS, MEDIA } from '../engine/config';
 import { START_DATE, addDays } from '../engine/date';
 import { createGroup } from '../engine/tournament/doubleElim';
 import { initialSponsors } from '../engine/finance/sponsors';
@@ -17,8 +17,8 @@ import type { Tournament } from '../engine/tournament/types';
 import type { MatchResult, Player, Team } from '../engine/types';
 import type { World, WorldEvent } from '../engine/world';
 
-/** v1: passo 6. v2: mercado. v3: finanças e satisfação. v4: calendário, ranking, prêmios e treino. v5: academy, olheiro, GC/FACEIT e idade. v6: comissão técnica. v7: carreira do manager. */
-export const SAVE_VERSION = 7;
+/** v1: passo 6. v2: mercado. v3: finanças e satisfação. v4: calendário, ranking, prêmios e treino. v5: academy, olheiro, GC/FACEIT e idade. v6: comissão técnica. v7: carreira do manager. v8: mídia (notícias, Twitter, Instagram, torcida). */
+export const SAVE_VERSION = 8;
 export const SLOTS = [1, 2, 3] as const;
 export type Slot = (typeof SLOTS)[number];
 
@@ -82,6 +82,14 @@ export function migrateState(raw: Record<string, unknown>, version: number): Sav
     s = { ...s, manager: s.manager ?? newManager(DEFAULT_PROFILE, s.myTeamId, s.date) };
     if (s.myTeamId && !s.manager.goals.length) s = { ...s, ...assignGoals({ ...s, managerTeamId: s.myTeamId }, s.myTeamId) };
   }
+  if (version < 8)
+    s = {
+      ...s,
+      fans: s.fans ?? Object.fromEntries(Object.keys(s.teams).map((id) => [id, MEDIA.startMood])),
+      news: s.news ?? [],
+      feed: s.feed ?? [],
+      posts: s.posts ?? [],
+    };
   return s;
 }
 

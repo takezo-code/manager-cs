@@ -20,8 +20,10 @@ import { AcademyPanel } from './AcademyPanel';
 import { StaffPanel } from './StaffPanel';
 import { ManagerPanel } from './ManagerPanel';
 import { UnemployedView } from './UnemployedView';
+import { NewsPanel } from './NewsPanel';
+import { SocialPanel } from './SocialPanel';
 
-type Tab = 'elenco' | 'manager' | 'comissao' | 'academy' | 'calendario' | 'ranking' | 'mercado' | 'financas' | 'mensagens' | 'amistoso';
+type Tab = 'elenco' | 'manager' | 'comissao' | 'academy' | 'calendario' | 'ranking' | 'mercado' | 'financas' | 'noticias' | 'social' | 'mensagens' | 'amistoso';
 
 const TAB_LABEL: Record<Tab, string> = {
   elenco: 'Elenco',
@@ -32,6 +34,8 @@ const TAB_LABEL: Record<Tab, string> = {
   ranking: 'Ranking',
   mercado: 'Mercado',
   financas: 'Finanças',
+  noticias: 'Notícias',
+  social: 'Social',
   mensagens: 'Mensagens',
   amistoso: 'Amistoso',
 };
@@ -188,6 +192,14 @@ function Dashboard() {
       ) : tab === 'calendario' ? (
         <div className="mt-4">
           <CalendarPanel />
+        </div>
+      ) : tab === 'noticias' ? (
+        <div className="mt-4">
+          <NewsPanel />
+        </div>
+      ) : tab === 'social' ? (
+        <div className="mt-4">
+          <SocialPanel />
         </div>
       ) : tab === 'manager' ? (
         <div className="mt-4">

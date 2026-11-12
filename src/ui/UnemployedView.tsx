@@ -5,11 +5,13 @@ import { useGame, useWorld } from '../store/game';
 import { CalendarPanel } from './CalendarPanel';
 import { ManagerOfferItem } from './ManagerOffer';
 import { ManagerPanel } from './ManagerPanel';
+import { NewsPanel } from './NewsPanel';
+import { SocialPanel } from './SocialPanel';
 import { RankingPanel } from './RankingPanel';
 import { TimeBar } from './TimeBar';
 
-type Tab = 'propostas' | 'perfil' | 'calendario' | 'ranking';
-const LABEL: Record<Tab, string> = { propostas: 'Propostas', perfil: 'Perfil', calendario: 'Calendário', ranking: 'Ranking' };
+type Tab = 'propostas' | 'perfil' | 'noticias' | 'twitter' | 'calendario' | 'ranking';
+const LABEL: Record<Tab, string> = { propostas: 'Propostas', perfil: 'Perfil', noticias: 'Notícias', twitter: 'Twitter', calendario: 'Calendário', ranking: 'Ranking' };
 
 /** Sem time: o tempo passa, o cenário segue e as propostas chegam conforme a reputação. */
 export function UnemployedView() {
@@ -86,6 +88,10 @@ export function UnemployedView() {
           </div>
         ) : tab === 'perfil' ? (
           <ManagerPanel />
+        ) : tab === 'noticias' ? (
+          <NewsPanel />
+        ) : tab === 'twitter' ? (
+          <SocialPanel />
         ) : tab === 'calendario' ? (
           <CalendarPanel />
         ) : (

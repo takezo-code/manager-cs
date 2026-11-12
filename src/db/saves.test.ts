@@ -187,3 +187,17 @@ describe('Save com manager desempregado', () => {
     expect(back.ok).toBe(true);
   });
 });
+
+describe('Migração v7 → v8', () => {
+  it('cria notícias, feed e posts vazios e humor 55 para todos', async () => {
+    const { migrateState } = await import('./saveFormat');
+    const s0 = sampleState();
+    const v7 = Object.fromEntries(Object.entries(s0).filter(([k]) => !['fans', 'news', 'feed', 'posts'].includes(k)));
+    const s = migrateState(v7 as unknown as Record<string, unknown>, 7);
+    expect(s.news).toEqual([]);
+    expect(s.feed).toEqual([]);
+    expect(s.posts).toEqual([]);
+    expect(Object.keys(s.fans)).toHaveLength(Object.keys(s0.teams).length);
+    expect(s.fans.furia).toBe(55);
+  });
+});

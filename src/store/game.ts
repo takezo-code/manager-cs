@@ -11,6 +11,7 @@ import { simulateMatch } from '../engine/match';
 import { staffAttrsOf } from '../engine/staff/effects';
 import { onYouthPromoted } from '../engine/manager/effects';
 import { acceptOffer, askBudget, declineOffer, resign } from '../engine/manager/offers';
+import { makePost, POST_LABEL, type PostKind } from '../engine/media/instagram';
 import { startCourse } from '../engine/staff/career';
 import { hireStaff, releaseStaff, respondStaffInbox } from '../engine/staff/market';
 import type { StaffAttr } from '../engine/types';
@@ -123,6 +124,7 @@ export interface GameState {
   declineManagerOffer(itemId: string): void;
   askBoardBudget(itemId: string): void;
   resignManager(): void;
+  postInstagram(kind: PostKind): void;
 }
 
 type WorldFields =
@@ -495,6 +497,15 @@ export const useGame = create<GameState>((set, get) => {
       const s = get();
       const out = askBudget(worldOf(s), itemId, createRng(hashString(`orcamento:${itemId}`)));
       commitWorld(out.world, [out.event], { message: { kind: out.event.kind === 'ok' ? 'ok' : 'erro', text: out.event.text } });
+    },
+
+    postInstagram: (kind) => {
+      const w = worldOf(get());
+      const r = makePost(w, kind, createRng(hashString(`post:${w.date}:${kind}`)));
+      if (!r.ok) return set({ message: { kind: 'erro', text: r.error } });
+      const p = r.world.posts[0];
+      const how = p.reception >= 2 ? 'foi bem recebido' : p.reception <= -2 ? 'foi mal recebido' : 'teve recepção morna';
+      commitWorld(r.world, [], { message: { kind: p.reception <= -2 ? 'erro' : 'ok', text: `Post "${POST_LABEL[kind]}" ${how}.` } });
     },
 
     resignManager: () => {
