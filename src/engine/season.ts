@@ -2,6 +2,7 @@
 import { INITIAL_PLAYERS, INITIAL_RELATIONS, INITIAL_STAFF, INITIAL_TEAMS } from '../data';
 import { generateTier2 } from './tier2/model';
 import { cupDayWithEvents, newTier2Season, startCup } from './tier2/cups';
+import { loansDay } from './tier2/loans';
 import { mediaDay } from './media/day';
 import { addToAcademy, generateYouth } from './academy';
 import { buildYear, teamBusy } from './calendar';
@@ -122,7 +123,8 @@ export function dailyTick(world: World, opts: { rng?: Rng } = {}): { world: Worl
     w = monthlySatisfaction(w);
     add(monthlyRequests(w));
   }
-  // Tier 2: copa do mês.
+  // Tier 2: empréstimos que acabaram e a copa do mês.
+  add(loansDay(w));
   w = startCup(w, rng);
   add(cupDayWithEvents(w));
   if (isMonday(w.date)) {

@@ -14,7 +14,11 @@ import { fmtMoney } from '../format';
 
 
 export const payroll = (w: World, team: Team) =>
-  [...team.playerIds, ...(team.academyIds ?? [])].reduce((s, id) => s + (w.players[id]?.contract?.salary ?? 0), 0) +
+  [...team.playerIds, ...(team.academyIds ?? [])].reduce((s, id) => {
+    const p = w.players[id];
+    // Emprestado: o outro time paga a parte dele.
+    return s + (p?.contract?.salary ?? 0) * (1 - (p?.loan?.salaryShare ?? 0));
+  }, 0) +
   Object.values(team.staff ?? {}).reduce((s, id) => s + (id ? (w.staff?.[id]?.contract?.salary ?? 0) : 0), 0);
 
 export const sponsorIncome = (team: Team, date: string) =>

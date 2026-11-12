@@ -807,4 +807,8 @@ export const TIER2 = {
   firstMonth: 2,
   lastMonth: 11,
   cupTeams: 16,
+  /** Empréstimos. */
+  loanRosterMax: 7,
+  loanSalaryShare: 0.5,
+  recallFee: 20_000,
 };

@@ -76,7 +76,7 @@ export function signAmateur(w: World, playerId: string): { ok: true; world: Worl
   const a = w.amateurs.find((x) => x.player.id === playerId);
   if (!a) return { ok: false, error: 'Esse amador não está mais disponível.' };
   const t = w.teams[w.managerTeamId];
-  if ((t.academyIds ?? []).length >= ACADEMY.maxSize) return { ok: false, error: `A academy está cheia (${ACADEMY.maxSize}).` };
+  if ((t.academyIds ?? []).filter((id) => !w.players[id]?.loan).length >= ACADEMY.maxSize) return { ok: false, error: `A academy está cheia (${ACADEMY.maxSize}).` };
   if (t.money < a.fee) return { ok: false, error: 'Dinheiro insuficiente para as luvas.' };
   const player: Player = {
     ...a.player,

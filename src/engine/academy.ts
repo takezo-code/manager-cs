@@ -86,6 +86,7 @@ export function addToAcademy(w: World, teamId: string, youth: Player[]): World {
 export function promote(w: World, playerId: string): { ok: true; world: World } | { ok: false; error: string } {
   const p = w.players[playerId];
   if (!p || p.squad !== 'academy' || !p.teamId) return { ok: false, error: 'Esse jogador não está numa academy.' };
+  if (p.loan) return { ok: false, error: `${p.nick} está emprestado. Chame de volta antes de promover.` };
   const t = w.teams[p.teamId];
   if (t.playerIds.length >= MARKET.squadMax) return { ok: false, error: `O elenco principal está cheio (${MARKET.squadMax}). Venda ou troque alguém antes.` };
   const teams = {
@@ -108,7 +109,7 @@ function releaseYouth(w: World, playerId: string): World {
   return {
     ...w,
     teams: { ...w.teams, [t.id]: { ...t, academyIds: t.academyIds.filter((id) => id !== playerId) } },
-    players: { ...w.players, [playerId]: { ...p, teamId: null, contract: null, squad: 'principal' } },
+    players: { ...w.players, [playerId]: { ...p, teamId: null, contract: null, squad: 'principal', loan: null } },
     transferLog: [{ date: w.date, kind: 'dispensa' as const, playerId, fromTeamId: t.id, toTeamId: null, fee: 0 }, ...w.transferLog].slice(0, 300),
   };
 }
@@ -124,8 +125,13 @@ export function academyYearEnd(world: World, rngIn?: Rng): { world: World; event
   const me = w.managerTeamId;
   for (const t of Object.values(w.teams)) {
     for (const id of t.academyIds ?? []) {
-      const p = w.players[id];
+      let p = w.players[id];
       if (p.age <= ACADEMY.maxAge) continue;
+      // Fez 20 emprestado: o empréstimo acaba e vale a regra da academy.
+      if (p.loan) {
+        p = { ...p, loan: null };
+        w = { ...w, players: { ...w.players, [id]: p } };
+      }
       if (t.id === me) {
         w = releaseYouth(w, id);
         events.push({ kind: 'alerta', text: `${p.nick} fez ${p.age} anos e deixou a academy como agente livre.` });

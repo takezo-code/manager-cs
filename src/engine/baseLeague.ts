@@ -25,7 +25,8 @@ export const newBaseSeason = (season: number): BaseLeague => ({ season, table: {
 function lineup(w: World, teamId: string) {
   return (w.teams[teamId].academyIds ?? [])
     .map((id) => w.players[id])
-    .filter(Boolean)
+    // Emprestados jogam no time do empréstimo.
+    .filter((p) => p && !p.loan)
     .sort((x, y) => baseOvr(y) - baseOvr(x))
     .slice(0, 5);
 }
