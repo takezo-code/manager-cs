@@ -67,7 +67,7 @@ export function issueInvites(world: World): Out {
     if (ev0.status !== 'futuro' || daysBetween(w.date, ev0.startDate) > CALENDAR.inviteDaysBefore) continue;
     const invited = ranked(w).slice(0, ev0.teams - ev0.qualifierSlots).map((t) => t.id);
     let ev: CalendarEvent = { ...ev0, status: 'convites', invited };
-    if (ev.teams >= Object.keys(w.teams).length) {
+    if (ev.teams >= CALENDAR.mandatoryTeams) {
       w = setEvent(w, { ...ev, accepted: [...invited] });
       if (invited.includes(w.managerTeamId))
         events.push({ kind: 'info', text: `${ev.name} (${ev.city}): participação confirmada (todos os times disputam).` });

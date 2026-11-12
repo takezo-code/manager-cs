@@ -27,11 +27,22 @@ function addGain(p: Player, attr: AttrKey, amount: number): Player {
 
 /** Um dia livre do time: treino (ganha atributo, gasta energia), descanso (energia e satisfação) ou dividido (metade de cada). */
 export function trainDay(w: World, teamId: string): World {
-  const team = w.teams[teamId];
+  return trainTeams(w, [teamId]);
+}
+
+/** `trainDay` de vários times de uma vez (copia jogadores e times uma vez só). */
+export function trainTeams(w: World, teamIds: string[]): World {
+  const players = { ...w.players };
+  const teams = { ...w.teams };
+  for (const teamId of teamIds) trainInto(players, teams, teamId);
+  return { ...w, players, teams };
+}
+
+function trainInto(players: World['players'], teams: World['teams'], teamId: string): void {
+  const team = teams[teamId];
   const plan = team.training ?? { mode: 'dividido', focus: 'mira' };
   const train = plan.mode === 'treino' ? 1 : plan.mode === 'dividido' ? 0.5 : 0;
   const rest = 1 - train;
-  const players = { ...w.players };
   for (const id of team.playerIds) {
     let p = players[id];
     if (train > 0 && isAttrFocus(plan.focus)) {
@@ -42,11 +53,9 @@ export function trainDay(w: World, teamId: string): World {
     const satisfaction = Math.min(100, p.satisfaction + rest * TRAINING.restSatisfaction);
     players[id] = { ...p, energy, satisfaction };
   }
-  let teams = w.teams;
   if (train > 0 && !isAttrFocus(plan.focus)) {
     const map = plan.focus;
     const cur = team.mapStrength[map];
-    teams = { ...teams, [teamId]: { ...team, mapStrength: { ...team.mapStrength, [map]: Math.min(TRAINING.mapMax, cur + TRAINING.mapGainPerDay * train) } } };
+    teams[teamId] = { ...team, mapStrength: { ...team.mapStrength, [map]: Math.min(TRAINING.mapMax, cur + TRAINING.mapGainPerDay * train) } };
   }
-  return { ...w, players, teams };
 }

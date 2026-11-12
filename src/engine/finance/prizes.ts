@@ -1,7 +1,7 @@
 // Premiação e efeitos do fim de campeonato (dinheiro, bônus de patrocínio, satisfação, MVP e EVPs).
 import { MORALE, PRIZE_SHARES } from '../config';
 import { roundTo } from '../format';
-import { applySatisfaction } from '../morale/satisfaction';
+import { withSatisfaction } from '../morale/satisfaction';
 import { grantAwards } from '../tournament/awards';
 import type { Tournament } from '../tournament/types';
 import type { World } from '../world';
@@ -44,7 +44,11 @@ export function awardTournament(world: World, t: Tournament): World {
     const place = placeNumber(label);
     const delta =
       place === 1 ? MORALE.events.title : place === 2 ? MORALE.events.vice : place <= 4 ? MORALE.events.top4 : place > half ? MORALE.events.earlyExit : 0;
-    if (delta) for (const pid of w.teams[teamId].playerIds) w = applySatisfaction(w, pid, delta);
+    if (delta) {
+      const players = { ...w.players };
+      for (const pid of w.teams[teamId].playerIds) players[pid] = withSatisfaction(players[pid], delta);
+      w = { ...w, players };
+    }
   }
   if (t.championId) w = payTitleBonuses(w, t.championId, t.name);
   return grantAwards(w, t);

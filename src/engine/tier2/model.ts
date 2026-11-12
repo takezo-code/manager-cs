@@ -133,8 +133,12 @@ export function tier2Teams(w: World): Record<string, Team> {
   const standins = [...(w.amateurs ?? [])].sort((a, b) => baseOvr(b.player) - baseOvr(a.player)).map((a) => a.player.id);
   let next = 0;
   const rank = (id: string) => 1000 - (w.tier2?.points[id] ?? 0);
+  // Provisório até o circuito real: só as academies do top 32 disputam a Tier 2 Cup.
   for (const t of Object.values(w.teams)) {
     const id = academyTeamId(t.id);
+    // Quem já está na copa do mês e a academy do manager continuam mesmo se o time cair no ranking.
+    const keep = w.tier2?.cup?.participants.includes(id) || t.id === w.managerTeamId || t.id === w.manager?.academyOf;
+    if (t.hltvRank > TIER2.academies && !keep) continue;
     const roster = byOvr(academyLineupIds(w, t.id));
     while (roster.length < 5 && next < standins.length) roster.push(standins[next++]);
     out[id] = asTeam({ id, name: `${t.name} Academy`, shortName: `${t.shortName}.A`, country: t.country, color: t.color, mapStrength: mapStrengthAround(id, TIER2.academyMapLevel) }, roster, rank(id));

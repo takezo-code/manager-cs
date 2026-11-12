@@ -3,7 +3,7 @@
     "id": "st-mouz-tecnico",
     "nick": "sycrone",
     "country": "DK",
-    "age": 33,
+    "age": 28,
     "role": "tecnico",
     "attrs": {
       "TAT": 88,
@@ -67,10 +67,10 @@
     "id": "st-furia-tecnico",
     "nick": "sidde",
     "country": "BR",
-    "age": 34,
+    "age": 40,
     "role": "tecnico",
     "attrs": {
-      "TAT": 83,
+      "TAT": 84,
       "VET": 84,
       "GES": 87
     },
@@ -92,15 +92,15 @@
     "age": 27,
     "role": "analista",
     "attrs": {
-      "LEI": 81,
+      "LEI": 82,
       "PRE": 79
     },
     "teamId": "furia",
     "contract": {
       "teamId": "furia",
-      "salary": 10600,
+      "salary": 11100,
       "endDate": "2028-04-30",
-      "releaseClause": 127200
+      "releaseClause": 133200
     },
     "course": null,
     "titles": 0,
@@ -114,7 +114,7 @@
     "role": "psicologo",
     "attrs": {
       "PRS": 81,
-      "MOT": 82
+      "MOT": 83
     },
     "teamId": "furia",
     "contract": {
@@ -131,19 +131,19 @@
     "id": "st-vitality-tecnico",
     "nick": "XTQZZZ",
     "country": "FR",
-    "age": 34,
+    "age": 38,
     "role": "tecnico",
     "attrs": {
-      "TAT": 82,
+      "TAT": 83,
       "VET": 82,
       "GES": 89
     },
     "teamId": "vitality",
     "contract": {
       "teamId": "vitality",
-      "salary": 12600,
+      "salary": 13200,
       "endDate": "2029-01-31",
-      "releaseClause": 151200
+      "releaseClause": 158400
     },
     "course": null,
     "titles": 0,
@@ -156,15 +156,15 @@
     "age": 31,
     "role": "analista",
     "attrs": {
-      "LEI": 81,
-      "PRE": 80
+      "LEI": 82,
+      "PRE": 81
     },
     "teamId": "vitality",
     "contract": {
       "teamId": "vitality",
-      "salary": 11100,
+      "salary": 11600,
       "endDate": "2028-12-31",
-      "releaseClause": 133200
+      "releaseClause": 139200
     },
     "course": null,
     "titles": 0,
@@ -178,7 +178,7 @@
     "role": "psicologo",
     "attrs": {
       "PRS": 76,
-      "MOT": 81
+      "MOT": 82
     },
     "teamId": "vitality",
     "contract": {
@@ -195,19 +195,19 @@
     "id": "st-spirit-tecnico",
     "nick": "hally",
     "country": "RU",
-    "age": 35,
+    "age": 29,
     "role": "tecnico",
     "attrs": {
-      "TAT": 82,
-      "VET": 88,
-      "GES": 83
+      "TAT": 83,
+      "VET": 89,
+      "GES": 84
     },
     "teamId": "spirit",
     "contract": {
       "teamId": "spirit",
-      "salary": 12600,
+      "salary": 13200,
       "endDate": "2029-04-30",
-      "releaseClause": 151200
+      "releaseClause": 158400
     },
     "course": null,
     "titles": 0,
@@ -220,15 +220,15 @@
     "age": 28,
     "role": "analista",
     "attrs": {
-      "LEI": 83,
-      "PRE": 83
+      "LEI": 84,
+      "PRE": 84
     },
     "teamId": "spirit",
     "contract": {
       "teamId": "spirit",
-      "salary": 12100,
+      "salary": 12600,
       "endDate": "2029-07-31",
-      "releaseClause": 145200
+      "releaseClause": 151200
     },
     "course": null,
     "titles": 0,
@@ -241,15 +241,15 @@
     "age": 37,
     "role": "psicologo",
     "attrs": {
-      "PRS": 78,
-      "MOT": 76
+      "PRS": 79,
+      "MOT": 77
     },
     "teamId": "spirit",
     "contract": {
       "teamId": "spirit",
-      "salary": 9200,
+      "salary": 9700,
       "endDate": "2028-10-31",
-      "releaseClause": 110400
+      "releaseClause": 116400
     },
     "course": null,
     "titles": 0,
@@ -259,19 +259,19 @@
     "id": "st-aurora-tecnico",
     "nick": "ash",
     "country": "GB",
-    "age": 32,
+    "age": 43,
     "role": "tecnico",
     "attrs": {
-      "TAT": 80,
-      "VET": 81,
-      "GES": 88
+      "TAT": 81,
+      "VET": 82,
+      "GES": 89
     },
     "teamId": "aurora",
     "contract": {
       "teamId": "aurora",
-      "salary": 12100,
+      "salary": 12600,
       "endDate": "2028-07-31",
-      "releaseClause": 145200
+      "releaseClause": 151200
     },
     "course": null,
     "titles": 0,
@@ -284,15 +284,15 @@
     "age": 40,
     "role": "analista",
     "attrs": {
-      "LEI": 76,
-      "PRE": 79
+      "LEI": 77,
+      "PRE": 81
     },
     "teamId": "aurora",
     "contract": {
       "teamId": "aurora",
-      "salary": 9700,
+      "salary": 10100,
       "endDate": "2029-08-31",
-      "releaseClause": 116400
+      "releaseClause": 121200
     },
     "course": null,
     "titles": 0,
@@ -305,15 +305,15 @@
     "age": 36,
     "role": "psicologo",
     "attrs": {
-      "PRS": 75,
-      "MOT": 83
+      "PRS": 76,
+      "MOT": 85
     },
     "teamId": "aurora",
     "contract": {
       "teamId": "aurora",
-      "salary": 10100,
+      "salary": 11100,
       "endDate": "2028-08-31",
-      "releaseClause": 121200
+      "releaseClause": 133200
     },
     "course": null,
     "titles": 0,
@@ -323,19 +323,19 @@
     "id": "st-falcons-tecnico",
     "nick": "zonic",
     "country": "DK",
-    "age": 43,
+    "age": 28,
     "role": "tecnico",
     "attrs": {
-      "TAT": 87,
-      "VET": 86,
-      "GES": 84
+      "TAT": 89,
+      "VET": 88,
+      "GES": 86
     },
     "teamId": "falcons",
     "contract": {
       "teamId": "falcons",
-      "salary": 13700,
+      "salary": 14800,
       "endDate": "2028-03-31",
-      "releaseClause": 164400
+      "releaseClause": 177600
     },
     "course": null,
     "titles": 0,
@@ -348,15 +348,15 @@
     "age": 31,
     "role": "analista",
     "attrs": {
-      "LEI": 81,
-      "PRE": 81
+      "LEI": 83,
+      "PRE": 82
     },
     "teamId": "falcons",
     "contract": {
       "teamId": "falcons",
-      "salary": 11100,
+      "salary": 12100,
       "endDate": "2029-11-30",
-      "releaseClause": 133200
+      "releaseClause": 145200
     },
     "course": null,
     "titles": 0,
@@ -369,15 +369,15 @@
     "age": 40,
     "role": "psicologo",
     "attrs": {
-      "PRS": 74,
-      "MOT": 81
+      "PRS": 75,
+      "MOT": 83
     },
     "teamId": "falcons",
     "contract": {
       "teamId": "falcons",
-      "salary": 9700,
+      "salary": 10100,
       "endDate": "2028-01-31",
-      "releaseClause": 116400
+      "releaseClause": 121200
     },
     "course": null,
     "titles": 0,
@@ -385,21 +385,21 @@
   },
   {
     "id": "st-betboom-tecnico",
-    "nick": "Fierce",
+    "nick": "halmak",
     "country": "RU",
-    "age": 33,
+    "age": 42,
     "role": "tecnico",
     "attrs": {
-      "TAT": 77,
-      "VET": 86,
-      "GES": 84
+      "TAT": 79,
+      "VET": 89,
+      "GES": 86
     },
     "teamId": "betboom",
     "contract": {
       "teamId": "betboom",
-      "salary": 11600,
+      "salary": 13200,
       "endDate": "2029-04-30",
-      "releaseClause": 139200
+      "releaseClause": 158400
     },
     "course": null,
     "titles": 0,
@@ -412,15 +412,15 @@
     "age": 34,
     "role": "analista",
     "attrs": {
-      "LEI": 78,
-      "PRE": 78
+      "LEI": 81,
+      "PRE": 80
     },
     "teamId": "betboom",
     "contract": {
       "teamId": "betboom",
-      "salary": 9700,
+      "salary": 11100,
       "endDate": "2029-05-31",
-      "releaseClause": 116400
+      "releaseClause": 133200
     },
     "course": null,
     "titles": 0,
@@ -428,20 +428,20 @@
   },
   {
     "id": "st-betboom-psicologo",
-    "nick": "halmak",
+    "nick": "sellin",
     "country": "RU",
     "age": 38,
     "role": "psicologo",
     "attrs": {
-      "PRS": 82,
-      "MOT": 74
+      "PRS": 84,
+      "MOT": 77
     },
     "teamId": "betboom",
     "contract": {
       "teamId": "betboom",
-      "salary": 9700,
+      "salary": 11100,
       "endDate": "2029-06-30",
-      "releaseClause": 116400
+      "releaseClause": 133200
     },
     "course": null,
     "titles": 0,
@@ -451,19 +451,19 @@
     "id": "st-navi-tecnico",
     "nick": "B1ad3",
     "country": "UA",
-    "age": 38,
+    "age": 42,
     "role": "tecnico",
     "attrs": {
-      "TAT": 82,
-      "VET": 81,
-      "GES": 78
+      "TAT": 85,
+      "VET": 83,
+      "GES": 81
     },
     "teamId": "navi",
     "contract": {
       "teamId": "navi",
-      "salary": 10600,
+      "salary": 12100,
       "endDate": "2028-08-31",
-      "releaseClause": 127200
+      "releaseClause": 145200
     },
     "course": null,
     "titles": 0,
@@ -471,20 +471,20 @@
   },
   {
     "id": "st-navi-analista",
-    "nick": "sellin",
+    "nick": "fenpet21",
     "country": "UA",
     "age": 37,
     "role": "analista",
     "attrs": {
-      "LEI": 79,
-      "PRE": 72
+      "LEI": 82,
+      "PRE": 75
     },
     "teamId": "navi",
     "contract": {
       "teamId": "navi",
-      "salary": 8800,
+      "salary": 10100,
       "endDate": "2027-11-30",
-      "releaseClause": 105600
+      "releaseClause": 121200
     },
     "course": null,
     "titles": 0,
@@ -497,15 +497,15 @@
     "age": 48,
     "role": "psicologo",
     "attrs": {
-      "PRS": 81,
-      "MOT": 79
+      "PRS": 84,
+      "MOT": 81
     },
     "teamId": "navi",
     "contract": {
       "teamId": "navi",
-      "salary": 10600,
+      "salary": 12100,
       "endDate": "2028-11-30",
-      "releaseClause": 127200
+      "releaseClause": 145200
     },
     "course": null,
     "titles": 0,
@@ -515,19 +515,19 @@
     "id": "st-fut-tecnico",
     "nick": "coolio",
     "country": "HU",
-    "age": 30,
+    "age": 28,
     "role": "tecnico",
     "attrs": {
-      "TAT": 79,
-      "VET": 80,
-      "GES": 81
+      "TAT": 82,
+      "VET": 83,
+      "GES": 83
     },
     "teamId": "fut",
     "contract": {
       "teamId": "fut",
-      "salary": 10600,
+      "salary": 12100,
       "endDate": "2028-07-31",
-      "releaseClause": 127200
+      "releaseClause": 145200
     },
     "course": null,
     "titles": 0,
@@ -540,15 +540,15 @@
     "age": 35,
     "role": "analista",
     "attrs": {
-      "LEI": 76,
-      "PRE": 72
+      "LEI": 79,
+      "PRE": 74
     },
     "teamId": "fut",
     "contract": {
       "teamId": "fut",
-      "salary": 7900,
+      "salary": 9200,
       "endDate": "2028-04-30",
-      "releaseClause": 94800
+      "releaseClause": 110400
     },
     "course": null,
     "titles": 0,
@@ -561,15 +561,15 @@
     "age": 49,
     "role": "psicologo",
     "attrs": {
-      "PRS": 77,
-      "MOT": 78
+      "PRS": 80,
+      "MOT": 81
     },
     "teamId": "fut",
     "contract": {
       "teamId": "fut",
-      "salary": 9700,
+      "salary": 11100,
       "endDate": "2028-10-31",
-      "releaseClause": 116400
+      "releaseClause": 133200
     },
     "course": null,
     "titles": 0,
@@ -579,19 +579,19 @@
     "id": "st-mongolz-tecnico",
     "nick": "maaRaa",
     "country": "MN",
-    "age": 34,
+    "age": 38,
     "role": "tecnico",
     "attrs": {
-      "TAT": 79,
-      "VET": 80,
-      "GES": 83
+      "TAT": 82,
+      "VET": 83,
+      "GES": 87
     },
     "teamId": "mongolz",
     "contract": {
       "teamId": "mongolz",
-      "salary": 11100,
+      "salary": 12600,
       "endDate": "2028-11-30",
-      "releaseClause": 133200
+      "releaseClause": 151200
     },
     "course": null,
     "titles": 0,
@@ -599,20 +599,20 @@
   },
   {
     "id": "st-mongolz-analista",
-    "nick": "fenpet21",
+    "nick": "kabro22",
     "country": "MN",
     "age": 36,
     "role": "analista",
     "attrs": {
-      "LEI": 78,
-      "PRE": 73
+      "LEI": 81,
+      "PRE": 77
     },
     "teamId": "mongolz",
     "contract": {
       "teamId": "mongolz",
-      "salary": 8800,
+      "salary": 10100,
       "endDate": "2029-05-31",
-      "releaseClause": 105600
+      "releaseClause": 121200
     },
     "course": null,
     "titles": 0,
@@ -625,15 +625,15 @@
     "age": 32,
     "role": "psicologo",
     "attrs": {
-      "PRS": 80,
-      "MOT": 80
+      "PRS": 83,
+      "MOT": 83
     },
     "teamId": "mongolz",
     "contract": {
       "teamId": "mongolz",
-      "salary": 10600,
+      "salary": 12100,
       "endDate": "2029-07-31",
-      "releaseClause": 127200
+      "releaseClause": 145200
     },
     "course": null,
     "titles": 0,
@@ -646,16 +646,16 @@
     "age": 33,
     "role": "tecnico",
     "attrs": {
-      "TAT": 78,
-      "VET": 83,
-      "GES": 74
+      "TAT": 81,
+      "VET": 87,
+      "GES": 78
     },
     "teamId": "nemiga",
     "contract": {
       "teamId": "nemiga",
-      "salary": 9700,
+      "salary": 11600,
       "endDate": "2028-08-31",
-      "releaseClause": 116400
+      "releaseClause": 139200
     },
     "course": null,
     "titles": 0,
@@ -668,15 +668,15 @@
     "age": 28,
     "role": "analista",
     "attrs": {
-      "LEI": 78,
-      "PRE": 79
+      "LEI": 81,
+      "PRE": 83
     },
     "teamId": "nemiga",
     "contract": {
       "teamId": "nemiga",
-      "salary": 10100,
+      "salary": 11600,
       "endDate": "2028-03-31",
-      "releaseClause": 121200
+      "releaseClause": 139200
     },
     "course": null,
     "titles": 0,
@@ -689,15 +689,15 @@
     "age": 47,
     "role": "psicologo",
     "attrs": {
-      "PRS": 76,
-      "MOT": 78
+      "PRS": 79,
+      "MOT": 81
     },
     "teamId": "nemiga",
     "contract": {
       "teamId": "nemiga",
-      "salary": 9200,
+      "salary": 10600,
       "endDate": "2029-03-31",
-      "releaseClause": 110400
+      "releaseClause": 127200
     },
     "course": null,
     "titles": 0,
@@ -705,21 +705,21 @@
   },
   {
     "id": "st-g2-tecnico",
-    "nick": "sAw",
-    "country": "FI",
+    "nick": "kabro21",
+    "country": "DE",
     "age": 31,
     "role": "tecnico",
     "attrs": {
-      "TAT": 76,
-      "VET": 74,
-      "GES": 80
+      "TAT": 80,
+      "VET": 78,
+      "GES": 84
     },
     "teamId": "g2",
     "contract": {
       "teamId": "g2",
-      "salary": 9200,
+      "salary": 11100,
       "endDate": "2027-12-31",
-      "releaseClause": 110400
+      "releaseClause": 133200
     },
     "course": null,
     "titles": 0,
@@ -732,15 +732,15 @@
     "age": 29,
     "role": "analista",
     "attrs": {
-      "LEI": 73,
-      "PRE": 73
+      "LEI": 77,
+      "PRE": 77
     },
     "teamId": "g2",
     "contract": {
       "teamId": "g2",
-      "salary": 7500,
+      "salary": 9200,
       "endDate": "2029-07-31",
-      "releaseClause": 90000
+      "releaseClause": 110400
     },
     "course": null,
     "titles": 0,
@@ -753,15 +753,15 @@
     "age": 33,
     "role": "psicologo",
     "attrs": {
-      "PRS": 76,
-      "MOT": 77
+      "PRS": 79,
+      "MOT": 80
     },
     "teamId": "g2",
     "contract": {
       "teamId": "g2",
-      "salary": 9200,
+      "salary": 10600,
       "endDate": "2029-03-31",
-      "releaseClause": 110400
+      "releaseClause": 127200
     },
     "course": null,
     "titles": 0,
@@ -771,19 +771,19 @@
     "id": "st-parivision-tecnico",
     "nick": "dastan",
     "country": "KZ",
-    "age": 31,
+    "age": 38,
     "role": "tecnico",
     "attrs": {
-      "TAT": 74,
-      "VET": 77,
-      "GES": 73
+      "TAT": 78,
+      "VET": 81,
+      "GES": 77
     },
     "teamId": "parivision",
     "contract": {
       "teamId": "parivision",
-      "salary": 8400,
+      "salary": 10100,
       "endDate": "2029-09-30",
-      "releaseClause": 100800
+      "releaseClause": 121200
     },
     "course": null,
     "titles": 0,
@@ -796,15 +796,15 @@
     "age": 40,
     "role": "analista",
     "attrs": {
-      "LEI": 76,
-      "PRE": 72
+      "LEI": 81,
+      "PRE": 77
     },
     "teamId": "parivision",
     "contract": {
       "teamId": "parivision",
-      "salary": 7900,
+      "salary": 10100,
       "endDate": "2029-04-30",
-      "releaseClause": 94800
+      "releaseClause": 121200
     },
     "course": null,
     "titles": 0,
@@ -812,20 +812,20 @@
   },
   {
     "id": "st-parivision-psicologo",
-    "nick": "kabro22",
+    "nick": "jordor23",
     "country": "RU",
     "age": 34,
     "role": "psicologo",
     "attrs": {
-      "PRS": 72,
-      "MOT": 78
+      "PRS": 76,
+      "MOT": 82
     },
     "teamId": "parivision",
     "contract": {
       "teamId": "parivision",
-      "salary": 8400,
+      "salary": 10100,
       "endDate": "2029-08-31",
-      "releaseClause": 100800
+      "releaseClause": 121200
     },
     "course": null,
     "titles": 0,
@@ -835,19 +835,19 @@
     "id": "st-legacy-tecnico",
     "nick": "adrrr",
     "country": "BR",
-    "age": 29,
+    "age": 30,
     "role": "tecnico",
     "attrs": {
-      "TAT": 74,
-      "VET": 74,
-      "GES": 73
+      "TAT": 78,
+      "VET": 79,
+      "GES": 78
     },
     "teamId": "legacy",
     "contract": {
       "teamId": "legacy",
-      "salary": 7900,
+      "salary": 9700,
       "endDate": "2029-10-31",
-      "releaseClause": 94800
+      "releaseClause": 116400
     },
     "course": null,
     "titles": 0,
@@ -860,15 +860,15 @@
     "age": 30,
     "role": "analista",
     "attrs": {
-      "LEI": 71,
-      "PRE": 74
+      "LEI": 76,
+      "PRE": 79
     },
     "teamId": "legacy",
     "contract": {
       "teamId": "legacy",
-      "salary": 7500,
+      "salary": 9700,
       "endDate": "2029-05-31",
-      "releaseClause": 90000
+      "releaseClause": 116400
     },
     "course": null,
     "titles": 0,
@@ -881,15 +881,15 @@
     "age": 39,
     "role": "psicologo",
     "attrs": {
-      "PRS": 76,
-      "MOT": 71
+      "PRS": 81,
+      "MOT": 76
     },
     "teamId": "legacy",
     "contract": {
       "teamId": "legacy",
-      "salary": 7900,
+      "salary": 10100,
       "endDate": "2029-09-30",
-      "releaseClause": 94800
+      "releaseClause": 121200
     },
     "course": null,
     "titles": 0,
@@ -899,19 +899,19 @@
     "id": "st-1win-tecnico",
     "nick": "groove",
     "country": "RU",
-    "age": 33,
+    "age": 39,
     "role": "tecnico",
     "attrs": {
-      "TAT": 77,
-      "VET": 73,
-      "GES": 75
+      "TAT": 82,
+      "VET": 78,
+      "GES": 80
     },
     "teamId": "1win",
     "contract": {
       "teamId": "1win",
-      "salary": 8400,
+      "salary": 10600,
       "endDate": "2028-07-31",
-      "releaseClause": 100800
+      "releaseClause": 127200
     },
     "course": null,
     "titles": 0,
@@ -919,20 +919,20 @@
   },
   {
     "id": "st-1win-analista",
-    "nick": "kabro21",
+    "nick": "fenpet22",
     "country": "RU",
     "age": 36,
     "role": "analista",
     "attrs": {
-      "LEI": 72,
-      "PRE": 73
+      "LEI": 76,
+      "PRE": 78
     },
     "teamId": "1win",
     "contract": {
       "teamId": "1win",
-      "salary": 7500,
+      "salary": 9200,
       "endDate": "2028-02-29",
-      "releaseClause": 90000
+      "releaseClause": 110400
     },
     "course": null,
     "titles": 0,
@@ -945,15 +945,15 @@
     "age": 43,
     "role": "psicologo",
     "attrs": {
-      "PRS": 77,
-      "MOT": 69
+      "PRS": 82,
+      "MOT": 74
     },
     "teamId": "1win",
     "contract": {
       "teamId": "1win",
-      "salary": 7500,
+      "salary": 9700,
       "endDate": "2029-07-31",
-      "releaseClause": 90000
+      "releaseClause": 116400
     },
     "course": null,
     "titles": 0,
@@ -963,19 +963,19 @@
     "id": "st-mibr-tecnico",
     "nick": "LETN1",
     "country": "RS",
-    "age": 30,
+    "age": 35,
     "role": "tecnico",
     "attrs": {
-      "TAT": 74,
-      "VET": 71,
-      "GES": 79
+      "TAT": 80,
+      "VET": 76,
+      "GES": 84
     },
     "teamId": "mibr",
     "contract": {
       "teamId": "mibr",
-      "salary": 8400,
+      "salary": 10600,
       "endDate": "2027-12-31",
-      "releaseClause": 100800
+      "releaseClause": 127200
     },
     "course": null,
     "titles": 0,
@@ -988,15 +988,15 @@
     "age": 30,
     "role": "analista",
     "attrs": {
-      "LEI": 68,
-      "PRE": 67
+      "LEI": 74,
+      "PRE": 73
     },
     "teamId": "mibr",
     "contract": {
       "teamId": "mibr",
-      "salary": 5700,
+      "salary": 7900,
       "endDate": "2028-05-31",
-      "releaseClause": 68400
+      "releaseClause": 94800
     },
     "course": null,
     "titles": 0,
@@ -1009,15 +1009,15 @@
     "age": 34,
     "role": "psicologo",
     "attrs": {
-      "PRS": 70,
-      "MOT": 71
+      "PRS": 75,
+      "MOT": 77
     },
     "teamId": "mibr",
     "contract": {
       "teamId": "mibr",
-      "salary": 6800,
+      "salary": 8800,
       "endDate": "2028-06-30",
-      "releaseClause": 81600
+      "releaseClause": 105600
     },
     "course": null,
     "titles": 0,
@@ -1025,21 +1025,21 @@
   },
   {
     "id": "st-liquid-tecnico",
-    "nick": "fenpet23",
-    "country": "US",
-    "age": 42,
+    "nick": "flashie",
+    "country": "HU",
+    "age": 43,
     "role": "tecnico",
     "attrs": {
-      "TAT": 70,
-      "VET": 70,
-      "GES": 78
+      "TAT": 76,
+      "VET": 76,
+      "GES": 83
     },
     "teamId": "liquid",
     "contract": {
       "teamId": "liquid",
-      "salary": 7500,
+      "salary": 9700,
       "endDate": "2028-02-29",
-      "releaseClause": 90000
+      "releaseClause": 116400
     },
     "course": null,
     "titles": 0,
@@ -1052,15 +1052,15 @@
     "age": 32,
     "role": "analista",
     "attrs": {
-      "LEI": 71,
-      "PRE": 73
+      "LEI": 76,
+      "PRE": 79
     },
     "teamId": "liquid",
     "contract": {
       "teamId": "liquid",
-      "salary": 7100,
+      "salary": 9700,
       "endDate": "2028-03-31",
-      "releaseClause": 85200
+      "releaseClause": 116400
     },
     "course": null,
     "titles": 0,
@@ -1073,15 +1073,15 @@
     "age": 36,
     "role": "psicologo",
     "attrs": {
-      "PRS": 68,
-      "MOT": 73
+      "PRS": 74,
+      "MOT": 78
     },
     "teamId": "liquid",
     "contract": {
       "teamId": "liquid",
-      "salary": 6800,
+      "salary": 8800,
       "endDate": "2027-11-30",
-      "releaseClause": 81600
+      "releaseClause": 105600
     },
     "course": null,
     "titles": 0,
@@ -1090,20 +1090,20 @@
   {
     "id": "st-faze-tecnico",
     "nick": "enkay J",
-    "country": "US",
-    "age": 36,
+    "country": "DE",
+    "age": 35,
     "role": "tecnico",
     "attrs": {
-      "TAT": 74,
-      "VET": 74,
-      "GES": 71
+      "TAT": 80,
+      "VET": 80,
+      "GES": 77
     },
     "teamId": "faze",
     "contract": {
       "teamId": "faze",
-      "salary": 7500,
+      "salary": 10100,
       "endDate": "2027-12-31",
-      "releaseClause": 90000
+      "releaseClause": 121200
     },
     "course": null,
     "titles": 0,
@@ -1116,15 +1116,15 @@
     "age": 40,
     "role": "analista",
     "attrs": {
-      "LEI": 68,
-      "PRE": 65
+      "LEI": 74,
+      "PRE": 71
     },
     "teamId": "faze",
     "contract": {
       "teamId": "faze",
-      "salary": 5400,
+      "salary": 7500,
       "endDate": "2028-03-31",
-      "releaseClause": 64800
+      "releaseClause": 90000
     },
     "course": null,
     "titles": 0,
@@ -1137,15 +1137,15 @@
     "age": 44,
     "role": "psicologo",
     "attrs": {
-      "PRS": 74,
-      "MOT": 67
+      "PRS": 80,
+      "MOT": 73
     },
     "teamId": "faze",
     "contract": {
       "teamId": "faze",
-      "salary": 6800,
+      "salary": 9200,
       "endDate": "2028-07-31",
-      "releaseClause": 81600
+      "releaseClause": 110400
     },
     "course": null,
     "titles": 0,
@@ -1153,21 +1153,21 @@
   },
   {
     "id": "st-9z-tecnico",
-    "nick": "petfen21",
-    "country": "AR",
-    "age": 43,
+    "nick": "BIT",
+    "country": "BR",
+    "age": 28,
     "role": "tecnico",
     "attrs": {
-      "TAT": 70,
-      "VET": 70,
-      "GES": 78
+      "TAT": 76,
+      "VET": 76,
+      "GES": 84
     },
     "teamId": "9z",
     "contract": {
       "teamId": "9z",
-      "salary": 7500,
+      "salary": 10100,
       "endDate": "2029-09-30",
-      "releaseClause": 90000
+      "releaseClause": 121200
     },
     "course": null,
     "titles": 0,
@@ -1180,15 +1180,15 @@
     "age": 40,
     "role": "analista",
     "attrs": {
-      "LEI": 66,
-      "PRE": 73
+      "LEI": 73,
+      "PRE": 79
     },
     "teamId": "9z",
     "contract": {
       "teamId": "9z",
-      "salary": 6400,
+      "salary": 8800,
       "endDate": "2028-02-29",
-      "releaseClause": 76800
+      "releaseClause": 105600
     },
     "course": null,
     "titles": 0,
@@ -1196,20 +1196,20 @@
   },
   {
     "id": "st-9z-psicologo",
-    "nick": "jordor22",
+    "nick": "petfen21",
     "country": "AR",
     "age": 39,
     "role": "psicologo",
     "attrs": {
-      "PRS": 69,
-      "MOT": 70
+      "PRS": 75,
+      "MOT": 76
     },
     "teamId": "9z",
     "contract": {
       "teamId": "9z",
-      "salary": 6400,
+      "salary": 8800,
       "endDate": "2029-01-31",
-      "releaseClause": 76800
+      "releaseClause": 105600
     },
     "course": null,
     "titles": 0,
@@ -1219,19 +1219,19 @@
     "id": "st-astralis-tecnico",
     "nick": "NEO",
     "country": "PL",
-    "age": 39,
+    "age": 37,
     "role": "tecnico",
     "attrs": {
-      "TAT": 75,
-      "VET": 75,
-      "GES": 68
+      "TAT": 82,
+      "VET": 82,
+      "GES": 75
     },
     "teamId": "astralis",
     "contract": {
       "teamId": "astralis",
-      "salary": 7500,
+      "salary": 10600,
       "endDate": "2028-05-31",
-      "releaseClause": 90000
+      "releaseClause": 127200
     },
     "course": null,
     "titles": 0,
@@ -1244,15 +1244,15 @@
     "age": 30,
     "role": "analista",
     "attrs": {
-      "LEI": 65,
-      "PRE": 68
+      "LEI": 72,
+      "PRE": 75
     },
     "teamId": "astralis",
     "contract": {
       "teamId": "astralis",
-      "salary": 5400,
+      "salary": 7900,
       "endDate": "2028-08-31",
-      "releaseClause": 64800
+      "releaseClause": 94800
     },
     "course": null,
     "titles": 0,
@@ -1260,20 +1260,20 @@
   },
   {
     "id": "st-astralis-psicologo",
-    "nick": "kabro23",
+    "nick": "jordor22",
     "country": "DK",
     "age": 35,
     "role": "psicologo",
     "attrs": {
-      "PRS": 68,
-      "MOT": 70
+      "PRS": 74,
+      "MOT": 76
     },
     "teamId": "astralis",
     "contract": {
       "teamId": "astralis",
-      "salary": 6000,
+      "salary": 8400,
       "endDate": "2028-07-31",
-      "releaseClause": 72000
+      "releaseClause": 100800
     },
     "course": null,
     "titles": 0,
@@ -1281,21 +1281,21 @@
   },
   {
     "id": "st-b8-tecnico",
-    "nick": "halmak22",
-    "country": "UA",
-    "age": 32,
+    "nick": "maddened",
+    "country": "RU",
+    "age": 41,
     "role": "tecnico",
     "attrs": {
-      "TAT": 68,
-      "VET": 74,
-      "GES": 74
+      "TAT": 75,
+      "VET": 81,
+      "GES": 81
     },
     "teamId": "b8",
     "contract": {
       "teamId": "b8",
-      "salary": 7100,
+      "salary": 10100,
       "endDate": "2028-07-31",
-      "releaseClause": 85200
+      "releaseClause": 121200
     },
     "course": null,
     "titles": 0,
@@ -1308,15 +1308,15 @@
     "age": 40,
     "role": "analista",
     "attrs": {
-      "LEI": 68,
-      "PRE": 73
+      "LEI": 75,
+      "PRE": 80
     },
     "teamId": "b8",
     "contract": {
       "teamId": "b8",
-      "salary": 6800,
+      "salary": 9700,
       "endDate": "2029-08-31",
-      "releaseClause": 81600
+      "releaseClause": 116400
     },
     "course": null,
     "titles": 0,
@@ -1324,20 +1324,20 @@
   },
   {
     "id": "st-b8-psicologo",
-    "nick": "jordor23",
+    "nick": "verik24",
     "country": "UA",
     "age": 34,
     "role": "psicologo",
     "attrs": {
-      "PRS": 68,
-      "MOT": 67
+      "PRS": 75,
+      "MOT": 74
     },
     "teamId": "b8",
     "contract": {
       "teamId": "b8",
-      "salary": 5700,
+      "salary": 8400,
       "endDate": "2028-01-31",
-      "releaseClause": 68400
+      "releaseClause": 100800
     },
     "course": null,
     "titles": 0,
@@ -1345,21 +1345,21 @@
   },
   {
     "id": "st-nip-tecnico",
-    "nick": "tugus22",
+    "nick": "Xizt",
     "country": "SE",
-    "age": 31,
+    "age": 40,
     "role": "tecnico",
     "attrs": {
-      "TAT": 72,
-      "VET": 74,
-      "GES": 71
+      "TAT": 79,
+      "VET": 82,
+      "GES": 78
     },
     "teamId": "nip",
     "contract": {
       "teamId": "nip",
-      "salary": 7100,
+      "salary": 10600,
       "endDate": "2029-01-31",
-      "releaseClause": 85200
+      "releaseClause": 127200
     },
     "course": null,
     "titles": 0,
@@ -1367,20 +1367,20 @@
   },
   {
     "id": "st-nip-analista",
-    "nick": "rikve24",
+    "nick": "kabro23",
     "country": "SE",
     "age": 29,
     "role": "analista",
     "attrs": {
-      "LEI": 71,
-      "PRE": 65
+      "LEI": 79,
+      "PRE": 72
     },
     "teamId": "nip",
     "contract": {
       "teamId": "nip",
-      "salary": 5700,
+      "salary": 8800,
       "endDate": "2029-01-31",
-      "releaseClause": 68400
+      "releaseClause": 105600
     },
     "course": null,
     "titles": 0,
@@ -1393,15 +1393,15 @@
     "age": 33,
     "role": "psicologo",
     "attrs": {
-      "PRS": 71,
-      "MOT": 72
+      "PRS": 78,
+      "MOT": 79
     },
     "teamId": "nip",
     "contract": {
       "teamId": "nip",
-      "salary": 7100,
+      "salary": 10100,
       "endDate": "2029-02-28",
-      "releaseClause": 85200
+      "releaseClause": 121200
     },
     "course": null,
     "titles": 0,
@@ -1411,19 +1411,19 @@
     "id": "st-eternalfire-tecnico",
     "nick": "Fabre",
     "country": "TR",
-    "age": 33,
+    "age": 31,
     "role": "tecnico",
     "attrs": {
-      "TAT": 75,
-      "VET": 73,
-      "GES": 67
+      "TAT": 83,
+      "VET": 80,
+      "GES": 75
     },
     "teamId": "eternalfire",
     "contract": {
       "teamId": "eternalfire",
-      "salary": 7100,
+      "salary": 10100,
       "endDate": "2028-04-30",
-      "releaseClause": 85200
+      "releaseClause": 121200
     },
     "course": null,
     "titles": 0,
@@ -1431,20 +1431,20 @@
   },
   {
     "id": "st-eternalfire-analista",
-    "nick": "gustu23",
+    "nick": "tugus22",
     "country": "TR",
     "age": 26,
     "role": "analista",
     "attrs": {
-      "LEI": 64,
-      "PRE": 71
+      "LEI": 71,
+      "PRE": 79
     },
     "teamId": "eternalfire",
     "contract": {
       "teamId": "eternalfire",
-      "salary": 5700,
+      "salary": 8400,
       "endDate": "2028-03-31",
-      "releaseClause": 68400
+      "releaseClause": 100800
     },
     "course": null,
     "titles": 0,
@@ -1457,15 +1457,15 @@
     "age": 43,
     "role": "psicologo",
     "attrs": {
-      "PRS": 67,
-      "MOT": 71
+      "PRS": 75,
+      "MOT": 78
     },
     "teamId": "eternalfire",
     "contract": {
       "teamId": "eternalfire",
-      "salary": 6000,
+      "salary": 9200,
       "endDate": "2029-11-30",
-      "releaseClause": 72000
+      "releaseClause": 110400
     },
     "course": null,
     "titles": 0,
@@ -1473,21 +1473,21 @@
   },
   {
     "id": "st-m80-tecnico",
-    "nick": "jordor24",
-    "country": "US",
-    "age": 41,
+    "nick": "dephh",
+    "country": "GB",
+    "age": 34,
     "role": "tecnico",
     "attrs": {
-      "TAT": 73,
-      "VET": 69,
-      "GES": 68
+      "TAT": 81,
+      "VET": 77,
+      "GES": 76
     },
     "teamId": "m80",
     "contract": {
       "teamId": "m80",
-      "salary": 6400,
+      "salary": 9700,
       "endDate": "2029-03-31",
-      "releaseClause": 76800
+      "releaseClause": 116400
     },
     "course": null,
     "titles": 0,
@@ -1500,15 +1500,15 @@
     "age": 36,
     "role": "analista",
     "attrs": {
-      "LEI": 63,
-      "PRE": 69
+      "LEI": 71,
+      "PRE": 77
     },
     "teamId": "m80",
     "contract": {
       "teamId": "m80",
-      "salary": 5100,
+      "salary": 7900,
       "endDate": "2028-01-31",
-      "releaseClause": 61200
+      "releaseClause": 94800
     },
     "course": null,
     "titles": 0,
@@ -1516,20 +1516,20 @@
   },
   {
     "id": "st-m80-psicologo",
-    "nick": "makhal24",
+    "nick": "gustu23",
     "country": "US",
     "age": 45,
     "role": "psicologo",
     "attrs": {
-      "PRS": 68,
-      "MOT": 63
+      "PRS": 77,
+      "MOT": 71
     },
     "teamId": "m80",
     "contract": {
       "teamId": "m80",
-      "salary": 5100,
+      "salary": 7900,
       "endDate": "2029-01-31",
-      "releaseClause": 61200
+      "releaseClause": 94800
     },
     "course": null,
     "titles": 0,
@@ -1539,19 +1539,19 @@
     "id": "st-heroic-tecnico",
     "nick": "Snappi",
     "country": "DK",
-    "age": 35,
+    "age": 38,
     "role": "tecnico",
     "attrs": {
-      "TAT": 72,
-      "VET": 65,
-      "GES": 66
+      "TAT": 80,
+      "VET": 73,
+      "GES": 74
     },
     "teamId": "heroic",
     "contract": {
       "teamId": "heroic",
-      "salary": 5700,
+      "salary": 8800,
       "endDate": "2028-04-30",
-      "releaseClause": 68400
+      "releaseClause": 105600
     },
     "course": null,
     "titles": 0,
@@ -1564,15 +1564,15 @@
     "age": 31,
     "role": "analista",
     "attrs": {
-      "LEI": 70,
-      "PRE": 61
+      "LEI": 78,
+      "PRE": 69
     },
     "teamId": "heroic",
     "contract": {
       "teamId": "heroic",
-      "salary": 5100,
+      "salary": 7900,
       "endDate": "2027-12-31",
-      "releaseClause": 61200
+      "releaseClause": 94800
     },
     "course": null,
     "titles": 0,
@@ -1585,15 +1585,15 @@
     "age": 32,
     "role": "psicologo",
     "attrs": {
-      "PRS": 65,
-      "MOT": 68
+      "PRS": 73,
+      "MOT": 76
     },
     "teamId": "heroic",
     "contract": {
       "teamId": "heroic",
-      "salary": 5400,
+      "salary": 8400,
       "endDate": "2029-09-30",
-      "releaseClause": 64800
+      "releaseClause": 100800
     },
     "course": null,
     "titles": 0,
@@ -1602,20 +1602,20 @@
   {
     "id": "st-gamerlegion-tecnico",
     "nick": "imd",
-    "country": "DK",
-    "age": 31,
+    "country": "PL",
+    "age": 41,
     "role": "tecnico",
     "attrs": {
-      "TAT": 68,
-      "VET": 68,
-      "GES": 73
+      "TAT": 77,
+      "VET": 77,
+      "GES": 82
     },
     "teamId": "gamerlegion",
     "contract": {
       "teamId": "gamerlegion",
-      "salary": 6400,
+      "salary": 10100,
       "endDate": "2028-12-31",
-      "releaseClause": 76800
+      "releaseClause": 121200
     },
     "course": null,
     "titles": 0,
@@ -1628,15 +1628,15 @@
     "age": 36,
     "role": "analista",
     "attrs": {
-      "LEI": 62,
-      "PRE": 62
+      "LEI": 71,
+      "PRE": 71
     },
     "teamId": "gamerlegion",
     "contract": {
       "teamId": "gamerlegion",
-      "salary": 3900,
+      "salary": 6800,
       "endDate": "2027-12-31",
-      "releaseClause": 46800
+      "releaseClause": 81600
     },
     "course": null,
     "titles": 0,
@@ -1649,15 +1649,15 @@
     "age": 40,
     "role": "psicologo",
     "attrs": {
-      "PRS": 67,
-      "MOT": 65
+      "PRS": 76,
+      "MOT": 74
     },
     "teamId": "gamerlegion",
     "contract": {
       "teamId": "gamerlegion",
-      "salary": 5100,
+      "salary": 8400,
       "endDate": "2028-02-29",
-      "releaseClause": 61200
+      "releaseClause": 100800
     },
     "course": null,
     "titles": 0,
@@ -1665,21 +1665,21 @@
   },
   {
     "id": "st-fnatic-tecnico",
-    "nick": "kabro25",
+    "nick": "jordor24",
     "country": "GB",
     "age": 35,
     "role": "tecnico",
     "attrs": {
-      "TAT": 64,
-      "VET": 64,
-      "GES": 69
+      "TAT": 73,
+      "VET": 73,
+      "GES": 78
     },
     "teamId": "fnatic",
     "contract": {
       "teamId": "fnatic",
-      "salary": 5100,
+      "salary": 8400,
       "endDate": "2028-03-31",
-      "releaseClause": 61200
+      "releaseClause": 100800
     },
     "course": null,
     "titles": 0,
@@ -1692,15 +1692,15 @@
     "age": 36,
     "role": "analista",
     "attrs": {
-      "LEI": 60,
-      "PRE": 66
+      "LEI": 69,
+      "PRE": 75
     },
     "teamId": "fnatic",
     "contract": {
       "teamId": "fnatic",
-      "salary": 4200,
+      "salary": 7100,
       "endDate": "2029-07-31",
-      "releaseClause": 50400
+      "releaseClause": 85200
     },
     "course": null,
     "titles": 0,
@@ -1708,20 +1708,20 @@
   },
   {
     "id": "st-fnatic-psicologo",
-    "nick": "vanro25",
+    "nick": "makhal24",
     "country": "GB",
     "age": 45,
     "role": "psicologo",
     "attrs": {
-      "PRS": 64,
-      "MOT": 68
+      "PRS": 73,
+      "MOT": 77
     },
     "teamId": "fnatic",
     "contract": {
       "teamId": "fnatic",
-      "salary": 5100,
+      "salary": 8400,
       "endDate": "2028-05-31",
-      "releaseClause": 61200
+      "releaseClause": 100800
     },
     "course": null,
     "titles": 0,
@@ -1729,21 +1729,21 @@
   },
   {
     "id": "st-envy-tecnico",
-    "nick": "broka23",
+    "nick": "halmak22",
     "country": "US",
     "age": 34,
     "role": "tecnico",
     "attrs": {
-      "TAT": 67,
-      "VET": 71,
-      "GES": 68
+      "TAT": 76,
+      "VET": 80,
+      "GES": 77
     },
     "teamId": "envy",
     "contract": {
       "teamId": "envy",
-      "salary": 6000,
+      "salary": 9700,
       "endDate": "2027-11-30",
-      "releaseClause": 72000
+      "releaseClause": 116400
     },
     "course": null,
     "titles": 0,
@@ -1756,15 +1756,15 @@
     "age": 38,
     "role": "analista",
     "attrs": {
-      "LEI": 68,
-      "PRE": 59
+      "LEI": 77,
+      "PRE": 68
     },
     "teamId": "envy",
     "contract": {
       "teamId": "envy",
-      "salary": 4500,
+      "salary": 7500,
       "endDate": "2028-03-31",
-      "releaseClause": 54000
+      "releaseClause": 90000
     },
     "course": null,
     "titles": 0,
@@ -1772,20 +1772,20 @@
   },
   {
     "id": "st-envy-psicologo",
-    "nick": "verik24",
+    "nick": "rikve25",
     "country": "US",
     "age": 42,
     "role": "psicologo",
     "attrs": {
-      "PRS": 67,
-      "MOT": 65
+      "PRS": 77,
+      "MOT": 75
     },
     "teamId": "envy",
     "contract": {
       "teamId": "envy",
-      "salary": 5100,
+      "salary": 8800,
       "endDate": "2028-03-31",
-      "releaseClause": 61200
+      "releaseClause": 105600
     },
     "course": null,
     "titles": 0,
@@ -1793,21 +1793,21 @@
   },
   {
     "id": "st-magic-tecnico",
-    "nick": "fenpet22",
+    "nick": "petfen23",
     "country": "RU",
     "age": 37,
     "role": "tecnico",
     "attrs": {
-      "TAT": 70,
-      "VET": 64,
-      "GES": 69
+      "TAT": 80,
+      "VET": 74,
+      "GES": 79
     },
     "teamId": "magic",
     "contract": {
       "teamId": "magic",
-      "salary": 5700,
+      "salary": 9700,
       "endDate": "2028-04-30",
-      "releaseClause": 68400
+      "releaseClause": 116400
     },
     "course": null,
     "titles": 0,
@@ -1820,15 +1820,15 @@
     "age": 32,
     "role": "analista",
     "attrs": {
-      "LEI": 61,
-      "PRE": 58
+      "LEI": 71,
+      "PRE": 68
     },
     "teamId": "magic",
     "contract": {
       "teamId": "magic",
-      "salary": 3400,
+      "salary": 6400,
       "endDate": "2028-03-31",
-      "releaseClause": 40800
+      "releaseClause": 76800
     },
     "course": null,
     "titles": 0,
@@ -1841,15 +1841,15 @@
     "age": 41,
     "role": "psicologo",
     "attrs": {
-      "PRS": 63,
-      "MOT": 60
+      "PRS": 73,
+      "MOT": 70
     },
     "teamId": "magic",
     "contract": {
       "teamId": "magic",
-      "salary": 3900,
+      "salary": 7100,
       "endDate": "2028-03-31",
-      "releaseClause": 46800
+      "releaseClause": 85200
     },
     "course": null,
     "titles": 0,
@@ -1857,21 +1857,21 @@
   },
   {
     "id": "st-tyloo-tecnico",
-    "nick": "petfen23",
+    "nick": "rovan24",
     "country": "CN",
     "age": 35,
     "role": "tecnico",
     "attrs": {
-      "TAT": 68,
-      "VET": 63,
-      "GES": 69
+      "TAT": 78,
+      "VET": 73,
+      "GES": 79
     },
     "teamId": "tyloo",
     "contract": {
       "teamId": "tyloo",
-      "salary": 5400,
+      "salary": 9200,
       "endDate": "2028-08-31",
-      "releaseClause": 64800
+      "releaseClause": 110400
     },
     "course": null,
     "titles": 0,
@@ -1884,15 +1884,15 @@
     "age": 36,
     "role": "analista",
     "attrs": {
-      "LEI": 61,
-      "PRE": 60
+      "LEI": 71,
+      "PRE": 70
     },
     "teamId": "tyloo",
     "contract": {
       "teamId": "tyloo",
-      "salary": 3600,
+      "salary": 6800,
       "endDate": "2029-06-30",
-      "releaseClause": 43200
+      "releaseClause": 81600
     },
     "course": null,
     "titles": 0,
@@ -1905,15 +1905,15 @@
     "age": 45,
     "role": "psicologo",
     "attrs": {
-      "PRS": 62,
-      "MOT": 63
+      "PRS": 72,
+      "MOT": 73
     },
     "teamId": "tyloo",
     "contract": {
       "teamId": "tyloo",
-      "salary": 4200,
+      "salary": 7500,
       "endDate": "2028-01-31",
-      "releaseClause": 50400
+      "releaseClause": 90000
     },
     "course": null,
     "titles": 0,
@@ -1926,16 +1926,16 @@
     "age": 32,
     "role": "tecnico",
     "attrs": {
-      "TAT": 61,
-      "VET": 68,
-      "GES": 67
+      "TAT": 72,
+      "VET": 79,
+      "GES": 78
     },
     "teamId": "hotu",
     "contract": {
       "teamId": "hotu",
-      "salary": 4800,
+      "salary": 8800,
       "endDate": "2029-07-31",
-      "releaseClause": 57600
+      "releaseClause": 105600
     },
     "course": null,
     "titles": 0,
@@ -1943,20 +1943,20 @@
   },
   {
     "id": "st-hotu-analista",
-    "nick": "dorjor24",
+    "nick": "fenpet23",
     "country": "RU",
     "age": 36,
     "role": "analista",
     "attrs": {
-      "LEI": 63,
-      "PRE": 59
+      "LEI": 73,
+      "PRE": 69
     },
     "teamId": "hotu",
     "contract": {
       "teamId": "hotu",
-      "salary": 3600,
+      "salary": 6800,
       "endDate": "2028-02-29",
-      "releaseClause": 43200
+      "releaseClause": 81600
     },
     "course": null,
     "titles": 0,
@@ -1964,20 +1964,20 @@
   },
   {
     "id": "st-hotu-psicologo",
-    "nick": "sellin24",
+    "nick": "broka23",
     "country": "RU",
     "age": 30,
     "role": "psicologo",
     "attrs": {
-      "PRS": 65,
-      "MOT": 64
+      "PRS": 76,
+      "MOT": 75
     },
     "teamId": "hotu",
     "contract": {
       "teamId": "hotu",
-      "salary": 4800,
+      "salary": 8800,
       "endDate": "2029-02-28",
-      "releaseClause": 57600
+      "releaseClause": 105600
     },
     "course": null,
     "titles": 0,
@@ -1985,21 +1985,21 @@
   },
   {
     "id": "st-big-tecnico",
-    "nick": "xenn",
+    "nick": "makhal25",
     "country": "DE",
-    "age": 30,
+    "age": 32,
     "role": "tecnico",
     "attrs": {
-      "TAT": 68,
-      "VET": 67,
-      "GES": 65
+      "TAT": 78,
+      "VET": 78,
+      "GES": 75
     },
     "teamId": "big",
     "contract": {
       "teamId": "big",
-      "salary": 5400,
+      "salary": 9200,
       "endDate": "2029-08-31",
-      "releaseClause": 64800
+      "releaseClause": 110400
     },
     "course": null,
     "titles": 0,
@@ -2012,15 +2012,15 @@
     "age": 40,
     "role": "analista",
     "attrs": {
-      "LEI": 58,
-      "PRE": 56
+      "LEI": 69,
+      "PRE": 66
     },
     "teamId": "big",
     "contract": {
       "teamId": "big",
-      "salary": 2700,
+      "salary": 5700,
       "endDate": "2029-04-30",
-      "releaseClause": 32400
+      "releaseClause": 68400
     },
     "course": null,
     "titles": 0,
@@ -2033,14 +2033,1742 @@
     "age": 36,
     "role": "psicologo",
     "attrs": {
-      "PRS": 64,
-      "MOT": 56
+      "PRS": 74,
+      "MOT": 67
     },
     "teamId": "big",
     "contract": {
       "teamId": "big",
-      "salary": 3400,
+      "salary": 6800,
       "endDate": "2029-02-28",
+      "releaseClause": 81600
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-100thieves-tecnico",
+    "nick": "kabro25",
+    "country": "DK",
+    "age": 41,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 73,
+      "VET": 72,
+      "GES": 72
+    },
+    "teamId": "100thieves",
+    "contract": {
+      "teamId": "100thieves",
+      "salary": 7100,
+      "endDate": "2028-03-31",
+      "releaseClause": 85200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-100thieves-analista",
+    "nick": "gustu25",
+    "country": "DK",
+    "age": 27,
+    "role": "analista",
+    "attrs": {
+      "LEI": 67,
+      "PRE": 76
+    },
+    "teamId": "100thieves",
+    "contract": {
+      "teamId": "100thieves",
+      "salary": 7100,
+      "endDate": "2028-11-30",
+      "releaseClause": 85200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-100thieves-psicologo",
+    "nick": "vanro25",
+    "country": "DK",
+    "age": 49,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 73,
+      "MOT": 74
+    },
+    "teamId": "100thieves",
+    "contract": {
+      "teamId": "100thieves",
+      "salary": 7900,
+      "endDate": "2028-09-30",
+      "releaseClause": 94800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-luminosity-tecnico",
+    "nick": "dorjor25",
+    "country": "BG",
+    "age": 43,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 75,
+      "VET": 70,
+      "GES": 70
+    },
+    "teamId": "luminosity",
+    "contract": {
+      "teamId": "luminosity",
+      "salary": 7100,
+      "endDate": "2027-12-31",
+      "releaseClause": 85200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-luminosity-analista",
+    "nick": "sellin25",
+    "country": "BG",
+    "age": 37,
+    "role": "analista",
+    "attrs": {
+      "LEI": 73,
+      "PRE": 73
+    },
+    "teamId": "luminosity",
+    "contract": {
+      "teamId": "luminosity",
+      "salary": 7500,
+      "endDate": "2029-04-30",
+      "releaseClause": 90000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-luminosity-psicologo",
+    "nick": "tugus26",
+    "country": "BG",
+    "age": 49,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 67,
+      "MOT": 71
+    },
+    "teamId": "luminosity",
+    "contract": {
+      "teamId": "luminosity",
+      "salary": 6000,
+      "endDate": "2028-01-31",
+      "releaseClause": 72000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-dendele-tecnico",
+    "nick": "gustu27",
+    "country": "BR",
+    "age": 33,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 75,
+      "VET": 75,
+      "GES": 75
+    },
+    "teamId": "dendele",
+    "contract": {
+      "teamId": "dendele",
+      "salary": 8400,
+      "endDate": "2028-01-31",
+      "releaseClause": 100800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-dendele-analista",
+    "nick": "fenpet24",
+    "country": "BR",
+    "age": 33,
+    "role": "analista",
+    "attrs": {
+      "LEI": 70,
+      "PRE": 74
+    },
+    "teamId": "dendele",
+    "contract": {
+      "teamId": "dendele",
+      "salary": 7100,
+      "endDate": "2027-11-30",
+      "releaseClause": 85200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-dendele-psicologo",
+    "nick": "rikve26",
+    "country": "BR",
+    "age": 37,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 67,
+      "MOT": 67
+    },
+    "teamId": "dendele",
+    "contract": {
+      "teamId": "dendele",
+      "salary": 5400,
+      "endDate": "2028-11-30",
+      "releaseClause": 64800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-nrg-tecnico",
+    "nick": "daps",
+    "country": "CA",
+    "age": 31,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 74,
+      "VET": 71,
+      "GES": 75
+    },
+    "teamId": "nrg",
+    "contract": {
+      "teamId": "nrg",
+      "salary": 7500,
+      "endDate": "2028-02-29",
+      "releaseClause": 90000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-nrg-analista",
+    "nick": "jordor28",
+    "country": "US",
+    "age": 35,
+    "role": "analista",
+    "attrs": {
+      "LEI": 71,
+      "PRE": 72
+    },
+    "teamId": "nrg",
+    "contract": {
+      "teamId": "nrg",
+      "salary": 7100,
+      "endDate": "2028-02-29",
+      "releaseClause": 85200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-nrg-psicologo",
+    "nick": "rikve24",
+    "country": "US",
+    "age": 39,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 66,
+      "MOT": 72
+    },
+    "teamId": "nrg",
+    "contract": {
+      "teamId": "nrg",
+      "salary": 6000,
+      "endDate": "2029-02-28",
+      "releaseClause": 72000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-innercircle-tecnico",
+    "nick": "stikle-",
+    "country": "AL",
+    "age": 40,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 69,
+      "VET": 76,
+      "GES": 77
+    },
+    "teamId": "innercircle",
+    "contract": {
+      "teamId": "innercircle",
+      "salary": 7900,
+      "endDate": "2029-09-30",
+      "releaseClause": 94800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-innercircle-analista",
+    "nick": "rovan21",
+    "country": "UA",
+    "age": 26,
+    "role": "analista",
+    "attrs": {
+      "LEI": 73,
+      "PRE": 70
+    },
+    "teamId": "innercircle",
+    "contract": {
+      "teamId": "innercircle",
+      "salary": 7100,
+      "endDate": "2028-06-30",
+      "releaseClause": 85200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-innercircle-psicologo",
+    "nick": "halmak26",
+    "country": "UA",
+    "age": 30,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 69,
+      "MOT": 65
+    },
+    "teamId": "innercircle",
+    "contract": {
+      "teamId": "innercircle",
+      "salary": 5400,
+      "endDate": "2029-11-30",
+      "releaseClause": 64800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-jijiehao-tecnico",
+    "nick": "linsel26",
+    "country": "LB",
+    "age": 39,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 70,
+      "VET": 77,
+      "GES": 71
+    },
+    "teamId": "jijiehao",
+    "contract": {
+      "teamId": "jijiehao",
+      "salary": 7500,
+      "endDate": "2029-03-31",
+      "releaseClause": 90000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-jijiehao-analista",
+    "nick": "verik25",
+    "country": "LB",
+    "age": 38,
+    "role": "analista",
+    "attrs": {
+      "LEI": 69,
+      "PRE": 69
+    },
+    "teamId": "jijiehao",
+    "contract": {
+      "teamId": "jijiehao",
+      "salary": 6000,
+      "endDate": "2028-10-31",
+      "releaseClause": 72000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-jijiehao-psicologo",
+    "nick": "fenpet26",
+    "country": "LB",
+    "age": 45,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 73,
+      "MOT": 66
+    },
+    "teamId": "jijiehao",
+    "contract": {
+      "teamId": "jijiehao",
+      "salary": 6400,
+      "endDate": "2029-05-31",
+      "releaseClause": 76800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-alliance-tecnico",
+    "nick": "petfen27",
+    "country": "SE",
+    "age": 33,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 68,
+      "VET": 71,
+      "GES": 73
+    },
+    "teamId": "alliance",
+    "contract": {
+      "teamId": "alliance",
+      "salary": 6800,
+      "endDate": "2029-08-31",
+      "releaseClause": 81600
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-alliance-analista",
+    "nick": "broka26",
+    "country": "SE",
+    "age": 37,
+    "role": "analista",
+    "attrs": {
+      "LEI": 71,
+      "PRE": 67
+    },
+    "teamId": "alliance",
+    "contract": {
+      "teamId": "alliance",
+      "salary": 6000,
+      "endDate": "2029-07-31",
+      "releaseClause": 72000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-alliance-psicologo",
+    "nick": "sellin27",
+    "country": "SE",
+    "age": 49,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 72,
+      "MOT": 73
+    },
+    "teamId": "alliance",
+    "contract": {
+      "teamId": "alliance",
+      "salary": 7500,
+      "endDate": "2028-11-30",
+      "releaseClause": 90000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-sinners-tecnico",
+    "nick": "broka27",
+    "country": "CZ",
+    "age": 36,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 76,
+      "VET": 76,
+      "GES": 77
+    },
+    "teamId": "sinners",
+    "contract": {
+      "teamId": "sinners",
+      "salary": 8800,
+      "endDate": "2029-04-30",
+      "releaseClause": 105600
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-sinners-analista",
+    "nick": "dorjor24",
+    "country": "CZ",
+    "age": 28,
+    "role": "analista",
+    "attrs": {
+      "LEI": 72,
+      "PRE": 64
+    },
+    "teamId": "sinners",
+    "contract": {
+      "teamId": "sinners",
+      "salary": 5700,
+      "endDate": "2029-10-31",
+      "releaseClause": 68400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-sinners-psicologo",
+    "nick": "sellin24",
+    "country": "CZ",
+    "age": 42,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 69,
+      "MOT": 67
+    },
+    "teamId": "sinners",
+    "contract": {
+      "teamId": "sinners",
+      "salary": 5700,
+      "endDate": "2028-06-30",
+      "releaseClause": 68400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-pain-tecnico",
+    "nick": "rikz",
+    "country": "BR",
+    "age": 33,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 75,
+      "VET": 73,
+      "GES": 74
+    },
+    "teamId": "pain",
+    "contract": {
+      "teamId": "pain",
+      "salary": 7900,
+      "endDate": "2028-09-30",
+      "releaseClause": 94800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-pain-analista",
+    "nick": "linsel25",
+    "country": "BR",
+    "age": 34,
+    "role": "analista",
+    "attrs": {
+      "LEI": 72,
+      "PRE": 67
+    },
+    "teamId": "pain",
+    "contract": {
+      "teamId": "pain",
+      "salary": 6400,
+      "endDate": "2028-05-31",
+      "releaseClause": 76800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-pain-psicologo",
+    "nick": "verik22",
+    "country": "BR",
+    "age": 40,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 72,
+      "MOT": 64
+    },
+    "teamId": "pain",
+    "contract": {
+      "teamId": "pain",
+      "salary": 5700,
+      "endDate": "2027-11-30",
+      "releaseClause": 68400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-sangal-tecnico",
+    "nick": "Jumpy",
+    "country": "SE",
+    "age": 40,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 71,
+      "VET": 70,
+      "GES": 73
+    },
+    "teamId": "sangal",
+    "contract": {
+      "teamId": "sangal",
+      "salary": 6800,
+      "endDate": "2029-11-30",
+      "releaseClause": 81600
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-sangal-analista",
+    "nick": "broka25",
+    "country": "RO",
+    "age": 26,
+    "role": "analista",
+    "attrs": {
+      "LEI": 69,
+      "PRE": 69
+    },
+    "teamId": "sangal",
+    "contract": {
+      "teamId": "sangal",
+      "salary": 6000,
+      "endDate": "2029-04-30",
+      "releaseClause": 72000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-sangal-psicologo",
+    "nick": "dorjor22",
+    "country": "RO",
+    "age": 42,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 72,
+      "MOT": 68
+    },
+    "teamId": "sangal",
+    "contract": {
+      "teamId": "sangal",
+      "salary": 6400,
+      "endDate": "2028-07-31",
+      "releaseClause": 76800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-wildcard-tecnico",
+    "nick": "rovan23",
+    "country": "US",
+    "age": 30,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 68,
+      "VET": 68,
+      "GES": 71
+    },
+    "teamId": "wildcard",
+    "contract": {
+      "teamId": "wildcard",
+      "salary": 6000,
+      "endDate": "2029-05-31",
+      "releaseClause": 72000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-wildcard-analista",
+    "nick": "rikve23",
+    "country": "US",
+    "age": 28,
+    "role": "analista",
+    "attrs": {
+      "LEI": 70,
+      "PRE": 69
+    },
+    "teamId": "wildcard",
+    "contract": {
+      "teamId": "wildcard",
+      "salary": 6400,
+      "endDate": "2029-02-28",
+      "releaseClause": 76800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-wildcard-psicologo",
+    "nick": "petfen28",
+    "country": "US",
+    "age": 34,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 72,
+      "MOT": 68
+    },
+    "teamId": "wildcard",
+    "contract": {
+      "teamId": "wildcard",
+      "salary": 6400,
+      "endDate": "2028-01-31",
+      "releaseClause": 76800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-lynnvision-tecnico",
+    "nick": "halmak27",
+    "country": "CN",
+    "age": 33,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 68,
+      "VET": 73,
+      "GES": 66
+    },
+    "teamId": "lynnvision",
+    "contract": {
+      "teamId": "lynnvision",
+      "salary": 6000,
+      "endDate": "2028-10-31",
+      "releaseClause": 72000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-lynnvision-analista",
+    "nick": "verik27",
+    "country": "CN",
+    "age": 36,
+    "role": "analista",
+    "attrs": {
+      "LEI": 67,
+      "PRE": 70
+    },
+    "teamId": "lynnvision",
+    "contract": {
+      "teamId": "lynnvision",
+      "salary": 6000,
+      "endDate": "2029-11-30",
+      "releaseClause": 72000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-lynnvision-psicologo",
+    "nick": "fenpet28",
+    "country": "CN",
+    "age": 43,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 68,
+      "MOT": 65
+    },
+    "teamId": "lynnvision",
+    "contract": {
+      "teamId": "lynnvision",
+      "salary": 5400,
+      "endDate": "2029-06-30",
+      "releaseClause": 64800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-k27-tecnico",
+    "nick": "rovan25",
+    "country": "RU",
+    "age": 32,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 69,
+      "VET": 73,
+      "GES": 68
+    },
+    "teamId": "k27",
+    "contract": {
+      "teamId": "k27",
+      "salary": 6400,
+      "endDate": "2028-04-30",
+      "releaseClause": 76800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-k27-analista",
+    "nick": "petfen24",
+    "country": "RU",
+    "age": 30,
+    "role": "analista",
+    "attrs": {
+      "LEI": 64,
+      "PRE": 62
+    },
+    "teamId": "k27",
+    "contract": {
+      "teamId": "k27",
+      "salary": 4200,
+      "endDate": "2028-11-30",
+      "releaseClause": 50400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-k27-psicologo",
+    "nick": "sellin26",
+    "country": "RU",
+    "age": 36,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 71,
+      "MOT": 70
+    },
+    "teamId": "k27",
+    "contract": {
+      "teamId": "k27",
+      "salary": 6800,
+      "endDate": "2028-09-30",
+      "releaseClause": 81600
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-private-tecnico",
+    "nick": "makhal28",
+    "country": "RU",
+    "age": 35,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 73,
+      "VET": 71,
+      "GES": 72
+    },
+    "teamId": "private",
+    "contract": {
+      "teamId": "private",
+      "salary": 7100,
+      "endDate": "2029-10-31",
+      "releaseClause": 85200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-private-analista",
+    "nick": "makhal26",
+    "country": "RU",
+    "age": 29,
+    "role": "analista",
+    "attrs": {
+      "LEI": 66,
+      "PRE": 66
+    },
+    "teamId": "private",
+    "contract": {
+      "teamId": "private",
+      "salary": 5100,
+      "endDate": "2029-11-30",
+      "releaseClause": 61200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-private-psicologo",
+    "nick": "kabro29",
+    "country": "RU",
+    "age": 33,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 62,
+      "MOT": 69
+    },
+    "teamId": "private",
+    "contract": {
+      "teamId": "private",
+      "salary": 5100,
+      "endDate": "2028-01-31",
+      "releaseClause": 61200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-bcgame-tecnico",
+    "nick": "broka28",
+    "country": "MN",
+    "age": 35,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 71,
+      "VET": 71,
+      "GES": 69
+    },
+    "teamId": "bcgame",
+    "contract": {
+      "teamId": "bcgame",
+      "salary": 6400,
+      "endDate": "2028-07-31",
+      "releaseClause": 76800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-bcgame-analista",
+    "nick": "petfen29",
+    "country": "MN",
+    "age": 29,
+    "role": "analista",
+    "attrs": {
+      "LEI": 61,
+      "PRE": 61
+    },
+    "teamId": "bcgame",
+    "contract": {
+      "teamId": "bcgame",
+      "salary": 3600,
+      "endDate": "2028-08-31",
+      "releaseClause": 43200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-bcgame-psicologo",
+    "nick": "rovan28",
+    "country": "MN",
+    "age": 33,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 69,
+      "MOT": 62
+    },
+    "teamId": "bcgame",
+    "contract": {
+      "teamId": "bcgame",
+      "salary": 5100,
+      "endDate": "2029-03-31",
+      "releaseClause": 61200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-imperial-tecnico",
+    "nick": "vanro29",
+    "country": "BR",
+    "age": 33,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 73,
+      "VET": 69,
+      "GES": 67
+    },
+    "teamId": "imperial",
+    "contract": {
+      "teamId": "imperial",
+      "salary": 6400,
+      "endDate": "2029-01-31",
+      "releaseClause": 76800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-imperial-analista",
+    "nick": "vanro27",
+    "country": "BR",
+    "age": 33,
+    "role": "analista",
+    "attrs": {
+      "LEI": 66,
+      "PRE": 65
+    },
+    "teamId": "imperial",
+    "contract": {
+      "teamId": "imperial",
+      "salary": 5100,
+      "endDate": "2027-11-30",
+      "releaseClause": 61200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-imperial-psicologo",
+    "nick": "gustu30",
+    "country": "BR",
+    "age": 37,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 65,
+      "MOT": 63
+    },
+    "teamId": "imperial",
+    "contract": {
+      "teamId": "imperial",
+      "salary": 4500,
+      "endDate": "2028-04-30",
+      "releaseClause": 54000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-5star-tecnico",
+    "nick": "halmak29",
+    "country": "MN",
+    "age": 43,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 65,
+      "VET": 70,
+      "GES": 69
+    },
+    "teamId": "5star",
+    "contract": {
+      "teamId": "5star",
+      "salary": 5700,
+      "endDate": "2029-09-30",
+      "releaseClause": 68400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-5star-analista",
+    "nick": "vanro30",
+    "country": "MN",
+    "age": 29,
+    "role": "analista",
+    "attrs": {
+      "LEI": 66,
+      "PRE": 62
+    },
+    "teamId": "5star",
+    "contract": {
+      "teamId": "5star",
+      "salary": 4500,
+      "endDate": "2028-01-31",
+      "releaseClause": 54000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-5star-psicologo",
+    "nick": "dorjor29",
+    "country": "MN",
+    "age": 41,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 64,
+      "MOT": 68
+    },
+    "teamId": "5star",
+    "contract": {
+      "teamId": "5star",
+      "salary": 5100,
+      "endDate": "2029-06-30",
+      "releaseClause": 61200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-bbl-tecnico",
+    "nick": "dorjor26",
+    "country": "DK",
+    "age": 36,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 70,
+      "VET": 66,
+      "GES": 72
+    },
+    "teamId": "bbl",
+    "contract": {
+      "teamId": "bbl",
+      "salary": 6000,
+      "endDate": "2029-09-30",
+      "releaseClause": 72000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-bbl-analista",
+    "nick": "gustu26",
+    "country": "DK",
+    "age": 27,
+    "role": "analista",
+    "attrs": {
+      "LEI": 66,
+      "PRE": 63
+    },
+    "teamId": "bbl",
+    "contract": {
+      "teamId": "bbl",
+      "salary": 4800,
+      "endDate": "2029-05-31",
+      "releaseClause": 57600
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-bbl-psicologo",
+    "nick": "fenpet25",
+    "country": "DK",
+    "age": 42,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 62,
+      "MOT": 65
+    },
+    "teamId": "bbl",
+    "contract": {
+      "teamId": "bbl",
+      "salary": 4500,
+      "endDate": "2029-08-31",
+      "releaseClause": 54000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-nemesis-tecnico",
+    "nick": "brain",
+    "country": "RU",
+    "age": 31,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 69,
+      "VET": 72,
+      "GES": 67
+    },
+    "teamId": "nemesis",
+    "contract": {
+      "teamId": "nemesis",
+      "salary": 6000,
+      "endDate": "2028-12-31",
+      "releaseClause": 72000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-nemesis-analista",
+    "nick": "linsel27",
+    "country": "RU",
+    "age": 35,
+    "role": "analista",
+    "attrs": {
+      "LEI": 61,
+      "PRE": 66
+    },
+    "teamId": "nemesis",
+    "contract": {
+      "teamId": "nemesis",
+      "salary": 4500,
+      "endDate": "2028-07-31",
+      "releaseClause": 54000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-nemesis-psicologo",
+    "nick": "rovan27",
+    "country": "RU",
+    "age": 34,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 68,
+      "MOT": 68
+    },
+    "teamId": "nemesis",
+    "contract": {
+      "teamId": "nemesis",
+      "salary": 5700,
+      "endDate": "2029-04-30",
+      "releaseClause": 68400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-nexus-tecnico",
+    "nick": "petfen30",
+    "country": "RO",
+    "age": 41,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 71,
+      "VET": 66,
+      "GES": 72
+    },
+    "teamId": "nexus",
+    "contract": {
+      "teamId": "nexus",
+      "salary": 6400,
+      "endDate": "2028-01-31",
+      "releaseClause": 76800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-nexus-analista",
+    "nick": "rovan26",
+    "country": "RO",
+    "age": 31,
+    "role": "analista",
+    "attrs": {
+      "LEI": 67,
+      "PRE": 67
+    },
+    "teamId": "nexus",
+    "contract": {
+      "teamId": "nexus",
+      "salary": 5400,
+      "endDate": "2028-12-31",
+      "releaseClause": 64800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-nexus-psicologo",
+    "nick": "sellin30",
+    "country": "RO",
+    "age": 33,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 63,
+      "MOT": 61
+    },
+    "teamId": "nexus",
+    "contract": {
+      "teamId": "nexus",
+      "salary": 3900,
+      "endDate": "2029-08-31",
+      "releaseClause": 46800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-fokus-tecnico",
+    "nick": "sellin28",
+    "country": "SE",
+    "age": 40,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 70,
+      "VET": 68,
+      "GES": 69
+    },
+    "teamId": "fokus",
+    "contract": {
+      "teamId": "fokus",
+      "salary": 6000,
+      "endDate": "2029-04-30",
+      "releaseClause": 72000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-fokus-analista",
+    "nick": "tugus27",
+    "country": "SE",
+    "age": 31,
+    "role": "analista",
+    "attrs": {
+      "LEI": 60,
+      "PRE": 64
+    },
+    "teamId": "fokus",
+    "contract": {
+      "teamId": "fokus",
+      "salary": 3900,
+      "endDate": "2028-12-31",
+      "releaseClause": 46800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-fokus-psicologo",
+    "nick": "kabro26",
+    "country": "SE",
+    "age": 30,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 64,
+      "MOT": 62
+    },
+    "teamId": "fokus",
+    "contract": {
+      "teamId": "fokus",
+      "salary": 4200,
+      "endDate": "2029-09-30",
+      "releaseClause": 50400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-iberiansoul-tecnico",
+    "nick": "djL",
+    "country": "SE",
+    "age": 33,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 71,
+      "VET": 63,
+      "GES": 66
+    },
+    "teamId": "iberiansoul",
+    "contract": {
+      "teamId": "iberiansoul",
+      "salary": 5400,
+      "endDate": "2029-01-31",
+      "releaseClause": 64800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-iberiansoul-analista",
+    "nick": "rikve28",
+    "country": "ES",
+    "age": 27,
+    "role": "analista",
+    "attrs": {
+      "LEI": 63,
+      "PRE": 63
+    },
+    "teamId": "iberiansoul",
+    "contract": {
+      "teamId": "iberiansoul",
+      "salary": 4200,
+      "endDate": "2028-04-30",
+      "releaseClause": 50400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-iberiansoul-psicologo",
+    "nick": "tugus31",
+    "country": "ES",
+    "age": 41,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 66,
+      "MOT": 61
+    },
+    "teamId": "iberiansoul",
+    "contract": {
+      "teamId": "iberiansoul",
+      "salary": 4500,
+      "endDate": "2028-07-31",
+      "releaseClause": 54000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-betclic-tecnico",
+    "nick": "vanro26",
+    "country": "PL",
+    "age": 34,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 69,
+      "VET": 72,
+      "GES": 64
+    },
+    "teamId": "betclic",
+    "contract": {
+      "teamId": "betclic",
+      "salary": 5700,
+      "endDate": "2027-11-30",
+      "releaseClause": 68400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-betclic-analista",
+    "nick": "dorjor28",
+    "country": "PL",
+    "age": 26,
+    "role": "analista",
+    "attrs": {
+      "LEI": 67,
+      "PRE": 62
+    },
+    "teamId": "betclic",
+    "contract": {
+      "teamId": "betclic",
+      "salary": 4800,
+      "endDate": "2029-11-30",
+      "releaseClause": 57600
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-betclic-psicologo",
+    "nick": "linsel29",
+    "country": "PL",
+    "age": 30,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 64,
+      "MOT": 68
+    },
+    "teamId": "betclic",
+    "contract": {
+      "teamId": "betclic",
+      "salary": 5100,
+      "endDate": "2028-11-30",
+      "releaseClause": 61200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-blackphoenix-tecnico",
+    "nick": "makhal27",
+    "country": "RU",
+    "age": 38,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 68,
+      "VET": 65,
+      "GES": 63
+    },
+    "teamId": "blackphoenix",
+    "contract": {
+      "teamId": "blackphoenix",
+      "salary": 4800,
+      "endDate": "2029-10-31",
+      "releaseClause": 57600
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-blackphoenix-analista",
+    "nick": "rovan29",
+    "country": "RU",
+    "age": 35,
+    "role": "analista",
+    "attrs": {
+      "LEI": 65,
+      "PRE": 61
+    },
+    "teamId": "blackphoenix",
+    "contract": {
+      "teamId": "blackphoenix",
+      "salary": 4200,
+      "endDate": "2028-12-31",
+      "releaseClause": 50400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-blackphoenix-psicologo",
+    "nick": "broka30",
+    "country": "RU",
+    "age": 34,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 58,
+      "MOT": 58
+    },
+    "teamId": "blackphoenix",
+    "contract": {
+      "teamId": "blackphoenix",
+      "salary": 2900,
+      "endDate": "2027-11-30",
+      "releaseClause": 34800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-bestia-tecnico",
+    "nick": "kabro24",
+    "country": "BR",
+    "age": 36,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 70,
+      "VET": 62,
+      "GES": 68
+    },
+    "teamId": "bestia",
+    "contract": {
+      "teamId": "bestia",
+      "salary": 5400,
+      "endDate": "2029-02-28",
+      "releaseClause": 64800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-bestia-analista",
+    "nick": "halmak31",
+    "country": "BR",
+    "age": 37,
+    "role": "analista",
+    "attrs": {
+      "LEI": 63,
+      "PRE": 59
+    },
+    "teamId": "bestia",
+    "contract": {
+      "teamId": "bestia",
+      "salary": 3600,
+      "endDate": "2028-01-31",
+      "releaseClause": 43200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-bestia-psicologo",
+    "nick": "verik26",
+    "country": "BR",
+    "age": 48,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 65,
+      "MOT": 65
+    },
+    "teamId": "bestia",
+    "contract": {
+      "teamId": "bestia",
+      "salary": 4800,
+      "endDate": "2028-06-30",
+      "releaseClause": 57600
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-shinden-tecnico",
+    "nick": "linsel31",
+    "country": "AR",
+    "age": 31,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 69,
+      "VET": 69,
+      "GES": 64
+    },
+    "teamId": "shinden",
+    "contract": {
+      "teamId": "shinden",
+      "salary": 5400,
+      "endDate": "2027-11-30",
+      "releaseClause": 64800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-shinden-analista",
+    "nick": "makhal31",
+    "country": "AR",
+    "age": 38,
+    "role": "analista",
+    "attrs": {
+      "LEI": 62,
+      "PRE": 59
+    },
+    "teamId": "shinden",
+    "contract": {
+      "teamId": "shinden",
+      "salary": 3600,
+      "endDate": "2028-11-30",
+      "releaseClause": 43200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-shinden-psicologo",
+    "nick": "fenpet31",
+    "country": "AR",
+    "age": 37,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 59,
+      "MOT": 62
+    },
+    "teamId": "shinden",
+    "contract": {
+      "teamId": "shinden",
+      "salary": 3600,
+      "endDate": "2029-07-31",
+      "releaseClause": 43200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-eyeballers-tecnico",
+    "nick": "pita",
+    "country": "BA",
+    "age": 37,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 71,
+      "VET": 69,
+      "GES": 66
+    },
+    "teamId": "eyeballers",
+    "contract": {
+      "teamId": "eyeballers",
+      "salary": 6000,
+      "endDate": "2029-02-28",
+      "releaseClause": 72000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-eyeballers-analista",
+    "nick": "tugus32",
+    "country": "SE",
+    "age": 38,
+    "role": "analista",
+    "attrs": {
+      "LEI": 63,
+      "PRE": 66
+    },
+    "teamId": "eyeballers",
+    "contract": {
+      "teamId": "eyeballers",
+      "salary": 4800,
+      "endDate": "2029-10-31",
+      "releaseClause": 57600
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-eyeballers-psicologo",
+    "nick": "rikve27",
+    "country": "SE",
+    "age": 32,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 57,
+      "MOT": 63
+    },
+    "teamId": "eyeballers",
+    "contract": {
+      "teamId": "eyeballers",
+      "salary": 3400,
+      "endDate": "2029-10-31",
       "releaseClause": 40800
     },
     "course": null,
@@ -2048,8 +3776,2632 @@
     "refusesRenewal": false
   },
   {
+    "id": "st-flyquest-tecnico",
+    "nick": "verik30",
+    "country": "AU",
+    "age": 31,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 68,
+      "VET": 69,
+      "GES": 67
+    },
+    "teamId": "flyquest",
+    "contract": {
+      "teamId": "flyquest",
+      "salary": 5700,
+      "endDate": "2029-10-31",
+      "releaseClause": 68400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-flyquest-analista",
+    "nick": "verik29",
+    "country": "AU",
+    "age": 34,
+    "role": "analista",
+    "attrs": {
+      "LEI": 66,
+      "PRE": 65
+    },
+    "teamId": "flyquest",
+    "contract": {
+      "teamId": "flyquest",
+      "salary": 5100,
+      "endDate": "2029-09-30",
+      "releaseClause": 61200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-flyquest-psicologo",
+    "nick": "halmak32",
+    "country": "AU",
+    "age": 33,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 62,
+      "MOT": 66
+    },
+    "teamId": "flyquest",
+    "contract": {
+      "teamId": "flyquest",
+      "salary": 4500,
+      "endDate": "2027-12-31",
+      "releaseClause": 54000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-nucleartigeres-tecnico",
+    "nick": "vanro32",
+    "country": "RU",
+    "age": 35,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 61,
+      "VET": 61,
+      "GES": 61
+    },
+    "teamId": "nucleartigeres",
+    "contract": {
+      "teamId": "nucleartigeres",
+      "salary": 3600,
+      "endDate": "2029-05-31",
+      "releaseClause": 43200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-nucleartigeres-analista",
+    "nick": "sellin32",
+    "country": "RU",
+    "age": 28,
+    "role": "analista",
+    "attrs": {
+      "LEI": 57,
+      "PRE": 65
+    },
+    "teamId": "nucleartigeres",
+    "contract": {
+      "teamId": "nucleartigeres",
+      "salary": 3600,
+      "endDate": "2029-08-31",
+      "releaseClause": 43200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-nucleartigeres-psicologo",
+    "nick": "kabro32",
+    "country": "RU",
+    "age": 37,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 65,
+      "MOT": 57
+    },
+    "teamId": "nucleartigeres",
+    "contract": {
+      "teamId": "nucleartigeres",
+      "salary": 3600,
+      "endDate": "2029-07-31",
+      "releaseClause": 43200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-chinggiswarriors-tecnico",
+    "nick": "rikve31",
+    "country": "MN",
+    "age": 43,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 69,
+      "VET": 60,
+      "GES": 64
+    },
+    "teamId": "chinggiswarriors",
+    "contract": {
+      "teamId": "chinggiswarriors",
+      "salary": 4500,
+      "endDate": "2028-08-31",
+      "releaseClause": 54000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-chinggiswarriors-analista",
+    "nick": "halmak30",
+    "country": "MN",
+    "age": 34,
+    "role": "analista",
+    "attrs": {
+      "LEI": 60,
+      "PRE": 62
+    },
+    "teamId": "chinggiswarriors",
+    "contract": {
+      "teamId": "chinggiswarriors",
+      "salary": 3600,
+      "endDate": "2028-12-31",
+      "releaseClause": 43200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-chinggiswarriors-psicologo",
+    "nick": "broka33",
+    "country": "MN",
+    "age": 33,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 66,
+      "MOT": 65
+    },
+    "teamId": "chinggiswarriors",
+    "contract": {
+      "teamId": "chinggiswarriors",
+      "salary": 5100,
+      "endDate": "2028-10-31",
+      "releaseClause": 61200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-basementboys-tecnico",
+    "nick": "fenpet29",
+    "country": "UA",
+    "age": 40,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 67,
+      "VET": 67,
+      "GES": 65
+    },
+    "teamId": "basementboys",
+    "contract": {
+      "teamId": "basementboys",
+      "salary": 5100,
+      "endDate": "2027-12-31",
+      "releaseClause": 61200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-basementboys-analista",
+    "nick": "vanro28",
+    "country": "UA",
+    "age": 39,
+    "role": "analista",
+    "attrs": {
+      "LEI": 65,
+      "PRE": 64
+    },
+    "teamId": "basementboys",
+    "contract": {
+      "teamId": "basementboys",
+      "salary": 4800,
+      "endDate": "2029-08-31",
+      "releaseClause": 57600
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-basementboys-psicologo",
+    "nick": "verik28",
+    "country": "UA",
+    "age": 38,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 61,
+      "MOT": 63
+    },
+    "teamId": "basementboys",
+    "contract": {
+      "teamId": "basementboys",
+      "salary": 3900,
+      "endDate": "2027-11-30",
+      "releaseClause": 46800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-saw-tecnico",
+    "nick": "dorjor27",
+    "country": "PT",
+    "age": 37,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 63,
+      "VET": 66,
+      "GES": 65
+    },
+    "teamId": "saw",
+    "contract": {
+      "teamId": "saw",
+      "salary": 4800,
+      "endDate": "2029-08-31",
+      "releaseClause": 57600
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-saw-analista",
+    "nick": "sellin34",
+    "country": "PT",
+    "age": 30,
+    "role": "analista",
+    "attrs": {
+      "LEI": 56,
+      "PRE": 61
+    },
+    "teamId": "saw",
+    "contract": {
+      "teamId": "saw",
+      "salary": 3200,
+      "endDate": "2028-05-31",
+      "releaseClause": 38400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-saw-psicologo",
+    "nick": "linsel28",
+    "country": "PT",
+    "age": 39,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 59,
+      "MOT": 59
+    },
+    "teamId": "saw",
+    "contract": {
+      "teamId": "saw",
+      "salary": 3200,
+      "endDate": "2029-03-31",
+      "releaseClause": 38400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-metizport-tecnico",
+    "nick": "tugus30",
+    "country": "SE",
+    "age": 40,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 62,
+      "VET": 68,
+      "GES": 59
+    },
+    "teamId": "metizport",
+    "contract": {
+      "teamId": "metizport",
+      "salary": 4200,
+      "endDate": "2029-05-31",
+      "releaseClause": 50400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-metizport-analista",
+    "nick": "rovan30",
+    "country": "SE",
+    "age": 36,
+    "role": "analista",
+    "attrs": {
+      "LEI": 63,
+      "PRE": 57
+    },
+    "teamId": "metizport",
+    "contract": {
+      "teamId": "metizport",
+      "salary": 3400,
+      "endDate": "2028-05-31",
+      "releaseClause": 40800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-metizport-psicologo",
+    "nick": "kabro28",
+    "country": "SE",
+    "age": 32,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 56,
+      "MOT": 58
+    },
+    "teamId": "metizport",
+    "contract": {
+      "teamId": "metizport",
+      "salary": 2700,
+      "endDate": "2029-11-30",
+      "releaseClause": 32400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-fluxo-tecnico",
+    "nick": "rikve29",
+    "country": "BR",
+    "age": 34,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 64,
+      "VET": 61,
+      "GES": 61
+    },
+    "teamId": "fluxo",
+    "contract": {
+      "teamId": "fluxo",
+      "salary": 3900,
+      "endDate": "2029-03-31",
+      "releaseClause": 46800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-fluxo-analista",
+    "nick": "gustu31",
+    "country": "BR",
+    "age": 36,
+    "role": "analista",
+    "attrs": {
+      "LEI": 57,
+      "PRE": 62
+    },
+    "teamId": "fluxo",
+    "contract": {
+      "teamId": "fluxo",
+      "salary": 3400,
+      "endDate": "2029-09-30",
+      "releaseClause": 40800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-fluxo-psicologo",
+    "nick": "gustu33",
+    "country": "BR",
+    "age": 30,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 64,
+      "MOT": 62
+    },
+    "teamId": "fluxo",
+    "contract": {
+      "teamId": "fluxo",
+      "salary": 4200,
+      "endDate": "2029-02-28",
+      "releaseClause": 50400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-galorys-tecnico",
+    "nick": "petfen25",
+    "country": "BR",
+    "age": 37,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 66,
+      "VET": 60,
+      "GES": 59
+    },
+    "teamId": "galorys",
+    "contract": {
+      "teamId": "galorys",
+      "salary": 3900,
+      "endDate": "2029-05-31",
+      "releaseClause": 46800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-galorys-analista",
+    "nick": "makhal33",
+    "country": "BR",
+    "age": 27,
+    "role": "analista",
+    "attrs": {
+      "LEI": 59,
+      "PRE": 63
+    },
+    "teamId": "galorys",
+    "contract": {
+      "teamId": "galorys",
+      "salary": 3600,
+      "endDate": "2028-05-31",
+      "releaseClause": 43200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-galorys-psicologo",
+    "nick": "jordor26",
+    "country": "BR",
+    "age": 39,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 59,
+      "MOT": 61
+    },
+    "teamId": "galorys",
+    "contract": {
+      "teamId": "galorys",
+      "salary": 3400,
+      "endDate": "2029-08-31",
+      "releaseClause": 40800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-phantom-tecnico",
+    "nick": "NBK-",
+    "country": "FR",
+    "age": 29,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 65,
+      "VET": 60,
+      "GES": 63
+    },
+    "teamId": "phantom",
+    "contract": {
+      "teamId": "phantom",
+      "salary": 4200,
+      "endDate": "2028-01-31",
+      "releaseClause": 50400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-phantom-analista",
+    "nick": "dorjor32",
+    "country": "PL",
+    "age": 26,
+    "role": "analista",
+    "attrs": {
+      "LEI": 55,
+      "PRE": 55
+    },
+    "teamId": "phantom",
+    "contract": {
+      "teamId": "phantom",
+      "salary": 2400,
+      "endDate": "2028-02-29",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-phantom-psicologo",
+    "nick": "linsel33",
+    "country": "PL",
+    "age": 43,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 60,
+      "MOT": 54
+    },
+    "teamId": "phantom",
+    "contract": {
+      "teamId": "phantom",
+      "salary": 2700,
+      "endDate": "2028-07-31",
+      "releaseClause": 32400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-nexvoid-tecnico",
+    "nick": "kabro27",
+    "country": "MN",
+    "age": 31,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 58,
+      "VET": 62,
+      "GES": 64
+    },
+    "teamId": "nexvoid",
+    "contract": {
+      "teamId": "nexvoid",
+      "salary": 3600,
+      "endDate": "2029-01-31",
+      "releaseClause": 43200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-nexvoid-analista",
+    "nick": "gustu34",
+    "country": "MN",
+    "age": 28,
+    "role": "analista",
+    "attrs": {
+      "LEI": 60,
+      "PRE": 59
+    },
+    "teamId": "nexvoid",
+    "contract": {
+      "teamId": "nexvoid",
+      "salary": 3400,
+      "endDate": "2028-03-31",
+      "releaseClause": 40800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-nexvoid-psicologo",
+    "nick": "tugus28",
+    "country": "MN",
+    "age": 35,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 58,
+      "MOT": 58
+    },
+    "teamId": "nexvoid",
+    "contract": {
+      "teamId": "nexvoid",
+      "salary": 2900,
+      "endDate": "2028-07-31",
+      "releaseClause": 34800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-voca-tecnico",
+    "nick": "broka31",
+    "country": "US",
+    "age": 35,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 66,
+      "VET": 66,
+      "GES": 60
+    },
+    "teamId": "voca",
+    "contract": {
+      "teamId": "voca",
+      "salary": 4500,
+      "endDate": "2027-11-30",
+      "releaseClause": 54000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-voca-analista",
+    "nick": "jordor33",
+    "country": "US",
+    "age": 38,
+    "role": "analista",
+    "attrs": {
+      "LEI": 56,
+      "PRE": 53
+    },
+    "teamId": "voca",
+    "contract": {
+      "teamId": "voca",
+      "salary": 2400,
+      "endDate": "2029-05-31",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-voca-psicologo",
+    "nick": "gustu32",
+    "country": "US",
+    "age": 47,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 57,
+      "MOT": 58
+    },
+    "teamId": "voca",
+    "contract": {
+      "teamId": "voca",
+      "salary": 2900,
+      "endDate": "2028-03-31",
+      "releaseClause": 34800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-barca-tecnico",
+    "nick": "gustu29",
+    "country": "BR",
+    "age": 31,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 57,
+      "VET": 66,
+      "GES": 60
+    },
+    "teamId": "barca",
+    "contract": {
+      "teamId": "barca",
+      "salary": 3600,
+      "endDate": "2029-09-30",
+      "releaseClause": 43200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-barca-analista",
+    "nick": "tugus35",
+    "country": "BR",
+    "age": 35,
+    "role": "analista",
+    "attrs": {
+      "LEI": 53,
+      "PRE": 55
+    },
+    "teamId": "barca",
+    "contract": {
+      "teamId": "barca",
+      "salary": 2200,
+      "endDate": "2029-05-31",
+      "releaseClause": 26400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-barca-psicologo",
+    "nick": "dorjor30",
+    "country": "BR",
+    "age": 39,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 59,
+      "MOT": 61
+    },
+    "teamId": "barca",
+    "contract": {
+      "teamId": "barca",
+      "salary": 3400,
+      "endDate": "2028-01-31",
+      "releaseClause": 40800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-pure-tecnico",
+    "nick": "dorjor31",
+    "country": "PL",
+    "age": 42,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 60,
+      "VET": 56,
+      "GES": 57
+    },
+    "teamId": "pure",
+    "contract": {
+      "teamId": "pure",
+      "salary": 2900,
+      "endDate": "2028-01-31",
+      "releaseClause": 34800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-pure-analista",
+    "nick": "makhal29",
+    "country": "PL",
+    "age": 40,
+    "role": "analista",
+    "attrs": {
+      "LEI": 60,
+      "PRE": 57
+    },
+    "teamId": "pure",
+    "contract": {
+      "teamId": "pure",
+      "salary": 3200,
+      "endDate": "2029-11-30",
+      "releaseClause": 38400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-pure-psicologo",
+    "nick": "makhal30",
+    "country": "PL",
+    "age": 46,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 54,
+      "MOT": 61
+    },
+    "teamId": "pure",
+    "contract": {
+      "teamId": "pure",
+      "salary": 2900,
+      "endDate": "2029-02-28",
+      "releaseClause": 34800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-lowcortisol-tecnico",
+    "nick": "rovan31",
+    "country": "BR",
+    "age": 33,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 65,
+      "VET": 58,
+      "GES": 61
+    },
+    "teamId": "lowcortisol",
+    "contract": {
+      "teamId": "lowcortisol",
+      "salary": 3600,
+      "endDate": "2029-11-30",
+      "releaseClause": 43200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-lowcortisol-analista",
+    "nick": "halmak36",
+    "country": "BR",
+    "age": 35,
+    "role": "analista",
+    "attrs": {
+      "LEI": 58,
+      "PRE": 52
+    },
+    "teamId": "lowcortisol",
+    "contract": {
+      "teamId": "lowcortisol",
+      "salary": 2400,
+      "endDate": "2029-06-30",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-lowcortisol-psicologo",
+    "nick": "verik32",
+    "country": "BR",
+    "age": 39,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 54,
+      "MOT": 56
+    },
+    "teamId": "lowcortisol",
+    "contract": {
+      "teamId": "lowcortisol",
+      "salary": 2400,
+      "endDate": "2028-04-30",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-unity-tecnico",
+    "nick": "sellin29",
+    "country": "CZ",
+    "age": 33,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 58,
+      "VET": 65,
+      "GES": 59
+    },
+    "teamId": "unity",
+    "contract": {
+      "teamId": "unity",
+      "salary": 3600,
+      "endDate": "2028-10-31",
+      "releaseClause": 43200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-unity-analista",
+    "nick": "linsel35",
+    "country": "CZ",
+    "age": 36,
+    "role": "analista",
+    "attrs": {
+      "LEI": 55,
+      "PRE": 56
+    },
+    "teamId": "unity",
+    "contract": {
+      "teamId": "unity",
+      "salary": 2500,
+      "endDate": "2028-06-30",
+      "releaseClause": 30000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-unity-psicologo",
+    "nick": "kabro30",
+    "country": "CZ",
+    "age": 39,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 58,
+      "MOT": 54
+    },
+    "teamId": "unity",
+    "contract": {
+      "teamId": "unity",
+      "salary": 2500,
+      "endDate": "2028-07-31",
+      "releaseClause": 30000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-rbls-tecnico",
+    "nick": "horvy",
+    "country": "BR",
+    "age": 31,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 61,
+      "VET": 57,
+      "GES": 62
+    },
+    "teamId": "rbls",
+    "contract": {
+      "teamId": "rbls",
+      "salary": 3400,
+      "endDate": "2028-09-30",
+      "releaseClause": 40800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-rbls-analista",
+    "nick": "jordor31",
+    "country": "PT",
+    "age": 26,
+    "role": "analista",
+    "attrs": {
+      "LEI": 59,
+      "PRE": 57
+    },
+    "teamId": "rbls",
+    "contract": {
+      "teamId": "rbls",
+      "salary": 2900,
+      "endDate": "2028-05-31",
+      "releaseClause": 34800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-rbls-psicologo",
+    "nick": "broka37",
+    "country": "PT",
+    "age": 45,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 55,
+      "MOT": 56
+    },
+    "teamId": "rbls",
+    "contract": {
+      "teamId": "rbls",
+      "salary": 2500,
+      "endDate": "2029-05-31",
+      "releaseClause": 30000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-bountyhunters-tecnico",
+    "nick": "fenpet30",
+    "country": "BR",
+    "age": 36,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 64,
+      "VET": 64,
+      "GES": 56
+    },
+    "teamId": "bountyhunters",
+    "contract": {
+      "teamId": "bountyhunters",
+      "salary": 3600,
+      "endDate": "2028-11-30",
+      "releaseClause": 43200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-bountyhunters-analista",
+    "nick": "jordor27",
+    "country": "BR",
+    "age": 30,
+    "role": "analista",
+    "attrs": {
+      "LEI": 60,
+      "PRE": 55
+    },
+    "teamId": "bountyhunters",
+    "contract": {
+      "teamId": "bountyhunters",
+      "salary": 2900,
+      "endDate": "2029-04-30",
+      "releaseClause": 34800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-bountyhunters-psicologo",
+    "nick": "broka32",
+    "country": "BR",
+    "age": 44,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 51,
+      "MOT": 52
+    },
+    "teamId": "bountyhunters",
+    "contract": {
+      "teamId": "bountyhunters",
+      "salary": 1900,
+      "endDate": "2028-01-31",
+      "releaseClause": 22800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-virtuspro-tecnico",
+    "nick": "jordor29",
+    "country": "RU",
+    "age": 38,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 54,
+      "VET": 57,
+      "GES": 61
+    },
+    "teamId": "virtuspro",
+    "contract": {
+      "teamId": "virtuspro",
+      "salary": 2700,
+      "endDate": "2029-06-30",
+      "releaseClause": 32400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-virtuspro-analista",
+    "nick": "vanro31",
+    "country": "RU",
+    "age": 32,
+    "role": "analista",
+    "attrs": {
+      "LEI": 52,
+      "PRE": 58
+    },
+    "teamId": "virtuspro",
+    "contract": {
+      "teamId": "virtuspro",
+      "salary": 2400,
+      "endDate": "2029-08-31",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-virtuspro-psicologo",
+    "nick": "jordor25",
+    "country": "RU",
+    "age": 36,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 60,
+      "MOT": 57
+    },
+    "teamId": "virtuspro",
+    "contract": {
+      "teamId": "virtuspro",
+      "salary": 3200,
+      "endDate": "2029-05-31",
+      "releaseClause": 38400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-infinite-tecnico",
+    "nick": "petfen31",
+    "country": "DE",
+    "age": 32,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 62,
+      "VET": 63,
+      "GES": 59
+    },
+    "teamId": "infinite",
+    "contract": {
+      "teamId": "infinite",
+      "salary": 3600,
+      "endDate": "2028-03-31",
+      "releaseClause": 43200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-infinite-analista",
+    "nick": "gustu28",
+    "country": "DE",
+    "age": 30,
+    "role": "analista",
+    "attrs": {
+      "LEI": 58,
+      "PRE": 59
+    },
+    "teamId": "infinite",
+    "contract": {
+      "teamId": "infinite",
+      "salary": 3200,
+      "endDate": "2028-02-29",
+      "releaseClause": 38400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-infinite-psicologo",
+    "nick": "halmak33",
+    "country": "DE",
+    "age": 36,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 58,
+      "MOT": 52
+    },
+    "teamId": "infinite",
+    "contract": {
+      "teamId": "infinite",
+      "salary": 2400,
+      "endDate": "2029-10-31",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-wbt-tecnico",
+    "nick": "verik34",
+    "country": "UA",
+    "age": 41,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 59,
+      "VET": 56,
+      "GES": 58
+    },
+    "teamId": "wbt",
+    "contract": {
+      "teamId": "wbt",
+      "salary": 2900,
+      "endDate": "2029-07-31",
+      "releaseClause": 34800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-wbt-analista",
+    "nick": "petfen32",
+    "country": "UA",
+    "age": 38,
+    "role": "analista",
+    "attrs": {
+      "LEI": 54,
+      "PRE": 55
+    },
+    "teamId": "wbt",
+    "contract": {
+      "teamId": "wbt",
+      "salary": 2400,
+      "endDate": "2029-04-30",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-wbt-psicologo",
+    "nick": "petfen38",
+    "country": "UA",
+    "age": 37,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 58,
+      "MOT": 57
+    },
+    "teamId": "wbt",
+    "contract": {
+      "teamId": "wbt",
+      "salary": 2900,
+      "endDate": "2028-08-31",
+      "releaseClause": 34800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-leo-tecnico",
+    "nick": "tugus29",
+    "country": "FR",
+    "age": 38,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 58,
+      "VET": 58,
+      "GES": 55
+    },
+    "teamId": "leo",
+    "contract": {
+      "teamId": "leo",
+      "salary": 2700,
+      "endDate": "2028-08-31",
+      "releaseClause": 32400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-leo-analista",
+    "nick": "petfen26",
+    "country": "FR",
+    "age": 35,
+    "role": "analista",
+    "attrs": {
+      "LEI": 50,
+      "PRE": 55
+    },
+    "teamId": "leo",
+    "contract": {
+      "teamId": "leo",
+      "salary": 2000,
+      "endDate": "2028-01-31",
+      "releaseClause": 24000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-leo-psicologo",
+    "nick": "rikve32",
+    "country": "FR",
+    "age": 34,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 50,
+      "MOT": 50
+    },
+    "teamId": "leo",
+    "contract": {
+      "teamId": "leo",
+      "salary": 1600,
+      "endDate": "2028-09-30",
+      "releaseClause": 19200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-aimclub-tecnico",
+    "nick": "halmak34",
+    "country": "RO",
+    "age": 37,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 53,
+      "VET": 57,
+      "GES": 61
+    },
+    "teamId": "aimclub",
+    "contract": {
+      "teamId": "aimclub",
+      "salary": 2700,
+      "endDate": "2029-02-28",
+      "releaseClause": 32400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-aimclub-analista",
+    "nick": "rovan33",
+    "country": "RO",
+    "age": 38,
+    "role": "analista",
+    "attrs": {
+      "LEI": 54,
+      "PRE": 52
+    },
+    "teamId": "aimclub",
+    "contract": {
+      "teamId": "aimclub",
+      "salary": 2000,
+      "endDate": "2028-02-29",
+      "releaseClause": 24000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-aimclub-psicologo",
+    "nick": "broka35",
+    "country": "RO",
+    "age": 35,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 56,
+      "MOT": 57
+    },
+    "teamId": "aimclub",
+    "contract": {
+      "teamId": "aimclub",
+      "salary": 2700,
+      "endDate": "2028-09-30",
+      "releaseClause": 32400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-navijunior-tecnico",
+    "nick": "petfen34",
+    "country": "CZ",
+    "age": 41,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 60,
+      "VET": 58,
+      "GES": 60
+    },
+    "teamId": "navijunior",
+    "contract": {
+      "teamId": "navijunior",
+      "salary": 3200,
+      "endDate": "2028-11-30",
+      "releaseClause": 38400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-navijunior-analista",
+    "nick": "tugus33",
+    "country": "CZ",
+    "age": 39,
+    "role": "analista",
+    "attrs": {
+      "LEI": 51,
+      "PRE": 50
+    },
+    "teamId": "navijunior",
+    "contract": {
+      "teamId": "navijunior",
+      "salary": 1700,
+      "endDate": "2028-04-30",
+      "releaseClause": 20400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-navijunior-psicologo",
+    "nick": "vanro36",
+    "country": "CZ",
+    "age": 41,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 51,
+      "MOT": 50
+    },
+    "teamId": "navijunior",
+    "contract": {
+      "teamId": "navijunior",
+      "salary": 1700,
+      "endDate": "2028-09-30",
+      "releaseClause": 20400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-withoutaroof-tecnico",
+    "nick": "fenpet35",
+    "country": "US",
+    "age": 31,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 59,
+      "VET": 57,
+      "GES": 58
+    },
+    "teamId": "withoutaroof",
+    "contract": {
+      "teamId": "withoutaroof",
+      "salary": 2900,
+      "endDate": "2028-11-30",
+      "releaseClause": 34800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-withoutaroof-analista",
+    "nick": "vanro34",
+    "country": "US",
+    "age": 38,
+    "role": "analista",
+    "attrs": {
+      "LEI": 50,
+      "PRE": 49
+    },
+    "teamId": "withoutaroof",
+    "contract": {
+      "teamId": "withoutaroof",
+      "salary": 1600,
+      "endDate": "2029-04-30",
+      "releaseClause": 19200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-withoutaroof-psicologo",
+    "nick": "makhal37",
+    "country": "US",
+    "age": 45,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 53,
+      "MOT": 52
+    },
+    "teamId": "withoutaroof",
+    "contract": {
+      "teamId": "withoutaroof",
+      "salary": 2000,
+      "endDate": "2028-05-31",
+      "releaseClause": 24000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-upgrade-tecnico",
+    "nick": "linsel32",
+    "country": "BY",
+    "age": 40,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 60,
+      "VET": 53,
+      "GES": 58
+    },
+    "teamId": "upgrade",
+    "contract": {
+      "teamId": "upgrade",
+      "salary": 2700,
+      "endDate": "2029-06-30",
+      "releaseClause": 32400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-upgrade-analista",
+    "nick": "linsel34",
+    "country": "BY",
+    "age": 38,
+    "role": "analista",
+    "attrs": {
+      "LEI": 57,
+      "PRE": 52
+    },
+    "teamId": "upgrade",
+    "contract": {
+      "teamId": "upgrade",
+      "salary": 2400,
+      "endDate": "2028-02-29",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-upgrade-psicologo",
+    "nick": "makhal34",
+    "country": "BY",
+    "age": 42,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 55,
+      "MOT": 49
+    },
+    "teamId": "upgrade",
+    "contract": {
+      "teamId": "upgrade",
+      "salary": 1900,
+      "endDate": "2029-02-28",
+      "releaseClause": 22800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-procyon-tecnico",
+    "nick": "fenpet27",
+    "country": "AR",
+    "age": 42,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 55,
+      "VET": 53,
+      "GES": 54
+    },
+    "teamId": "procyon",
+    "contract": {
+      "teamId": "procyon",
+      "salary": 2200,
+      "endDate": "2028-04-30",
+      "releaseClause": 26400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-procyon-analista",
+    "nick": "vanro35",
+    "country": "AR",
+    "age": 28,
+    "role": "analista",
+    "attrs": {
+      "LEI": 55,
+      "PRE": 48
+    },
+    "teamId": "procyon",
+    "contract": {
+      "teamId": "procyon",
+      "salary": 1900,
+      "endDate": "2028-03-31",
+      "releaseClause": 22800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-procyon-psicologo",
+    "nick": "jordor32",
+    "country": "AR",
+    "age": 44,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 53,
+      "MOT": 51
+    },
+    "teamId": "procyon",
+    "contract": {
+      "teamId": "procyon",
+      "salary": 1900,
+      "endDate": "2028-03-31",
+      "releaseClause": 22800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-thehuns-tecnico",
+    "nick": "Carnage",
+    "country": "MN",
+    "age": 32,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 52,
+      "VET": 52,
+      "GES": 60
+    },
+    "teamId": "thehuns",
+    "contract": {
+      "teamId": "thehuns",
+      "salary": 2400,
+      "endDate": "2029-03-31",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-thehuns-analista",
+    "nick": "rikve33",
+    "country": "MN",
+    "age": 34,
+    "role": "analista",
+    "attrs": {
+      "LEI": 53,
+      "PRE": 57
+    },
+    "teamId": "thehuns",
+    "contract": {
+      "teamId": "thehuns",
+      "salary": 2400,
+      "endDate": "2027-12-31",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-thehuns-psicologo",
+    "nick": "kabro36",
+    "country": "MN",
+    "age": 33,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 56,
+      "MOT": 54
+    },
+    "teamId": "thehuns",
+    "contract": {
+      "teamId": "thehuns",
+      "salary": 2400,
+      "endDate": "2028-03-31",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-johnnyspeeds-tecnico",
+    "nick": "halmak28",
+    "country": "SE",
+    "age": 42,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 56,
+      "VET": 58,
+      "GES": 51
+    },
+    "teamId": "johnnyspeeds",
+    "contract": {
+      "teamId": "johnnyspeeds",
+      "salary": 2400,
+      "endDate": "2028-06-30",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-johnnyspeeds-analista",
+    "nick": "linsel36",
+    "country": "SE",
+    "age": 39,
+    "role": "analista",
+    "attrs": {
+      "LEI": 51,
+      "PRE": 47
+    },
+    "teamId": "johnnyspeeds",
+    "contract": {
+      "teamId": "johnnyspeeds",
+      "salary": 1500,
+      "endDate": "2029-06-30",
+      "releaseClause": 18000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-johnnyspeeds-psicologo",
+    "nick": "kabro33",
+    "country": "SE",
+    "age": 40,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 50,
+      "MOT": 50
+    },
+    "teamId": "johnnyspeeds",
+    "contract": {
+      "teamId": "johnnyspeeds",
+      "salary": 1600,
+      "endDate": "2029-11-30",
+      "releaseClause": 19200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-quazar-tecnico",
+    "nick": "jordor30",
+    "country": "RU",
+    "age": 36,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 58,
+      "VET": 58,
+      "GES": 55
+    },
+    "teamId": "quazar",
+    "contract": {
+      "teamId": "quazar",
+      "salary": 2700,
+      "endDate": "2028-10-31",
+      "releaseClause": 32400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-quazar-analista",
+    "nick": "broka29",
+    "country": "RU",
+    "age": 33,
+    "role": "analista",
+    "attrs": {
+      "LEI": 54,
+      "PRE": 48
+    },
+    "teamId": "quazar",
+    "contract": {
+      "teamId": "quazar",
+      "salary": 1700,
+      "endDate": "2028-03-31",
+      "releaseClause": 20400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-quazar-psicologo",
+    "nick": "verik33",
+    "country": "RU",
+    "age": 42,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 54,
+      "MOT": 54
+    },
+    "teamId": "quazar",
+    "contract": {
+      "teamId": "quazar",
+      "salary": 2200,
+      "endDate": "2029-04-30",
+      "releaseClause": 26400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-spiritacademy-tecnico",
+    "nick": "Qikert",
+    "country": "KZ",
+    "age": 41,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 54,
+      "VET": 59,
+      "GES": 52
+    },
+    "teamId": "spiritacademy",
+    "contract": {
+      "teamId": "spiritacademy",
+      "salary": 2400,
+      "endDate": "2028-08-31",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-spiritacademy-analista",
+    "nick": "jordor37",
+    "country": "RU",
+    "age": 27,
+    "role": "analista",
+    "attrs": {
+      "LEI": 48,
+      "PRE": 50
+    },
+    "teamId": "spiritacademy",
+    "contract": {
+      "teamId": "spiritacademy",
+      "salary": 1500,
+      "endDate": "2029-07-31",
+      "releaseClause": 18000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-spiritacademy-psicologo",
+    "nick": "gustu36",
+    "country": "RU",
+    "age": 31,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 55,
+      "MOT": 52
+    },
+    "teamId": "spiritacademy",
+    "contract": {
+      "teamId": "spiritacademy",
+      "salary": 2200,
+      "endDate": "2029-10-31",
+      "releaseClause": 26400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-mellren-tecnico",
+    "nick": "fenpet39",
+    "country": "BY",
+    "age": 31,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 56,
+      "VET": 56,
+      "GES": 51
+    },
+    "teamId": "mellren",
+    "contract": {
+      "teamId": "mellren",
+      "salary": 2200,
+      "endDate": "2029-05-31",
+      "releaseClause": 26400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-mellren-analista",
+    "nick": "tugus37",
+    "country": "BY",
+    "age": 37,
+    "role": "analista",
+    "attrs": {
+      "LEI": 49,
+      "PRE": 55
+    },
+    "teamId": "mellren",
+    "contract": {
+      "teamId": "mellren",
+      "salary": 1900,
+      "endDate": "2029-03-31",
+      "releaseClause": 22800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-mellren-psicologo",
+    "nick": "rikve35",
+    "country": "BY",
+    "age": 49,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 54,
+      "MOT": 55
+    },
+    "teamId": "mellren",
+    "contract": {
+      "teamId": "mellren",
+      "salary": 2400,
+      "endDate": "2028-09-30",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-wbtacademy-tecnico",
+    "nick": "kabro38",
+    "country": "UA",
+    "age": 41,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 51,
+      "VET": 55,
+      "GES": 58
+    },
+    "teamId": "wbtacademy",
+    "contract": {
+      "teamId": "wbtacademy",
+      "salary": 2400,
+      "endDate": "2029-11-30",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-wbtacademy-analista",
+    "nick": "gustu38",
+    "country": "UA",
+    "age": 32,
+    "role": "analista",
+    "attrs": {
+      "LEI": 55,
+      "PRE": 55
+    },
+    "teamId": "wbtacademy",
+    "contract": {
+      "teamId": "wbtacademy",
+      "salary": 2400,
+      "endDate": "2027-11-30",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-wbtacademy-psicologo",
+    "nick": "jordor39",
+    "country": "UA",
+    "age": 31,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 47,
+      "MOT": 52
+    },
+    "teamId": "wbtacademy",
+    "contract": {
+      "teamId": "wbtacademy",
+      "salary": 1600,
+      "endDate": "2027-12-31",
+      "releaseClause": 19200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-marsborne-tecnico",
+    "nick": "makhal35",
+    "country": "US",
+    "age": 33,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 56,
+      "VET": 59,
+      "GES": 52
+    },
+    "teamId": "marsborne",
+    "contract": {
+      "teamId": "marsborne",
+      "salary": 2500,
+      "endDate": "2028-02-29",
+      "releaseClause": 30000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-marsborne-analista",
+    "nick": "dorjor36",
+    "country": "US",
+    "age": 37,
+    "role": "analista",
+    "attrs": {
+      "LEI": 49,
+      "PRE": 46
+    },
+    "teamId": "marsborne",
+    "contract": {
+      "teamId": "marsborne",
+      "salary": 1400,
+      "endDate": "2029-08-31",
+      "releaseClause": 16800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-marsborne-psicologo",
+    "nick": "sellin36",
+    "country": "US",
+    "age": 31,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 49,
+      "MOT": 53
+    },
+    "teamId": "marsborne",
+    "contract": {
+      "teamId": "marsborne",
+      "salary": 1700,
+      "endDate": "2028-01-31",
+      "releaseClause": 20400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-innercircleacademy-tecnico",
+    "nick": "sellin33",
+    "country": "UA",
+    "age": 40,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 54,
+      "VET": 57,
+      "GES": 58
+    },
+    "teamId": "innercircleacademy",
+    "contract": {
+      "teamId": "innercircleacademy",
+      "salary": 2500,
+      "endDate": "2028-04-30",
+      "releaseClause": 30000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-innercircleacademy-analista",
+    "nick": "sellin35",
+    "country": "UA",
+    "age": 28,
+    "role": "analista",
+    "attrs": {
+      "LEI": 48,
+      "PRE": 53
+    },
+    "teamId": "innercircleacademy",
+    "contract": {
+      "teamId": "innercircleacademy",
+      "salary": 1700,
+      "endDate": "2029-02-28",
+      "releaseClause": 20400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-innercircleacademy-psicologo",
+    "nick": "sellin37",
+    "country": "UA",
+    "age": 42,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 53,
+      "MOT": 47
+    },
+    "teamId": "innercircleacademy",
+    "contract": {
+      "teamId": "innercircleacademy",
+      "salary": 1600,
+      "endDate": "2028-03-31",
+      "releaseClause": 19200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-lazercats-tecnico",
+    "nick": "monarrrh",
+    "country": "UA",
+    "age": 34,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 60,
+      "VET": 53,
+      "GES": 58
+    },
+    "teamId": "lazercats",
+    "contract": {
+      "teamId": "lazercats",
+      "salary": 2700,
+      "endDate": "2029-04-30",
+      "releaseClause": 32400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-lazercats-analista",
+    "nick": "verik38",
+    "country": "UA",
+    "age": 35,
+    "role": "analista",
+    "attrs": {
+      "LEI": 53,
+      "PRE": 48
+    },
+    "teamId": "lazercats",
+    "contract": {
+      "teamId": "lazercats",
+      "salary": 1700,
+      "endDate": "2028-10-31",
+      "releaseClause": 20400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-lazercats-psicologo",
+    "nick": "fenpet33",
+    "country": "UA",
+    "age": 35,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 53,
+      "MOT": 47
+    },
+    "teamId": "lazercats",
+    "contract": {
+      "teamId": "lazercats",
+      "salary": 1600,
+      "endDate": "2029-08-31",
+      "releaseClause": 19200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-exzerotenacity-tecnico",
+    "nick": "broka34",
+    "country": "RS",
+    "age": 32,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 53,
+      "VET": 53,
+      "GES": 60
+    },
+    "teamId": "exzerotenacity",
+    "contract": {
+      "teamId": "exzerotenacity",
+      "salary": 2400,
+      "endDate": "2028-07-31",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-exzerotenacity-analista",
+    "nick": "makhal36",
+    "country": "RS",
+    "age": 37,
+    "role": "analista",
+    "attrs": {
+      "LEI": 54,
+      "PRE": 53
+    },
+    "teamId": "exzerotenacity",
+    "contract": {
+      "teamId": "exzerotenacity",
+      "salary": 2200,
+      "endDate": "2028-03-31",
+      "releaseClause": 26400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-exzerotenacity-psicologo",
+    "nick": "rovan38",
+    "country": "RS",
+    "age": 46,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 51,
+      "MOT": 53
+    },
+    "teamId": "exzerotenacity",
+    "contract": {
+      "teamId": "exzerotenacity",
+      "salary": 1900,
+      "endDate": "2029-06-30",
+      "releaseClause": 22800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-baks-tecnico",
+    "nick": "makhal40",
+    "country": "RU",
+    "age": 43,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 55,
+      "VET": 60,
+      "GES": 53
+    },
+    "teamId": "baks",
+    "contract": {
+      "teamId": "baks",
+      "salary": 2500,
+      "endDate": "2028-03-31",
+      "releaseClause": 30000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-baks-analista",
+    "nick": "tugus39",
+    "country": "RU",
+    "age": 37,
+    "role": "analista",
+    "attrs": {
+      "LEI": 55,
+      "PRE": 55
+    },
+    "teamId": "baks",
+    "contract": {
+      "teamId": "baks",
+      "salary": 2400,
+      "endDate": "2028-03-31",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-baks-psicologo",
+    "nick": "vanro41",
+    "country": "RU",
+    "age": 39,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 51,
+      "MOT": 46
+    },
+    "teamId": "baks",
+    "contract": {
+      "teamId": "baks",
+      "salary": 1500,
+      "endDate": "2028-12-31",
+      "releaseClause": 18000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-og-tecnico",
+    "nick": "Lambert",
+    "country": "FR",
+    "age": 38,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 54,
+      "VET": 52,
+      "GES": 52
+    },
+    "teamId": "og",
+    "contract": {
+      "teamId": "og",
+      "salary": 2000,
+      "endDate": "2029-10-31",
+      "releaseClause": 24000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-og-analista",
+    "nick": "linsel30",
+    "country": "FR",
+    "age": 36,
+    "role": "analista",
+    "attrs": {
+      "LEI": 54,
+      "PRE": 54
+    },
+    "teamId": "og",
+    "contract": {
+      "teamId": "og",
+      "salary": 2200,
+      "endDate": "2028-05-31",
+      "releaseClause": 26400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-og-psicologo",
+    "nick": "kabro31",
+    "country": "FR",
+    "age": 30,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 49,
+      "MOT": 51
+    },
+    "teamId": "og",
+    "contract": {
+      "teamId": "og",
+      "salary": 1600,
+      "endDate": "2028-11-30",
+      "releaseClause": 19200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-brute-tecnico",
+    "nick": "dorjor39",
+    "country": "CZ",
+    "age": 42,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 58,
+      "VET": 50,
+      "GES": 54
+    },
+    "teamId": "brute",
+    "contract": {
+      "teamId": "brute",
+      "salary": 2200,
+      "endDate": "2028-10-31",
+      "releaseClause": 26400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-brute-analista",
+    "nick": "sellin31",
+    "country": "CZ",
+    "age": 39,
+    "role": "analista",
+    "attrs": {
+      "LEI": 49,
+      "PRE": 48
+    },
+    "teamId": "brute",
+    "contract": {
+      "teamId": "brute",
+      "salary": 1500,
+      "endDate": "2028-01-31",
+      "releaseClause": 18000
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-brute-psicologo",
+    "nick": "fenpet32",
+    "country": "CZ",
+    "age": 38,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 52,
+      "MOT": 56
+    },
+    "teamId": "brute",
+    "contract": {
+      "teamId": "brute",
+      "salary": 2200,
+      "endDate": "2029-05-31",
+      "releaseClause": 26400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-illyrians-tecnico",
+    "nick": "dorjor34",
+    "country": "XK",
+    "age": 41,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 54,
+      "VET": 57,
+      "GES": 59
+    },
+    "teamId": "illyrians",
+    "contract": {
+      "teamId": "illyrians",
+      "salary": 2700,
+      "endDate": "2028-06-30",
+      "releaseClause": 32400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-illyrians-analista",
+    "nick": "rikve39",
+    "country": "XK",
+    "age": 32,
+    "role": "analista",
+    "attrs": {
+      "LEI": 49,
+      "PRE": 54
+    },
+    "teamId": "illyrians",
+    "contract": {
+      "teamId": "illyrians",
+      "salary": 1900,
+      "endDate": "2029-06-30",
+      "releaseClause": 22800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-illyrians-psicologo",
+    "nick": "rovan35",
+    "country": "XK",
+    "age": 31,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 48,
+      "MOT": 48
+    },
+    "teamId": "illyrians",
+    "contract": {
+      "teamId": "illyrians",
+      "salary": 1400,
+      "endDate": "2029-03-31",
+      "releaseClause": 16800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-glitch-tecnico",
+    "nick": "rovan37",
+    "country": "PL",
+    "age": 37,
+    "role": "tecnico",
+    "attrs": {
+      "TAT": 54,
+      "VET": 51,
+      "GES": 60
+    },
+    "teamId": "glitch",
+    "contract": {
+      "teamId": "glitch",
+      "salary": 2400,
+      "endDate": "2029-11-30",
+      "releaseClause": 28800
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-glitch-analista",
+    "nick": "verik36",
+    "country": "PL",
+    "age": 28,
+    "role": "analista",
+    "attrs": {
+      "LEI": 56,
+      "PRE": 46
+    },
+    "teamId": "glitch",
+    "contract": {
+      "teamId": "glitch",
+      "salary": 1700,
+      "endDate": "2027-11-30",
+      "releaseClause": 20400
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
+    "id": "st-glitch-psicologo",
+    "nick": "tugus40",
+    "country": "PL",
+    "age": 37,
+    "role": "psicologo",
+    "attrs": {
+      "PRS": 49,
+      "MOT": 51
+    },
+    "teamId": "glitch",
+    "contract": {
+      "teamId": "glitch",
+      "salary": 1600,
+      "endDate": "2028-01-31",
+      "releaseClause": 19200
+    },
+    "course": null,
+    "titles": 0,
+    "refusesRenewal": false
+  },
+  {
     "id": "st-livre-tecnico-01",
-    "nick": "rikve25",
+    "nick": "dorjor40",
     "country": "FR",
     "age": 36,
     "role": "tecnico",
@@ -2066,7 +6418,7 @@
   },
   {
     "id": "st-livre-tecnico-02",
-    "nick": "fenpet26",
+    "nick": "gustu41",
     "country": "US",
     "age": 43,
     "role": "tecnico",
@@ -2083,7 +6435,7 @@
   },
   {
     "id": "st-livre-tecnico-03",
-    "nick": "rovan25",
+    "nick": "rikve34",
     "country": "DK",
     "age": 46,
     "role": "tecnico",
@@ -2100,7 +6452,7 @@
   },
   {
     "id": "st-livre-tecnico-04",
-    "nick": "verik25",
+    "nick": "rikve37",
     "country": "GB",
     "age": 29,
     "role": "tecnico",
@@ -2117,7 +6469,7 @@
   },
   {
     "id": "st-livre-tecnico-05",
-    "nick": "dorjor22",
+    "nick": "petfen33",
     "country": "UA",
     "age": 28,
     "role": "tecnico",
@@ -2134,7 +6486,7 @@
   },
   {
     "id": "st-livre-tecnico-06",
-    "nick": "tugus26",
+    "nick": "linsel40",
     "country": "ES",
     "age": 35,
     "role": "tecnico",
@@ -2151,7 +6503,7 @@
   },
   {
     "id": "st-livre-tecnico-07",
-    "nick": "rovan21",
+    "nick": "rikve30",
     "country": "PL",
     "age": 34,
     "role": "tecnico",
@@ -2168,7 +6520,7 @@
   },
   {
     "id": "st-livre-tecnico-08",
-    "nick": "fenpet24",
+    "nick": "kabro34",
     "country": "SE",
     "age": 45,
     "role": "tecnico",
@@ -2185,7 +6537,7 @@
   },
   {
     "id": "st-livre-tecnico-09",
-    "nick": "halmak26",
+    "nick": "jordor34",
     "country": "CZ",
     "age": 40,
     "role": "tecnico",
@@ -2202,7 +6554,7 @@
   },
   {
     "id": "st-livre-tecnico-10",
-    "nick": "verik22",
+    "nick": "verik31",
     "country": "PL",
     "age": 42,
     "role": "tecnico",
@@ -2219,7 +6571,7 @@
   },
   {
     "id": "st-livre-tecnico-11",
-    "nick": "gustu27",
+    "nick": "sellin41",
     "country": "ES",
     "age": 31,
     "role": "tecnico",
@@ -2236,7 +6588,7 @@
   },
   {
     "id": "st-livre-tecnico-12",
-    "nick": "rovan23",
+    "nick": "rovan34",
     "country": "UA",
     "age": 36,
     "role": "tecnico",
@@ -2253,7 +6605,7 @@
   },
   {
     "id": "st-livre-analista-01",
-    "nick": "makhal25",
+    "nick": "vanro37",
     "country": "PT",
     "age": 34,
     "role": "analista",
@@ -2269,7 +6621,7 @@
   },
   {
     "id": "st-livre-analista-02",
-    "nick": "gustu25",
+    "nick": "linsel42",
     "country": "RU",
     "age": 37,
     "role": "analista",
@@ -2285,7 +6637,7 @@
   },
   {
     "id": "st-livre-analista-03",
-    "nick": "linsel25",
+    "nick": "halmak35",
     "country": "KZ",
     "age": 40,
     "role": "analista",
@@ -2301,7 +6653,7 @@
   },
   {
     "id": "st-livre-analista-04",
-    "nick": "linsel26",
+    "nick": "sellin38",
     "country": "BR",
     "age": 35,
     "role": "analista",
@@ -2317,7 +6669,7 @@
   },
   {
     "id": "st-livre-analista-05",
-    "nick": "broka25",
+    "nick": "makhal32",
     "country": "FI",
     "age": 34,
     "role": "analista",
@@ -2333,7 +6685,7 @@
   },
   {
     "id": "st-livre-analista-06",
-    "nick": "petfen25",
+    "nick": "jordor35",
     "country": "SE",
     "age": 41,
     "role": "analista",
@@ -2349,7 +6701,7 @@
   },
   {
     "id": "st-livre-analista-07",
-    "nick": "broka27",
+    "nick": "kabro35",
     "country": "CZ",
     "age": 36,
     "role": "analista",
@@ -2365,7 +6717,7 @@
   },
   {
     "id": "st-livre-analista-08",
-    "nick": "jordor28",
+    "nick": "makhal42",
     "country": "ES",
     "age": 43,
     "role": "analista",
@@ -2381,7 +6733,7 @@
   },
   {
     "id": "st-livre-analista-09",
-    "nick": "rikve23",
+    "nick": "rovan32",
     "country": "PL",
     "age": 42,
     "role": "analista",
@@ -2397,7 +6749,7 @@
   },
   {
     "id": "st-livre-analista-10",
-    "nick": "vanro26",
+    "nick": "tugus36",
     "country": "KZ",
     "age": 32,
     "role": "analista",
@@ -2413,7 +6765,7 @@
   },
   {
     "id": "st-livre-analista-11",
-    "nick": "broka26",
+    "nick": "sellin43",
     "country": "RU",
     "age": 33,
     "role": "analista",
@@ -2429,7 +6781,7 @@
   },
   {
     "id": "st-livre-analista-12",
-    "nick": "sellin26",
+    "nick": "rikve38",
     "country": "PT",
     "age": 30,
     "role": "analista",
@@ -2445,7 +6797,7 @@
   },
   {
     "id": "st-livre-psicologo-01",
-    "nick": "linsel27",
+    "nick": "verik39",
     "country": "PT",
     "age": 38,
     "role": "psicologo",
@@ -2461,7 +6813,7 @@
   },
   {
     "id": "st-livre-psicologo-02",
-    "nick": "halmak27",
+    "nick": "broka44",
     "country": "RU",
     "age": 29,
     "role": "psicologo",
@@ -2477,7 +6829,7 @@
   },
   {
     "id": "st-livre-psicologo-03",
-    "nick": "makhal27",
+    "nick": "gustu37",
     "country": "KZ",
     "age": 28,
     "role": "psicologo",
@@ -2493,7 +6845,7 @@
   },
   {
     "id": "st-livre-psicologo-04",
-    "nick": "sellin27",
+    "nick": "linsel39",
     "country": "BR",
     "age": 43,
     "role": "psicologo",
@@ -2509,7 +6861,7 @@
   },
   {
     "id": "st-livre-psicologo-05",
-    "nick": "gustu26",
+    "nick": "vanro33",
     "country": "FI",
     "age": 46,
     "role": "psicologo",
@@ -2525,7 +6877,7 @@
   },
   {
     "id": "st-livre-psicologo-06",
-    "nick": "jordor26",
+    "nick": "petfen36",
     "country": "SE",
     "age": 41,
     "role": "psicologo",
@@ -2541,7 +6893,7 @@
   },
   {
     "id": "st-livre-psicologo-07",
-    "nick": "petfen28",
+    "nick": "fenpet36",
     "country": "CZ",
     "age": 40,
     "role": "psicologo",
@@ -2557,7 +6909,7 @@
   },
   {
     "id": "st-livre-psicologo-08",
-    "nick": "kabro29",
+    "nick": "vanro43",
     "country": "ES",
     "age": 43,
     "role": "psicologo",
@@ -2573,7 +6925,7 @@
   },
   {
     "id": "st-livre-psicologo-09",
-    "nick": "kabro24",
+    "nick": "dorjor33",
     "country": "PL",
     "age": 34,
     "role": "psicologo",
@@ -2589,7 +6941,7 @@
   },
   {
     "id": "st-livre-psicologo-10",
-    "nick": "verik28",
+    "nick": "jordor38",
     "country": "KZ",
     "age": 36,
     "role": "psicologo",
@@ -2605,7 +6957,7 @@
   },
   {
     "id": "st-livre-psicologo-11",
-    "nick": "fenpet28",
+    "nick": "halmak45",
     "country": "RU",
     "age": 33,
     "role": "psicologo",
@@ -2621,7 +6973,7 @@
   },
   {
     "id": "st-livre-psicologo-12",
-    "nick": "dorjor28",
+    "nick": "sellin40",
     "country": "PT",
     "age": 30,
     "role": "psicologo",

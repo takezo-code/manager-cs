@@ -1,11 +1,11 @@
 // Academy: jovens de 16 a 19 anos, fora do elenco principal, promovidos a qualquer momento.
-import { ACADEMY, MANAGER, MARKET } from './config';
+import { ACADEMY, MANAGER, MARKET, REGION_COUNTRIES } from './config';
 import { endOfMonthAfter } from './date';
 import { baseOvr } from './form';
 import { DEFAULT_MOOD } from './morale/satisfaction';
 import { createRng, hashString, type Rng } from './rng';
 import { weakestRole } from './squad';
-import { ATTR_KEYS, ROLES, type Attributes, type Player } from './types';
+import { ATTR_KEYS, ROLES, type Attributes, type Player, type Region } from './types';
 import type { World, WorldEvent } from './world';
 
 const SYL_A = ['ka', 'ze', 'vi', 'lu', 'mo', 'ra', 'ne', 'to', 'xi', 'du', 'bi', 'fe', 'gu', 'ja', 'le', 'pi', 'ro', 'sa', 'ti', 'vo', 'kr', 'zy'];
@@ -62,15 +62,18 @@ export function makeYoungPlayer(rng: Rng, id: string, teamId: string | null, cou
   return { ...p, potential: Math.min(ACADEMY.maxPotential, baseOvr(p) + rng.int(ACADEMY.potentialGapMin, ACADEMY.potentialGapMax)) };
 }
 
+/** País de um jovem da região (segue a mesma tabela de regiões do jogo). */
+export const youthCountry = (rng: Rng, region: Region): string => rng.pick(REGION_COUNTRIES[region]);
+
 /** Gera N jovens para a academy de um time. */
 export function generateYouth(w: World, rng: Rng, teamId: string, n: number): Player[] {
-  const country = w.teams[teamId].country;
+  const region = w.teams[teamId].region;
   const out: Player[] = [];
   for (let i = 0; i < n; i++) {
     let id = '';
     do id = `ac-${teamId}-${rng.int(1000, 9999)}`;
     while (w.players[id] || out.some((p) => p.id === id));
-    out.push(makeYoungPlayer(rng, id, teamId, country, w.date, [ACADEMY.levelMin, ACADEMY.levelMax]));
+    out.push(makeYoungPlayer(rng, id, teamId, youthCountry(rng, region), w.date, [ACADEMY.levelMin, ACADEMY.levelMax]));
   }
   return out;
 }

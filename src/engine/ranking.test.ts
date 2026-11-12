@@ -31,7 +31,7 @@ describe('Ranking HLTV', () => {
     const team = w.teams.mongolz;
     w = { ...w, results: [{ eventId: 'major-x', teamId: 'mongolz', date: w.date, placeFactor: 1, weight: 1, roster: [...team.starters] }] };
     const with5 = computeRanking(w).find((r) => r.teamId === 'mongolz')!.points;
-    const newStarters = [...team.starters.slice(0, 2), 'fa-kraeven', 'fa-dovi', 'fa-mirok'];
+    const newStarters = [...team.starters.slice(0, 2), 'kwezz', 'queenix', 'altekz'];
     const changed = { ...w, teams: { ...w.teams, mongolz: { ...team, starters: newStarters, legacyRoster: newStarters } } };
     const with2 = computeRanking(changed).find((r) => r.teamId === 'mongolz')!.points;
     expect(with2).toBeLessThan(with5);

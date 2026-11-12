@@ -1,7 +1,7 @@
 // Recrutamento na GC e na FACEIT: amadores fictícios, baratos, com o potencial real escondido.
-import { makeYoungPlayer } from './academy';
+import { makeYoungPlayer, youthCountry } from './academy';
 import { managerOrg } from './manager/model';
-import { ACADEMY, AMATEURS, SCOUT } from './config';
+import { ACADEMY, AMATEURS, SCOUT, REGION_COUNTRIES } from './config';
 import { endOfMonthAfter } from './date';
 import { baseOvr } from './form';
 import { roundTo } from './format';
@@ -30,7 +30,9 @@ export function generateAmateurs(rng: Rng, n: number, date: string, taken: Set<s
     do id = `am-${date}-${rng.int(10000, 99999)}`;
     while (used.has(id));
     used.add(id);
-    const p0 = makeYoungPlayer(rng, id, null, rng.pick(AMATEURS.countries), date, [AMATEURS.levelMin, AMATEURS.levelMax]);
+    // Amadores do mundo todo, com país coerente com a região.
+    const region = rng.pick(Object.keys(REGION_COUNTRIES) as Array<keyof typeof REGION_COUNTRIES>);
+    const p0 = makeYoungPlayer(rng, id, null, youthCountry(rng, region), date, [AMATEURS.levelMin, AMATEURS.levelMax]);
     const ovr = baseOvr(p0);
     const player = { ...p0, potential: Math.min(ACADEMY.maxPotential, ovr + rng.int(AMATEURS.potentialGapMin, AMATEURS.potentialGapMax)) };
     const platform = rng.chance(0.6) ? ('FACEIT' as const) : ('GC' as const);

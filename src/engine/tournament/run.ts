@@ -134,7 +134,7 @@ export function playDay(
     for (const pid of teams[teamId].playerIds) ps[pid] = recoverDay(ps[pid]);
 
   const results: Record<string, MatchResult> = {};
-  const snapshot = ps; // todos os jogos do dia usam o estado do início do dia
+  const snapshot = { ...ps }; // todos os jogos do dia usam o estado do início do dia
   for (const m of todays) {
     const ta = teams[m.teamAId];
     const tb = teams[m.teamBId];
@@ -165,7 +165,7 @@ export function playDay(
       const mapRatings = r.maps.map((x) => calcRating(x.stats[pid]));
       const st = t.playerStats[pid] ?? { maps: 0, ratingSum: 0, teamId: startersA.includes(pid) ? ta.id : tb.id };
       t.playerStats[pid] = { ...st, maps: st.maps + mapRatings.length, ratingSum: st.ratingSum + mapRatings.reduce((a, b) => a + b, 0) };
-      ps = { ...ps, [pid]: afterSeries(ps[pid], mapRatings, staffOf?.(startersA.includes(pid) ? ta.id : tb.id).MOT) };
+      ps[pid] = afterSeries(ps[pid], mapRatings, staffOf?.(startersA.includes(pid) ? ta.id : tb.id).MOT);
     }
   }
   recordPlacements(t, stage, todays);

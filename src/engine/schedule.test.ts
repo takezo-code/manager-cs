@@ -84,7 +84,7 @@ describe('Janelas de transferência', () => {
     const t = startNegotiation(w, 'transfer', 'ropz', 'furia');
     expect(t.ok).toBe(false);
     if (!t.ok) expect(t.error).toContain('Mercado fechado');
-    expect(startNegotiation(w, 'free', 'fa-kraeven', 'furia').ok).toBe(true);
+    expect(startNegotiation(w, 'free', 'kwezz', 'furia').ok).toBe(true);
     const inWindow = startNegotiation({ ...w, date: '2027-01-10' }, 'transfer', 'ropz', 'furia');
     expect(inWindow.ok).toBe(true);
   });

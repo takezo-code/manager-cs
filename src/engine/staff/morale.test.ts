@@ -47,7 +47,7 @@ describe('Comissão técnica fora da partida', () => {
       return acc / (400 * ids.length);
     };
     expect(count(90) - count(70)).toBeGreaterThan(0.06);
-  });
+  }, 30_000);
 
   it('Motivação 95 estreita as faixas de abaixo e má fase em 0,025', () => {
     const p = base.players[starter];

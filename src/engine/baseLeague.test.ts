@@ -7,15 +7,15 @@ import type { World } from './world';
 const inMarch = (): World => ({ ...createWorld('furia'), date: '2027-03-01' });
 
 describe('Liga de base', () => {
-  it('uma rodada tem 16 jogos e a tabela fecha (vitórias = derrotas)', () => {
+  it('uma rodada tem um jogo para cada 2 academies e a tabela fecha (vitórias = derrotas)', () => {
     const w = playBaseRound(inMarch(), createRng(1));
     const rows = baseStandings(w);
-    expect(rows).toHaveLength(32);
+    expect(rows).toHaveLength(100);
     const wins = rows.reduce((s, r) => s + r.w, 0);
     const losses = rows.reduce((s, r) => s + r.l, 0);
-    expect(wins).toBe(16);
-    expect(losses).toBe(16);
-    expect(w.baseLeague.lastRound).toHaveLength(16);
+    expect(wins).toBe(50);
+    expect(losses).toBe(50);
+    expect(w.baseLeague.lastRound).toHaveLength(50);
   });
 
   it('academy com menos de 5 perde por W.O.', () => {

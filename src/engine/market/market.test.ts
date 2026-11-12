@@ -20,6 +20,9 @@ import { marketValue } from './value';
 
 // Dentro da janela de transferências (1–20 jan).
 const fresh = (): World => ({ ...createWorld('furia'), date: '2027-01-05' });
+/** Mesmo mundo com caixa folgado para o comprador (o teste é da negociação, não do dinheiro). */
+const rich = (w: World, teamId: string): World => ({ ...w, teams: { ...w.teams, [teamId]: { ...w.teams[teamId], money: 50_000_000 } } });
+const FREE = ['kwezz', 'queenix', 'altekz'];
 
 describe('Valor de mercado', () => {
   it('estrelas valem milhões; jovem vale mais que veterano de OVR parecido', () => {
@@ -60,7 +63,7 @@ describe('Negociação com o time', () => {
   });
 
   it('aceitar a contraproposta do time fecha, mesmo na última rodada', () => {
-    const w = fresh();
+    const w = rich(fresh(), 'furia');
     const start = startNegotiation(w, 'transfer', 'jimpphat', 'furia');
     if (!start.ok) throw new Error(start.error);
     const asking = askingPrice(w, 'jimpphat', 'furia')!;
@@ -72,7 +75,7 @@ describe('Negociação com o time', () => {
   });
 
   it('pagar o pedido passa para a conversa com o jogador e fecha com o salário pedido', () => {
-    const w = fresh();
+    const w = rich(fresh(), 'vitality');
     const start = startNegotiation(w, 'transfer', 'xertion', 'vitality');
     if (!start.ok) throw new Error(start.error);
     let n = offerClub(w, start.neg, askingPrice(w, 'xertion', 'vitality')!);
@@ -91,8 +94,8 @@ describe('Negociação com o time', () => {
 
   it('elenco cheio (7) não contrata', () => {
     const w = fresh();
-    const full = { ...w, teams: { ...w.teams, mouz: { ...w.teams.mouz, playerIds: [...w.teams.mouz.playerIds, 'fa-dovi', 'fa-kraeven'] } } };
-    expect(startNegotiation(full, 'free', 'fa-tavinho', 'mouz').ok).toBe(false);
+    const full = { ...w, teams: { ...w.teams, mouz: { ...w.teams.mouz, playerIds: [...w.teams.mouz.playerIds, FREE[0], FREE[1]] } } };
+    expect(startNegotiation(full, 'free', FREE[2], 'mouz').ok).toBe(false);
   });
 });
 

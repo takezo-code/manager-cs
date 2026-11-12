@@ -44,7 +44,11 @@ const clamp = (v: number) => Math.max(0, Math.min(100, Math.round(v)));
  * (é difícil reconquistar); se mesmo assim passar do teto, o jogador foi reconquistado.
  */
 export function applySatisfaction(w: World, playerId: string, delta: number): World {
-  const p = w.players[playerId];
+  return { ...w, players: { ...w.players, [playerId]: withSatisfaction(w.players[playerId], delta) } };
+}
+
+/** Mesmo efeito de `applySatisfaction`, direto no jogador (para laços que mexem em muitos de uma vez). */
+export function withSatisfaction(p: Player, delta: number): Player {
   let d = delta;
   if (p.mood.exitDenied && d > 0) d *= MORALE.deniedEventFactor;
   let s = clamp(p.satisfaction + d);
@@ -54,7 +58,7 @@ export function applySatisfaction(w: World, playerId: string, delta: number): Wo
     if (delta >= MORALE.events.title) mood = { ...mood, exitDenied: false };
     else s = MORALE.deniedCap;
   }
-  return { ...w, players: { ...w.players, [playerId]: { ...p, satisfaction: s, mood } } };
+  return { ...p, satisfaction: s, mood };
 }
 
 /** Referência de salário de mercado para o jogador hoje. */
@@ -62,7 +66,8 @@ export const fairSalary = (p: Player) => salaryForOvr(baseOvr(p));
 
 /** Efeitos do mês para todos os jogadores com time. */
 export function monthlySatisfaction(world: World): World {
-  let w = world;
+  const w = world;
+  const players = { ...w.players };
   const m = MORALE.monthly;
   for (const p of Object.values(w.players)) {
     if (!p.teamId || !p.contract) continue;
@@ -88,15 +93,12 @@ export function monthlySatisfaction(world: World): World {
     delta += (staffAttr(w, team.id, 'GES') - 70) * STAFF.managementMonthly;
     // Gestão de vestiário do manager.
     if (team.id === w.managerTeamId) delta += MANAGER.lockerMonthly * lockerRoom(w);
-    let next = applySatisfaction(w, p.id, delta);
+    let q = withSatisfaction(p, delta);
     // Promessa quebrada é cobrada uma vez só.
-    if (promised && !starter) {
-      const q = next.players[p.id];
-      next = { ...next, players: { ...next.players, [p.id]: { ...q, mood: { ...q.mood, promiseUntil: null } } } };
-    }
-    w = next;
+    if (promised && !starter) q = { ...q, mood: { ...q.mood, promiseUntil: null } };
+    players[p.id] = q;
   }
-  return w;
+  return { ...w, players };
 }
 
 /**

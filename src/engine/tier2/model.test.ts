@@ -22,7 +22,7 @@ describe('Tier 2: times', () => {
     }
   });
 
-  it('48 equipes no tier 2: 32 academies + 16 fictícios', () => {
+  it('48 equipes no tier 2: academies do top 32 + 16 fictícios', () => {
     const all = tier2Teams(w);
     expect(Object.keys(all)).toHaveLength(48);
     expect(all[academyTeamId('furia')].name).toBe('FURIA Academy');

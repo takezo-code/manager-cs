@@ -23,13 +23,13 @@
       "xelex"
     ],
     "mapStrength": {
-      "ancient": 77,
-      "anubis": 65,
-      "cache": 86,
-      "dust2": 65,
-      "inferno": 68,
-      "mirage": 84,
-      "nuke": 72
+      "ancient": 79,
+      "anubis": 68,
+      "cache": 88,
+      "dust2": 68,
+      "inferno": 71,
+      "mirage": 86,
+      "nuke": 74
     },
     "money": 3500000,
     "sponsors": [],
@@ -50,6 +50,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 4494,
     "staff": {
       "tecnico": "st-mouz-tecnico",
       "analista": "st-mouz-analista",
@@ -80,13 +81,13 @@
       "molodoy"
     ],
     "mapStrength": {
-      "ancient": 86,
-      "anubis": 75,
-      "cache": 81,
-      "dust2": 82,
-      "inferno": 80,
-      "mirage": 71,
-      "nuke": 71
+      "ancient": 87,
+      "anubis": 77,
+      "cache": 83,
+      "dust2": 84,
+      "inferno": 82,
+      "mirage": 74,
+      "nuke": 74
     },
     "money": 3250000,
     "sponsors": [],
@@ -107,6 +108,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 8297,
     "staff": {
       "tecnico": "st-furia-tecnico",
       "analista": "st-furia-analista",
@@ -137,13 +139,13 @@
       "mezii"
     ],
     "mapStrength": {
-      "ancient": 83,
-      "anubis": 84,
-      "cache": 63,
-      "dust2": 78,
-      "inferno": 80,
-      "mirage": 65,
-      "nuke": 76
+      "ancient": 87,
+      "anubis": 87,
+      "cache": 68,
+      "dust2": 82,
+      "inferno": 84,
+      "mirage": 70,
+      "nuke": 80
     },
     "money": 3050000,
     "sponsors": [],
@@ -164,6 +166,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 9565,
     "staff": {
       "tecnico": "st-vitality-tecnico",
       "analista": "st-vitality-analista",
@@ -194,13 +197,13 @@
       "donk"
     ],
     "mapStrength": {
-      "ancient": 86,
-      "anubis": 82,
-      "cache": 70,
-      "dust2": 70,
-      "inferno": 73,
-      "mirage": 64,
-      "nuke": 85
+      "ancient": 87,
+      "anubis": 83,
+      "cache": 72,
+      "dust2": 72,
+      "inferno": 74,
+      "mirage": 67,
+      "nuke": 86
     },
     "money": 2800000,
     "sponsors": [],
@@ -221,6 +224,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 7020,
     "staff": {
       "tecnico": "st-spirit-tecnico",
       "analista": "st-spirit-analista",
@@ -251,12 +255,12 @@
       "wicadia"
     ],
     "mapStrength": {
-      "ancient": 74,
-      "anubis": 85,
-      "cache": 64,
-      "dust2": 86,
-      "inferno": 85,
-      "mirage": 78,
+      "ancient": 73,
+      "anubis": 84,
+      "cache": 65,
+      "dust2": 84,
+      "inferno": 84,
+      "mirage": 77,
       "nuke": 75
     },
     "money": 2600000,
@@ -278,6 +282,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 11861,
     "staff": {
       "tecnico": "st-aurora-tecnico",
       "analista": "st-aurora-analista",
@@ -308,13 +313,13 @@
       "kyousuke"
     ],
     "mapStrength": {
-      "ancient": 65,
-      "anubis": 75,
-      "cache": 87,
-      "dust2": 78,
-      "inferno": 68,
-      "mirage": 80,
-      "nuke": 79
+      "ancient": 69,
+      "anubis": 78,
+      "cache": 89,
+      "dust2": 81,
+      "inferno": 71,
+      "mirage": 83,
+      "nuke": 81
     },
     "money": 2350000,
     "sponsors": [],
@@ -335,6 +340,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 11283,
     "staff": {
       "tecnico": "st-falcons-tecnico",
       "analista": "st-falcons-analista",
@@ -365,13 +371,13 @@
       "magnojez"
     ],
     "mapStrength": {
-      "ancient": 62,
-      "anubis": 83,
-      "cache": 70,
+      "ancient": 64,
+      "anubis": 82,
+      "cache": 71,
       "dust2": 85,
       "inferno": 85,
-      "mirage": 64,
-      "nuke": 67
+      "mirage": 65,
+      "nuke": 68
     },
     "money": 2100000,
     "sponsors": [],
@@ -392,6 +398,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 12394,
     "staff": {
       "tecnico": "st-betboom-tecnico",
       "analista": "st-betboom-analista",
@@ -422,13 +429,13 @@
       "makazze"
     ],
     "mapStrength": {
-      "ancient": 72,
-      "anubis": 82,
-      "cache": 84,
-      "dust2": 79,
-      "inferno": 84,
-      "mirage": 74,
-      "nuke": 88
+      "ancient": 74,
+      "anubis": 83,
+      "cache": 85,
+      "dust2": 81,
+      "inferno": 85,
+      "mirage": 76,
+      "nuke": 89
     },
     "money": 1900000,
     "sponsors": [],
@@ -449,6 +456,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 4608,
     "staff": {
       "tecnico": "st-navi-tecnico",
       "analista": "st-navi-analista",
@@ -479,13 +487,13 @@
       "dziugss"
     ],
     "mapStrength": {
-      "ancient": 68,
-      "anubis": 68,
-      "cache": 73,
-      "dust2": 70,
-      "inferno": 70,
-      "mirage": 86,
-      "nuke": 84
+      "ancient": 70,
+      "anubis": 70,
+      "cache": 75,
+      "dust2": 72,
+      "inferno": 72,
+      "mirage": 87,
+      "nuke": 85
     },
     "money": 1650000,
     "sponsors": [],
@@ -506,6 +514,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 13286,
     "staff": {
       "tecnico": "st-fut-tecnico",
       "analista": "st-fut-analista",
@@ -536,13 +545,13 @@
       "cobrazera"
     ],
     "mapStrength": {
-      "ancient": 63,
+      "ancient": 64,
       "anubis": 64,
       "cache": 73,
-      "dust2": 86,
+      "dust2": 85,
       "inferno": 74,
-      "mirage": 88,
-      "nuke": 87
+      "mirage": 86,
+      "nuke": 86
     },
     "money": 1450000,
     "sponsors": [],
@@ -563,6 +572,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 6248,
     "staff": {
       "tecnico": "st-mongolz-tecnico",
       "analista": "st-mongolz-analista",
@@ -593,13 +603,13 @@
       "syph0"
     ],
     "mapStrength": {
-      "ancient": 85,
-      "anubis": 81,
-      "cache": 63,
-      "dust2": 67,
-      "inferno": 67,
-      "mirage": 72,
-      "nuke": 77
+      "ancient": 86,
+      "anubis": 82,
+      "cache": 66,
+      "dust2": 69,
+      "inferno": 69,
+      "mirage": 74,
+      "nuke": 78
     },
     "money": 1200000,
     "sponsors": [],
@@ -620,6 +630,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 7969,
     "staff": {
       "tecnico": "st-nemiga-tecnico",
       "analista": "st-nemiga-analista",
@@ -650,13 +661,13 @@
       "matys"
     ],
     "mapStrength": {
-      "ancient": 69,
-      "anubis": 75,
-      "cache": 75,
-      "dust2": 83,
-      "inferno": 65,
-      "mirage": 69,
-      "nuke": 69
+      "ancient": 67,
+      "anubis": 73,
+      "cache": 73,
+      "dust2": 81,
+      "inferno": 64,
+      "mirage": 68,
+      "nuke": 67
     },
     "money": 950000,
     "sponsors": [],
@@ -677,6 +688,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 5995,
     "staff": {
       "tecnico": "st-g2-tecnico",
       "analista": "st-g2-analista",
@@ -707,13 +719,13 @@
       "zweih"
     ],
     "mapStrength": {
-      "ancient": 82,
-      "anubis": 66,
-      "cache": 64,
-      "dust2": 85,
-      "inferno": 67,
-      "mirage": 79,
-      "nuke": 83
+      "ancient": 79,
+      "anubis": 65,
+      "cache": 62,
+      "dust2": 82,
+      "inferno": 66,
+      "mirage": 77,
+      "nuke": 80
     },
     "money": 750000,
     "sponsors": [],
@@ -734,6 +746,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 12467,
     "staff": {
       "tecnico": "st-parivision-tecnico",
       "analista": "st-parivision-analista",
@@ -754,20 +767,20 @@
       "dumau",
       "latto",
       "try",
-      "legacy-standin"
+      "halmak97"
     ],
     "starters": [
       "art",
       "dumau",
       "latto",
       "try",
-      "legacy-standin"
+      "halmak97"
     ],
     "mapStrength": {
       "ancient": 76,
-      "anubis": 68,
-      "cache": 87,
-      "dust2": 65,
+      "anubis": 69,
+      "cache": 86,
+      "dust2": 66,
       "inferno": 84,
       "mirage": 86,
       "nuke": 80
@@ -782,7 +795,7 @@
       "dumau",
       "latto",
       "try",
-      "legacy-standin"
+      "halmak97"
     ],
     "rankHistory": [],
     "training": {
@@ -791,6 +804,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 12468,
     "staff": {
       "tecnico": "st-legacy-tecnico",
       "analista": "st-legacy-analista",
@@ -821,13 +835,13 @@
       "artfr0st"
     ],
     "mapStrength": {
-      "ancient": 65,
-      "anubis": 77,
-      "cache": 77,
-      "dust2": 68,
-      "inferno": 77,
-      "mirage": 73,
-      "nuke": 69
+      "ancient": 67,
+      "anubis": 78,
+      "cache": 78,
+      "dust2": 70,
+      "inferno": 78,
+      "mirage": 75,
+      "nuke": 70
     },
     "money": 400000,
     "sponsors": [],
@@ -848,6 +862,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 10621,
     "staff": {
       "tecnico": "st-1win-tecnico",
       "analista": "st-1win-analista",
@@ -879,12 +894,12 @@
     ],
     "mapStrength": {
       "ancient": 74,
-      "anubis": 67,
+      "anubis": 68,
       "cache": 70,
-      "dust2": 68,
-      "inferno": 64,
-      "mirage": 87,
-      "nuke": 88
+      "dust2": 69,
+      "inferno": 65,
+      "mirage": 86,
+      "nuke": 87
     },
     "money": 400000,
     "sponsors": [],
@@ -905,6 +920,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 9215,
     "staff": {
       "tecnico": "st-mibr-tecnico",
       "analista": "st-mibr-analista",
@@ -935,13 +951,13 @@
       "jorko"
     ],
     "mapStrength": {
-      "ancient": 77,
-      "anubis": 87,
-      "cache": 74,
-      "dust2": 62,
-      "inferno": 73,
-      "mirage": 71,
-      "nuke": 77
+      "ancient": 79,
+      "anubis": 88,
+      "cache": 75,
+      "dust2": 65,
+      "inferno": 75,
+      "mirage": 73,
+      "nuke": 78
     },
     "money": 400000,
     "sponsors": [],
@@ -962,6 +978,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 5973,
     "staff": {
       "tecnico": "st-liquid-tecnico",
       "analista": "st-liquid-analista",
@@ -995,10 +1012,10 @@
       "ancient": 86,
       "anubis": 74,
       "cache": 84,
-      "dust2": 67,
-      "inferno": 86,
+      "dust2": 68,
+      "inferno": 85,
       "mirage": 75,
-      "nuke": 70
+      "nuke": 71
     },
     "money": 400000,
     "sponsors": [],
@@ -1019,6 +1036,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 6667,
     "staff": {
       "tecnico": "st-faze-tecnico",
       "analista": "st-faze-analista",
@@ -1039,23 +1057,23 @@
       "dgt",
       "luchov",
       "huasopeek",
-      "9z-standin"
+      "kabro35"
     ],
     "starters": [
       "max",
       "dgt",
       "luchov",
       "huasopeek",
-      "9z-standin"
+      "kabro35"
     ],
     "mapStrength": {
-      "ancient": 82,
-      "anubis": 79,
-      "cache": 88,
-      "dust2": 79,
-      "inferno": 74,
-      "mirage": 65,
-      "nuke": 75
+      "ancient": 78,
+      "anubis": 75,
+      "cache": 83,
+      "dust2": 75,
+      "inferno": 70,
+      "mirage": 62,
+      "nuke": 72
     },
     "money": 400000,
     "sponsors": [],
@@ -1067,7 +1085,7 @@
       "dgt",
       "luchov",
       "huasopeek",
-      "9z-standin"
+      "kabro35"
     ],
     "rankHistory": [],
     "training": {
@@ -1076,6 +1094,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 9996,
     "staff": {
       "tecnico": "st-9z-tecnico",
       "analista": "st-9z-analista",
@@ -1106,13 +1125,13 @@
       "cmtry"
     ],
     "mapStrength": {
-      "ancient": 65,
-      "anubis": 73,
-      "cache": 69,
-      "dust2": 87,
-      "inferno": 68,
-      "mirage": 63,
-      "nuke": 74
+      "ancient": 68,
+      "anubis": 75,
+      "cache": 71,
+      "dust2": 88,
+      "inferno": 71,
+      "mirage": 66,
+      "nuke": 76
     },
     "money": 400000,
     "sponsors": [],
@@ -1133,6 +1152,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 6665,
     "staff": {
       "tecnico": "st-astralis-tecnico",
       "analista": "st-astralis-analista",
@@ -1163,11 +1183,11 @@
       "s1zzi"
     ],
     "mapStrength": {
-      "ancient": 86,
+      "ancient": 85,
       "anubis": 73,
-      "cache": 73,
-      "dust2": 62,
-      "inferno": 79,
+      "cache": 72,
+      "dust2": 63,
+      "inferno": 78,
       "mirage": 70,
       "nuke": 67
     },
@@ -1190,6 +1210,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 11241,
     "staff": {
       "tecnico": "st-b8-tecnico",
       "analista": "st-b8-analista",
@@ -1221,12 +1242,12 @@
     ],
     "mapStrength": {
       "ancient": 82,
-      "anubis": 66,
-      "cache": 64,
-      "dust2": 64,
+      "anubis": 67,
+      "cache": 66,
+      "dust2": 65,
       "inferno": 86,
       "mirage": 82,
-      "nuke": 78
+      "nuke": 79
     },
     "money": 400000,
     "sponsors": [],
@@ -1247,6 +1268,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 4411,
     "staff": {
       "tecnico": "st-nip-tecnico",
       "analista": "st-nip-analista",
@@ -1277,13 +1299,13 @@
       "jottaaa"
     ],
     "mapStrength": {
-      "ancient": 85,
-      "anubis": 75,
-      "cache": 75,
-      "dust2": 65,
-      "inferno": 84,
-      "mirage": 70,
-      "nuke": 82
+      "ancient": 86,
+      "anubis": 77,
+      "cache": 77,
+      "dust2": 67,
+      "inferno": 85,
+      "mirage": 72,
+      "nuke": 84
     },
     "money": 400000,
     "sponsors": [],
@@ -1304,6 +1326,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 11251,
     "staff": {
       "tecnico": "st-eternalfire-tecnico",
       "analista": "st-eternalfire-analista",
@@ -1334,12 +1357,12 @@
       "lake"
     ],
     "mapStrength": {
-      "ancient": 68,
-      "anubis": 69,
-      "cache": 79,
-      "dust2": 84,
-      "inferno": 70,
-      "mirage": 87,
+      "ancient": 67,
+      "anubis": 68,
+      "cache": 78,
+      "dust2": 82,
+      "inferno": 69,
+      "mirage": 85,
       "nuke": 66
     },
     "money": 400000,
@@ -1361,6 +1384,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 12376,
     "staff": {
       "tecnico": "st-m80-tecnico",
       "analista": "st-m80-analista",
@@ -1391,13 +1415,13 @@
       "chr1zn"
     ],
     "mapStrength": {
-      "ancient": 69,
-      "anubis": 66,
-      "cache": 81,
-      "dust2": 86,
-      "inferno": 82,
-      "mirage": 82,
-      "nuke": 68
+      "ancient": 72,
+      "anubis": 70,
+      "cache": 83,
+      "dust2": 88,
+      "inferno": 85,
+      "mirage": 84,
+      "nuke": 72
     },
     "money": 400000,
     "sponsors": [],
@@ -1418,6 +1442,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 7175,
     "staff": {
       "tecnico": "st-heroic-tecnico",
       "analista": "st-heroic-analista",
@@ -1449,10 +1474,10 @@
     ],
     "mapStrength": {
       "ancient": 87,
-      "anubis": 70,
+      "anubis": 71,
       "cache": 73,
       "dust2": 74,
-      "inferno": 68,
+      "inferno": 69,
       "mirage": 79,
       "nuke": 86
     },
@@ -1475,6 +1500,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 9928,
     "staff": {
       "tecnico": "st-gamerlegion-tecnico",
       "analista": "st-gamerlegion-analista",
@@ -1486,7 +1512,7 @@
     "name": "Fnatic",
     "shortName": "fnatic",
     "country": "GB",
-    "region": "EU",
+    "region": "CIS",
     "hltvRank": 27,
     "hltvPoints": 76,
     "color": "#ff5900",
@@ -1505,13 +1531,13 @@
       "mazay"
     ],
     "mapStrength": {
-      "ancient": 82,
-      "anubis": 65,
-      "cache": 83,
-      "dust2": 85,
-      "inferno": 84,
-      "mirage": 63,
-      "nuke": 71
+      "ancient": 79,
+      "anubis": 64,
+      "cache": 80,
+      "dust2": 82,
+      "inferno": 81,
+      "mirage": 62,
+      "nuke": 69
     },
     "money": 400000,
     "sponsors": [],
@@ -1532,6 +1558,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 4991,
     "staff": {
       "tecnico": "st-fnatic-tecnico",
       "analista": "st-fnatic-analista",
@@ -1562,13 +1589,13 @@
       "graviti"
     ],
     "mapStrength": {
-      "ancient": 77,
-      "anubis": 64,
-      "cache": 79,
-      "dust2": 74,
-      "inferno": 63,
-      "mirage": 77,
-      "nuke": 83
+      "ancient": 75,
+      "anubis": 62,
+      "cache": 76,
+      "dust2": 72,
+      "inferno": 61,
+      "mirage": 74,
+      "nuke": 80
     },
     "money": 400000,
     "sponsors": [],
@@ -1589,6 +1616,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 5991,
     "staff": {
       "tecnico": "st-envy-tecnico",
       "analista": "st-envy-analista",
@@ -1619,13 +1647,13 @@
       "tenzy"
     ],
     "mapStrength": {
-      "ancient": 85,
-      "anubis": 67,
-      "cache": 69,
-      "dust2": 64,
-      "inferno": 67,
-      "mirage": 63,
-      "nuke": 82
+      "ancient": 82,
+      "anubis": 66,
+      "cache": 68,
+      "dust2": 63,
+      "inferno": 65,
+      "mirage": 61,
+      "nuke": 79
     },
     "money": 400000,
     "sponsors": [],
@@ -1646,6 +1674,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 13592,
     "staff": {
       "tecnico": "st-magic-tecnico",
       "analista": "st-magic-analista",
@@ -1676,13 +1705,13 @@
       "zero"
     ],
     "mapStrength": {
-      "ancient": 77,
-      "anubis": 84,
-      "cache": 83,
-      "dust2": 78,
-      "inferno": 85,
-      "mirage": 87,
-      "nuke": 82
+      "ancient": 74,
+      "anubis": 81,
+      "cache": 80,
+      "dust2": 75,
+      "inferno": 81,
+      "mirage": 84,
+      "nuke": 79
     },
     "money": 400000,
     "sponsors": [],
@@ -1703,6 +1732,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 4863,
     "staff": {
       "tecnico": "st-tyloo-tecnico",
       "analista": "st-tyloo-analista",
@@ -1733,13 +1763,13 @@
       "frontales"
     ],
     "mapStrength": {
-      "ancient": 88,
-      "anubis": 62,
-      "cache": 71,
-      "dust2": 70,
-      "inferno": 86,
-      "mirage": 77,
-      "nuke": 86
+      "ancient": 84,
+      "anubis": 61,
+      "cache": 69,
+      "dust2": 68,
+      "inferno": 83,
+      "mirage": 74,
+      "nuke": 82
     },
     "money": 400000,
     "sponsors": [],
@@ -1760,6 +1790,7 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 11581,
     "staff": {
       "tecnico": "st-hotu-tecnico",
       "analista": "st-hotu-analista",
@@ -1790,11 +1821,11 @@
       "gr1ks"
     ],
     "mapStrength": {
-      "ancient": 76,
-      "anubis": 80,
-      "cache": 77,
-      "dust2": 67,
-      "inferno": 85,
+      "ancient": 75,
+      "anubis": 79,
+      "cache": 76,
+      "dust2": 66,
+      "inferno": 84,
       "mirage": 69,
       "nuke": 64
     },
@@ -1817,10 +1848,3955 @@
     },
     "academyIds": [],
     "scoutLevel": 1,
+    "hltvId": 7532,
     "staff": {
       "tecnico": "st-big-tecnico",
       "analista": "st-big-analista",
       "psicologo": "st-big-psicologo"
+    }
+  },
+  {
+    "id": "100thieves",
+    "name": "100 Thieves",
+    "shortName": "1T",
+    "country": "DK",
+    "region": "EU",
+    "hltvRank": 33,
+    "hltvPoints": 57,
+    "color": "#f4a261",
+    "playerIds": [
+      "device",
+      "rain",
+      "gizmy",
+      "sirah",
+      "poiii"
+    ],
+    "starters": [
+      "device",
+      "rain",
+      "gizmy",
+      "sirah",
+      "poiii"
+    ],
+    "mapStrength": {
+      "ancient": 79,
+      "anubis": 68,
+      "cache": 70,
+      "dust2": 69,
+      "inferno": 69,
+      "mirage": 61,
+      "nuke": 75
+    },
+    "money": 400000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 57,
+    "legacyRoster": [
+      "device",
+      "rain",
+      "gizmy",
+      "sirah",
+      "poiii"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 8474,
+    "staff": {
+      "tecnico": "st-100thieves-tecnico",
+      "analista": "st-100thieves-analista",
+      "psicologo": "st-100thieves-psicologo"
+    }
+  },
+  {
+    "id": "luminosity",
+    "name": "Luminosity",
+    "shortName": "LUMIN",
+    "country": "BG",
+    "region": "EU",
+    "hltvRank": 34,
+    "hltvPoints": 56,
+    "color": "#06d6a0",
+    "playerIds": [
+      "rainwaker",
+      "afro",
+      "lux",
+      "yxngstxr",
+      "azuwu"
+    ],
+    "starters": [
+      "rainwaker",
+      "afro",
+      "lux",
+      "yxngstxr",
+      "azuwu"
+    ],
+    "mapStrength": {
+      "ancient": 79,
+      "anubis": 72,
+      "cache": 86,
+      "dust2": 77,
+      "inferno": 68,
+      "mirage": 79,
+      "nuke": 67
+    },
+    "money": 390000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 56,
+    "legacyRoster": [
+      "rainwaker",
+      "afro",
+      "lux",
+      "yxngstxr",
+      "azuwu"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 6290,
+    "staff": {
+      "tecnico": "st-luminosity-tecnico",
+      "analista": "st-luminosity-analista",
+      "psicologo": "st-luminosity-psicologo"
+    }
+  },
+  {
+    "id": "dendele",
+    "name": "DENDELE",
+    "shortName": "DENDE",
+    "country": "BR",
+    "region": "SA",
+    "hltvRank": 35,
+    "hltvPoints": 56,
+    "color": "#f4a261",
+    "playerIds": [
+      "gafolo",
+      "koala",
+      "maxxkor",
+      "rdnzao",
+      "doc"
+    ],
+    "starters": [
+      "gafolo",
+      "koala",
+      "maxxkor",
+      "rdnzao",
+      "doc"
+    ],
+    "mapStrength": {
+      "ancient": 76,
+      "anubis": 74,
+      "cache": 84,
+      "dust2": 84,
+      "inferno": 72,
+      "mirage": 75,
+      "nuke": 65
+    },
+    "money": 390000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 56,
+    "legacyRoster": [
+      "gafolo",
+      "koala",
+      "maxxkor",
+      "rdnzao",
+      "doc"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13926,
+    "staff": {
+      "tecnico": "st-dendele-tecnico",
+      "analista": "st-dendele-analista",
+      "psicologo": "st-dendele-psicologo"
+    }
+  },
+  {
+    "id": "nrg",
+    "name": "NRG",
+    "shortName": "NRG",
+    "country": "US",
+    "region": "NA",
+    "hltvRank": 36,
+    "hltvPoints": 53,
+    "color": "#ef476f",
+    "playerIds": [
+      "nitr0",
+      "sonic",
+      "hallzerk",
+      "grim",
+      "jeorge"
+    ],
+    "starters": [
+      "nitr0",
+      "sonic",
+      "hallzerk",
+      "grim",
+      "jeorge"
+    ],
+    "mapStrength": {
+      "ancient": 70,
+      "anubis": 81,
+      "cache": 86,
+      "dust2": 70,
+      "inferno": 77,
+      "mirage": 80,
+      "nuke": 72
+    },
+    "money": 380000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 53,
+    "legacyRoster": [
+      "nitr0",
+      "sonic",
+      "hallzerk",
+      "grim",
+      "jeorge"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 6673,
+    "staff": {
+      "tecnico": "st-nrg-tecnico",
+      "analista": "st-nrg-analista",
+      "psicologo": "st-nrg-psicologo"
+    }
+  },
+  {
+    "id": "innercircle",
+    "name": "Inner Circle",
+    "shortName": "IC",
+    "country": "UA",
+    "region": "CIS",
+    "hltvRank": 37,
+    "hltvPoints": 51,
+    "color": "#ff006e",
+    "playerIds": [
+      "cptkurtka023",
+      "headtr1ck",
+      "zerrofix",
+      "onic",
+      "dawy"
+    ],
+    "starters": [
+      "cptkurtka023",
+      "headtr1ck",
+      "zerrofix",
+      "onic",
+      "dawy"
+    ],
+    "mapStrength": {
+      "ancient": 82,
+      "anubis": 78,
+      "cache": 66,
+      "dust2": 71,
+      "inferno": 67,
+      "mirage": 78,
+      "nuke": 75
+    },
+    "money": 380000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 51,
+    "legacyRoster": [
+      "cptkurtka023",
+      "headtr1ck",
+      "zerrofix",
+      "onic",
+      "dawy"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13117,
+    "staff": {
+      "tecnico": "st-innercircle-tecnico",
+      "analista": "st-innercircle-analista",
+      "psicologo": "st-innercircle-psicologo"
+    }
+  },
+  {
+    "id": "jijiehao",
+    "name": "JiJieHao",
+    "shortName": "JIJIE",
+    "country": "LB",
+    "region": "EU",
+    "hltvRank": 38,
+    "hltvPoints": 47,
+    "color": "#e63946",
+    "playerIds": [
+      "m1n1",
+      "sinnopsyy",
+      "bibu",
+      "cacanito",
+      "0samas"
+    ],
+    "starters": [
+      "m1n1",
+      "sinnopsyy",
+      "bibu",
+      "cacanito",
+      "0samas"
+    ],
+    "mapStrength": {
+      "ancient": 62,
+      "anubis": 83,
+      "cache": 74,
+      "dust2": 73,
+      "inferno": 73,
+      "mirage": 76,
+      "nuke": 63
+    },
+    "money": 380000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 47,
+    "legacyRoster": [
+      "m1n1",
+      "sinnopsyy",
+      "bibu",
+      "cacanito",
+      "0samas"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 10245,
+    "staff": {
+      "tecnico": "st-jijiehao-tecnico",
+      "analista": "st-jijiehao-analista",
+      "psicologo": "st-jijiehao-psicologo"
+    }
+  },
+  {
+    "id": "alliance",
+    "name": "Alliance",
+    "shortName": "ALLIA",
+    "country": "SE",
+    "region": "EU",
+    "hltvRank": 39,
+    "hltvPoints": 45,
+    "color": "#f4a261",
+    "playerIds": [
+      "twist",
+      "eraa",
+      "bobeksde",
+      "upe",
+      "avid"
+    ],
+    "starters": [
+      "twist",
+      "eraa",
+      "bobeksde",
+      "upe",
+      "avid"
+    ],
+    "mapStrength": {
+      "ancient": 66,
+      "anubis": 69,
+      "cache": 70,
+      "dust2": 62,
+      "inferno": 80,
+      "mirage": 69,
+      "nuke": 75
+    },
+    "money": 370000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 45,
+    "legacyRoster": [
+      "twist",
+      "eraa",
+      "bobeksde",
+      "upe",
+      "avid"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 12474,
+    "staff": {
+      "tecnico": "st-alliance-tecnico",
+      "analista": "st-alliance-analista",
+      "psicologo": "st-alliance-psicologo"
+    }
+  },
+  {
+    "id": "sinners",
+    "name": "SINNERS",
+    "shortName": "SINNE",
+    "country": "CZ",
+    "region": "EU",
+    "hltvRank": 40,
+    "hltvPoints": 44,
+    "color": "#ffd166",
+    "playerIds": [
+      "beastik",
+      "shock",
+      "modo",
+      "kisserek",
+      "stressarn"
+    ],
+    "starters": [
+      "beastik",
+      "shock",
+      "modo",
+      "kisserek",
+      "stressarn"
+    ],
+    "mapStrength": {
+      "ancient": 72,
+      "anubis": 76,
+      "cache": 67,
+      "dust2": 72,
+      "inferno": 70,
+      "mirage": 66,
+      "nuke": 64
+    },
+    "money": 370000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 44,
+    "legacyRoster": [
+      "beastik",
+      "shock",
+      "modo",
+      "kisserek",
+      "stressarn"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 10577,
+    "staff": {
+      "tecnico": "st-sinners-tecnico",
+      "analista": "st-sinners-analista",
+      "psicologo": "st-sinners-psicologo"
+    }
+  },
+  {
+    "id": "pain",
+    "name": "paiN",
+    "shortName": "paiN",
+    "country": "BR",
+    "region": "SA",
+    "hltvRank": 41,
+    "hltvPoints": 40,
+    "color": "#118ab2",
+    "playerIds": [
+      "biguzera",
+      "saffee",
+      "snow",
+      "tatu",
+      "rkzinho"
+    ],
+    "starters": [
+      "biguzera",
+      "saffee",
+      "snow",
+      "tatu",
+      "rkzinho"
+    ],
+    "mapStrength": {
+      "ancient": 74,
+      "anubis": 62,
+      "cache": 81,
+      "dust2": 81,
+      "inferno": 75,
+      "mirage": 75,
+      "nuke": 77
+    },
+    "money": 360000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 40,
+    "legacyRoster": [
+      "biguzera",
+      "saffee",
+      "snow",
+      "tatu",
+      "rkzinho"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 4773,
+    "staff": {
+      "tecnico": "st-pain-tecnico",
+      "analista": "st-pain-analista",
+      "psicologo": "st-pain-psicologo"
+    }
+  },
+  {
+    "id": "sangal",
+    "name": "Sangal",
+    "shortName": "Sangal",
+    "country": "RO",
+    "region": "EU",
+    "hltvRank": 42,
+    "hltvPoints": 39,
+    "color": "#ffd166",
+    "playerIds": [
+      "adams",
+      "bnox",
+      "puuha",
+      "r4dyx",
+      "joey"
+    ],
+    "starters": [
+      "adams",
+      "bnox",
+      "puuha",
+      "r4dyx",
+      "joey"
+    ],
+    "mapStrength": {
+      "ancient": 73,
+      "anubis": 69,
+      "cache": 78,
+      "dust2": 81,
+      "inferno": 79,
+      "mirage": 73,
+      "nuke": 81
+    },
+    "money": 360000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 39,
+    "legacyRoster": [
+      "adams",
+      "bnox",
+      "puuha",
+      "r4dyx",
+      "joey"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 10333,
+    "staff": {
+      "tecnico": "st-sangal-tecnico",
+      "analista": "st-sangal-analista",
+      "psicologo": "st-sangal-psicologo"
+    }
+  },
+  {
+    "id": "wildcard",
+    "name": "Wildcard",
+    "shortName": "WILDC",
+    "country": "US",
+    "region": "NA",
+    "hltvRank": 43,
+    "hltvPoints": 36,
+    "color": "#ffd166",
+    "playerIds": [
+      "nemanha",
+      "cxzi",
+      "reck",
+      "hext",
+      "fr3nd"
+    ],
+    "starters": [
+      "nemanha",
+      "cxzi",
+      "reck",
+      "hext",
+      "fr3nd"
+    ],
+    "mapStrength": {
+      "ancient": 76,
+      "anubis": 81,
+      "cache": 77,
+      "dust2": 70,
+      "inferno": 60,
+      "mirage": 80,
+      "nuke": 64
+    },
+    "money": 360000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 36,
+    "legacyRoster": [
+      "nemanha",
+      "cxzi",
+      "reck",
+      "hext",
+      "fr3nd"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 12257,
+    "staff": {
+      "tecnico": "st-wildcard-tecnico",
+      "analista": "st-wildcard-analista",
+      "psicologo": "st-wildcard-psicologo"
+    }
+  },
+  {
+    "id": "lynnvision",
+    "name": "Lynn Vision",
+    "shortName": "LV",
+    "country": "CN",
+    "region": "ASIA",
+    "hltvRank": 44,
+    "hltvPoints": 35,
+    "color": "#2a9d8f",
+    "playerIds": [
+      "westmelon",
+      "z4kr",
+      "starry",
+      "emiliaqaq",
+      "c4llm3su3"
+    ],
+    "starters": [
+      "westmelon",
+      "z4kr",
+      "starry",
+      "emiliaqaq",
+      "c4llm3su3"
+    ],
+    "mapStrength": {
+      "ancient": 65,
+      "anubis": 80,
+      "cache": 63,
+      "dust2": 83,
+      "inferno": 78,
+      "mirage": 86,
+      "nuke": 64
+    },
+    "money": 350000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 35,
+    "legacyRoster": [
+      "westmelon",
+      "z4kr",
+      "starry",
+      "emiliaqaq",
+      "c4llm3su3"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 8840,
+    "staff": {
+      "tecnico": "st-lynnvision-tecnico",
+      "analista": "st-lynnvision-analista",
+      "psicologo": "st-lynnvision-psicologo"
+    }
+  },
+  {
+    "id": "k27",
+    "name": "K27",
+    "shortName": "K27",
+    "country": "RU",
+    "region": "CIS",
+    "hltvRank": 45,
+    "hltvPoints": 33,
+    "color": "#118ab2",
+    "playerIds": [
+      "clax",
+      "x5g7v",
+      "xeedo",
+      "kashl1d",
+      "qw1nk1"
+    ],
+    "starters": [
+      "clax",
+      "x5g7v",
+      "xeedo",
+      "kashl1d",
+      "qw1nk1"
+    ],
+    "mapStrength": {
+      "ancient": 69,
+      "anubis": 65,
+      "cache": 68,
+      "dust2": 63,
+      "inferno": 75,
+      "mirage": 70,
+      "nuke": 61
+    },
+    "money": 350000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 33,
+    "legacyRoster": [
+      "clax",
+      "x5g7v",
+      "xeedo",
+      "kashl1d",
+      "qw1nk1"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 12895,
+    "staff": {
+      "tecnico": "st-k27-tecnico",
+      "analista": "st-k27-analista",
+      "psicologo": "st-k27-psicologo"
+    }
+  },
+  {
+    "id": "private",
+    "name": "PRIVATE",
+    "shortName": "PRIVA",
+    "country": "RU",
+    "region": "CIS",
+    "hltvRank": 46,
+    "hltvPoints": 32,
+    "color": "#06d6a0",
+    "playerIds": [
+      "1eer",
+      "h4san4tor",
+      "sowalio",
+      "sh1nejezzz",
+      "z1k4"
+    ],
+    "starters": [
+      "1eer",
+      "h4san4tor",
+      "sowalio",
+      "sh1nejezzz",
+      "z1k4"
+    ],
+    "mapStrength": {
+      "ancient": 72,
+      "anubis": 63,
+      "cache": 79,
+      "dust2": 74,
+      "inferno": 62,
+      "mirage": 83,
+      "nuke": 66
+    },
+    "money": 340000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 32,
+    "legacyRoster": [
+      "1eer",
+      "h4san4tor",
+      "sowalio",
+      "sh1nejezzz",
+      "z1k4"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 14030,
+    "staff": {
+      "tecnico": "st-private-tecnico",
+      "analista": "st-private-analista",
+      "psicologo": "st-private-psicologo"
+    }
+  },
+  {
+    "id": "bcgame",
+    "name": "BC.Game",
+    "shortName": "BC.GA",
+    "country": "MN",
+    "region": "ASIA",
+    "hltvRank": 47,
+    "hltvPoints": 32,
+    "color": "#f4a261",
+    "playerIds": [
+      "s1mple",
+      "magisk",
+      "asap",
+      "senzu",
+      "mzinho"
+    ],
+    "starters": [
+      "s1mple",
+      "magisk",
+      "asap",
+      "senzu",
+      "mzinho"
+    ],
+    "mapStrength": {
+      "ancient": 64,
+      "anubis": 76,
+      "cache": 77,
+      "dust2": 79,
+      "inferno": 66,
+      "mirage": 74,
+      "nuke": 71
+    },
+    "money": 340000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 32,
+    "legacyRoster": [
+      "s1mple",
+      "magisk",
+      "asap",
+      "senzu",
+      "mzinho"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 12878,
+    "staff": {
+      "tecnico": "st-bcgame-tecnico",
+      "analista": "st-bcgame-analista",
+      "psicologo": "st-bcgame-psicologo"
+    }
+  },
+  {
+    "id": "imperial",
+    "name": "Imperial",
+    "shortName": "IMPER",
+    "country": "BR",
+    "region": "SA",
+    "hltvRank": 48,
+    "hltvPoints": 29,
+    "color": "#f4a261",
+    "playerIds": [
+      "chelo",
+      "vini",
+      "decenty",
+      "noway",
+      "saadzin"
+    ],
+    "starters": [
+      "chelo",
+      "vini",
+      "decenty",
+      "noway",
+      "saadzin"
+    ],
+    "mapStrength": {
+      "ancient": 80,
+      "anubis": 70,
+      "cache": 71,
+      "dust2": 78,
+      "inferno": 75,
+      "mirage": 75,
+      "nuke": 62
+    },
+    "money": 340000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 29,
+    "legacyRoster": [
+      "chelo",
+      "vini",
+      "decenty",
+      "noway",
+      "saadzin"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 9455,
+    "staff": {
+      "tecnico": "st-imperial-tecnico",
+      "analista": "st-imperial-analista",
+      "psicologo": "st-imperial-psicologo"
+    }
+  },
+  {
+    "id": "5star",
+    "name": "5star",
+    "shortName": "5star",
+    "country": "MN",
+    "region": "ASIA",
+    "hltvRank": 49,
+    "hltvPoints": 28,
+    "color": "#06d6a0",
+    "playerIds": [
+      "neuz",
+      "rate",
+      "clouden",
+      "ariucle",
+      "hoolig4n"
+    ],
+    "starters": [
+      "neuz",
+      "rate",
+      "clouden",
+      "ariucle",
+      "hoolig4n"
+    ],
+    "mapStrength": {
+      "ancient": 78,
+      "anubis": 82,
+      "cache": 69,
+      "dust2": 72,
+      "inferno": 82,
+      "mirage": 66,
+      "nuke": 73
+    },
+    "money": 330000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 28,
+    "legacyRoster": [
+      "neuz",
+      "rate",
+      "clouden",
+      "ariucle",
+      "hoolig4n"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13724,
+    "staff": {
+      "tecnico": "st-5star-tecnico",
+      "analista": "st-5star-analista",
+      "psicologo": "st-5star-psicologo"
+    }
+  },
+  {
+    "id": "bbl",
+    "name": "BBL",
+    "shortName": "BBL",
+    "country": "DK",
+    "region": "EU",
+    "hltvRank": 50,
+    "hltvPoints": 28,
+    "color": "#ff006e",
+    "playerIds": [
+      "iceberg",
+      "mistr",
+      "salazar",
+      "leakz",
+      "nickyb"
+    ],
+    "starters": [
+      "iceberg",
+      "mistr",
+      "salazar",
+      "leakz",
+      "nickyb"
+    ],
+    "mapStrength": {
+      "ancient": 77,
+      "anubis": 72,
+      "cache": 76,
+      "dust2": 68,
+      "inferno": 69,
+      "mirage": 82,
+      "nuke": 71
+    },
+    "money": 330000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 28,
+    "legacyRoster": [
+      "iceberg",
+      "mistr",
+      "salazar",
+      "leakz",
+      "nickyb"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13996,
+    "staff": {
+      "tecnico": "st-bbl-tecnico",
+      "analista": "st-bbl-analista",
+      "psicologo": "st-bbl-psicologo"
+    }
+  },
+  {
+    "id": "nemesis",
+    "name": "Nemesis",
+    "shortName": "NEMES",
+    "country": "RU",
+    "region": "CIS",
+    "hltvRank": 51,
+    "hltvPoints": 25,
+    "color": "#e9c46a",
+    "playerIds": [
+      "sellter",
+      "r3salt",
+      "mag1k3y",
+      "tex1y",
+      "sdaim"
+    ],
+    "starters": [
+      "sellter",
+      "r3salt",
+      "mag1k3y",
+      "tex1y",
+      "sdaim"
+    ],
+    "mapStrength": {
+      "ancient": 84,
+      "anubis": 66,
+      "cache": 65,
+      "dust2": 79,
+      "inferno": 70,
+      "mirage": 80,
+      "nuke": 76
+    },
+    "money": 320000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 25,
+    "legacyRoster": [
+      "sellter",
+      "r3salt",
+      "mag1k3y",
+      "tex1y",
+      "sdaim"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13355,
+    "staff": {
+      "tecnico": "st-nemesis-tecnico",
+      "analista": "st-nemesis-analista",
+      "psicologo": "st-nemesis-psicologo"
+    }
+  },
+  {
+    "id": "nexus",
+    "name": "Nexus",
+    "shortName": "Nexus",
+    "country": "RO",
+    "region": "EU",
+    "hltvRank": 52,
+    "hltvPoints": 22,
+    "color": "#06d6a0",
+    "playerIds": [
+      "shield",
+      "fnk",
+      "s0und",
+      "nexius",
+      "holy"
+    ],
+    "starters": [
+      "shield",
+      "fnk",
+      "s0und",
+      "nexius",
+      "holy"
+    ],
+    "mapStrength": {
+      "ancient": 78,
+      "anubis": 60,
+      "cache": 79,
+      "dust2": 68,
+      "inferno": 64,
+      "mirage": 77,
+      "nuke": 78
+    },
+    "money": 320000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 22,
+    "legacyRoster": [
+      "shield",
+      "fnk",
+      "s0und",
+      "nexius",
+      "holy"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 7187,
+    "staff": {
+      "tecnico": "st-nexus-tecnico",
+      "analista": "st-nexus-analista",
+      "psicologo": "st-nexus-psicologo"
+    }
+  },
+  {
+    "id": "fokus",
+    "name": "FOKUS",
+    "shortName": "FOKUS",
+    "country": "SE",
+    "region": "EU",
+    "hltvRank": 53,
+    "hltvPoints": 21,
+    "color": "#ff006e",
+    "playerIds": [
+      "ztr",
+      "banjo",
+      "podi",
+      "jocab",
+      "matheos"
+    ],
+    "starters": [
+      "ztr",
+      "banjo",
+      "podi",
+      "jocab",
+      "matheos"
+    ],
+    "mapStrength": {
+      "ancient": 86,
+      "anubis": 78,
+      "cache": 71,
+      "dust2": 69,
+      "inferno": 65,
+      "mirage": 81,
+      "nuke": 78
+    },
+    "money": 320000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 21,
+    "legacyRoster": [
+      "ztr",
+      "banjo",
+      "podi",
+      "jocab",
+      "matheos"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13679,
+    "staff": {
+      "tecnico": "st-fokus-tecnico",
+      "analista": "st-fokus-analista",
+      "psicologo": "st-fokus-psicologo"
+    }
+  },
+  {
+    "id": "iberiansoul",
+    "name": "Iberian Soul",
+    "shortName": "IS",
+    "country": "ES",
+    "region": "EU",
+    "hltvRank": 54,
+    "hltvPoints": 20,
+    "color": "#e63946",
+    "playerIds": [
+      "alex",
+      "mopoz",
+      "sausol",
+      "dav1g",
+      "gustu29"
+    ],
+    "starters": [
+      "alex",
+      "mopoz",
+      "sausol",
+      "dav1g",
+      "gustu29"
+    ],
+    "mapStrength": {
+      "ancient": 81,
+      "anubis": 58,
+      "cache": 75,
+      "dust2": 76,
+      "inferno": 69,
+      "mirage": 76,
+      "nuke": 73
+    },
+    "money": 310000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 20,
+    "legacyRoster": [
+      "alex",
+      "mopoz",
+      "sausol",
+      "dav1g",
+      "gustu29"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13104,
+    "staff": {
+      "tecnico": "st-iberiansoul-tecnico",
+      "analista": "st-iberiansoul-analista",
+      "psicologo": "st-iberiansoul-psicologo"
+    }
+  },
+  {
+    "id": "betclic",
+    "name": "Betclic",
+    "shortName": "BETCL",
+    "country": "PL",
+    "region": "EU",
+    "hltvRank": 55,
+    "hltvPoints": 20,
+    "color": "#e9c46a",
+    "playerIds": [
+      "demho",
+      "prism",
+      "ex1st",
+      "ultimate",
+      "qlocuu"
+    ],
+    "starters": [
+      "demho",
+      "prism",
+      "ex1st",
+      "ultimate",
+      "qlocuu"
+    ],
+    "mapStrength": {
+      "ancient": 70,
+      "anubis": 73,
+      "cache": 64,
+      "dust2": 78,
+      "inferno": 67,
+      "mirage": 79,
+      "nuke": 70
+    },
+    "money": 310000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 20,
+    "legacyRoster": [
+      "demho",
+      "prism",
+      "ex1st",
+      "ultimate",
+      "qlocuu"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 12916,
+    "staff": {
+      "tecnico": "st-betclic-tecnico",
+      "analista": "st-betclic-analista",
+      "psicologo": "st-betclic-psicologo"
+    }
+  },
+  {
+    "id": "blackphoenix",
+    "name": "Black Phoenix",
+    "shortName": "BP",
+    "country": "RU",
+    "region": "CIS",
+    "hltvRank": 56,
+    "hltvPoints": 19,
+    "color": "#ffd166",
+    "playerIds": [
+      "4x1s",
+      "karnez",
+      "topo",
+      "mrcreed",
+      "salazar-blackphoenix"
+    ],
+    "starters": [
+      "4x1s",
+      "karnez",
+      "topo",
+      "mrcreed",
+      "salazar-blackphoenix"
+    ],
+    "mapStrength": {
+      "ancient": 64,
+      "anubis": 77,
+      "cache": 70,
+      "dust2": 65,
+      "inferno": 74,
+      "mirage": 73,
+      "nuke": 62
+    },
+    "money": 300000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 19,
+    "legacyRoster": [
+      "4x1s",
+      "karnez",
+      "topo",
+      "mrcreed",
+      "salazar-blackphoenix"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13924,
+    "staff": {
+      "tecnico": "st-blackphoenix-tecnico",
+      "analista": "st-blackphoenix-analista",
+      "psicologo": "st-blackphoenix-psicologo"
+    }
+  },
+  {
+    "id": "bestia",
+    "name": "BESTIA",
+    "shortName": "BESTIA",
+    "country": "BR",
+    "region": "SA",
+    "hltvRank": 57,
+    "hltvPoints": 19,
+    "color": "#8338ec",
+    "playerIds": [
+      "drop",
+      "kauez",
+      "cass1n",
+      "buda",
+      "timo"
+    ],
+    "starters": [
+      "drop",
+      "kauez",
+      "cass1n",
+      "buda",
+      "timo"
+    ],
+    "mapStrength": {
+      "ancient": 71,
+      "anubis": 64,
+      "cache": 80,
+      "dust2": 68,
+      "inferno": 74,
+      "mirage": 62,
+      "nuke": 78
+    },
+    "money": 300000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 19,
+    "legacyRoster": [
+      "drop",
+      "kauez",
+      "cass1n",
+      "buda",
+      "timo"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 12144,
+    "staff": {
+      "tecnico": "st-bestia-tecnico",
+      "analista": "st-bestia-analista",
+      "psicologo": "st-bestia-psicologo"
+    }
+  },
+  {
+    "id": "shinden",
+    "name": "ShindeN",
+    "shortName": "SHIND",
+    "country": "AR",
+    "region": "SA",
+    "hltvRank": 58,
+    "hltvPoints": 19,
+    "color": "#e63946",
+    "playerIds": [
+      "tom1jed",
+      "abizz",
+      "ivz",
+      "naz",
+      "guty"
+    ],
+    "starters": [
+      "tom1jed",
+      "abizz",
+      "ivz",
+      "naz",
+      "guty"
+    ],
+    "mapStrength": {
+      "ancient": 61,
+      "anubis": 63,
+      "cache": 60,
+      "dust2": 78,
+      "inferno": 77,
+      "mirage": 61,
+      "nuke": 65
+    },
+    "money": 300000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 19,
+    "legacyRoster": [
+      "tom1jed",
+      "abizz",
+      "ivz",
+      "naz",
+      "guty"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 12959,
+    "staff": {
+      "tecnico": "st-shinden-tecnico",
+      "analista": "st-shinden-analista",
+      "psicologo": "st-shinden-psicologo"
+    }
+  },
+  {
+    "id": "eyeballers",
+    "name": "EYEBALLERS",
+    "shortName": "EYEBA",
+    "country": "SE",
+    "region": "EU",
+    "hltvRank": 59,
+    "hltvPoints": 18,
+    "color": "#8338ec",
+    "playerIds": [
+      "jw",
+      "krimz",
+      "maxster",
+      "ro1f",
+      "linsel70"
+    ],
+    "starters": [
+      "jw",
+      "krimz",
+      "maxster",
+      "ro1f",
+      "linsel70"
+    ],
+    "mapStrength": {
+      "ancient": 69,
+      "anubis": 66,
+      "cache": 63,
+      "dust2": 62,
+      "inferno": 67,
+      "mirage": 76,
+      "nuke": 79
+    },
+    "money": 290000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 18,
+    "legacyRoster": [
+      "jw",
+      "krimz",
+      "maxster",
+      "ro1f",
+      "linsel70"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 11737,
+    "staff": {
+      "tecnico": "st-eyeballers-tecnico",
+      "analista": "st-eyeballers-analista",
+      "psicologo": "st-eyeballers-psicologo"
+    }
+  },
+  {
+    "id": "flyquest",
+    "name": "FlyQuest",
+    "shortName": "FLYQU",
+    "country": "AU",
+    "region": "ASIA",
+    "hltvRank": 60,
+    "hltvPoints": 17,
+    "color": "#f4a261",
+    "playerIds": [
+      "jks",
+      "alistair",
+      "ins",
+      "vexite",
+      "nettik"
+    ],
+    "starters": [
+      "jks",
+      "alistair",
+      "ins",
+      "vexite",
+      "nettik"
+    ],
+    "mapStrength": {
+      "ancient": 65,
+      "anubis": 78,
+      "cache": 83,
+      "dust2": 78,
+      "inferno": 80,
+      "mirage": 74,
+      "nuke": 78
+    },
+    "money": 290000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 17,
+    "legacyRoster": [
+      "jks",
+      "alistair",
+      "ins",
+      "vexite",
+      "nettik"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 12774,
+    "staff": {
+      "tecnico": "st-flyquest-tecnico",
+      "analista": "st-flyquest-analista",
+      "psicologo": "st-flyquest-psicologo"
+    }
+  },
+  {
+    "id": "nucleartigeres",
+    "name": "Nuclear TigeRES",
+    "shortName": "NT",
+    "country": "RU",
+    "region": "CIS",
+    "hltvRank": 61,
+    "hltvPoints": 17,
+    "color": "#06d6a0",
+    "playerIds": [
+      "senka",
+      "djon8",
+      "flouzer",
+      "ayuki",
+      "tronic"
+    ],
+    "starters": [
+      "senka",
+      "djon8",
+      "flouzer",
+      "ayuki",
+      "tronic"
+    ],
+    "mapStrength": {
+      "ancient": 64,
+      "anubis": 73,
+      "cache": 66,
+      "dust2": 75,
+      "inferno": 83,
+      "mirage": 71,
+      "nuke": 73
+    },
+    "money": 280000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 17,
+    "legacyRoster": [
+      "senka",
+      "djon8",
+      "flouzer",
+      "ayuki",
+      "tronic"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13027,
+    "staff": {
+      "tecnico": "st-nucleartigeres-tecnico",
+      "analista": "st-nucleartigeres-analista",
+      "psicologo": "st-nucleartigeres-psicologo"
+    }
+  },
+  {
+    "id": "chinggiswarriors",
+    "name": "Chinggis Warriors",
+    "shortName": "CW",
+    "country": "MN",
+    "region": "ASIA",
+    "hltvRank": 62,
+    "hltvPoints": 16,
+    "color": "#06d6a0",
+    "playerIds": [
+      "sk0r",
+      "roux",
+      "cool4st",
+      "fury5k",
+      "tikuak"
+    ],
+    "starters": [
+      "sk0r",
+      "roux",
+      "cool4st",
+      "fury5k",
+      "tikuak"
+    ],
+    "mapStrength": {
+      "ancient": 81,
+      "anubis": 74,
+      "cache": 78,
+      "dust2": 73,
+      "inferno": 65,
+      "mirage": 77,
+      "nuke": 73
+    },
+    "money": 280000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 16,
+    "legacyRoster": [
+      "sk0r",
+      "roux",
+      "cool4st",
+      "fury5k",
+      "tikuak"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 12646,
+    "staff": {
+      "tecnico": "st-chinggiswarriors-tecnico",
+      "analista": "st-chinggiswarriors-analista",
+      "psicologo": "st-chinggiswarriors-psicologo"
+    }
+  },
+  {
+    "id": "basementboys",
+    "name": "BASEMENT BOYS",
+    "shortName": "BB",
+    "country": "UA",
+    "region": "CIS",
+    "hltvRank": 63,
+    "hltvPoints": 16,
+    "color": "#ffd166",
+    "playerIds": [
+      "kr1vda",
+      "owner",
+      "kalash",
+      "tr0uble",
+      "maggent"
+    ],
+    "starters": [
+      "kr1vda",
+      "owner",
+      "kalash",
+      "tr0uble",
+      "maggent"
+    ],
+    "mapStrength": {
+      "ancient": 78,
+      "anubis": 72,
+      "cache": 76,
+      "dust2": 67,
+      "inferno": 70,
+      "mirage": 69,
+      "nuke": 71
+    },
+    "money": 280000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 16,
+    "legacyRoster": [
+      "kr1vda",
+      "owner",
+      "kalash",
+      "tr0uble",
+      "maggent"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13181,
+    "staff": {
+      "tecnico": "st-basementboys-tecnico",
+      "analista": "st-basementboys-analista",
+      "psicologo": "st-basementboys-psicologo"
+    }
+  },
+  {
+    "id": "saw",
+    "name": "SAW",
+    "shortName": "SAW",
+    "country": "PT",
+    "region": "EU",
+    "hltvRank": 64,
+    "hltvPoints": 16,
+    "color": "#2a9d8f",
+    "playerIds": [
+      "mutiris",
+      "nopeej",
+      "story",
+      "ewjerkz",
+      "krazy"
+    ],
+    "starters": [
+      "mutiris",
+      "nopeej",
+      "story",
+      "ewjerkz",
+      "krazy"
+    ],
+    "mapStrength": {
+      "ancient": 59,
+      "anubis": 77,
+      "cache": 59,
+      "dust2": 64,
+      "inferno": 63,
+      "mirage": 73,
+      "nuke": 63
+    },
+    "money": 270000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 16,
+    "legacyRoster": [
+      "mutiris",
+      "nopeej",
+      "story",
+      "ewjerkz",
+      "krazy"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 10567,
+    "staff": {
+      "tecnico": "st-saw-tecnico",
+      "analista": "st-saw-analista",
+      "psicologo": "st-saw-psicologo"
+    }
+  },
+  {
+    "id": "metizport",
+    "name": "Metizport",
+    "shortName": "METIZ",
+    "country": "SE",
+    "region": "EU",
+    "hltvRank": 65,
+    "hltvPoints": 15,
+    "color": "#8338ec",
+    "playerIds": [
+      "stanislaw",
+      "plopski",
+      "f1ku",
+      "forsyy",
+      "mail09"
+    ],
+    "starters": [
+      "stanislaw",
+      "plopski",
+      "f1ku",
+      "forsyy",
+      "mail09"
+    ],
+    "mapStrength": {
+      "ancient": 66,
+      "anubis": 79,
+      "cache": 68,
+      "dust2": 81,
+      "inferno": 65,
+      "mirage": 74,
+      "nuke": 79
+    },
+    "money": 270000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 15,
+    "legacyRoster": [
+      "stanislaw",
+      "plopski",
+      "f1ku",
+      "forsyy",
+      "mail09"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 11641,
+    "staff": {
+      "tecnico": "st-metizport-tecnico",
+      "analista": "st-metizport-analista",
+      "psicologo": "st-metizport-psicologo"
+    }
+  },
+  {
+    "id": "fluxo",
+    "name": "Fluxo",
+    "shortName": "Fluxo",
+    "country": "BR",
+    "region": "SA",
+    "hltvRank": 66,
+    "hltvPoints": 14,
+    "color": "#ffd166",
+    "playerIds": [
+      "exit",
+      "dav1deus",
+      "zevy",
+      "kye",
+      "ltz"
+    ],
+    "starters": [
+      "exit",
+      "dav1deus",
+      "zevy",
+      "kye",
+      "ltz"
+    ],
+    "mapStrength": {
+      "ancient": 74,
+      "anubis": 64,
+      "cache": 61,
+      "dust2": 62,
+      "inferno": 81,
+      "mirage": 72,
+      "nuke": 81
+    },
+    "money": 260000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 14,
+    "legacyRoster": [
+      "exit",
+      "dav1deus",
+      "zevy",
+      "kye",
+      "ltz"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 11837,
+    "staff": {
+      "tecnico": "st-fluxo-tecnico",
+      "analista": "st-fluxo-analista",
+      "psicologo": "st-fluxo-psicologo"
+    }
+  },
+  {
+    "id": "galorys",
+    "name": "Galorys",
+    "shortName": "GALOR",
+    "country": "BR",
+    "region": "SA",
+    "hltvRank": 67,
+    "hltvPoints": 13,
+    "color": "#2a9d8f",
+    "playerIds": [
+      "pkl",
+      "destiny",
+      "detr0ittj",
+      "gbb",
+      "tomate"
+    ],
+    "starters": [
+      "pkl",
+      "destiny",
+      "detr0ittj",
+      "gbb",
+      "tomate"
+    ],
+    "mapStrength": {
+      "ancient": 68,
+      "anubis": 68,
+      "cache": 62,
+      "dust2": 71,
+      "inferno": 76,
+      "mirage": 74,
+      "nuke": 76
+    },
+    "money": 260000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 13,
+    "legacyRoster": [
+      "pkl",
+      "destiny",
+      "detr0ittj",
+      "gbb",
+      "tomate"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 12677,
+    "staff": {
+      "tecnico": "st-galorys-tecnico",
+      "analista": "st-galorys-analista",
+      "psicologo": "st-galorys-psicologo"
+    }
+  },
+  {
+    "id": "phantom",
+    "name": "Phantom",
+    "shortName": "PHANT",
+    "country": "PL",
+    "region": "EU",
+    "hltvRank": 68,
+    "hltvPoints": 13,
+    "color": "#2a9d8f",
+    "playerIds": [
+      "tmb",
+      "nicoodoz",
+      "kei",
+      "kylar",
+      "kunai"
+    ],
+    "starters": [
+      "tmb",
+      "nicoodoz",
+      "kei",
+      "kylar",
+      "kunai"
+    ],
+    "mapStrength": {
+      "ancient": 62,
+      "anubis": 75,
+      "cache": 77,
+      "dust2": 68,
+      "inferno": 61,
+      "mirage": 79,
+      "nuke": 70
+    },
+    "money": 260000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 13,
+    "legacyRoster": [
+      "tmb",
+      "nicoodoz",
+      "kei",
+      "kylar",
+      "kunai"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13173,
+    "staff": {
+      "tecnico": "st-phantom-tecnico",
+      "analista": "st-phantom-analista",
+      "psicologo": "st-phantom-psicologo"
+    }
+  },
+  {
+    "id": "nexvoid",
+    "name": "NEXVOID",
+    "shortName": "NEXVO",
+    "country": "MN",
+    "region": "ASIA",
+    "hltvRank": 69,
+    "hltvPoints": 12,
+    "color": "#ef476f",
+    "playerIds": [
+      "erkast",
+      "xerolte",
+      "miq",
+      "accuracytg",
+      "zesta"
+    ],
+    "starters": [
+      "erkast",
+      "xerolte",
+      "miq",
+      "accuracytg",
+      "zesta"
+    ],
+    "mapStrength": {
+      "ancient": 71,
+      "anubis": 80,
+      "cache": 73,
+      "dust2": 73,
+      "inferno": 75,
+      "mirage": 71,
+      "nuke": 74
+    },
+    "money": 250000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 12,
+    "legacyRoster": [
+      "erkast",
+      "xerolte",
+      "miq",
+      "accuracytg",
+      "zesta"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13667,
+    "staff": {
+      "tecnico": "st-nexvoid-tecnico",
+      "analista": "st-nexvoid-analista",
+      "psicologo": "st-nexvoid-psicologo"
+    }
+  },
+  {
+    "id": "voca",
+    "name": "Voca",
+    "shortName": "Voca",
+    "country": "US",
+    "region": "NA",
+    "hltvRank": 70,
+    "hltvPoints": 11,
+    "color": "#ef476f",
+    "playerIds": [
+      "marke",
+      "junior",
+      "dare",
+      "snav",
+      "dorjor49"
+    ],
+    "starters": [
+      "marke",
+      "junior",
+      "dare",
+      "snav",
+      "dorjor49"
+    ],
+    "mapStrength": {
+      "ancient": 66,
+      "anubis": 58,
+      "cache": 62,
+      "dust2": 81,
+      "inferno": 65,
+      "mirage": 74,
+      "nuke": 60
+    },
+    "money": 250000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 11,
+    "legacyRoster": [
+      "marke",
+      "junior",
+      "dare",
+      "snav",
+      "dorjor49"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13499,
+    "staff": {
+      "tecnico": "st-voca-tecnico",
+      "analista": "st-voca-analista",
+      "psicologo": "st-voca-psicologo"
+    }
+  },
+  {
+    "id": "barca",
+    "name": "BARCA",
+    "shortName": "BARCA",
+    "country": "BR",
+    "region": "SA",
+    "hltvRank": 71,
+    "hltvPoints": 11,
+    "color": "#2a9d8f",
+    "playerIds": [
+      "zmb",
+      "pancc",
+      "alisson",
+      "happ",
+      "divine"
+    ],
+    "starters": [
+      "zmb",
+      "pancc",
+      "alisson",
+      "happ",
+      "divine"
+    ],
+    "mapStrength": {
+      "ancient": 62,
+      "anubis": 71,
+      "cache": 61,
+      "dust2": 78,
+      "inferno": 67,
+      "mirage": 59,
+      "nuke": 73
+    },
+    "money": 240000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 11,
+    "legacyRoster": [
+      "zmb",
+      "pancc",
+      "alisson",
+      "happ",
+      "divine"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 14107,
+    "staff": {
+      "tecnico": "st-barca-tecnico",
+      "analista": "st-barca-analista",
+      "psicologo": "st-barca-psicologo"
+    }
+  },
+  {
+    "id": "pure",
+    "name": "PURE",
+    "shortName": "PURE",
+    "country": "PL",
+    "region": "EU",
+    "hltvRank": 72,
+    "hltvPoints": 11,
+    "color": "#e9c46a",
+    "playerIds": [
+      "keen",
+      "mwlky",
+      "andu",
+      "polbandana",
+      "tein"
+    ],
+    "starters": [
+      "keen",
+      "mwlky",
+      "andu",
+      "polbandana",
+      "tein"
+    ],
+    "mapStrength": {
+      "ancient": 63,
+      "anubis": 73,
+      "cache": 68,
+      "dust2": 81,
+      "inferno": 63,
+      "mirage": 76,
+      "nuke": 64
+    },
+    "money": 240000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 11,
+    "legacyRoster": [
+      "keen",
+      "mwlky",
+      "andu",
+      "polbandana",
+      "tein"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13777,
+    "staff": {
+      "tecnico": "st-pure-tecnico",
+      "analista": "st-pure-analista",
+      "psicologo": "st-pure-psicologo"
+    }
+  },
+  {
+    "id": "lowcortisol",
+    "name": "Low Cortisol",
+    "shortName": "LC",
+    "country": "BR",
+    "region": "SA",
+    "hltvRank": 73,
+    "hltvPoints": 11,
+    "color": "#2a9d8f",
+    "playerIds": [
+      "t9rnay",
+      "zede",
+      "fokiu",
+      "levi",
+      "stormzyn"
+    ],
+    "starters": [
+      "t9rnay",
+      "zede",
+      "fokiu",
+      "levi",
+      "stormzyn"
+    ],
+    "mapStrength": {
+      "ancient": 61,
+      "anubis": 59,
+      "cache": 80,
+      "dust2": 59,
+      "inferno": 80,
+      "mirage": 69,
+      "nuke": 69
+    },
+    "money": 240000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 11,
+    "legacyRoster": [
+      "t9rnay",
+      "zede",
+      "fokiu",
+      "levi",
+      "stormzyn"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 14051,
+    "staff": {
+      "tecnico": "st-lowcortisol-tecnico",
+      "analista": "st-lowcortisol-analista",
+      "psicologo": "st-lowcortisol-psicologo"
+    }
+  },
+  {
+    "id": "unity",
+    "name": "UNiTY",
+    "shortName": "UNiTY",
+    "country": "CZ",
+    "region": "EU",
+    "hltvRank": 74,
+    "hltvPoints": 11,
+    "color": "#ef476f",
+    "playerIds": [
+      "dytor",
+      "kwertzz",
+      "2high",
+      "m1key",
+      "sn0w"
+    ],
+    "starters": [
+      "dytor",
+      "kwertzz",
+      "2high",
+      "m1key",
+      "sn0w"
+    ],
+    "mapStrength": {
+      "ancient": 81,
+      "anubis": 80,
+      "cache": 76,
+      "dust2": 68,
+      "inferno": 66,
+      "mirage": 65,
+      "nuke": 64
+    },
+    "money": 230000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 11,
+    "legacyRoster": [
+      "dytor",
+      "kwertzz",
+      "2high",
+      "m1key",
+      "sn0w"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 12267,
+    "staff": {
+      "tecnico": "st-unity-tecnico",
+      "analista": "st-unity-analista",
+      "psicologo": "st-unity-psicologo"
+    }
+  },
+  {
+    "id": "rbls",
+    "name": "RBLS",
+    "shortName": "RBLS",
+    "country": "PT",
+    "region": "EU",
+    "hltvRank": 75,
+    "hltvPoints": 11,
+    "color": "#e63946",
+    "playerIds": [
+      "stadodo",
+      "arrozdoce",
+      "icarus",
+      "shr",
+      "aragornn"
+    ],
+    "starters": [
+      "stadodo",
+      "arrozdoce",
+      "icarus",
+      "shr",
+      "aragornn"
+    ],
+    "mapStrength": {
+      "ancient": 61,
+      "anubis": 71,
+      "cache": 81,
+      "dust2": 82,
+      "inferno": 65,
+      "mirage": 72,
+      "nuke": 65
+    },
+    "money": 230000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 11,
+    "legacyRoster": [
+      "stadodo",
+      "arrozdoce",
+      "icarus",
+      "shr",
+      "aragornn"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 12642,
+    "staff": {
+      "tecnico": "st-rbls-tecnico",
+      "analista": "st-rbls-analista",
+      "psicologo": "st-rbls-psicologo"
+    }
+  },
+  {
+    "id": "bountyhunters",
+    "name": "Bounty Hunters",
+    "shortName": "BH",
+    "country": "BR",
+    "region": "SA",
+    "hltvRank": 76,
+    "hltvPoints": 10,
+    "color": "#457b9d",
+    "playerIds": [
+      "ponter",
+      "kaiser",
+      "zock",
+      "urban0",
+      "pepe"
+    ],
+    "starters": [
+      "ponter",
+      "kaiser",
+      "zock",
+      "urban0",
+      "pepe"
+    ],
+    "mapStrength": {
+      "ancient": 67,
+      "anubis": 77,
+      "cache": 64,
+      "dust2": 71,
+      "inferno": 76,
+      "mirage": 80,
+      "nuke": 69
+    },
+    "money": 220000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 10,
+    "legacyRoster": [
+      "ponter",
+      "kaiser",
+      "zock",
+      "urban0",
+      "pepe"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 12776,
+    "staff": {
+      "tecnico": "st-bountyhunters-tecnico",
+      "analista": "st-bountyhunters-analista",
+      "psicologo": "st-bountyhunters-psicologo"
+    }
+  },
+  {
+    "id": "virtuspro",
+    "name": "Virtus.pro",
+    "shortName": "VIRTU",
+    "country": "RU",
+    "region": "CIS",
+    "hltvRank": 77,
+    "hltvPoints": 10,
+    "color": "#118ab2",
+    "playerIds": [
+      "mir",
+      "b1st",
+      "f0r3ver",
+      "aquars",
+      "to0ro"
+    ],
+    "starters": [
+      "mir",
+      "b1st",
+      "f0r3ver",
+      "aquars",
+      "to0ro"
+    ],
+    "mapStrength": {
+      "ancient": 68,
+      "anubis": 67,
+      "cache": 59,
+      "dust2": 75,
+      "inferno": 64,
+      "mirage": 76,
+      "nuke": 68
+    },
+    "money": 220000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 10,
+    "legacyRoster": [
+      "mir",
+      "b1st",
+      "f0r3ver",
+      "aquars",
+      "to0ro"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 5378,
+    "staff": {
+      "tecnico": "st-virtuspro-tecnico",
+      "analista": "st-virtuspro-analista",
+      "psicologo": "st-virtuspro-psicologo"
+    }
+  },
+  {
+    "id": "infinite",
+    "name": "INFINITE",
+    "shortName": "INFIN",
+    "country": "DE",
+    "region": "EU",
+    "hltvRank": 78,
+    "hltvPoints": 9,
+    "color": "#457b9d",
+    "playerIds": [
+      "scrunk",
+      "blytz",
+      "kyuubii",
+      "volt",
+      "sl3nd"
+    ],
+    "starters": [
+      "scrunk",
+      "blytz",
+      "kyuubii",
+      "volt",
+      "sl3nd"
+    ],
+    "mapStrength": {
+      "ancient": 74,
+      "anubis": 62,
+      "cache": 64,
+      "dust2": 77,
+      "inferno": 68,
+      "mirage": 76,
+      "nuke": 62
+    },
+    "money": 220000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 9,
+    "legacyRoster": [
+      "scrunk",
+      "blytz",
+      "kyuubii",
+      "volt",
+      "sl3nd"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 10823,
+    "staff": {
+      "tecnico": "st-infinite-tecnico",
+      "analista": "st-infinite-analista",
+      "psicologo": "st-infinite-psicologo"
+    }
+  },
+  {
+    "id": "wbt",
+    "name": "WBT",
+    "shortName": "WBT",
+    "country": "UA",
+    "region": "CIS",
+    "hltvRank": 79,
+    "hltvPoints": 9,
+    "color": "#06d6a0",
+    "playerIds": [
+      "psycho",
+      "smash",
+      "s4ltovsk1yy",
+      "demqq",
+      "tyr1k"
+    ],
+    "starters": [
+      "psycho",
+      "smash",
+      "s4ltovsk1yy",
+      "demqq",
+      "tyr1k"
+    ],
+    "mapStrength": {
+      "ancient": 63,
+      "anubis": 67,
+      "cache": 73,
+      "dust2": 73,
+      "inferno": 66,
+      "mirage": 68,
+      "nuke": 61
+    },
+    "money": 210000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 9,
+    "legacyRoster": [
+      "psycho",
+      "smash",
+      "s4ltovsk1yy",
+      "demqq",
+      "tyr1k"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13683,
+    "staff": {
+      "tecnico": "st-wbt-tecnico",
+      "analista": "st-wbt-analista",
+      "psicologo": "st-wbt-psicologo"
+    }
+  },
+  {
+    "id": "leo",
+    "name": "Leo",
+    "shortName": "Leo",
+    "country": "FR",
+    "region": "EU",
+    "hltvRank": 80,
+    "hltvPoints": 9,
+    "color": "#e9c46a",
+    "playerIds": [
+      "drac",
+      "leen",
+      "next1me",
+      "tarkky",
+      "aimy"
+    ],
+    "starters": [
+      "drac",
+      "leen",
+      "next1me",
+      "tarkky",
+      "aimy"
+    ],
+    "mapStrength": {
+      "ancient": 75,
+      "anubis": 84,
+      "cache": 61,
+      "dust2": 71,
+      "inferno": 81,
+      "mirage": 67,
+      "nuke": 62
+    },
+    "money": 210000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 9,
+    "legacyRoster": [
+      "drac",
+      "leen",
+      "next1me",
+      "tarkky",
+      "aimy"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 11446,
+    "staff": {
+      "tecnico": "st-leo-tecnico",
+      "analista": "st-leo-analista",
+      "psicologo": "st-leo-psicologo"
+    }
+  },
+  {
+    "id": "aimclub",
+    "name": "aimclub",
+    "shortName": "AIMCL",
+    "country": "RO",
+    "region": "EU",
+    "hltvRank": 81,
+    "hltvPoints": 9,
+    "color": "#2a9d8f",
+    "playerIds": [
+      "xellow",
+      "zewts",
+      "ragga",
+      "adron",
+      "mhn1"
+    ],
+    "starters": [
+      "xellow",
+      "zewts",
+      "ragga",
+      "adron",
+      "mhn1"
+    ],
+    "mapStrength": {
+      "ancient": 81,
+      "anubis": 72,
+      "cache": 66,
+      "dust2": 82,
+      "inferno": 68,
+      "mirage": 76,
+      "nuke": 76
+    },
+    "money": 200000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 9,
+    "legacyRoster": [
+      "xellow",
+      "zewts",
+      "ragga",
+      "adron",
+      "mhn1"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 6810,
+    "staff": {
+      "tecnico": "st-aimclub-tecnico",
+      "analista": "st-aimclub-analista",
+      "psicologo": "st-aimclub-psicologo"
+    }
+  },
+  {
+    "id": "navijunior",
+    "name": "NAVI Junior",
+    "shortName": "NJ",
+    "country": "CZ",
+    "region": "EU",
+    "hltvRank": 82,
+    "hltvPoints": 9,
+    "color": "#e63946",
+    "playerIds": [
+      "mahar",
+      "fazery",
+      "skizzyee",
+      "yoki",
+      "kodak"
+    ],
+    "starters": [
+      "mahar",
+      "fazery",
+      "skizzyee",
+      "yoki",
+      "kodak"
+    ],
+    "mapStrength": {
+      "ancient": 75,
+      "anubis": 61,
+      "cache": 77,
+      "dust2": 72,
+      "inferno": 70,
+      "mirage": 64,
+      "nuke": 80
+    },
+    "money": 200000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 9,
+    "legacyRoster": [
+      "mahar",
+      "fazery",
+      "skizzyee",
+      "yoki",
+      "kodak"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 10371,
+    "staff": {
+      "tecnico": "st-navijunior-tecnico",
+      "analista": "st-navijunior-analista",
+      "psicologo": "st-navijunior-psicologo"
+    }
+  },
+  {
+    "id": "withoutaroof",
+    "name": "Without a Roof",
+    "shortName": "WAR",
+    "country": "US",
+    "region": "NA",
+    "hltvRank": 83,
+    "hltvPoints": 9,
+    "color": "#f4a261",
+    "playerIds": [
+      "autimatic",
+      "stewie2k",
+      "brehze",
+      "cerq",
+      "fang"
+    ],
+    "starters": [
+      "autimatic",
+      "stewie2k",
+      "brehze",
+      "cerq",
+      "fang"
+    ],
+    "mapStrength": {
+      "ancient": 79,
+      "anubis": 76,
+      "cache": 68,
+      "dust2": 70,
+      "inferno": 62,
+      "mirage": 81,
+      "nuke": 69
+    },
+    "money": 200000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 9,
+    "legacyRoster": [
+      "autimatic",
+      "stewie2k",
+      "brehze",
+      "cerq",
+      "fang"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 6914,
+    "staff": {
+      "tecnico": "st-withoutaroof-tecnico",
+      "analista": "st-withoutaroof-analista",
+      "psicologo": "st-withoutaroof-psicologo"
+    }
+  },
+  {
+    "id": "upgrade",
+    "name": "UPGRADE",
+    "shortName": "UPGRA",
+    "country": "BY",
+    "region": "CIS",
+    "hltvRank": 84,
+    "hltvPoints": 9,
+    "color": "#ff006e",
+    "playerIds": [
+      "synyx",
+      "squezxc",
+      "pleynnn",
+      "tw1sterzaza",
+      "dan9armatura"
+    ],
+    "starters": [
+      "synyx",
+      "squezxc",
+      "pleynnn",
+      "tw1sterzaza",
+      "dan9armatura"
+    ],
+    "mapStrength": {
+      "ancient": 67,
+      "anubis": 61,
+      "cache": 61,
+      "dust2": 79,
+      "inferno": 57,
+      "mirage": 70,
+      "nuke": 75
+    },
+    "money": 190000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 9,
+    "legacyRoster": [
+      "synyx",
+      "squezxc",
+      "pleynnn",
+      "tw1sterzaza",
+      "dan9armatura"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13989,
+    "staff": {
+      "tecnico": "st-upgrade-tecnico",
+      "analista": "st-upgrade-analista",
+      "psicologo": "st-upgrade-psicologo"
+    }
+  },
+  {
+    "id": "procyon",
+    "name": "Procyon",
+    "shortName": "PROCY",
+    "country": "AR",
+    "region": "SA",
+    "hltvRank": 85,
+    "hltvPoints": 9,
+    "color": "#8338ec",
+    "playerIds": [
+      "lenci",
+      "laser",
+      "pavv",
+      "maxoff",
+      "next"
+    ],
+    "starters": [
+      "lenci",
+      "laser",
+      "pavv",
+      "maxoff",
+      "next"
+    ],
+    "mapStrength": {
+      "ancient": 65,
+      "anubis": 72,
+      "cache": 77,
+      "dust2": 65,
+      "inferno": 68,
+      "mirage": 70,
+      "nuke": 79
+    },
+    "money": 190000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 9,
+    "legacyRoster": [
+      "lenci",
+      "laser",
+      "pavv",
+      "maxoff",
+      "next"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 10997,
+    "staff": {
+      "tecnico": "st-procyon-tecnico",
+      "analista": "st-procyon-analista",
+      "psicologo": "st-procyon-psicologo"
+    }
+  },
+  {
+    "id": "thehuns",
+    "name": "The Huns",
+    "shortName": "TH",
+    "country": "MN",
+    "region": "ASIA",
+    "hltvRank": 86,
+    "hltvPoints": 9,
+    "color": "#06d6a0",
+    "playerIds": [
+      "bart4k",
+      "controlez",
+      "cozen",
+      "darkmeister",
+      "bexyz"
+    ],
+    "starters": [
+      "bart4k",
+      "controlez",
+      "cozen",
+      "darkmeister",
+      "bexyz"
+    ],
+    "mapStrength": {
+      "ancient": 63,
+      "anubis": 60,
+      "cache": 62,
+      "dust2": 62,
+      "inferno": 60,
+      "mirage": 79,
+      "nuke": 63
+    },
+    "money": 180000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 9,
+    "legacyRoster": [
+      "bart4k",
+      "controlez",
+      "cozen",
+      "darkmeister",
+      "bexyz"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 12510,
+    "staff": {
+      "tecnico": "st-thehuns-tecnico",
+      "analista": "st-thehuns-analista",
+      "psicologo": "st-thehuns-psicologo"
+    }
+  },
+  {
+    "id": "johnnyspeeds",
+    "name": "Johnny Speeds",
+    "shortName": "JS",
+    "country": "SE",
+    "region": "EU",
+    "hltvRank": 87,
+    "hltvPoints": 9,
+    "color": "#118ab2",
+    "playerIds": [
+      "draken",
+      "hampus",
+      "svedjehed",
+      "bsover",
+      "rack"
+    ],
+    "starters": [
+      "draken",
+      "hampus",
+      "svedjehed",
+      "bsover",
+      "rack"
+    ],
+    "mapStrength": {
+      "ancient": 77,
+      "anubis": 64,
+      "cache": 69,
+      "dust2": 64,
+      "inferno": 64,
+      "mirage": 57,
+      "nuke": 79
+    },
+    "money": 180000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 9,
+    "legacyRoster": [
+      "draken",
+      "hampus",
+      "svedjehed",
+      "bsover",
+      "rack"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 12604,
+    "staff": {
+      "tecnico": "st-johnnyspeeds-tecnico",
+      "analista": "st-johnnyspeeds-analista",
+      "psicologo": "st-johnnyspeeds-psicologo"
+    }
+  },
+  {
+    "id": "quazar",
+    "name": "QUAZAR",
+    "shortName": "QUAZAR",
+    "country": "RU",
+    "region": "CIS",
+    "hltvRank": 88,
+    "hltvPoints": 8,
+    "color": "#ffd166",
+    "playerIds": [
+      "porya",
+      "gehji",
+      "ne1xxx",
+      "newt",
+      "kaiori"
+    ],
+    "starters": [
+      "porya",
+      "gehji",
+      "ne1xxx",
+      "newt",
+      "kaiori"
+    ],
+    "mapStrength": {
+      "ancient": 59,
+      "anubis": 68,
+      "cache": 75,
+      "dust2": 68,
+      "inferno": 64,
+      "mirage": 76,
+      "nuke": 79
+    },
+    "money": 180000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 8,
+    "legacyRoster": [
+      "porya",
+      "gehji",
+      "ne1xxx",
+      "newt",
+      "kaiori"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 11312,
+    "staff": {
+      "tecnico": "st-quazar-tecnico",
+      "analista": "st-quazar-analista",
+      "psicologo": "st-quazar-psicologo"
+    }
+  },
+  {
+    "id": "spiritacademy",
+    "name": "Spirit Academy",
+    "shortName": "SA",
+    "country": "RU",
+    "region": "CIS",
+    "hltvRank": 89,
+    "hltvPoints": 8,
+    "color": "#3a86ff",
+    "playerIds": [
+      "vilby",
+      "kiryasoo",
+      "netrix",
+      "s1nside",
+      "k0gass"
+    ],
+    "starters": [
+      "vilby",
+      "kiryasoo",
+      "netrix",
+      "s1nside",
+      "k0gass"
+    ],
+    "mapStrength": {
+      "ancient": 61,
+      "anubis": 63,
+      "cache": 63,
+      "dust2": 79,
+      "inferno": 72,
+      "mirage": 63,
+      "nuke": 79
+    },
+    "money": 170000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 8,
+    "legacyRoster": [
+      "vilby",
+      "kiryasoo",
+      "netrix",
+      "s1nside",
+      "k0gass"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 7900,
+    "staff": {
+      "tecnico": "st-spiritacademy-tecnico",
+      "analista": "st-spiritacademy-analista",
+      "psicologo": "st-spiritacademy-psicologo"
+    }
+  },
+  {
+    "id": "mellren",
+    "name": "mellren",
+    "shortName": "MELLR",
+    "country": "BY",
+    "region": "CIS",
+    "hltvRank": 90,
+    "hltvPoints": 8,
+    "color": "#06d6a0",
+    "playerIds": [
+      "lollipop21k",
+      "menddel",
+      "mdl",
+      "shootic",
+      "maksilvl"
+    ],
+    "starters": [
+      "lollipop21k",
+      "menddel",
+      "mdl",
+      "shootic",
+      "maksilvl"
+    ],
+    "mapStrength": {
+      "ancient": 75,
+      "anubis": 67,
+      "cache": 79,
+      "dust2": 81,
+      "inferno": 70,
+      "mirage": 64,
+      "nuke": 58
+    },
+    "money": 170000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 8,
+    "legacyRoster": [
+      "lollipop21k",
+      "menddel",
+      "mdl",
+      "shootic",
+      "maksilvl"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13759,
+    "staff": {
+      "tecnico": "st-mellren-tecnico",
+      "analista": "st-mellren-analista",
+      "psicologo": "st-mellren-psicologo"
+    }
+  },
+  {
+    "id": "wbtacademy",
+    "name": "WBT Academy",
+    "shortName": "WA",
+    "country": "UA",
+    "region": "CIS",
+    "hltvRank": 91,
+    "hltvPoints": 8,
+    "color": "#2a9d8f",
+    "playerIds": [
+      "fl1per",
+      "svemyy",
+      "marat2k",
+      "tired73",
+      "nxstep"
+    ],
+    "starters": [
+      "fl1per",
+      "svemyy",
+      "marat2k",
+      "tired73",
+      "nxstep"
+    ],
+    "mapStrength": {
+      "ancient": 79,
+      "anubis": 77,
+      "cache": 76,
+      "dust2": 76,
+      "inferno": 72,
+      "mirage": 75,
+      "nuke": 72
+    },
+    "money": 160000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 8,
+    "legacyRoster": [
+      "fl1per",
+      "svemyy",
+      "marat2k",
+      "tired73",
+      "nxstep"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13999,
+    "staff": {
+      "tecnico": "st-wbtacademy-tecnico",
+      "analista": "st-wbtacademy-analista",
+      "psicologo": "st-wbtacademy-psicologo"
+    }
+  },
+  {
+    "id": "marsborne",
+    "name": "Marsborne",
+    "shortName": "MARSB",
+    "country": "US",
+    "region": "NA",
+    "hltvRank": 92,
+    "hltvPoints": 8,
+    "color": "#3a86ff",
+    "playerIds": [
+      "freshie",
+      "nicx",
+      "grizz",
+      "ogwizard",
+      "wumbo"
+    ],
+    "starters": [
+      "freshie",
+      "nicx",
+      "grizz",
+      "ogwizard",
+      "wumbo"
+    ],
+    "mapStrength": {
+      "ancient": 69,
+      "anubis": 61,
+      "cache": 71,
+      "dust2": 75,
+      "inferno": 72,
+      "mirage": 66,
+      "nuke": 78
+    },
+    "money": 160000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 8,
+    "legacyRoster": [
+      "freshie",
+      "nicx",
+      "grizz",
+      "ogwizard",
+      "wumbo"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13124,
+    "staff": {
+      "tecnico": "st-marsborne-tecnico",
+      "analista": "st-marsborne-analista",
+      "psicologo": "st-marsborne-psicologo"
+    }
+  },
+  {
+    "id": "innercircleacademy",
+    "name": "Inner Circle Academy",
+    "shortName": "ICA",
+    "country": "UA",
+    "region": "CIS",
+    "hltvRank": 93,
+    "hltvPoints": 8,
+    "color": "#ffd166",
+    "playerIds": [
+      "flierax",
+      "3ippoch",
+      "nayz",
+      "l1seyoung",
+      "tamefear"
+    ],
+    "starters": [
+      "flierax",
+      "3ippoch",
+      "nayz",
+      "l1seyoung",
+      "tamefear"
+    ],
+    "mapStrength": {
+      "ancient": 65,
+      "anubis": 66,
+      "cache": 81,
+      "dust2": 82,
+      "inferno": 79,
+      "mirage": 74,
+      "nuke": 73
+    },
+    "money": 160000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 8,
+    "legacyRoster": [
+      "flierax",
+      "3ippoch",
+      "nayz",
+      "l1seyoung",
+      "tamefear"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13681,
+    "staff": {
+      "tecnico": "st-innercircleacademy-tecnico",
+      "analista": "st-innercircleacademy-analista",
+      "psicologo": "st-innercircleacademy-psicologo"
+    }
+  },
+  {
+    "id": "lazercats",
+    "name": "Lazer Cats",
+    "shortName": "LC",
+    "country": "UA",
+    "region": "CIS",
+    "hltvRank": 94,
+    "hltvPoints": 8,
+    "color": "#3a86ff",
+    "playerIds": [
+      "nikitea",
+      "magic",
+      "kiy0o",
+      "tripex17",
+      "kabro49"
+    ],
+    "starters": [
+      "nikitea",
+      "magic",
+      "kiy0o",
+      "tripex17",
+      "kabro49"
+    ],
+    "mapStrength": {
+      "ancient": 60,
+      "anubis": 72,
+      "cache": 76,
+      "dust2": 60,
+      "inferno": 60,
+      "mirage": 63,
+      "nuke": 73
+    },
+    "money": 150000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 8,
+    "legacyRoster": [
+      "nikitea",
+      "magic",
+      "kiy0o",
+      "tripex17",
+      "kabro49"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 12087,
+    "staff": {
+      "tecnico": "st-lazercats-tecnico",
+      "analista": "st-lazercats-analista",
+      "psicologo": "st-lazercats-psicologo"
+    }
+  },
+  {
+    "id": "exzerotenacity",
+    "name": "ex-Zero Tenacity",
+    "shortName": "ET",
+    "country": "RS",
+    "region": "EU",
+    "hltvRank": 95,
+    "hltvPoints": 8,
+    "color": "#e9c46a",
+    "playerIds": [
+      "kind0",
+      "dragon",
+      "vldn",
+      "cjoffo",
+      "brutmonster"
+    ],
+    "starters": [
+      "kind0",
+      "dragon",
+      "vldn",
+      "cjoffo",
+      "brutmonster"
+    ],
+    "mapStrength": {
+      "ancient": 77,
+      "anubis": 73,
+      "cache": 65,
+      "dust2": 79,
+      "inferno": 74,
+      "mirage": 63,
+      "nuke": 80
+    },
+    "money": 150000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 8,
+    "legacyRoster": [
+      "kind0",
+      "dragon",
+      "vldn",
+      "cjoffo",
+      "brutmonster"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 13573,
+    "staff": {
+      "tecnico": "st-exzerotenacity-tecnico",
+      "analista": "st-exzerotenacity-analista",
+      "psicologo": "st-exzerotenacity-psicologo"
+    }
+  },
+  {
+    "id": "baks",
+    "name": "BAKS",
+    "shortName": "BAKS",
+    "country": "RU",
+    "region": "CIS",
+    "hltvRank": 96,
+    "hltvPoints": 8,
+    "color": "#2a9d8f",
+    "playerIds": [
+      "glowiing",
+      "norwi",
+      "danistzz",
+      "whisper",
+      "turbo"
+    ],
+    "starters": [
+      "glowiing",
+      "norwi",
+      "danistzz",
+      "whisper",
+      "turbo"
+    ],
+    "mapStrength": {
+      "ancient": 81,
+      "anubis": 78,
+      "cache": 74,
+      "dust2": 82,
+      "inferno": 80,
+      "mirage": 58,
+      "nuke": 76
+    },
+    "money": 150000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 8,
+    "legacyRoster": [
+      "glowiing",
+      "norwi",
+      "danistzz",
+      "whisper",
+      "turbo"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 11699,
+    "staff": {
+      "tecnico": "st-baks-tecnico",
+      "analista": "st-baks-analista",
+      "psicologo": "st-baks-psicologo"
+    }
+  },
+  {
+    "id": "og",
+    "name": "OG",
+    "shortName": "OG",
+    "country": "FR",
+    "region": "EU",
+    "hltvRank": 97,
+    "hltvPoints": 8,
+    "color": "#ffd166",
+    "playerIds": [
+      "bodyy",
+      "spooke",
+      "ex3rcice",
+      "nutnut",
+      "chucky"
+    ],
+    "starters": [
+      "bodyy",
+      "spooke",
+      "ex3rcice",
+      "nutnut",
+      "chucky"
+    ],
+    "mapStrength": {
+      "ancient": 76,
+      "anubis": 75,
+      "cache": 76,
+      "dust2": 77,
+      "inferno": 64,
+      "mirage": 70,
+      "nuke": 64
+    },
+    "money": 150000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 8,
+    "legacyRoster": [
+      "bodyy",
+      "spooke",
+      "ex3rcice",
+      "nutnut",
+      "chucky"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 10503,
+    "staff": {
+      "tecnico": "st-og-tecnico",
+      "analista": "st-og-analista",
+      "psicologo": "st-og-psicologo"
+    }
+  },
+  {
+    "id": "brute",
+    "name": "BRUTE",
+    "shortName": "BRUTE",
+    "country": "CZ",
+    "region": "EU",
+    "hltvRank": 98,
+    "hltvPoints": 8,
+    "color": "#e9c46a",
+    "playerIds": [
+      "zedko",
+      "nbqq",
+      "aidkit",
+      "tak",
+      "hfah"
+    ],
+    "starters": [
+      "zedko",
+      "nbqq",
+      "aidkit",
+      "tak",
+      "hfah"
+    ],
+    "mapStrength": {
+      "ancient": 77,
+      "anubis": 73,
+      "cache": 59,
+      "dust2": 79,
+      "inferno": 66,
+      "mirage": 62,
+      "nuke": 66
+    },
+    "money": 150000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 8,
+    "legacyRoster": [
+      "zedko",
+      "nbqq",
+      "aidkit",
+      "tak",
+      "hfah"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 9139,
+    "staff": {
+      "tecnico": "st-brute-tecnico",
+      "analista": "st-brute-analista",
+      "psicologo": "st-brute-psicologo"
+    }
+  },
+  {
+    "id": "illyrians",
+    "name": "Illyrians",
+    "shortName": "ILLYR",
+    "country": "XK",
+    "region": "EU",
+    "hltvRank": 99,
+    "hltvPoints": 8,
+    "color": "#ef476f",
+    "playerIds": [
+      "cerber",
+      "bledard",
+      "ammar",
+      "lewis",
+      "rosoneriii"
+    ],
+    "starters": [
+      "cerber",
+      "bledard",
+      "ammar",
+      "lewis",
+      "rosoneriii"
+    ],
+    "mapStrength": {
+      "ancient": 65,
+      "anubis": 72,
+      "cache": 69,
+      "dust2": 67,
+      "inferno": 76,
+      "mirage": 76,
+      "nuke": 80
+    },
+    "money": 150000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 8,
+    "legacyRoster": [
+      "cerber",
+      "bledard",
+      "ammar",
+      "lewis",
+      "rosoneriii"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 11719,
+    "staff": {
+      "tecnico": "st-illyrians-tecnico",
+      "analista": "st-illyrians-analista",
+      "psicologo": "st-illyrians-psicologo"
+    }
+  },
+  {
+    "id": "glitch",
+    "name": "Glitch",
+    "shortName": "Glitch",
+    "country": "PL",
+    "region": "EU",
+    "hltvRank": 100,
+    "hltvPoints": 8,
+    "color": "#06d6a0",
+    "playerIds": [
+      "szejn",
+      "smekk",
+      "shaik",
+      "brillo",
+      "rud"
+    ],
+    "starters": [
+      "szejn",
+      "smekk",
+      "shaik",
+      "brillo",
+      "rud"
+    ],
+    "mapStrength": {
+      "ancient": 66,
+      "anubis": 59,
+      "cache": 69,
+      "dust2": 75,
+      "inferno": 66,
+      "mirage": 69,
+      "nuke": 62
+    },
+    "money": 150000,
+    "sponsors": [],
+    "lateMonths": 0,
+    "arrears": 0,
+    "legacyPoints": 8,
+    "legacyRoster": [
+      "szejn",
+      "smekk",
+      "shaik",
+      "brillo",
+      "rud"
+    ],
+    "rankHistory": [],
+    "training": {
+      "mode": "dividido",
+      "focus": "mira"
+    },
+    "academyIds": [],
+    "scoutLevel": 1,
+    "hltvId": 14077,
+    "staff": {
+      "tecnico": "st-glitch-tecnico",
+      "analista": "st-glitch-analista",
+      "psicologo": "st-glitch-psicologo"
     }
   }
 ]

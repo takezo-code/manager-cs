@@ -1,5 +1,7 @@
-// Gera src/data/teams.json, players.json, staff.json e relations.json: top 32 do ranking HLTV de 09/11/2026.
-// Elencos, países e pontos são reais; função, idade, rating, contratos e relações são estimativas.
+// Gera src/data/teams.json, players.json, staff.json e relations.json a partir do snapshot do HLTV
+// (src/data/hltv-2026-11-09.json: ranking 1–150, elencos, nacionalidade, idade, Rating 3.0, as 7 notas do perfil
+// e o técnico dos 100 primeiros). Top 100 = times do jogo; jogadores dos times 101–150 = agentes livres.
+// Os 32 times que já existiam mantêm id, cor, nome curto, funções e liderança dos IGLs (tabela KNOWN abaixo).
 //
 // Uso: npm run gerar-dados
 // ATENÇÃO: sobrescreve os JSONs (inclusive edições feitas à mão neles).
@@ -11,10 +13,9 @@ import path from 'node:path';
 
 const out = process.argv[2] ?? 'src/data';
 
-// [id, nome, nome curto, país da org, cor, [ [nick, país, idade, função, rating, liderança?], ... ] ]
-// O rank e os pontos vêm da ordem e de POINTS.
-const POINTS = [912, 910, 836, 777, 552, 477, 439, 412, 361, 324, 316, 247, 234, 221, 161, 153, 150, 118, 113, 112, 101, 100, 94, 89, 88, 86, 76, 72, 65, 63, 61, 57];
-const TEAMS = [
+// Metadados dos 32 times que já existiam: [id, nome, nome curto, país, cor, [ [nick, país, idade, função, rating, liderança?] ] ].
+// Do elenco só usamos a função conhecida de cada nick e a liderança dos IGLs.
+const KNOWN = [
   ['mouz', 'MOUZ', 'MOUZ', 'DE', '#e3001b', [
     ['torzsi', 'HU', 24, 'AWPER', 1.13], ['Spinx', 'IL', 25, 'LURKER', 1.1], ['xertioN', 'IL', 22, 'ENTRY', 1.08],
     ['PR', 'CZ', 23, 'IGL', 1.0, 84], ['xelex', 'HU', 20, 'SUPPORT', 1.06]]],
@@ -157,87 +158,200 @@ function contractFor(key, ovr, teamId) {
 const potentialFor = (key, ovr, age) => Math.min(97, ovr + Math.max(0, Math.round((24 - age) * 1.6 + noise(key + 'p', 2))));
 const flexFor = (key) => Math.round((0.3 + frac(key + 'f') * 0.7) * 100) / 100;
 
+// Snapshot do HLTV (ranking de 9/11/2026): elencos dos 150 primeiros e as estatísticas que a coleta conseguiu
+// (o Cloudflare bloqueou o resto). Jogador sem estatística recebe nível estimado pelo ranking do time.
+const RANKING = JSON.parse(fs.readFileSync(path.resolve('src/data/hltv/ranking.json'), 'utf8'));
+const STATS = Object.assign({}, ...fs.readdirSync(path.resolve('src/data/hltv')).filter((f) => f.startsWith('stats')).map((f) => JSON.parse(fs.readFileSync(path.resolve('src/data/hltv', f), 'utf8'))));
+const RAW = {
+  teams: RANKING.map(([rank, id, slug, name, points, country, coach, coachCountry, ps]) => ({
+    rank, id, slug, name, points, country, coach, coachCountry,
+    players: ps.map(([pid, pslug, nick, pc]) => {
+      const st = STATS[pid];
+      return { id: pid, slug: pslug, nick, country: pc, ...(st ? { age: st[0], rating: st[1], fp: st[2], en: st[3], tr: st[4], op: st[5], cl: st[6], sn: st[7], ut: st[8] } : {}) };
+    }),
+  })),
+};
+const ATTRS = ['MIR', 'REF', 'NOC', 'UTL', 'MEN', 'EQP'];
+const clampTo = (v, lo, hi) => Math.max(lo, Math.min(hi, Math.round(v)));
+
+// País → região (mesma tabela do motor, em src/engine/market/value.ts).
+const REGION_BY_COUNTRY = {
+  BR: 'SA', AR: 'SA', UY: 'SA', CL: 'SA', PE: 'SA', CO: 'SA',
+  US: 'NA', CA: 'NA', GT: 'NA', MX: 'NA',
+  RU: 'CIS', UA: 'CIS', BY: 'CIS', KZ: 'CIS',
+  MN: 'ASIA', CN: 'ASIA', KR: 'ASIA', JP: 'ASIA', AU: 'ASIA',
+};
+const regionOf = (c) => REGION_BY_COUNTRY[c] ?? 'EU';
+const REGION_BY_TEAM_COUNTRY = {
+  Europe: 'EU', CIS: 'CIS', Asia: 'ASIA', Oceania: 'ASIA', 'South America': 'SA', 'North America': 'NA',
+  Brazil: 'SA', Argentina: 'SA', Chile: 'SA', Uruguay: 'SA', Peru: 'SA', Colombia: 'SA',
+  'United States': 'NA', Canada: 'NA', Mexico: 'NA',
+  Russia: 'CIS', Ukraine: 'CIS', Kazakhstan: 'CIS', Belarus: 'CIS',
+  Mongolia: 'ASIA', China: 'ASIA', 'South Korea': 'ASIA', Japan: 'ASIA', Australia: 'ASIA', Indonesia: 'ASIA',
+};
+const majority = (list) => {
+  const n = {};
+  for (const x of list) if (x) n[x] = (n[x] ?? 0) + 1;
+  return Object.entries(n).sort((a, b) => b[1] - a[1])[0]?.[0] ?? null;
+};
+
+// Metadados conhecidos (32 times antigos).
+const known = Object.fromEntries(KNOWN.map(([id, name, shortName, country, color, roster]) => [id, { id, name, shortName, country, color, roster }]));
+const knownByName = Object.fromEntries(KNOWN.map(([id, name, shortName]) => [name.toLowerCase(), id]).concat(KNOWN.map(([id, , shortName]) => [shortName.toLowerCase(), id])));
+const KNOWN_ROLE = {};
+const KNOWN_LEADERSHIP = {};
+for (const [, , , , , roster] of KNOWN)
+  for (const [nick, , , role, , leadership] of roster) {
+    KNOWN_ROLE[nick.toLowerCase()] = role;
+    if (leadership) KNOWN_LEADERSHIP[nick.toLowerCase()] = leadership;
+  }
+const slugId = (slug) => slug.toLowerCase().replace(/[^a-z0-9]/g, '');
+function teamIdOf(t) {
+  const byName = knownByName[t.name.toLowerCase()];
+  if (byName) return byName;
+  const id = slugId(t.slug);
+  return known[id] ? id : id;
+}
+const PALETTE = ['#e63946', '#457b9d', '#2a9d8f', '#e9c46a', '#f4a261', '#8338ec', '#3a86ff', '#ff006e', '#06d6a0', '#118ab2', '#ef476f', '#ffd166'];
+function shortNameOf(name) {
+  if (name.length <= 6) return name.toUpperCase() === name ? name : name;
+  const words = name.split(/\s+/).filter(Boolean);
+  if (words.length >= 2) return words.map((w) => w[0]).join('').toUpperCase().slice(0, 4);
+  return name.slice(0, 5).toUpperCase();
+}
+
+// Estatística → atributos. Nível = 73 + (rating − 1,00) × 75; cada atributo desvia pela nota (0–100) do perfil.
+const NOTE = 0.12;
+function attrsFrom(st, level) {
+  const sc = (k) => (st[k] ?? 50) - 50;
+  return {
+    MIR: clamp(level + sc('fp') * NOTE),
+    REF: clamp(level + ((sc('en') + sc('op')) / 2) * NOTE),
+    NOC: clamp(level + ((sc('tr') + sc('cl')) / 2) * NOTE * 0.8),
+    UTL: clamp(level + sc('ut') * NOTE),
+    MEN: clamp(level + sc('cl') * NOTE * 0.8),
+    EQP: clamp(level + sc('tr') * NOTE * 0.8),
+  };
+}
+const fallbackRating = (rank) => 1.04 - rank * 0.0012;
+
+/** Funções: AWPer (maior Sniping), Entry (maior Entrying), IGL (conhecido ou o mais velho de Firepower mais baixo), resto Suporte/Lurker. */
+function assignRoles(ps) {
+  const left = new Set(ps.map((p) => p.id));
+  const role = {};
+  for (const p of ps) {
+    const r = KNOWN_ROLE[p.nick.toLowerCase()];
+    if (r && !Object.values(role).includes(r === 'SUPPORT' || r === 'LURKER' ? '__' : r)) {
+      role[p.id] = r;
+      left.delete(p.id);
+    }
+  }
+  const has = (r) => Object.values(role).includes(r);
+  const pool = () => ps.filter((p) => left.has(p.id));
+  const take = (r, best) => {
+    if (has(r) || !pool().length) return;
+    const p = [...pool()].sort(best)[0];
+    if (!p) return;
+    role[p.id] = r;
+    left.delete(p.id);
+  };
+  if (!has('AWPER')) {
+    const sn = [...pool()].sort((a, b) => (b.st.sn ?? 0) - (a.st.sn ?? 0))[0];
+    if (sn && (sn.st.sn ?? 0) >= 45) take('AWPER', (a, b) => (b.st.sn ?? 0) - (a.st.sn ?? 0));
+  }
+  // Sem estatística de Sniping: alguém do time vira o AWPer (todo time tem um).
+  if (!has('AWPER')) take('AWPER', (a, b) => (b.st.sn ?? hash(b.nick) % 40) - (a.st.sn ?? hash(a.nick) % 40));
+  take('ENTRY', (a, b) => (b.st.en ?? 50) - (a.st.en ?? 50));
+  take('IGL', (a, b) => (b.age ?? 24) - (b.st.fp ?? 50) / 10 - ((a.age ?? 24) - (a.st.fp ?? 50) / 10));
+  for (const p of pool()) role[p.id] = (p.st.ut ?? 50) >= (p.st.cl ?? 50) ? 'SUPPORT' : 'LURKER';
+  return role;
+}
+
+const usedIds = new Set();
+const playerId = (nick, teamId) => {
+  const base = nick.toLowerCase().replace(/[^a-z0-9]/g, '') || 'jogador';
+  const id = usedIds.has(base) ? `${base}-${teamId}` : base;
+  usedIds.add(id);
+  return id;
+};
+const SYLA = ['ka', 'ro', 've', 'lin', 'dor', 'mak', 'sel', 'tu', 'van', 'bro', 'gus', 'fen', 'hal', 'jor', 'pet', 'rik'];
+const fakeNick = (key) => SYLA[hash(key + 'a') % SYLA.length] + SYLA[hash(key + 'b') % SYLA.length] + (hash(key) % 90 + 10);
+
+function makePlayer({ id, nick, country, age, role, teamId, attrs, leadership, key, hltvId }) {
+  if (role === 'IGL') {
+    attrs.EQP = leadership ?? clamp(Math.max(attrs.EQP, (attrs.NOC + attrs.UTL) / 2 + 4));
+    attrs.NOC = clamp(Math.max(attrs.NOC, attrs.EQP - 6));
+  }
+  if (age >= 31) attrs.MEN = clamp(attrs.MEN + 3);
+  const ovr = ovrOf(attrs, role);
+  return {
+    id, nick, country, age, role, teamId,
+    ...(hltvId ? { hltvId } : {}),
+    baseAttributes: attrs, evolution: 0, skillId: null,
+    phase: 'normal', phaseStreak: 0, energy: 100, satisfaction: 70,
+    recentRatings: [],
+    potential: potentialFor(key, ovr, age),
+    regionFlex: flexFor(key),
+    transferListed: false,
+    contract: teamId ? contractFor(key, ovr, teamId) : null,
+    mood: { promiseUntil: null, exitDenied: false, lastRaise: null, raiseRefusals: 0, lastCut: null, cutRefusals: 0, salaryBeforeCut: null, lastRequest: null }, awards: [], mvpUntil: null, trainingGains: {}, growth: {}, squad: 'principal',
+  };
+}
+
 const teams = [];
 const players = [];
-TEAMS.forEach(([id, name, shortName, country, color, roster], i) => {
-  const rank = i + 1;
+const coachOf = {};
+for (const t of RAW.teams) {
+  const isTeam = t.rank <= 100;
+  const teamId = isTeam ? teamIdOf(t) : null;
+  const ps = t.players.map((p) => ({ ...p, st: p }));
+  const roles = assignRoles(ps);
   const ids = [];
-  for (const [nick, pc, age, role, rating, leadership] of roster) {
+  for (const p of ps) {
+    const rating = p.rating ?? fallbackRating(t.rank);
     const level = Math.min(93, 73 + (rating - 1.0) * 75);
-    const prof = PROFILE[role];
-    const attrs = {};
-    for (const k of ['MIR', 'REF', 'NOC', 'UTL', 'MEN', 'EQP']) attrs[k] = clamp(level + prof[k] + noise(nick + id + k, 2));
-    if (role === 'IGL') {
-      attrs.EQP = leadership;
-      attrs.NOC = clamp(Math.max(attrs.NOC, leadership - 6 + noise(nick + 'n', 2)));
-    }
-    if (age >= 31) attrs.MEN = clamp(attrs.MEN + 3);
-    const base = nick === 'Stand-in' ? `${id}-standin` : nick.toLowerCase().replace(/[^a-z0-9]/g, '');
-    const pid = players.some((p) => p.id === base) ? `${base}-${id}` : base;
-    ids.push(pid);
-    players.push({
-      id: pid, nick, country: pc, age, role, teamId: id,
-      baseAttributes: attrs, evolution: 0, skillId: null,
-      phase: 'normal', phaseStreak: 0, energy: 100, satisfaction: 70,
-      recentRatings: [],
-      potential: potentialFor(nick + id, ovrOf(attrs, role), age),
-      regionFlex: flexFor(nick + id),
-      transferListed: false,
-      contract: contractFor(nick + id, ovrOf(attrs, role), id),
-      mood: { promiseUntil: null, exitDenied: false, lastRaise: null, raiseRefusals: 0, lastCut: null, cutRefusals: 0, salaryBeforeCut: null, lastRequest: null }, awards: [], mvpUntil: null, trainingGains: {}, growth: {}, squad: 'principal',
-    });
+    const id = playerId(p.nick, teamId ?? 'livre');
+    ids.push(id);
+    const age = p.age ?? 22 + (hash(p.nick) % 8);
+    players.push(makePlayer({ id, nick: p.nick, country: p.country ?? 'EU', age, role: roles[p.id], teamId, attrs: attrsFrom(p, level), leadership: KNOWN_LEADERSHIP[p.nick.toLowerCase()], key: p.nick + (teamId ?? 'fa'), hltvId: p.id }));
   }
+  if (!isTeam) continue;
+  // Time com 4: um quinto jogador fictício na função que falta.
+  if (ids.length < 5) {
+    const roleSet = new Set(Object.values(roles));
+    const need = ['IGL', 'AWPER', 'ENTRY', 'SUPPORT', 'LURKER'].find((r) => !roleSet.has(r)) ?? 'SUPPORT';
+    const avg = ps.reduce((s2, p) => s2 + (p.rating ?? fallbackRating(t.rank)), 0) / Math.max(1, ps.length);
+    const key = teamId + '-quinto';
+    const country = majority(ps.map((p) => p.country)) ?? 'EU';
+    const level = Math.min(93, 73 + (avg - 0.05 - 1.0) * 75);
+    const id = playerId(fakeNick(key), teamId);
+    ids.push(id);
+    players.push(makePlayer({ id, nick: fakeNick(key), country, age: 19 + (hash(key) % 6), role: need, teamId, attrs: attrsFrom({}, level), key }));
+  }
+  const k = known[teamId];
+  const country = k?.country ?? majority(ps.map((p) => p.country)) ?? 'EU';
+  const region = TEAM_REGION[teamId] ?? REGION_BY_TEAM_COUNTRY[t.country] ?? regionOf(majority(ps.map((p) => p.country)) ?? 'EU');
+  const teamLevel = players.filter((p) => ids.includes(p.id)).reduce((s2, p) => s2 + ovrOf(p.baseAttributes, p.role), 0) / ids.length;
   const mapStrength = {};
-  for (const m of MAPS) mapStrength[m] = Math.round(75 + noise(id + m, 13));
-  const money = Math.max(400_000, Math.round((3_500_000 - (rank - 1) * 230_000) / 50_000) * 50_000);
+  for (const m of MAPS) mapStrength[m] = clampTo(75 + (teamLevel - 78) * 0.6 + noise(teamId + m, 12), 45, 95);
+  const rank = t.rank;
+  const money = rank <= 32 ? Math.max(400_000, Math.round((3_500_000 - (rank - 1) * 230_000) / 50_000) * 50_000) : Math.max(150_000, Math.round((400_000 - (rank - 32) * 4_000) / 10_000) * 10_000);
   teams.push({
-    id, name, shortName, country, region: TEAM_REGION[id] ?? 'EU', hltvRank: rank, hltvPoints: POINTS[i], color,
-    playerIds: ids, starters: [...ids], mapStrength, money, sponsors: [], lateMonths: 0, arrears: 0,
-    legacyPoints: POINTS[i], legacyRoster: [...ids], rankHistory: [], training: { mode: 'dividido', focus: 'mira' }, academyIds: [], scoutLevel: 1,
+    id: teamId, name: k?.name ?? t.name, shortName: k?.shortName ?? shortNameOf(t.name), country, region, hltvRank: rank, hltvPoints: t.points,
+    color: k?.color ?? PALETTE[hash(teamId) % PALETTE.length],
+    playerIds: ids, starters: ids.slice(0, 5), mapStrength, money, sponsors: [], lateMonths: 0, arrears: 0,
+    legacyPoints: t.points, legacyRoster: ids.slice(0, 5), rankHistory: [], training: { mode: 'dividido', focus: 'mira' }, academyIds: [], scoutLevel: 1,
+    hltvId: t.id,
   });
-});
-
-// ---------- Agentes livres fictícios ----------
-const FREE = [
-  ['kraeven', 'SE', 22, 'ENTRY', 0.98], ['dovi', 'PL', 24, 'AWPER', 0.97], ['mirok', 'RU', 19, 'LURKER', 0.95], ['tavinho', 'BR', 21, 'ENTRY', 0.96],
-  ['ozzyx', 'TR', 23, 'SUPPORT', 0.93], ['lumen', 'FR', 26, 'IGL', 0.9, 80], ['brakk', 'DE', 25, 'LURKER', 0.95], ['sanchoz', 'ES', 20, 'AWPER', 0.94],
-  ['nyxen', 'FI', 18, 'ENTRY', 0.92], ['zelko', 'RS', 27, 'SUPPORT', 0.94], ['caffe', 'IT', 24, 'IGL', 0.88, 78], ['vyrus', 'UA', 19, 'AWPER', 0.96],
-  ['pakito', 'AR', 22, 'LURKER', 0.93], ['jinsu', 'KR', 21, 'ENTRY', 0.92], ['hollow', 'US', 25, 'SUPPORT', 0.92], ['tenk', 'CA', 23, 'AWPER', 0.93],
-  ['marzo', 'PT', 28, 'IGL', 0.9, 82], ['qwerin', 'KZ', 18, 'LURKER', 0.94], ['bolt', 'AU', 24, 'ENTRY', 0.91], ['drezz', 'CZ', 22, 'SUPPORT', 0.93],
-  ['ferro', 'BR', 29, 'IGL', 0.89, 83], ['kalm', 'EE', 20, 'SUPPORT', 0.92], ['zuhl', 'MN', 20, 'ENTRY', 0.93], ['rastko', 'BA', 26, 'AWPER', 0.95],
-  ['wenhao', 'CN', 21, 'LURKER', 0.91], ['tiqo', 'DK', 19, 'ENTRY', 0.94], ['hevo', 'NO', 25, 'SUPPORT', 0.9], ['grimm', 'LV', 30, 'LURKER', 0.92],
-  ['soren', 'NL', 23, 'AWPER', 0.91], ['yapix', 'CL', 20, 'SUPPORT', 0.9],
-];
-for (const [nick, pc, age, role, rating, leadership] of FREE) {
-  const level = Math.min(93, 73 + (rating - 1.0) * 75);
-  const prof = PROFILE[role];
-  const attrs = {};
-  for (const k of ['MIR', 'REF', 'NOC', 'UTL', 'MEN', 'EQP']) attrs[k] = clamp(level + prof[k] + noise(nick + 'fa' + k, 2));
-  if (role === 'IGL') {
-    attrs.EQP = leadership;
-    attrs.NOC = clamp(Math.max(attrs.NOC, leadership - 6));
-  }
-  const ovr = ovrOf(attrs, role);
-  players.push({
-    id: 'fa-' + nick, nick, country: pc, age, role, teamId: null,
-    baseAttributes: attrs, evolution: 0, skillId: null, phase: 'normal', phaseStreak: 0, energy: 100, satisfaction: 70,
-    recentRatings: [], potential: potentialFor(nick, ovr, age), regionFlex: flexFor(nick), transferListed: false, contract: null,
-    mood: { promiseUntil: null, exitDenied: false, lastRaise: null, raiseRefusals: 0, lastCut: null, cutRefusals: 0, salaryBeforeCut: null, lastRequest: null }, awards: [], mvpUntil: null, trainingGains: {}, growth: {}, squad: 'principal',
-  });
+  if (t.coach) coachOf[teamId] = [t.coach, t.coachCountry ?? country, 28 + (hash(t.coach) % 16)];
 }
 
 // ---------- Comissão técnica ----------
 // Técnicos reais confirmados em nov/2026 (HLTV, Liquipedia, Wikipedia). Os times sem confirmação ganham um
 // técnico fictício. Atributos (40–95), idades e países são estimativas; analistas e psicólogos são fictícios.
 // Salário: mesma fórmula de src/engine/staff/model.ts (staffSalary).
-const REAL_COACHES = {
-  mouz: ['sycrone', 'DK', 33], furia: ['sidde', 'BR', 34], vitality: ['XTQZZZ', 'FR', 34], spirit: ['hally', 'RU', 35],
-  aurora: ['ash', 'GB', 32], falcons: ['zonic', 'DK', 43], betboom: ['Fierce', 'RU', 33], navi: ['B1ad3', 'UA', 38],
-  fut: ['coolio', 'HU', 30], mongolz: ['maaRaa', 'MN', 34], g2: ['sAw', 'FI', 31], parivision: ['dastan', 'KZ', 31],
-  legacy: ['adrrr', 'BR', 29], '1win': ['groove', 'RU', 33], mibr: ['LETN1', 'RS', 30], faze: ['enkay J', 'US', 36],
-  astralis: ['NEO', 'PL', 39], eternalfire: ['Fabre', 'TR', 33], heroic: ['Snappi', 'DK', 35], gamerlegion: ['imd', 'DK', 31],
-  big: ['xenn', 'DE', 30],
-};
+// Técnicos reais: vêm do snapshot do HLTV (página de cada time). Sem técnico lá: técnico fictício.
+const REAL_COACHES = coachOf;
 const STAFF_ATTRS = { tecnico: ['TAT', 'VET', 'GES'], analista: ['LEI', 'PRE'], psicologo: ['PRS', 'MOT'] };
 const SYL = ['ka', 'ro', 've', 'lin', 'dor', 'mak', 'sel', 'tu', 'van', 'bro', 'gus', 'fen', 'hal', 'jor', 'pet', 'rik'];
 const COUNTRIES = ['BR', 'DK', 'SE', 'FR', 'DE', 'PL', 'RU', 'UA', 'US', 'FI', 'TR', 'CZ', 'ES', 'PT', 'GB', 'KZ'];
@@ -271,7 +385,7 @@ function makeStaff(id, role, nick, country, age, level, teamId) {
 }
 const staff = [];
 teams.forEach((t, i) => {
-  const top = 86 - i * 0.7;
+  const top = Math.max(55, 86 - i * 0.35);
   const real = REAL_COACHES[t.id];
   const tec = real
     ? makeStaff(`st-${t.id}-tecnico`, 'tecnico', real[0], real[1], real[2], top, t.id)

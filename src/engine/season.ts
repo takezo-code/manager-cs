@@ -31,7 +31,7 @@ import { applyRanking } from './ranking';
 import { createRng, hashString, type Rng } from './rng';
 import { issueInvites, playEvents, runQualifiers, startEvents } from './schedule';
 import { expireMvp } from './tournament/awards';
-import { trainDay } from './training';
+import { trainTeams } from './training';
 import type { MatchResult } from './types';
 import type { World, WorldEvent } from './world';
 
@@ -103,7 +103,7 @@ export function dailyTick(world: World, opts: { rng?: Rng } = {}): { world: Worl
   add(played);
 
   // Dias livres: treino/descanso para quem não está em evento; agentes livres descansam.
-  for (const t of Object.values(w.teams)) if (!teamBusy(w.calendar, t.id)) w = trainDay(w, t.id);
+  w = trainTeams(w, Object.keys(w.teams).filter((id) => !teamBusy(w.calendar, id)));
   w = { ...w, players: Object.fromEntries(Object.entries(w.players).map(([id, p]) => [id, p.teamId ? p : recoverRest(p)])) };
 
   // Virada do ano: aniversários, saída dos jovens de 20 anos e nova temporada da liga de base.

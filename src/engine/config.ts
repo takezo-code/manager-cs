@@ -373,9 +373,11 @@ export const AI_MARKET = {
 export const FINANCE = {
   /** Vagas de patrocínio: 1 master + 3 comuns. */
   regularSlots: 3,
-  /** Master por mês: 200 mil × 0,93^(posição − 1). #1 ≈ 200 mil; #10 ≈ 104 mil; #32 ≈ 21 mil. */
+  /** Master por mês: 200 mil × 0,96^(posição − 1) até o 32º, depois × 0,985 por posição. #1 = 200 mil; #10 ≈ 138 mil; #32 ≈ 56 mil; #100 ≈ 20 mil. */
   masterBase: 200_000,
-  masterDecay: 0.93,
+  masterDecay: 0.96,
+  /** Depois do 32º a queda é mais lenta (tier 2/3 ainda tem patrocínio). */
+  masterTailDecay: 0.985,
   /** Comum vale 30% do master. */
   regularShare: 0.3,
   /** Variação das ofertas (±). */
@@ -500,6 +502,8 @@ export const MORALE = {
 export const CALENDAR = {
   /** Convites saem N dias antes do evento. */
   inviteDaysBefore: 21,
+  /** Eventos com esse número de times (Majors, EWC) são obrigatórios para os convidados. */
+  mandatoryTeams: 32,
   /** Qualificatória (mata-mata MD3) N dias antes do evento. */
   qualifierDaysBefore: 3,
   /** Vagas de qualificatória nos eventos com menos de 32 times. */
@@ -804,6 +808,8 @@ export const MEDIA = {
 /** Tier 2: academies + times fictícios, copas mensais e empréstimos. */
 export const TIER2 = {
   rosterSize: 6,
+  /** Academies na Tier 2 Cup: as dos times até esta posição do ranking. */
+  academies: 32,
   levelMin: 62,
   levelMax: 74,
   ageMin: 18,
@@ -823,3 +829,12 @@ export const TIER2 = {
   loanSalaryShare: 0.5,
   recallFee: 20_000,
 };
+
+/** Países de onde vêm os jovens da academy e os amadores, por região (repetição = mais comum). */
+export const REGION_COUNTRIES = {
+  SA: ['BR', 'BR', 'BR', 'BR', 'AR', 'AR', 'CL', 'UY', 'PE', 'CO'],
+  NA: ['US', 'US', 'US', 'CA', 'CA', 'MX'],
+  EU: ['DK', 'SE', 'FR', 'DE', 'PL', 'FI', 'NO', 'ES', 'PT', 'CZ', 'HU', 'TR', 'RS', 'BA', 'LV', 'EE', 'NL', 'BE', 'GB', 'IL', 'RO', 'BG', 'SK', 'IT'],
+  CIS: ['RU', 'RU', 'RU', 'UA', 'UA', 'KZ', 'BY'],
+  ASIA: ['MN', 'MN', 'CN', 'CN', 'KR', 'JP', 'AU'],
+} as const;
