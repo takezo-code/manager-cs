@@ -26,7 +26,8 @@ import { createRng, hashString } from '../engine/rng';
 import { createWorld, dailyTick } from '../engine/season';
 import { validStarters } from '../engine/squad';
 import { windowOpen } from '../engine/calendar';
-import { acceptInvite, declineInvite } from '../engine/schedule';
+import { acceptInvite, declineInvite, myMatchToday } from '../engine/schedule';
+import { addDays } from '../engine/date';
 import { signAmateur, type Amateur } from '../engine/amateurs';
 import { promoteMine } from '../engine/academy';
 import { upgradeScout } from '../engine/scout';
@@ -35,7 +36,7 @@ import type { Staff } from '../engine/types';
 import type { Manager, ManagerProfile } from '../engine/manager/model';
 import type { CalendarEvent } from '../engine/calendar';
 import type { EventResult, SeriesLogEntry } from '../engine/ranking';
-import type { MatchFormat, MatchResult, MatchStage, Player, SkillId, Team, TrainingPlan } from '../engine/types';
+import type { MatchFormat, MatchResult, MatchStage, Player, SkillId, Team, TrainingPlan, VetoStep } from '../engine/types';
 import {
   addMoney,
   type IncomingOffer,
@@ -90,6 +91,8 @@ export interface GameState {
   seriesResults: Record<string, MatchResult>;
   /** Séries jogadas no último dia. */
   lastDayIds: string[];
+  /** Resultado da série do seu time no dia de jogo (tela de resumo). */
+  matchDayResult: MatchResult | null;
 
   openNewCareer(slot: Slot): void;
   startCareer(teamId: string, profile?: ManagerProfile, academy?: boolean): void;
@@ -103,6 +106,9 @@ export interface GameState {
   // Mercado
   /** Avança N dias, ou até o próximo jogo do seu time ('jogo'; no máximo 60 dias). */
   advance(target: number | 'jogo'): void;
+  /** Dia de jogo: joga o próximo dia com o veto do manager (null = o técnico decide). */
+  playMatchDay(veto: VetoStep[] | null): void;
+  closeMatchDay(): void;
   acceptInvite(eventId: string): void;
   declineInvite(eventId: string): void;
   setTraining(plan: TrainingPlan): void;
@@ -266,6 +272,7 @@ export const useGame = create<GameState>((set, get) => {
     message: null,
     seriesResults: {},
     lastDayIds: [],
+    matchDayResult: null,
 
     openNewCareer: (slot) => set({ screen: 'newCareer', pendingSlot: slot }),
 
@@ -343,6 +350,8 @@ export const useGame = create<GameState>((set, get) => {
       for (const [id, r] of Object.entries(s.seriesResults)) if (r.teamAId === me || r.teamBId === me) kept[id] = r;
       let lastDay: Record<string, MatchResult> = {};
       for (let i = 0; i < maxDays; i++) {
+        // Dia de jogo do seu time: o avanço para na véspera (o veto é seu).
+        if (myMatchToday(w)) break;
         const out = dailyTick(w, { rng: createRng(hashString(`${w.date}:${s.activeSlot}:${me}`)) });
         w = out.world;
         events = [...stamp(w.date, out.events), ...events];
@@ -360,6 +369,31 @@ export const useGame = create<GameState>((set, get) => {
         lastDayIds: Object.keys(lastDay),
       });
     },
+
+    playMatchDay: (veto) => {
+      const s = get();
+      if (s.screen !== 'game' || !s.myTeamId) return;
+      const me = s.myTeamId;
+      const match = myMatchToday(worldOf(s));
+      if (!match) return;
+      const out = dailyTick(worldOf(s), {
+        rng: createRng(hashString(`${addDays(s.date, 1)}:${s.activeSlot}:${me}`)),
+        veto: veto ? { [match.seriesId]: veto } : undefined,
+      });
+      const kept: Record<string, MatchResult> = {};
+      for (const [id, r] of Object.entries(s.seriesResults)) if (r.teamAId === me || r.teamBId === me) kept[id] = r;
+      for (const [id, r] of Object.entries(out.results)) if (r.teamAId === me || r.teamBId === me) kept[id] = r;
+      const mine = Object.values(out.results).find((r) => r.teamAId === me || r.teamBId === me) ?? null;
+      set({
+        ...fromWorld(out.world),
+        events: [...stamp(out.world.date, out.events), ...s.events].slice(0, MAX_EVENTS),
+        seriesResults: { ...trimMyResults(kept, me), ...out.results },
+        lastDayIds: Object.keys(out.results),
+        matchDayResult: mine,
+      });
+    },
+
+    closeMatchDay: () => set({ matchDayResult: null }),
 
     acceptInvite: (eventId) => {
       const r = acceptInvite(worldOf(get()), eventId);

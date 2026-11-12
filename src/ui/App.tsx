@@ -1,20 +1,16 @@
-import { useEffect, useState } from 'react';
-import { flushSave } from '../store/autosave';
-import { useGame } from '../store/game';
+import { useState } from 'react';
+import { myMatchToday } from '../engine/schedule';
+import { useGame, useWorld, worldOf } from '../store/game';
 import { MainMenu } from './MainMenu';
 import { MarketPanel } from './MarketPanel';
 import { FinancePanel } from './FinancePanel';
 import { InboxPanel } from './InboxPanel';
-import { formatDate } from '../engine/date';
-import { money } from './format';
 import { MatchSetup, MatchView } from './MatchView';
 import { PlayerCard } from './PlayerCard';
 import { PlayerPanel } from './PlayerPanel';
-import { TeamBadge } from './TeamBadge';
 import { TeamSelect } from './TeamSelect';
 import { CalendarPanel } from './CalendarPanel';
 import { RankingPanel } from './RankingPanel';
-import { TimeBar } from './TimeBar';
 import { TrainingSection } from './TrainingSection';
 import { AcademyPanel } from './AcademyPanel';
 import { StaffPanel } from './StaffPanel';
@@ -24,213 +20,170 @@ import { NewsPanel } from './NewsPanel';
 import { SocialPanel } from './SocialPanel';
 import { Tier2Panel } from './Tier2Panel';
 import { AcademyManagerView } from './AcademyManagerView';
+import { GameShell, SubTabs, type NavTab } from './shell/GameShell';
+import { Home, type HomeLink } from './home/Home';
+import { MatchDay } from './matchday/MatchDay';
 
-type Tab = 'elenco' | 'manager' | 'comissao' | 'academy' | 'tier2' | 'calendario' | 'ranking' | 'mercado' | 'financas' | 'noticias' | 'social' | 'mensagens' | 'amistoso';
+type Tab = 'inicio' | 'elenco' | 'partidas' | 'mercado' | 'academy' | 'ranking' | 'carreira' | 'midia' | 'mensagens';
+type PartidasTab = 'calendario' | 'tier2' | 'amistoso';
+type CarreiraTab = 'manager' | 'comissao' | 'financas';
+type MidiaTab = 'noticias' | 'social';
 
-const TAB_LABEL: Record<Tab, string> = {
-  elenco: 'Elenco',
-  manager: 'Manager',
-  comissao: 'Comissão',
-  academy: 'Academy',
-  tier2: 'Tier 2/3',
-  calendario: 'Calendário',
-  ranking: 'Ranking',
-  mercado: 'Mercado',
-  financas: 'Finanças',
-  noticias: 'Notícias',
-  social: 'Social',
-  mensagens: 'Mensagens',
-  amistoso: 'Amistoso',
-};
-
-function SaveIndicator({ slot, status }: { slot: number | null; status: ReturnType<typeof useGame.getState>['saveStatus'] }) {
-  const text =
-    status.kind === 'saving'
-      ? 'Salvando…'
-      : status.kind === 'erro'
-        ? 'Erro ao salvar'
-        : status.kind === 'saved' && status.at
-          ? `Salvo às ${new Date(status.at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`
-          : status.kind === 'saved'
-            ? 'Salvo'
-            : '';
+function Elenco() {
+  const myTeamId = useGame((s) => s.myTeamId)!;
+  const team = useGame((s) => s.teams[myTeamId]);
+  const players = useGame((s) => s.players);
+  const [selected, setSelected] = useState(team.playerIds[0]);
+  const current = team.playerIds.includes(selected) ? selected : team.playerIds[0];
+  const bench = team.playerIds.filter((id) => !team.starters.includes(id));
   return (
-    <span className={`text-[11px] ${status.kind === 'erro' ? 'text-loss' : 'text-muted'}`} title={status.error}>
-      Slot {slot}
-      {text && ` · ${text}`}
-    </span>
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_380px]">
+      <div className="space-y-4">
+        {team.playerIds.length < 5 && (
+          <p className="rounded-lg bg-loss/15 px-4 py-2 text-sm text-loss">
+            Seu elenco tem só {team.playerIds.length} jogadores. Contrate no Mercado para chegar a 5 e poder jogar.
+          </p>
+        )}
+        <TrainingSection />
+        <h2 className="font-display text-lg font-bold">Titulares</h2>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          {team.starters.map((id) => (
+            <PlayerCard key={id} player={players[id]} selected={id === current} onClick={() => setSelected(id)} />
+          ))}
+        </div>
+        {bench.length > 0 && (
+          <>
+            <h2 className="font-display text-lg font-bold">Reservas</h2>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+              {bench.map((id) => (
+                <PlayerCard key={id} player={players[id]} selected={id === current} onClick={() => setSelected(id)} />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+      {current && <PlayerPanel player={players[current]} />}
+    </div>
   );
 }
 
 function Dashboard() {
   const myTeamId = useGame((s) => s.myTeamId)!;
   const team = useGame((s) => s.teams[myTeamId]);
-  const players = useGame((s) => s.players);
   const lastMatch = useGame((s) => s.lastMatch);
-  const message = useGame((s) => s.message);
-  const clearMessage = useGame((s) => s.clearMessage);
-  const toMenu = useGame((s) => s.toMenu);
-  const activeSlot = useGame((s) => s.activeSlot);
-  const saveStatus = useGame((s) => s.saveStatus);
-  const [tab, setTab] = useState<Tab>('elenco');
-  const [selected, setSelected] = useState(team.playerIds[0]);
-  const date = useGame((s) => s.date);
-  const badges: Partial<Record<Tab, number>> = {
-    mensagens: useGame((s) => s.inbox.length),
-    financas: useGame((s) => s.sponsorOffers.length),
-    mercado: useGame((s) => s.offers.length),
+  const advance = useGame((s) => s.advance);
+  const matchDayResult = useGame((s) => s.matchDayResult);
+  const inbox = useGame((s) => s.inbox.length);
+  const sponsorOffers = useGame((s) => s.sponsorOffers.length);
+  const offers = useGame((s) => s.offers.length);
+  const world = useWorld();
+  const [tab, setTab] = useState<Tab>('inicio');
+  const [partidas, setPartidas] = useState<PartidasTab>('calendario');
+  const [carreira, setCarreira] = useState<CarreiraTab>('manager');
+  const [midia, setMidia] = useState<MidiaTab>('noticias');
+  const [matchOpen, setMatchOpen] = useState(false);
+  const matchTomorrow = !!myMatchToday(world);
+
+  const onAdvance = (t: number | 'jogo') => {
+    // Véspera do jogo do seu time: o avanço abre o dia de jogo (o veto é seu).
+    if (myMatchToday(worldOf(useGame.getState()))) return setMatchOpen(true);
+    advance(t);
+    if (t === 'jogo' && myMatchToday(worldOf(useGame.getState()))) {
+      setTab('inicio');
+      setMatchOpen(true);
+    }
   };
-  // Se o jogador selecionado saiu do time, mostra o primeiro titular.
-  const current = team.playerIds.includes(selected) ? selected : team.playerIds[0];
-  const bench = team.playerIds.filter((id) => !team.starters.includes(id));
+  const go = (l: HomeLink) => setTab(l);
 
-  useEffect(() => {
-    if (!message) return;
-    const t = setTimeout(clearMessage, 3000);
-    return () => clearTimeout(t);
-  }, [message, clearMessage]);
+  const tabs: NavTab<Tab>[] = [
+    { id: 'inicio', label: 'Início' },
+    { id: 'elenco', label: 'Elenco' },
+    { id: 'partidas', label: 'Partidas' },
+    { id: 'mercado', label: 'Mercado', badge: offers },
+    { id: 'academy', label: 'Academy' },
+    { id: 'ranking', label: 'Ranking' },
+    { id: 'carreira', label: 'Carreira', badge: sponsorOffers },
+    { id: 'midia', label: 'Mídia' },
+    { id: 'mensagens', label: 'Mensagens', badge: inbox },
+  ];
 
+  const showMatch = matchOpen || !!matchDayResult;
   return (
-    <div className="mx-auto max-w-6xl px-4 py-6">
-      <header className="flex flex-wrap items-center gap-4 border-b border-line pb-4">
-        <TeamBadge team={team} size={52} />
-        <div className="min-w-[11rem] flex-1">
-          <h1 className="font-display truncate text-3xl font-bold">{team.name}</h1>
-          <p className="text-sm text-muted">
-            #{team.hltvRank} no ranking HLTV · {team.hltvPoints} pts · {formatDate(date)}
-          </p>
-        </div>
-        <div className="text-right">
-          <div className="font-display text-2xl font-bold text-accent">{money(team.money)}</div>
-          <div className="text-xs text-muted">em caixa</div>
-        </div>
-        <div className="flex flex-col items-end gap-1">
-          <button
-            type="button"
-            onClick={async () => {
-              await flushSave();
-              toMenu();
-            }}
-            className="rounded-lg border border-line px-3 py-2 text-sm text-muted hover:text-ink"
-          >
-            Menu
-          </button>
-          <SaveIndicator slot={activeSlot} status={saveStatus} />
-        </div>
-      </header>
-
-      <div className="mt-4">
-        <TimeBar />
-      </div>
-
-      <nav className="mt-4 flex flex-wrap gap-1" role="tablist">
-        {(Object.keys(TAB_LABEL) as Tab[]).map((t) => (
-          <button
-            key={t}
-            role="tab"
-            aria-selected={tab === t}
-            type="button"
-            onClick={() => setTab(t)}
-            className={`font-display rounded-lg px-3 py-2 text-lg font-bold transition sm:px-4 ${
-              tab === t ? 'bg-panel-2 text-ink' : 'text-muted hover:text-ink'
-            }`}
-          >
-            {TAB_LABEL[t]}
-            {!!badges[t] && (
-              <span className="ml-1.5 rounded-full bg-accent px-1.5 py-0.5 align-middle text-xs text-black">{badges[t]}</span>
-            )}
-          </button>
-        ))}
-      </nav>
-
-      {message && (
-        <div
-          role="status"
-          className={`mt-3 rounded-lg px-4 py-2 text-sm ${message.kind === 'ok' ? 'bg-win/15 text-win' : 'bg-loss/15 text-loss'}`}
-        >
-          {message.text}
-        </div>
-      )}
-
-      {tab === 'elenco' ? (
-        <div className="mt-4 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_380px]">
-          <div className="space-y-4">
-            {team.playerIds.length < 5 && (
-              <p className="rounded-lg bg-loss/15 px-4 py-2 text-sm text-loss">
-                Seu elenco tem só {team.playerIds.length} jogadores. Contrate no Mercado para chegar a 5 e poder jogar.
-              </p>
-            )}
-            <TrainingSection />
-            <h2 className="text-sm font-semibold text-muted">Titulares</h2>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {team.starters.map((id) => (
-                <PlayerCard key={id} player={players[id]} selected={id === current} onClick={() => setSelected(id)} />
-              ))}
+    <GameShell
+      team={team}
+      subtitle={`#${team.hltvRank} no ranking HLTV`}
+      tabs={tabs}
+      tab={tab}
+      onTab={(t) => {
+        setMatchOpen(false);
+        setTab(t);
+      }}
+      onAdvance={onAdvance}
+      matchDay={matchTomorrow}
+    >
+      {showMatch ? (
+        <MatchDay onClose={() => setMatchOpen(false)} />
+      ) : tab === 'inicio' ? (
+        <Home onPlay={() => setMatchOpen(true)} go={go} />
+      ) : tab === 'elenco' ? (
+        <Elenco />
+      ) : tab === 'partidas' ? (
+        <>
+          <SubTabs<PartidasTab>
+            tabs={[
+              { id: 'calendario', label: 'Calendário' },
+              { id: 'tier2', label: 'Tier 2/3' },
+              { id: 'amistoso', label: 'Amistoso' },
+            ]}
+            value={partidas}
+            onChange={setPartidas}
+          />
+          {partidas === 'calendario' ? (
+            <CalendarPanel />
+          ) : partidas === 'tier2' ? (
+            <Tier2Panel />
+          ) : (
+            <div className="space-y-4">
+              <MatchSetup />
+              {lastMatch && <MatchView key={`${lastMatch.seed}-${lastMatch.teamAId}-${lastMatch.teamBId}-${lastMatch.format}`} result={lastMatch} />}
             </div>
-            {bench.length > 0 && (
-              <>
-                <h2 className="text-sm font-semibold text-muted">Reservas</h2>
-                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                  {bench.map((id) => (
-                    <PlayerCard key={id} player={players[id]} selected={id === current} onClick={() => setSelected(id)} />
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-          {current && <PlayerPanel player={players[current]} />}
-        </div>
+          )}
+        </>
       ) : tab === 'mercado' ? (
-        <div className="mt-4">
-          <MarketPanel />
-        </div>
-      ) : tab === 'financas' ? (
-        <div className="mt-4">
-          <FinancePanel />
-        </div>
-      ) : tab === 'mensagens' ? (
-        <div className="mt-4">
-          <InboxPanel />
-        </div>
-      ) : tab === 'calendario' ? (
-        <div className="mt-4">
-          <CalendarPanel />
-        </div>
-      ) : tab === 'noticias' ? (
-        <div className="mt-4">
-          <NewsPanel />
-        </div>
-      ) : tab === 'social' ? (
-        <div className="mt-4">
-          <SocialPanel />
-        </div>
-      ) : tab === 'manager' ? (
-        <div className="mt-4">
-          <ManagerPanel />
-        </div>
-      ) : tab === 'comissao' ? (
-        <div className="mt-4">
-          <StaffPanel />
-        </div>
-      ) : tab === 'tier2' ? (
-        <div className="mt-4">
-          <Tier2Panel />
-        </div>
+        <MarketPanel />
       ) : tab === 'academy' ? (
-        <div className="mt-4">
-          <AcademyPanel />
-        </div>
+        <AcademyPanel />
       ) : tab === 'ranking' ? (
-        <div className="mt-4">
-          <RankingPanel />
-        </div>
+        <RankingPanel />
+      ) : tab === 'carreira' ? (
+        <>
+          <SubTabs<CarreiraTab>
+            tabs={[
+              { id: 'manager', label: 'Manager' },
+              { id: 'comissao', label: 'Comissão técnica' },
+              { id: 'financas', label: 'Finanças', badge: sponsorOffers },
+            ]}
+            value={carreira}
+            onChange={setCarreira}
+          />
+          {carreira === 'manager' ? <ManagerPanel /> : carreira === 'comissao' ? <StaffPanel /> : <FinancePanel />}
+        </>
+      ) : tab === 'midia' ? (
+        <>
+          <SubTabs<MidiaTab>
+            tabs={[
+              { id: 'noticias', label: 'Notícias' },
+              { id: 'social', label: 'Social' },
+            ]}
+            value={midia}
+            onChange={setMidia}
+          />
+          {midia === 'noticias' ? <NewsPanel /> : <SocialPanel />}
+        </>
       ) : (
-        <div className="mt-4 space-y-4">
-          <MatchSetup />
-          {lastMatch && <MatchView key={`${lastMatch.seed}-${lastMatch.teamAId}-${lastMatch.teamBId}-${lastMatch.format}`} result={lastMatch} />}
-        </div>
+        <InboxPanel />
       )}
-    </div>
+    </GameShell>
   );
 }
 
