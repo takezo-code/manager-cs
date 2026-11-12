@@ -220,7 +220,12 @@ describe('Migração v9 → v10', () => {
     expect(s.tier2.teams).toEqual({});
     expect(s.tier2.cup).toBeNull();
     expect(s.players[youth.id].loan).toBeFalsy();
-    expect(s.calendar.every((e) => e.tier === 1)).toBe(true);
+    expect(s.calendar.filter((e) => e.tier === 1)).toHaveLength(v9.calendar.length);
+    // Ganha o circuito tier 2/3 que ainda está por vir nos anos do calendário.
+    const circuit = s.calendar.filter((e) => e.tier > 1);
+    expect(circuit.length).toBeGreaterThan(0); // save de 11/11/2026: só o que resta de novembro
+    expect(circuit.every((e) => e.startDate > s.date && e.status === 'futuro')).toBe(true);
+    expect(s.calendar.map((e) => e.startDate)).toEqual([...s.calendar.map((e) => e.startDate)].sort());
   });
 });
 

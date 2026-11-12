@@ -32,7 +32,7 @@ export function TeamSelect() {
       </button>
       <p className="font-display text-sm font-semibold tracking-[0.3em] text-accent uppercase">Nova carreira · Slot {slot}</p>
       <h1 className="font-display mt-1 text-4xl font-bold sm:text-5xl">Escolha seu time</h1>
-      <p className="mt-2 max-w-xl text-muted">Top 32 do ranking HLTV de 9 de novembro de 2026. Você começa como um manager desconhecido: atributos e reputação baixos, e a diretoria cobrando metas.</p>
+      <p className="mt-2 max-w-xl text-muted">Os 100 primeiros do ranking HLTV de 9 de novembro de 2026, mais Turma do Pagode e ODDIK. Do 33º para baixo, o time joga o circuito tier 2 e tier 3. Você começa como um manager desconhecido: atributos e reputação baixos, e a diretoria cobrando metas.</p>
 
       <fieldset className="mt-6 flex flex-wrap items-end gap-3 rounded-2xl border border-line bg-panel p-4">
         <legend className="px-1 text-sm font-semibold">Seu manager</legend>

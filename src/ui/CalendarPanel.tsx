@@ -6,8 +6,21 @@ import type { CalendarEvent } from '../engine/calendar';
 import { formatDate } from '../engine/date';
 import { useGame, useWorld } from '../store/game';
 import { TeamBadge } from './TeamBadge';
+import { academyTeamId, withAcademyTeams } from '../engine/tier2/model';
+import { managerOrg } from '../engine/manager/model';
 import { money } from './format';
 import { EventPanel } from './TournamentView';
+
+type TierView = 'meus' | '1' | '2' | '3' | 'todos';
+const TIER_VIEWS: Array<[TierView, string]> = [
+  ['meus', 'Meus eventos'],
+  ['1', 'Tier 1'],
+  ['2', 'Tier 2'],
+  ['3', 'Tier 3'],
+  ['todos', 'Todos'],
+];
+const involves = (e: CalendarEvent, id: string) =>
+  e.invited.includes(id) || e.accepted.includes(id) || e.qualified.includes(id) || !!e.tournament?.participants.includes(id);
 
 const MONTHS = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
@@ -90,20 +103,26 @@ function RivalPreviewCard({ rivalId, seriesId }: { rivalId: string; seriesId: st
 export function CalendarPanel() {
   const world = useWorld();
   const calendar = useGame((s) => s.calendar);
-  const teams = useGame((s) => s.teams);
   const date = useGame((s) => s.date);
   const me = useGame((s) => s.myTeamId)!;
   const accept = useGame((s) => s.acceptInvite);
   const decline = useGame((s) => s.declineInvite);
   const [openId, setOpenId] = useState<string | null>(null);
   const [year, setYear] = useState(Number(date.slice(0, 4)));
+  const [tierView, setTierView] = useState<TierView>('meus');
+  // "Meus eventos": o tier 1 e os tier 2/3 com o seu time ou a sua academy.
+  const org = managerOrg(world);
+  const mineIds = org ? [org, academyTeamId(org)] : [];
+  const shown = (e: CalendarEvent) =>
+    tierView === 'todos' ? true : tierView === 'meus' ? (e.tier ?? 1) === 1 || mineIds.some((id) => involves(e, id)) : (e.tier ?? 1) === Number(tierView);
 
   const opened = calendar.find((e) => e.id === openId);
   if (opened) return <EventPanel ev={opened} onBack={() => setOpenId(null)} />;
 
   const years = [...new Set(calendar.map((e) => Number(e.startDate.slice(0, 4))))].sort();
   const next = nextOpponent(world);
-  const events = calendar.filter((e) => e.startDate.startsWith(String(year)));
+  const events = calendar.filter((e) => e.startDate.startsWith(String(year)) && shown(e));
+  const teams = withAcademyTeams(world, events.flatMap((e) => (e.tournament?.championId ? [e.tournament.championId] : [])));
   const months = MONTHS.map((name, i) => ({ name, i, list: events.filter((e) => Number(e.startDate.slice(5, 7)) === i + 1) }));
   const thisMonth = date.startsWith(String(year)) ? Number(date.slice(5, 7)) - 1 : -1;
 
@@ -121,7 +140,20 @@ export function CalendarPanel() {
             Temporada {y}
           </button>
         ))}
-        <p className="ml-auto text-sm text-muted">Convites saem 21 dias antes, pelo ranking. Majors e EWC reúnem os 32 times.</p>
+        <p className="ml-auto text-sm text-muted">Convites saem 21 dias antes, pelo ranking. Majors e EWC reúnem os 32 primeiros.</p>
+      </div>
+      <div className="flex flex-wrap gap-1.5" role="group" aria-label="Filtrar por tier">
+        {TIER_VIEWS.map(([v, label]) => (
+          <button
+            key={v}
+            type="button"
+            aria-pressed={tierView === v}
+            onClick={() => setTierView(v)}
+            className={`rounded-full border px-3 py-1 text-sm transition ${tierView === v ? 'border-accent bg-accent/15 font-semibold text-accent' : 'border-line text-muted hover:text-ink'}`}
+          >
+            {label}
+          </button>
+        ))}
       </div>
 
       <ol className="relative space-y-3 border-l border-line pl-5">
@@ -155,8 +187,9 @@ export function CalendarPanel() {
                         <button type="button" onClick={() => setOpenId(ev.id)} className="min-w-0 flex-1 text-left">
                           <span className="font-display block truncate text-lg font-bold hover:underline">{ev.name}</span>
                           <span className="block text-xs text-muted">
+                            {(ev.tier ?? 1) > 1 && <span className="mr-1.5 rounded bg-white/5 px-1.5 py-px font-semibold">Tier {ev.tier}</span>}
                             {formatDate(ev.startDate)} a {formatDate(ev.endDate)}
-                            {ev.city && ` em ${ev.city}`}. {ev.teams} times, prêmio de {money(ev.prizePool)}.
+                            {ev.city && ev.city !== 'Online' ? ` em ${ev.city}` : ev.city === 'Online' ? ' (online)' : ''}. {ev.teams} times, prêmio de {money(ev.prizePool)}.
                             {ev.tournament?.championId && ` Campeão: ${teams[ev.tournament.championId].shortName}.`}
                           </span>
                         </button>

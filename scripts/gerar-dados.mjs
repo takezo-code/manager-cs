@@ -228,7 +228,13 @@ function shortNameOf(name) {
 
 // Estatística → atributos. Nível = 73 + (rating − 1,00) × 75; cada atributo desvia pela nota (0–100) do perfil.
 const NOTE = 0.12;
-function attrsFrom(st, level) {
+function attrsFrom(st, level, role, key) {
+  // Sem estatística: perfil da função + variação por jogador, mantendo o OVR no nível.
+  if (st.fp == null && role) {
+    const mods = Object.fromEntries(Object.entries(PROFILE[role]).map(([k, v]) => [k, v * 0.7 + noise(key + k, 3)]));
+    const shift = Object.entries(WEIGHTS[role]).reduce((s, [k, w]) => s + mods[k] * w, 0);
+    return Object.fromEntries(Object.keys(mods).map((k) => [k, clamp(level + mods[k] - shift)]));
+  }
   const sc = (k) => (st[k] ?? 50) - 50;
   return {
     MIR: clamp(level + sc('fp') * NOTE),
@@ -330,7 +336,7 @@ for (const t of RAW.teams) {
     const id = playerId(p.nick, teamId ?? 'livre');
     ids.push(id);
     const age = p.age ?? 22 + (hash(p.nick) % 8);
-    players.push(makePlayer({ id, nick: p.nick, country: p.country ?? 'EU', age, role: roles[p.id], teamId, attrs: attrsFrom(p, level), leadership: KNOWN_LEADERSHIP[p.nick.toLowerCase()], key: p.nick + (teamId ?? 'fa'), hltvId: p.id }));
+    players.push(makePlayer({ id, nick: p.nick, country: p.country ?? 'EU', age, role: roles[p.id], teamId, attrs: attrsFrom(p, level, roles[p.id], p.nick), leadership: KNOWN_LEADERSHIP[p.nick.toLowerCase()], key: p.nick + (teamId ?? 'fa'), hltvId: p.id }));
   }
   if (!isTeam) continue;
   // Time com menos de 5: completa com fictícios nas funções que faltam.
@@ -343,7 +349,7 @@ for (const t of RAW.teams) {
     const level = avg - 3;
     const id = playerId(fakeNick(key), teamId);
     ids.push(id);
-    players.push(makePlayer({ id, nick: fakeNick(key), country, age: 19 + (hash(key) % 6), role: need, teamId, attrs: attrsFrom({}, level), key }));
+    players.push(makePlayer({ id, nick: fakeNick(key), country, age: 19 + (hash(key) % 6), role: need, teamId, attrs: attrsFrom({}, level, need, key), key }));
   }
   const k = known[teamId];
   const country = k?.country ?? majority(ps.map((p) => p.country)) ?? 'EU';

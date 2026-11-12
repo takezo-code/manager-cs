@@ -1,5 +1,5 @@
 import { managerOrg } from '../engine/manager/model';
-import { academyTeam, academyTeamId, orgOfAcademy } from '../engine/tier2/model';
+import { academyTeamId, withAcademyTeams } from '../engine/tier2/model';
 import { academyRanking } from '../engine/tier2/ranking';
 import type { CalendarEvent } from '../engine/calendar';
 import type { Team } from '../engine/types';
@@ -8,7 +8,7 @@ import { useWorld } from '../store/game';
 import { formatDate } from '../engine/date';
 import { TeamBadge } from './TeamBadge';
 
-const teamOf = (w: World, id: string): Team | undefined => w.teams[id] ?? (orgOfAcademy(id) && w.teams[orgOfAcademy(id)!] ? academyTeam(w, orgOfAcademy(id)!) : undefined);
+const teamOf = (w: World, id: string): Team | undefined => withAcademyTeams(w, [id])[id];
 
 function EventCard({ ev, mine }: { ev: CalendarEvent; mine: string[] }) {
   const w = useWorld();

@@ -16,7 +16,7 @@ import { TimeBar } from './TimeBar';
 type Tab = 'academy' | 'tier2' | 'mensagens' | 'manager' | 'noticias' | 'calendario' | 'ranking';
 const LABEL: Record<Tab, string> = {
   academy: 'Academy',
-  tier2: 'Tier 2',
+  tier2: 'Tier 2/3',
   mensagens: 'Mensagens',
   manager: 'Manager',
   noticias: 'Notícias',

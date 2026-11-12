@@ -32,7 +32,7 @@ const TAB_LABEL: Record<Tab, string> = {
   manager: 'Manager',
   comissao: 'Comissão',
   academy: 'Academy',
-  tier2: 'Tier 2',
+  tier2: 'Tier 2/3',
   calendario: 'Calendário',
   ranking: 'Ranking',
   mercado: 'Mercado',

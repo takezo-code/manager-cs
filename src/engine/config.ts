@@ -373,11 +373,11 @@ export const AI_MARKET = {
 export const FINANCE = {
   /** Vagas de patrocínio: 1 master + 3 comuns. */
   regularSlots: 3,
-  /** Master por mês: 200 mil × 0,96^(posição − 1) até o 32º, depois × 0,985 por posição. #1 = 200 mil; #10 ≈ 138 mil; #32 ≈ 56 mil; #100 ≈ 20 mil. */
+  /** Master por mês: 200 mil × 0,96^(posição − 1) até o 32º, depois × 0,99 por posição. #1 = 200 mil; #10 ≈ 138 mil; #32 ≈ 56 mil; #100 ≈ 28 mil. */
   masterBase: 200_000,
   masterDecay: 0.96,
   /** Depois do 32º a queda é mais lenta (tier 2/3 ainda tem patrocínio). */
-  masterTailDecay: 0.985,
+  masterTailDecay: 0.99,
   /** Comum vale 30% do master. */
   regularShare: 0.3,
   /** Variação das ofertas (±). */

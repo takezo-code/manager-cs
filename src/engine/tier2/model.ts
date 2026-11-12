@@ -70,6 +70,16 @@ export function academyTeam(w: World, orgId: string): Team {
   return { ...asTeam({ id, name: `${t.name} Academy`, shortName: `${t.shortName}.A`, country: t.country, color: t.color, mapStrength: mapStrengthAround(id, TIER2.academyMapLevel) }, roster, 1000 + t.hltvRank), region: t.region };
 }
 
+/** Times do mundo mais as academies que aparecem em `ids` (para telas de evento). */
+export function withAcademyTeams(w: World, ids: Iterable<string>): Record<string, Team> {
+  const out = { ...w.teams };
+  for (const id of ids) {
+    const org = orgOfAcademy(id);
+    if (!out[id] && org && w.teams[org]) out[id] = academyTeam(w, org);
+  }
+  return out;
+}
+
 /** Jovens da academy que jogam pela academy (os emprestados jogam no time do empréstimo). */
 export const academyLineupIds = (w: World, orgId: string) =>
   (w.teams[orgId]?.academyIds ?? []).filter((id) => w.players[id] && !w.players[id].loan);
