@@ -41,11 +41,3 @@ const REGION_BY_COUNTRY: Record<string, Region> = {
 };
 
 export const regionOf = (country: string): Region => REGION_BY_COUNTRY[country] ?? 'EU';
-
-export const REGION_LABEL: Record<Region, string> = {
-  EU: 'Europa',
-  CIS: 'CIS',
-  SA: 'América do Sul',
-  NA: 'América do Norte',
-  ASIA: 'Ásia',
-};

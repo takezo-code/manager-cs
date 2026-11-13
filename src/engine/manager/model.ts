@@ -62,7 +62,6 @@ export interface Manager extends ManagerProfile {
 }
 
 /** Organização do manager: o time que ele comanda ou a org da academy que ele comanda. */
-export const managerOrg = (w: { managerTeamId: string }): string | null => w.managerTeamId || null;
 
 export const DEFAULT_PROFILE: ManagerProfile = { name: 'Manager', age: 35, country: 'BR' };
 

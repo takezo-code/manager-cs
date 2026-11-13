@@ -1,6 +1,5 @@
 // Olheiro: estima o POT dos jovens. Nível baixo dá faixa vaga (às vezes errada); alto, quase exata.
 import { SCOUT } from './config';
-import { managerOrg } from './manager/model';
 import { baseOvr } from './form';
 import { hashString } from './rng';
 import type { Player } from './types';
@@ -37,7 +36,7 @@ export function estimatePotential(p: Player, level: number, narrowing = 0): Pote
 }
 
 export function upgradeScout(w: World): { ok: true; world: World } | { ok: false; error: string } {
-  const org = managerOrg(w);
+  const org = w.managerTeamId || null;
   if (!org) return { ok: false, error: 'Sem time, não há olheiro.' };
   const t = w.teams[org];
   const level = t.scoutLevel ?? 1;

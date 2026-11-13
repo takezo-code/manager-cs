@@ -1,5 +1,4 @@
-// Elenco: titulares, carências de função e limites.
-import { MARKET } from './config';
+// Elenco: titulares e carências de função.
 import { playerOvr } from './player';
 import type { Player, Role, Team } from './types';
 
@@ -26,9 +25,6 @@ export function validStarters(team: Team, players: Record<string, Player>): stri
   const ok = team.starters.length === 5 && team.starters.every((id) => team.playerIds.includes(id));
   return ok ? team.starters : bestStarters(team, players);
 }
-
-export const canAddPlayer = (team: Team) => team.playerIds.length < MARKET.squadMax;
-export const hasMinimum = (team: Team) => team.playerIds.length >= MARKET.squadMin;
 
 /** Quantos jogadores da função o time tem. */
 export const roleCount = (team: Team, players: Record<string, Player>, role: Role) =>
