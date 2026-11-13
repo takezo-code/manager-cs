@@ -88,7 +88,13 @@ function Dashboard() {
       setMatchOpen(true);
     }
   };
-  const go = (l: HomeLink) => setTab(l === 'ranking' ? 'hltv' : l);
+  // "Ver chave": abre a página do evento direto no calendário.
+  const [eventToOpen, setEventToOpen] = useState<string | null>(null);
+  const go = (l: HomeLink, eventId?: string) => {
+    setEventToOpen(eventId ?? null);
+    if (eventId) setPartidas('calendario');
+    setTab(l === 'ranking' ? 'hltv' : l);
+  };
 
   const tabs: NavTab<Tab>[] = [
     { id: 'inicio', label: 'Início' },
@@ -133,7 +139,7 @@ function Dashboard() {
             onChange={setPartidas}
           />
           {partidas === 'calendario' ? (
-            <CalendarPanel />
+            <CalendarPanel key={eventToOpen ?? 'cal'} initialEventId={eventToOpen} />
           ) : (
             <div className="space-y-4">
               <MatchSetup />

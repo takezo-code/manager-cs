@@ -65,7 +65,7 @@ function MatchSide({ team, me }: { team: Team; me: boolean }) {
   );
 }
 
-function NextMatch({ onPlay, go }: { onPlay: () => void; go: (l: HomeLink) => void }) {
+function NextMatch({ onPlay, go }: { onPlay: () => void; go: (l: HomeLink, eventId?: string) => void }) {
   const w = useWorld();
   const me = w.managerTeamId;
   const advance = useGame((s) => s.advance);
@@ -91,7 +91,14 @@ function NextMatch({ onPlay, go }: { onPlay: () => void; go: (l: HomeLink) => vo
 
   if (!match)
     return (
-      <Card title="Próxima partida" action={<button className={linkBtn} onClick={() => go('partidas')}>Calendário</button>}>
+      <Card
+        title="Próxima partida"
+        action={
+          <button className={linkBtn} onClick={() => go('partidas', upcoming?.id)}>
+            {upcoming ? 'Ver chave ›' : 'Calendário'}
+          </button>
+        }
+      >
         <div className="flex flex-1 flex-col items-center justify-center gap-2 py-4 text-center">
           {upcoming ? (
             <>
@@ -120,11 +127,11 @@ function NextMatch({ onPlay, go }: { onPlay: () => void; go: (l: HomeLink) => vo
     <Card
       title="Próxima partida"
       action={
-        <span className="truncate text-right text-[11px] leading-tight font-semibold tracking-wider text-muted uppercase">
+        <button onClick={() => go('partidas', match.eventId)} className="truncate text-right text-[11px] leading-tight font-semibold tracking-wider text-muted uppercase hover:text-ink">
           {match.eventName}
           <br />
-          {match.format} · {match.stage === 'grupos' ? 'grupos' : match.stage}
-        </span>
+          {match.format} · {match.stage === 'grupos' ? 'grupos' : match.stage} · ver chave ›
+        </button>
       }
     >
       <div className="flex items-center justify-around py-1">
@@ -426,7 +433,7 @@ function Table({ go }: { go: (l: HomeLink) => void }) {
   );
 }
 
-export function Home({ onPlay, go }: { onPlay: () => void; go: (l: HomeLink) => void }) {
+export function Home({ onPlay, go }: { onPlay: () => void; go: (l: HomeLink, eventId?: string) => void }) {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-12 [&>*]:flex">
       <div className="lg:col-span-4">

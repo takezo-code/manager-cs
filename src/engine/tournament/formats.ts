@@ -131,3 +131,11 @@ export const FORMATS: Record<FormatId, FormatSpec> = {
     next: () => null,
   },
 };
+
+/** Chave dos playoffs do formato ainda sem times (TBD), para mostrar antes de os playoffs começarem. */
+export function playoffPreview(format: FormatId, thirdPlace: boolean): BracketStage | null {
+  const tbd = (n: number) => Array.from({ length: n }, () => '');
+  if (format === 'groups16' || format === 'rivals8') return sixTeamPlayoff(tbd(3), tbd(3), thirdPlace);
+  if (format === 'ewc32') return singleElim('Playoffs', seededPairs(tbd(16)), thirdPlace);
+  return singleElim('Playoffs', seededPairs(tbd(8)), thirdPlace);
+}

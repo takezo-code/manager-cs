@@ -87,14 +87,15 @@ function RivalPreviewCard({ rivalId, seriesId }: { rivalId: string; seriesId: st
   );
 }
 
-export function CalendarPanel() {
+/** `initialEventId`: abre direto a página desse evento (ex.: "Ver chave" no Início). */
+export function CalendarPanel({ initialEventId }: { initialEventId?: string | null } = {}) {
   const world = useWorld();
   const calendar = useGame((s) => s.calendar);
   const date = useGame((s) => s.date);
   const me = useGame((s) => s.myTeamId)!;
   const accept = useGame((s) => s.acceptInvite);
   const decline = useGame((s) => s.declineInvite);
-  const [openId, setOpenId] = useState<string | null>(null);
+  const [openId, setOpenId] = useState<string | null>(initialEventId ?? null);
   const [year, setYear] = useState(Number(date.slice(0, 4)));
 
   const opened = calendar.find((e) => e.id === openId);

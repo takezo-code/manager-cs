@@ -6,7 +6,8 @@ import { formatDate } from '../engine/date';
 import { prizeFor } from '../engine/finance/prizes';
 import { pickAwards } from '../engine/tournament/awards';
 import { allSeries } from '../engine/tournament/run';
-import type { FormatId, Group, Series, Stage, SwissStage } from '../engine/tournament/types';
+import type { BracketStage, FormatId, Group, Series, Stage, SwissStage } from '../engine/tournament/types';
+import { playoffPreview } from '../engine/tournament/formats';
 import { money } from './format';
 
 export const FORMAT_LABEL: Record<FormatId, string> = {
@@ -175,7 +176,7 @@ function StageView(props: { stage: Stage; teams: Record<string, Team>; myTeamId:
         ))}
       </div>
     );
-  return <BracketTree b={stage} {...props} />;
+  return <p className="text-sm text-muted">A chave dos playoffs está no topo da página.</p>;
 }
 
 function myStatus(ev: CalendarEvent, myTeamId: string): string {
@@ -249,6 +250,17 @@ export function EventPanel({ ev, onBack }: { ev: CalendarEvent; onBack: () => vo
           </div>
         )}
       </div>
+
+      {/* Chave dos playoffs sempre à vista: a de verdade quando já existe; antes disso, com TBD. */}
+      <BracketTree
+        b={(t?.stages.find((s) => s.kind === 'bracket') as BracketStage | undefined) ?? playoffPreview(ev.format, !!ev.options?.thirdPlace)!}
+        teams={teams}
+        myTeamId={myTeamId}
+        open={open}
+        can={can}
+        startDate={ev.startDate}
+        today={(t?.day ?? 0) + 1}
+      />
 
       {!t && (
         <section className="rounded-2xl border border-line bg-panel p-5 text-sm">
