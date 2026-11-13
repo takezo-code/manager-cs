@@ -10,22 +10,20 @@ import { PlayerCard } from './PlayerCard';
 import { PlayerPanel } from './PlayerPanel';
 import { TeamSelect } from './TeamSelect';
 import { CalendarPanel } from './CalendarPanel';
-import { RankingPanel } from './RankingPanel';
 import { TrainingSection } from './TrainingSection';
 import { AcademyPanel } from './AcademyPanel';
 import { StaffPanel } from './StaffPanel';
 import { ManagerPanel } from './ManagerPanel';
 import { UnemployedView } from './UnemployedView';
-import { NewsPanel } from './NewsPanel';
+import { HltvHub } from './hltv/HltvHub';
 import { SocialPanel } from './SocialPanel';
 import { GameShell, SubTabs, type NavTab } from './shell/GameShell';
 import { Home, type HomeLink } from './home/Home';
 import { MatchDay } from './matchday/MatchDay';
 
-type Tab = 'inicio' | 'elenco' | 'partidas' | 'mercado' | 'academy' | 'ranking' | 'carreira' | 'midia' | 'mensagens';
+type Tab = 'inicio' | 'elenco' | 'partidas' | 'hltv' | 'mercado' | 'academy' | 'carreira' | 'midia' | 'mensagens';
 type PartidasTab = 'calendario' | 'amistoso';
 type CarreiraTab = 'manager' | 'comissao' | 'financas';
-type MidiaTab = 'noticias' | 'social';
 
 function Elenco() {
   const myTeamId = useGame((s) => s.myTeamId)!;
@@ -78,7 +76,6 @@ function Dashboard() {
   const [tab, setTab] = useState<Tab>('inicio');
   const [partidas, setPartidas] = useState<PartidasTab>('calendario');
   const [carreira, setCarreira] = useState<CarreiraTab>('manager');
-  const [midia, setMidia] = useState<MidiaTab>('noticias');
   const [matchOpen, setMatchOpen] = useState(false);
   const matchTomorrow = !!myMatchToday(world);
 
@@ -91,17 +88,17 @@ function Dashboard() {
       setMatchOpen(true);
     }
   };
-  const go = (l: HomeLink) => setTab(l);
+  const go = (l: HomeLink) => setTab(l === 'ranking' ? 'hltv' : l);
 
   const tabs: NavTab<Tab>[] = [
     { id: 'inicio', label: 'Início' },
     { id: 'elenco', label: 'Elenco' },
     { id: 'partidas', label: 'Partidas' },
+    { id: 'hltv', label: 'HLTV' },
     { id: 'mercado', label: 'Mercado', badge: offers },
     { id: 'academy', label: 'Academy' },
-    { id: 'ranking', label: 'Ranking' },
     { id: 'carreira', label: 'Carreira', badge: sponsorOffers },
-    { id: 'midia', label: 'Mídia' },
+    { id: 'midia', label: 'Social' },
     { id: 'mensagens', label: 'Mensagens', badge: inbox },
   ];
 
@@ -148,8 +145,8 @@ function Dashboard() {
         <MarketPanel />
       ) : tab === 'academy' ? (
         <AcademyPanel />
-      ) : tab === 'ranking' ? (
-        <RankingPanel />
+      ) : tab === 'hltv' ? (
+        <HltvHub />
       ) : tab === 'carreira' ? (
         <>
           <SubTabs<CarreiraTab>
@@ -164,17 +161,7 @@ function Dashboard() {
           {carreira === 'manager' ? <ManagerPanel /> : carreira === 'comissao' ? <StaffPanel /> : <FinancePanel />}
         </>
       ) : tab === 'midia' ? (
-        <>
-          <SubTabs<MidiaTab>
-            tabs={[
-              { id: 'noticias', label: 'Notícias' },
-              { id: 'social', label: 'Social' },
-            ]}
-            value={midia}
-            onChange={setMidia}
-          />
-          {midia === 'noticias' ? <NewsPanel /> : <SocialPanel />}
-        </>
+        <SocialPanel />
       ) : (
         <InboxPanel />
       )}

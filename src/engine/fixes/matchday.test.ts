@@ -54,6 +54,17 @@ describe('Dia de jogo', () => {
     for (const id of [...r.lineups.furia, ...r.lineups.mouz]) expect(r.maps[0].stats[id]).toBeDefined();
   });
 
+  it('o histórico de séries guarda placar, evento, formato e o id do resultado (aba HLTV)', () => {
+    const ev = buildYear(2027).find((e) => e.templateId === 'iem-inverno')!;
+    let w = { ...createWorld('furia'), date: addDays(ev.startDate, -25), calendar: [ev] };
+    while (!w.seriesLog.length) w = dailyTick(w).world;
+    const s = w.seriesLog[0];
+    expect(s.eventId).toBe(ev.id);
+    expect(s.format).toMatch(/^MD/);
+    expect(s.score![0]).toBeGreaterThan(s.score![1]);
+    expect(s.matchId).toBeTruthy();
+  }, 30_000);
+
   it('o evento abre na véspera: o jogo do primeiro dia já aparece antes de ser jogado', () => {
     const ev = buildYear(2027).find((e) => e.templateId === 'iem-inverno')!;
     // Convites e confirmação 21 dias antes; avança até a véspera.

@@ -257,7 +257,8 @@ export function playEvents(world: World, _rng?: Rng, opts: { veto?: Record<strin
     for (const [id, r] of Object.entries(out.results)) {
       results[id] = r;
       const loser = r.winnerTeamId === r.teamAId ? r.teamBId : r.teamAId;
-      w = { ...w, seriesLog: [...w.seriesLog, { date: w.date, winner: r.winnerTeamId, loser, winnerRoster: [...w.teams[r.winnerTeamId].starters] }] };
+      const score: [number, number] = [r.mapScore[r.winnerTeamId], r.mapScore[loser]];
+      w = { ...w, seriesLog: [...w.seriesLog, { date: w.date, winner: r.winnerTeamId, loser, winnerRoster: [...w.teams[r.winnerTeamId].starters], eventId: ev.id, format: r.format, score, matchId: id }] };
     }
     const t = out.tournament;
     if (!t.championId) {

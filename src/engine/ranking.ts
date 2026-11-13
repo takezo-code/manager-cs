@@ -22,6 +22,11 @@ export interface SeriesLogEntry {
   winner: string;
   loser: string;
   winnerRoster: string[];
+  /** Para a aba HLTV: evento, formato, placar em mapas (vencedor primeiro) e id do resultado. */
+  eventId?: string;
+  format?: string;
+  score?: [number, number];
+  matchId?: string;
 }
 
 /** O time ainda tem pelo menos 3 dos titulares daquele resultado? */
