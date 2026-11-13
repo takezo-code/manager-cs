@@ -583,6 +583,7 @@ export function simulateMatch(input: MatchInput): MatchResult {
     mapScore,
     winnerTeamId,
     ratings,
+    lineups: { [teamA.id]: input.playersA.map((p) => p.id), [teamB.id]: input.playersB.map((p) => p.id) },
   };
 }
 

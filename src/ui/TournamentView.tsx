@@ -266,8 +266,8 @@ export function EventPanel({ ev, onBack }: { ev: CalendarEvent; onBack: () => vo
             {awards?.mvp && (
               <div className="text-right">
                 <p className="text-sm text-accent">MVP</p>
-                <p className="font-display text-2xl font-bold">{players[awards.mvp].nick}</p>
-                {awards.evps.length > 0 && <p className="text-xs text-muted">EVPs: {awards.evps.map((id) => players[id].nick).join(', ')}</p>}
+                <p className="font-display text-2xl font-bold">{players[awards.mvp]?.nick ?? awards.mvp}</p>
+                {awards.evps.length > 0 && <p className="text-xs text-muted">EVPs: {awards.evps.map((id) => players[id]?.nick ?? id).join(', ')}</p>}
               </div>
             )}
           </div>

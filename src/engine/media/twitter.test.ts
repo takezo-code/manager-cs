@@ -8,7 +8,7 @@ import { mediaDay } from './day';
 import { pushTweets, tweetsForDay } from './twitter';
 
 const series = (winner: string, loser: string): MatchResult =>
-  ({ teamAId: winner, teamBId: loser, winnerTeamId: winner, stage: 'grupos', format: 'MD3', seed: 1, veto: [], maps: [], mapScore: {}, ratings: {} }) as MatchResult;
+  ({ teamAId: winner, teamBId: loser, winnerTeamId: winner, stage: 'grupos', format: 'MD3', seed: 1, veto: [], maps: [], mapScore: {}, ratings: {}, lineups: {} }) as MatchResult;
 
 describe('Twitter', () => {
   const w0 = createWorld('furia');

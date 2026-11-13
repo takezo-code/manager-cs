@@ -79,12 +79,14 @@ export function MatchSetup() {
   );
 }
 
-function Scoreboard({ map, teams, players }: { map: MapResult; teams: Team[]; players: Record<string, Player> }) {
+/** `lineups`: quem jogou por cada time (resultados antigos sem isso: quem tem estatística no mapa). */
+function Scoreboard({ map, teams, players, lineups }: { map: MapResult; teams: Team[]; players: Record<string, Player>; lineups?: Record<string, string[]> }) {
   return (
     <div className="grid gap-4 lg:grid-cols-2">
       {teams.map((t) => {
-        const rows = t.playerIds
-          .map((id) => ({ p: players[id], s: map.stats[id] }))
+        const rows = (lineups?.[t.id] ?? t.playerIds)
+          .filter((id) => map.stats[id])
+          .map((id) => ({ id, nick: players[id]?.nick ?? id, s: map.stats[id] }))
           .map((r) => ({ ...r, rating: calcRating(r.s) }))
           .sort((a, b) => b.rating - a.rating);
         return (
@@ -101,11 +103,11 @@ function Scoreboard({ map, teams, players }: { map: MapResult; teams: Team[]; pl
                 </tr>
               </thead>
               <tbody>
-                {rows.map(({ p, s, rating }) => {
+                {rows.map(({ id, nick, s, rating }) => {
                   const diff = s.kills - s.deaths;
                   return (
-                    <tr key={p.id} className="border-t border-line/60">
-                      <td className="px-3 py-1.5 font-semibold">{p.nick}</td>
+                    <tr key={id} className="border-t border-line/60">
+                      <td className="px-3 py-1.5 font-semibold">{nick}</td>
                       <td className="px-2 text-right tabular-nums">
                         {s.kills}-{s.deaths}
                       </td>
@@ -166,7 +168,7 @@ export function MatchView({ result }: { result: MatchResult }) {
   const map = result.maps[Math.min(mapIdx, result.maps.length - 1)];
   const [showAll, setShowAll] = useState(false);
 
-  const allPlayers = [...teamA.playerIds, ...teamB.playerIds];
+  const allPlayers = Object.keys(result.ratings);
   const mvpId = allPlayers.reduce((best, id) => (result.ratings[id] > result.ratings[best] ? id : best), allPlayers[0]);
 
   return (
@@ -189,7 +191,7 @@ export function MatchView({ result }: { result: MatchResult }) {
       <p className="text-center text-xs text-muted">
         {result.format} · {STAGE_LABEL[result.stage]} · semente {result.seed} · MVP:{' '}
         <span className="font-semibold text-accent">
-          {players[mvpId].nick} ({result.ratings[mvpId].toFixed(2)})
+          {players[mvpId]?.nick ?? mvpId} ({result.ratings[mvpId].toFixed(2)})
         </span>
       </p>
 
@@ -234,7 +236,7 @@ export function MatchView({ result }: { result: MatchResult }) {
         <span className="mr-1 ml-3 inline-block h-2.5 w-2.5 rounded-sm bg-tr align-middle" /> vitória como TR
       </p>
 
-      <Scoreboard map={map} teams={[teamA, teamB]} players={players} />
+      <Scoreboard map={map} teams={[teamA, teamB]} players={players} lineups={result.lineups} />
 
       <div>
         <h3 className="mb-2 text-xs font-semibold tracking-wider text-muted uppercase">Narração</h3>

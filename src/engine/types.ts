@@ -253,4 +253,6 @@ export interface MatchResult {
   winnerTeamId: string;
   /** Rating médio por jogador na série. */
   ratings: Record<string, number>;
+  /** Quem jogou por cada time (o elenco pode mudar depois). */
+  lineups: Record<string, string[]>;
 }

@@ -5,6 +5,7 @@ import { formatDate } from '../../engine/date';
 import { flushSave } from '../../store/autosave';
 import { useGame } from '../../store/game';
 import { TeamBadge } from '../TeamBadge';
+import { ErrorBoundary } from './ErrorBoundary';
 import { money } from '../format';
 import type { Team } from '../../engine/types';
 
@@ -149,7 +150,11 @@ export function GameShell<T extends string>({
         </div>
       )}
 
-      <main className="mx-auto max-w-7xl px-4 py-5">{children}</main>
+      <main className="mx-auto max-w-7xl px-4 py-5">
+        <ErrorBoundary resetKey={tab} onBack={() => onTab(tabs[0].id)}>
+          {children}
+        </ErrorBoundary>
+      </main>
     </div>
   );
 }

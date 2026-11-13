@@ -45,6 +45,15 @@ describe('Dia de jogo', () => {
     expect(r.maps.map((m) => m.map)).toEqual(['mirage', 'inferno', 'dust2'].slice(0, r.maps.length));
   });
 
+  it('o resultado guarda quem jogou por cada time (o placar não depende do elenco atual)', () => {
+    const w = createWorld('furia');
+    const [a, b] = [w.teams.furia, w.teams.mouz];
+    const roster = (t: typeof a) => t.starters.map((id) => w.players[id]);
+    const r = simulateMatch({ teamA: a, teamB: b, playersA: roster(a), playersB: roster(b), format: 'MD1', stage: 'grupos', seed: 3 });
+    expect(r.lineups).toEqual({ furia: a.starters, mouz: b.starters });
+    for (const id of [...r.lineups.furia, ...r.lineups.mouz]) expect(r.maps[0].stats[id]).toBeDefined();
+  });
+
   it('o evento abre na véspera: o jogo do primeiro dia já aparece antes de ser jogado', () => {
     const ev = buildYear(2027).find((e) => e.templateId === 'iem-inverno')!;
     // Convites e confirmação 21 dias antes; avança até a véspera.

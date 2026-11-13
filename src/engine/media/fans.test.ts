@@ -7,7 +7,7 @@ import type { World } from '../world';
 import { changeMood, crowdBonus, fanMood, fansDay, fanSponsorFactor, moodLabel } from './fans';
 
 const series = (winner: string, loser: string, stage: MatchResult['stage'] = 'grupos'): MatchResult =>
-  ({ teamAId: winner, teamBId: loser, winnerTeamId: winner, stage, format: 'MD3', seed: 1, veto: [], maps: [], mapScore: {}, ratings: {} }) as MatchResult;
+  ({ teamAId: winner, teamBId: loser, winnerTeamId: winner, stage, format: 'MD3', seed: 1, veto: [], maps: [], mapScore: {}, ratings: {}, lineups: {} }) as MatchResult;
 const withMood = (w: World, teamId: string, v: number): World => ({ ...w, fans: { ...w.fans, [teamId]: v } });
 
 describe('Humor da torcida', () => {

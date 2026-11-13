@@ -283,7 +283,7 @@ export function playEvents(world: World, _rng?: Rng, opts: { veto?: Record<strin
     const myPlace = t.placements[w.managerTeamId];
     events.push({
       kind: myPlace === 'Campeão' ? 'ok' : 'info',
-      text: `${t.name}: campeão ${w.teams[t.championId].shortName}${mvp ? `, MVP ${w.players[mvp].nick}` : ''}.${myPlace ? ` Seu time: ${myPlace}.` : ''}`,
+      text: `${t.name}: campeão ${w.teams[t.championId].shortName}${mvp ? `, MVP ${w.players[mvp]?.nick ?? mvp}` : ''}.${myPlace ? ` Seu time: ${myPlace}.` : ''}`,
     });
   }
   return { world: w, events, results };
