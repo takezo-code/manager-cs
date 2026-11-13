@@ -164,7 +164,7 @@ function GroupView({ g, teams, myTeamId, open, can }: { g: Group; teams: Record<
   );
 }
 
-function StageView(props: { stage: Stage; teams: Record<string, Team>; myTeamId: string; open: (id: string) => void; can: (id: string) => boolean }) {
+function StageView(props: { stage: Stage; teams: Record<string, Team>; myTeamId: string; open: (id: string) => void; can: (id: string) => boolean; startDate?: string; today?: number }) {
   const { stage } = props;
   if (stage.kind === 'swiss') return <SwissView s={stage} {...props} />;
   if (stage.kind === 'groups')
@@ -294,7 +294,7 @@ export function EventPanel({ ev, onBack }: { ev: CalendarEvent; onBack: () => vo
               </button>
             ))}
           </div>
-          <StageView stage={t.stages[shownIdx]} teams={teams} myTeamId={myTeamId} open={open} can={can} />
+          <StageView stage={t.stages[shownIdx]} teams={teams} myTeamId={myTeamId} open={open} can={can} startDate={ev.startDate} today={t.day + 1} />
         </section>
       )}
 
