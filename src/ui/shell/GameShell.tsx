@@ -40,12 +40,12 @@ export function SubTabs<T extends string>({ tabs, value, onChange }: { tabs: Nav
 function TimeControls({ onAdvance, matchDay }: { onAdvance: (t: number | 'jogo') => void; matchDay: boolean }) {
   const date = useGame((s) => s.date);
   const open = windowOpen(date);
-  const btn = 'rounded-md px-2.5 py-1.5 text-xs font-semibold text-muted transition hover:bg-white/5 hover:text-ink';
+  const btn = 'font-display rounded-sm px-2 py-1.5 text-[11px] font-bold tracking-wider text-muted uppercase transition hover:bg-white/5 hover:text-ink disabled:opacity-30';
   return (
     <div className="flex items-center gap-1">
       <div className="mr-2 hidden text-right leading-tight sm:block">
-        <div className="font-display text-base font-bold">{formatDate(date)}</div>
-        <div className={`text-[11px] ${open ? 'text-win' : 'text-muted'}`}>{open ? 'Janela aberta' : onVacation(date) ? 'Férias' : 'Mercado fechado'}</div>
+        <div className="font-display text-sm font-bold tracking-wide">{formatDate(date)}</div>
+        <div className={`text-[10px] tracking-wider uppercase ${open ? 'text-win' : 'text-muted'}`}>{open ? 'Janela aberta' : onVacation(date) ? 'Férias' : 'Mercado fechado'}</div>
       </div>
       <button type="button" className={btn} onClick={() => onAdvance(1)} disabled={matchDay}>
         +1 dia
@@ -56,7 +56,7 @@ function TimeControls({ onAdvance, matchDay }: { onAdvance: (t: number | 'jogo')
       <button
         type="button"
         onClick={() => onAdvance('jogo')}
-        className={`rounded-md px-3 py-1.5 text-xs font-bold text-black transition hover:brightness-110 ${matchDay ? 'bg-win' : 'bg-accent'}`}
+        className={`font-display rounded-sm px-3 py-1.5 text-[11px] font-bold tracking-wider text-black uppercase transition hover:brightness-110 ${matchDay ? 'bg-win' : 'bg-ink'}`}
         title={matchDay ? 'Seu time joga amanhã: abrir o dia de jogo' : 'Avança até o próximo jogo do seu time ou até chegar algo novo nas mensagens (no máximo 60 dias).'}
       >
         {matchDay ? 'Dia de jogo' : 'Continuar'}
@@ -96,36 +96,27 @@ export function GameShell<T extends string>({
   }, [message, clearMessage]);
 
   return (
-    <div className="min-h-screen">
-      <header className="sticky top-0 z-20 border-b border-line bg-bg/95 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 pt-2">
+    <div className="relative min-h-screen">
+      {/* Fundo: brilho na cor do time e a sigla gigante, bem apagada. */}
+      <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute -top-40 -right-40 h-[48rem] w-[48rem] rounded-full opacity-25 blur-3xl" style={{ background: team.color }} />
+        <div className="absolute -bottom-60 -left-40 h-[36rem] w-[36rem] rounded-full bg-ct opacity-10 blur-3xl" />
+        <span className="font-display absolute top-24 -right-6 text-[22rem] leading-none font-bold text-white/[0.025] select-none">{team.shortName}</span>
+      </div>
+      <header className="sticky top-0 z-20 border-b border-white/10 bg-[#0b0e13]/80 backdrop-blur">
+        <div className="mx-auto flex h-14 max-w-7xl items-center gap-2 px-4">
           <button
             type="button"
-            title="Voltar ao menu (o jogo já está salvo)"
+            title={`${team.name}: voltar ao menu (o jogo já está salvo)`}
             onClick={async () => {
               await flushSave();
               toMenu();
             }}
-            className="flex min-w-0 items-center gap-2 rounded-md py-1 pr-2 text-left hover:bg-white/5"
+            className="shrink-0 rounded-sm p-1 hover:bg-white/5"
           >
-            <TeamBadge team={team} size={32} />
-            <span className="hidden min-w-0 leading-tight md:block">
-              <span className="font-display block truncate text-base font-bold">{team.name}</span>
-              <span className="block truncate text-[11px] text-muted">
-                {subtitle} · {saveStatus.kind === 'erro' ? 'erro ao salvar' : 'salvo'}
-              </span>
-            </span>
+            <TeamBadge team={team} size={30} />
           </button>
-          <div className="flex-1" />
-          <div className="hidden text-right sm:block">
-            <div className="font-display text-base font-bold text-accent">{money(team.money)}</div>
-            <div className="text-[11px] text-muted">em caixa</div>
-          </div>
-          <div className="mx-1 hidden h-8 w-px bg-line sm:block" />
-          <TimeControls onAdvance={onAdvance} matchDay={matchDay} />
-        </div>
-        <div className="mx-auto max-w-7xl px-2">
-          <nav className="flex gap-0.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="tablist" aria-label="Seções do jogo">
+          <nav className="flex min-w-0 flex-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="tablist" aria-label="Seções do jogo">
             {tabs.map((t) => (
               <button
                 key={t.id}
@@ -133,14 +124,27 @@ export function GameShell<T extends string>({
                 type="button"
                 aria-selected={tab === t.id}
                 onClick={() => onTab(t.id)}
-                className={`font-display relative shrink-0 px-3 pt-2 pb-2.5 text-[15px] font-bold tracking-wide transition ${tab === t.id ? 'text-ink' : 'text-muted hover:text-ink'}`}
+                className={`font-display relative flex h-14 shrink-0 items-center px-3 text-[13px] font-bold tracking-[0.14em] uppercase transition ${tab === t.id ? 'text-ink' : 'text-muted hover:text-ink'}`}
               >
                 {t.label}
-                {!!t.badge && <span className="ml-1 rounded-full bg-accent px-1.5 align-middle text-[10px] text-black">{t.badge}</span>}
-                {tab === t.id && <span className="absolute inset-x-3 bottom-0 h-0.5 rounded bg-accent" />}
+                {!!t.badge && <span className="ml-1.5 rounded-full bg-accent px-1.5 text-[10px] tracking-normal text-black">{t.badge}</span>}
+                {tab === t.id && (
+                  <>
+                    <span className="absolute inset-x-2 bottom-2 h-px bg-ink" />
+                    <span className="absolute bottom-[5px] left-1/2 h-1.5 w-1.5 -translate-x-1/2 rotate-45 bg-ink" />
+                  </>
+                )}
               </button>
             ))}
           </nav>
+          <div className="hidden shrink-0 text-right leading-tight 2xl:block">
+            <div className="font-display text-sm font-bold text-accent tabular-nums">{money(team.money)}</div>
+            <div className="truncate text-[10px] tracking-wider text-muted uppercase">
+              {subtitle} · {saveStatus.kind === 'erro' ? 'erro ao salvar' : 'salvo'}
+            </div>
+          </div>
+          <div className="mx-1 hidden h-7 w-px bg-white/10 2xl:block" />
+          <TimeControls onAdvance={onAdvance} matchDay={matchDay} />
         </div>
       </header>
 
