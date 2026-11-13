@@ -221,6 +221,12 @@ export interface PlayerMatchStats {
   rounds: number;
 }
 
+/** O que aconteceu no round, em ordem (kill feed da partida ao vivo). */
+export type RoundEvent =
+  | { kind: 'kill'; killer: string; victim: string; weapon: string; headshot: boolean; trade: boolean }
+  | { kind: 'plant'; by: string }
+  | { kind: 'defuse'; by: string };
+
 export interface RoundResult {
   number: number;
   winnerTeamId: string;
@@ -229,6 +235,7 @@ export interface RoundResult {
   buys: Record<string, BuyType>;
   scoreAfter: Record<string, number>;
   narration: string;
+  events: RoundEvent[];
 }
 
 export interface MapResult {

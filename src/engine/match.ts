@@ -1,7 +1,7 @@
 // Simulação de partida round a round: economia, duelos, trades, bomba, clutches e narração.
 import { ECONOMY, PASSIVE_BONUS, SIM, STAFF } from './config';
 import { effectiveAttributes } from './player';
-import { createRng, type Rng } from './rng';
+import { createRng, hashString, type Rng } from './rng';
 import { calcRating } from './rating';
 import { pressureFactor, prepBonus, tacticBonus, type StaffAttrs } from './staff/effects';
 import { mapsToPlay, runVeto } from './veto';
@@ -21,6 +21,7 @@ import type {
   SkillId,
   Team,
   VetoStep,
+  RoundEvent,
 } from './types';
 
 export interface MatchInput {
@@ -213,7 +214,7 @@ function simulateRound(
   ctx: RoundCtx,
   stats: Record<string, PlayerMatchStats>,
   rng: Rng,
-): { winner: 0 | 1; reason: RoundEndReason; highlight: string; planted: boolean } {
+): { winner: 0 | 1; reason: RoundEndReason; highlight: string; planted: boolean; events: RoundEvent[] } {
   const tIdx = ctx.side[0] === 'T' ? 0 : 1;
   const ctIdx = (1 - tIdx) as 0 | 1;
   const alive = (i: number) => teams[i].players.filter((p) => p.alive);
@@ -221,6 +222,15 @@ function simulateRound(
   let first = true;
   const clutcher: Record<number, { id: string; vs: number } | null> = { 0: null, 1: null };
   let openingNick = '';
+  // Kill feed: só registra (arma e headshot vêm de um hash fixo, sem mexer no RNG da simulação).
+  const events: RoundEvent[] = [];
+  const weaponOf = (p: SimPlayer, i: number): string => {
+    if (p.hasAwp) return 'AWP';
+    const buy = ctx.buys[i];
+    if (buy === 'pistol' || (buy === 'eco' && !p.keptWeapon)) return ctx.side[i] === 'T' ? 'Glock-18' : 'USP-S';
+    if (buy === 'force' && !p.keptWeapon) return ctx.side[i] === 'T' ? 'Galil AR' : 'MP9';
+    return ctx.side[i] === 'T' ? 'AK-47' : 'M4A1-S';
+  };
   // Leitura tática do round (strat que encaixa ou não): variação de time, independente da habilidade.
   const roundNoise = [rng.gaussian() * SIM.roundNoise, rng.gaussian() * SIM.roundNoise];
 
@@ -260,7 +270,9 @@ function simulateRound(
     });
   };
 
-  const registerKill = (killer: SimPlayer, ki: number, victim: SimPlayer, opening: boolean) => {
+  const registerKill = (killer: SimPlayer, ki: number, victim: SimPlayer, opening: boolean, trade = false) => {
+    const hs = hashString(`${killer.id}>${victim.id}:${ctx.map}:${ctx.round}:${events.length}`) % 100 < (killer.hasAwp ? 12 : 45);
+    events.push({ kind: 'kill', killer: killer.id, victim: victim.id, weapon: weaponOf(killer, ki), headshot: hs, trade });
     victim.alive = false;
     killer.killsThisRound++;
     stats[killer.id].kills++;
@@ -298,7 +310,10 @@ function simulateRound(
     if (!planted && !first) {
       const diff = alive(tIdx).length - alive(ctIdx).length;
       const p = SIM.plantChance * (1 + 0.35 * diff);
-      if (rng.chance(Math.max(0.05, Math.min(0.9, p)))) planted = true;
+      if (rng.chance(Math.max(0.05, Math.min(0.9, p)))) {
+        planted = true;
+        events.push({ kind: 'plant', by: alive(tIdx)[0].id });
+      }
     }
     const a = pickDuelist(0, first);
     const b = pickDuelist(1, first);
@@ -315,7 +330,7 @@ function simulateRound(
       if (rng.chance(SIM.baseTradeChance + teams[vi].tradeSkill + bonus)) {
         const trader = rng.weighted(mates, (m) => (has(m, 'trade_instantaneo') ? 2 : 1));
         if (duel(trader, vi, killer, ki, false, SIM.tradeEdge)) {
-          registerKill(trader, vi, killer, false);
+          registerKill(trader, vi, killer, false, true);
           victim.tradedThisRound = true;
         } else {
           registerKill(killer, ki, trader, false);
@@ -355,6 +370,7 @@ function simulateRound(
       if (rng.chance(chance)) {
         winner = ctIdx;
         reason = 'defuse';
+        events.push({ kind: 'defuse', by: alive(ctIdx)[0].id });
       } else {
         winner = tIdx as 0 | 1;
         reason = 'bomba';
@@ -390,7 +406,7 @@ function simulateRound(
       if (p.killsThisRound > 0 || p.assistedThisRound || p.alive || p.tradedThisRound) stats[p.id].kastRounds++;
     }
 
-  return { winner, reason, highlight, planted };
+  return { winner, reason, highlight, planted, events };
 }
 
 const REASON_TEXT: Record<RoundEndReason, string> = {
@@ -480,6 +496,7 @@ export function simulateMap(
       buys: { [ids[0]]: buys[0], [ids[1]]: buys[1] },
       scoreAfter: { [ids[0]]: score[0], [ids[1]]: score[1] },
       narration,
+      events: r.events,
     });
   };
 
