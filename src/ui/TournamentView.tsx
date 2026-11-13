@@ -6,7 +6,7 @@ import { formatDate } from '../engine/date';
 import { prizeFor } from '../engine/finance/prizes';
 import { pickAwards } from '../engine/tournament/awards';
 import { allSeries } from '../engine/tournament/run';
-import type { BracketStage, FormatId, Group, Series, Stage, SwissStage } from '../engine/tournament/types';
+import type { FormatId, Group, Series, Stage, SwissStage } from '../engine/tournament/types';
 import { money } from './format';
 
 export const FORMAT_LABEL: Record<FormatId, string> = {
@@ -22,6 +22,7 @@ import type { Team } from '../engine/types';
 import { useGame, useWorld } from '../store/game';
 import { MatchView } from './MatchView';
 import { TeamBadge } from './TeamBadge';
+import { BracketTree } from './BracketTree';
 
 function SeriesRow({
   m,
@@ -163,31 +164,6 @@ function GroupView({ g, teams, myTeamId, open, can }: { g: Group; teams: Record<
   );
 }
 
-function BracketView({ b, teams, myTeamId, open, can }: { b: BracketStage; teams: Record<string, Team>; myTeamId: string; open: (id: string) => void; can: (id: string) => boolean }) {
-  const col = (label: string) => (label === 'Disputa de 3º lugar' ? 'Grande final' : label);
-  const columns = [...new Set(b.slots.map((x) => col(x.label)))];
-  return (
-    <div className="grid gap-4 md:auto-cols-fr md:grid-flow-col">
-      {columns.map((c) => (
-        <div key={c} className="flex flex-col justify-around gap-2">
-          <h4 className="text-xs font-semibold tracking-wider text-muted uppercase">{c}</h4>
-          {b.slots
-            .filter((s) => col(s.label) === c)
-            .map((slot) =>
-              slot.series ? (
-                <SeriesRow key={slot.id} m={slot.series} teams={teams} myTeamId={myTeamId} onOpen={open} canOpen={can(slot.series.id)} />
-              ) : (
-                <div key={slot.id} className="rounded-lg border border-dashed border-line px-3 py-3 text-center text-xs text-muted">
-                  {'team' in slot.a ? teams[slot.a.team].shortName : 'A definir'} × {'team' in slot.b ? teams[slot.b.team].shortName : 'A definir'}
-                </div>
-              ),
-            )}
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function StageView(props: { stage: Stage; teams: Record<string, Team>; myTeamId: string; open: (id: string) => void; can: (id: string) => boolean }) {
   const { stage } = props;
   if (stage.kind === 'swiss') return <SwissView s={stage} {...props} />;
@@ -199,7 +175,7 @@ function StageView(props: { stage: Stage; teams: Record<string, Team>; myTeamId:
         ))}
       </div>
     );
-  return <BracketView b={stage} {...props} />;
+  return <BracketTree b={stage} {...props} />;
 }
 
 function myStatus(ev: CalendarEvent, myTeamId: string): string {

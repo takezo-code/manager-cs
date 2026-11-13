@@ -9,6 +9,7 @@ import { MAP_IDS, type MapId, type MatchResult, type VetoStep } from '../../engi
 import { aiVetoChoice, vetoSequence } from '../../engine/veto';
 import { useGame, useWorld } from '../../store/game';
 import { MatchView } from '../MatchView';
+import { LiveMatch } from './LiveMatch';
 import { TeamBadge } from '../TeamBadge';
 import { ROLE_LABEL } from '../format';
 
@@ -87,8 +88,11 @@ export function MatchDay({ onClose }: { onClose: () => void }) {
   const closeResult = useGame((s) => s.closeMatchDay);
   const match = useMemo(() => myMatchToday(w), [w]);
   const [phase, setPhase] = useState<Phase>('pre');
+  // Depois de jogar: primeiro a partida ao vivo, depois o resumo.
+  const [watched, setWatched] = useState(false);
   const [steps, setSteps] = useState<VetoStep[]>([]);
 
+  if (result && !watched) return <LiveMatch result={result} onFinish={() => setWatched(true)} />;
   if (result)
     return (
       <MatchDayResult
